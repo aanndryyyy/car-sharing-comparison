@@ -1,0 +1,244 @@
+[
+  {
+    "name": "Audi A1",
+    "type": "everyday",
+    "price": {
+      "km": 0.24,
+      "minute": 0.16,
+      "hour": 7.99,
+      "day": 30.9,
+      "minimum": 2.29
+    }
+  },
+  {
+    "name": "Audi A3",
+    "type": "everyday",
+    "price": {
+      "km": 0.25,
+      "minute": 0.18,
+      "hour": 7.99,
+      "day": 33.89,
+      "minimum": 2.29
+    }
+  },
+  {
+    "name": "Audi e-tron",
+    "type": "premium",
+    "price": {
+      "km": 0.25,
+      "minute": 0.69,
+      "hour": 39.9,
+      "day": 149.9,
+      "minimum": 2.29
+    }
+  },
+  {
+    "name": "Audi Q2",
+    "type": "everyday-suv",
+    "price": {
+      "km": 0.25,
+      "minute": 0.17,
+      "hour": 7.99,
+      "day": 33.89,
+      "minimum": 2.29
+    }
+  },
+  {
+    "name": "Hyundai i20",
+    "type": "everyday",
+    "price": {
+      "km": 0.24,
+      "minute": 0.13,
+      "hour": 4.99,
+      "day": 27.9,
+      "minimum": 2.29
+    }
+  },
+  {
+    "name": "Kia Picanto",
+    "type": "everyday",
+    "price": {
+      "km": 0.22,
+      "minute": 0.13,
+      "hour": 4.99,
+      "day": 27.89,
+      "minimum": 2.29
+    }
+  },
+  {
+    "name": "Mercedes Sprinter",
+    "type": "cargo",
+    "price": {
+      "km": 0.27,
+      "minute": 0.15,
+      "hour": 7.9,
+      "day": 37.9,
+      "minimum": 2.29
+    }
+  },
+  {
+    "name": "Toyota Corolla",
+    "type": "everyday",
+    "price": {
+      "km": 0.25,
+      "minute": 0.15,
+      "hour": 6.29,
+      "day": 29.89,
+      "minimum": 2.29
+    }
+  },
+  {
+    "name": "Toyota C-HR",
+    "type": "everyday-suv",
+    "price": {
+      "km": 0.25,
+      "minute": 0.18,
+      "hour": 7.99,
+      "day": 35.89,
+      "minimum": 2.29
+    }
+  },
+  {
+    "name": "Toyota Land Cruiser",
+    "type": "premium",
+    "price": {
+      "km": 0.34,
+      "minute": 0.49,
+      "hour": 19.9,
+      "day": 79.9,
+      "minimum": 2.29
+    }
+  },
+  {
+    "name": "Toyota RAV4",
+    "type": "premium",
+    "price": {
+      "km": 0.25,
+      "minute": 0.3,
+      "hour": 12.9,
+      "day": 43.9,
+      "minimum": 2.29
+    }
+  },
+  {
+    "name": "Toyota Yaris",
+    "type": "everyday",
+    "price": {
+      "km": 0.22,
+      "minute": 0.13,
+      "hour": 4.99,
+      "day": 27.89,
+      "minimum": 2.29
+    }
+  },
+  {
+    "name": "Toyota Yaris Cross",
+    "type": "everyday-suv",
+    "price": {
+      "km": 0.25,
+      "minute": 0.18,
+      "hour": 6.99,
+      "day": 33.89,
+      "minimum": 2.29
+    }
+  },
+  {
+    "name": "VW Arteon",
+    "type": "premium",
+    "price": {
+      "km": 0.25,
+      "minute": 0.3,
+      "hour": 12.9,
+      "day": 43.9,
+      "minimum": 2.29
+    }
+  },
+  {
+    "name": "VW e-Crafter",
+    "type": "cargo",
+    "price": {
+      "km": 0.27,
+      "minute": 0.13,
+      "hour": 6.9,
+      "day": 35.9,
+      "minimum": 2.29
+    }
+  },
+  {
+    "name": "VW Crafter",
+    "type": "cargo",
+    "price": {
+      "km": 0.27,
+      "minute": 0.13,
+      "hour": 6.9,
+      "day": 35.9,
+      "minimum": 2.29
+    }
+  },
+  {
+    "name": "VW T-Cross",
+    "type": "everyday-suv",
+    "price": {
+      "km": 0.25,
+      "minute": 0.16,
+      "hour": 6.99,
+      "day": 33.89,
+      "minimum": 2.29
+    }
+  },
+  {
+    "name": "VW T-Roc",
+    "type": "everyday-suv",
+    "price": {
+      "km": 0.25,
+      "minute": 0.16,
+      "hour": 6.99,
+      "day": 33.89,
+      "minimum": 2.29
+    }
+  },
+  {
+    "name": "VW T-Roc Cabrio",
+    "type": "premium",
+    "price": {
+      "km": 0.25,
+      "minute": 0.16,
+      "hour": 6.99,
+      "day": 33.89,
+      "minimum": 2.29
+    }
+  },
+  {
+    "name": "Škoda Scala",
+    "type": "everyday",
+    "price": {
+      "km": 0.22,
+      "minute": 0.13,
+      "hour": 4.99,
+      "day": 27.89,
+      "minimum": 2.29
+    }
+  },
+  {
+    "name": "Škoda Fabia",
+    "type": "everyday",
+    "price": {
+      "km": 0.24,
+      "minute": 0.13,
+      "hour": 4.99,
+      "day": 27.9,
+      "minimum": 2.29
+    }
+  },
+  {
+    "name": "Škoda Kamiq",
+    "type": "everyday-suv",
+    "price": {
+      "km": 0.25,
+      "minute": 0.16,
+      "hour": 6.99,
+      "day": 33.89,
+      "minimum": 2.29
+    }
+  }
+]
