@@ -1,0 +1,15 @@
+{
+	"name": "Car Sharing Comparison",
+	"image": "mcr.microsoft.com/devcontainers/javascript-node:0-18-bullseye",
+	"customizations": {
+		"vscode": {
+			"settings": {},
+			"extensions": [
+				"streetsidesoftware.code-spell-checker",
+				"svelte.svelte-vscode",
+				"bradlc.vscode-tailwindcss"
+			]
+		}
+	},
+	"postCreateCommand": "npm install"
+}
