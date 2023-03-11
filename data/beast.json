@@ -1,0 +1,77 @@
+[
+  {
+    "name": "Model 3 Standard Range",
+    "price": {
+      "km": 0.22,
+      "minute": 0.28,
+      "day": 139.99,
+      "threeDays": 339.99,
+      "week": 649.99,
+      "start": 4.99,
+      "deposit": {
+        "base": 150,
+        "special": 450
+      }
+    }
+  },
+  {
+    "name": "Model 3 Long Range",
+    "price": {
+      "km": 0.22,
+      "minute": 0.32,
+      "day": 159.99,
+      "threeDays": 379.99,
+      "week": 749.99,
+      "start": 4.99,
+      "deposit": {
+        "base": 150,
+        "special": 450
+      }
+    }
+  },
+  {
+    "name": "Model 3 Performance",
+    "price": {
+      "km": 0.22,
+      "minute": 0.36,
+      "day": 179.99,
+      "threeDays": 429.99,
+      "week": 849.99,
+      "start": 9.99,
+      "deposit": {
+        "base": 200,
+        "special": 600
+      }
+    }
+  },
+  {
+    "name": "Model Y Long Range",
+    "price": {
+      "km": 0.28,
+      "minute": 0.43,
+      "day": 209.99,
+      "threeDays": 499.99,
+      "week": 999.99,
+      "start": 9.99,
+      "deposit": {
+        "base": 200,
+        "special": 600
+      }
+    }
+  },
+  {
+    "name": "Model X Performance",
+    "price": {
+      "km": 0.33,
+      "minute": 0.62,
+      "day": 299.99,
+      "threeDays": 719.99,
+      "week": 1449.99,
+      "start": 9.99,
+      "deposit": {
+        "base": 500,
+        "special": 1500
+      }
+    }
+  }
+]
