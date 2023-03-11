@@ -1,9 +1,9 @@
 import { browser } from '$app/environment'
 import { init, register } from 'svelte-i18n'
 
-const defaultLocale = 'en-GB'
+const defaultLocale = 'en-US'
 
-register( 'en-GB', () => import( '../../locales/en-GB.json' ) );
+register( 'en-US', () => import( '../../locales/en-US.json' ) );
 register( 'et', () => import( '../../locales/et.json' ) );
 
 init({
