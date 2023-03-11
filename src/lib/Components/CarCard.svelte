@@ -8,7 +8,7 @@
   export let index: number;
 </script>
 
-<div class="flex justify-between items-center p-4 shadow-md rounded-md border border-gray-500" class:border-green-600={index === 0} class:border-2={index === 0}>
+<div class="flex justify-between items-center p-4 shadow-md rounded-md border border-gray-500" class:border-green-600={index === 0} class:border-4={index === 0}>
           
   <div>
     <h2 class="font-semibold text-base mb-1 md:mb-2">{car.getName()}</h2>

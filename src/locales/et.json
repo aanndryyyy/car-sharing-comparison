@@ -6,7 +6,12 @@
   },
   "planner": {
     "title": "Planeerija",
-    "subtitle": "Kasuta nuppe või sisesta käsitsi"
+    "subtitle": "Kasuta nuppe või sisesta käsitsi",
+    "input": {
+      "day": "{count, plural, one {PÄEV} other {PÄEVA}}",
+      "hour": "{count, plural, one {TUND} other {TUNDI}}",
+      "minute": "{count, plural, one {MIN} other {MIN}}"
+    }
   },
   "cars": {
     "title": "Autod",

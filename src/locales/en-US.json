@@ -6,7 +6,12 @@
   },
   "planner": {
     "title": "Planner",
-    "subtitle": "Use sliders or enter manually"
+    "subtitle": "Use sliders or enter manually",
+    "input": {
+      "day": "{count, plural, one {DAY} other {DAYS}}",
+      "hour": "{count, plural, one {HOUR} other {HRS}}",
+      "minute": "{count, plural, one {MIN} other {MINS}}"
+    }
   },
   "cars": {
     "title": "Cars",
