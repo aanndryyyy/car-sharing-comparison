@@ -37,4 +37,28 @@ export default interface BaseCar {
    * @returns Formatted price.
    */
   getFormattedTotalPrice( minutes: number, distance: number ): string;
+
+  /**
+   * The long term discount formatted as text.
+   * 
+   * @param minutes Total minutes.
+   * @param distance Total distance.
+   * 
+   * @returns Formatted price.
+   */
+  getFormattedLongTermDiscount( minutes: number, distance: number ): string;
+
+  /**
+   * The minute price as formatted text.
+   * 
+   * @returns Formatted price.
+   */
+  getFormattedMinutePrice(): string;
+
+  /**
+   * The kilometre price as formatted text.
+   * 
+   * @returns Formatted price.
+   */
+  getFormattedKilometrePrice(): string;
 }

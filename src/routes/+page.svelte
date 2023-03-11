@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type BaseCar from "$lib/BaseCar";
+  import type BaseCar from "$lib/Car/BaseCar";
   import type { PageData } from "./$types";
   import { breakdownMinutes, formatDuration } from "$lib/Time";
   export let data: PageData;

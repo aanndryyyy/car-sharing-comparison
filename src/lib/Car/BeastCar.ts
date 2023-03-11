@@ -1,5 +1,5 @@
 import type BaseCar from "./BaseCar";
-import { breakdownMinutes } from "./Time";
+import { breakdownMinutes } from "../Time";
 
 type BeastCarObject = {
   name: string,
@@ -74,6 +74,30 @@ class BeastCar implements BaseCar {
   getFormattedTotalPrice( minutes: number, distance: number ): string {
 
     return ( this.getTotalPrice( minutes, distance ) ).toFixed(2) + " € (+" + this.carData.price.deposit.base + " €)";
+  }
+
+  /**
+   * @inheritdoc
+   */
+  getFormattedLongTermDiscount( minutes: number, distance: number ): string {
+
+    return ( this.getTotalPrice( minutes, distance ) - this.carData.price.minute*minutes ).toFixed(2) + " €";
+  }
+
+  /**
+   * @inheritdoc
+   */
+  getFormattedMinutePrice(): string {
+
+    return this.carData.price.minute + ' €/min';
+  } 
+
+  /**
+   * @inheritdoc
+   */
+  getFormattedKilometrePrice(): string {
+
+    return this.carData.price.km + ' €/min';
   }
 }
 

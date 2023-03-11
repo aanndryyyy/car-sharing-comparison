@@ -1,51 +1,29 @@
 import type BaseCar from "./BaseCar";
-import { breakdownMinutes } from "./Time";
+import { breakdownMinutes } from "../Time";
 
-type ElmoCarObject = {
+type CityBeeCarObject = {
   name: string,
   type: string,
   price: {
-    km: {
-      base: number,
-      after100: number,
-    },
+    km: number,
     minute: number,
     hour: number,
     day: number,
-    week: {
-      price: number,
-      km: {
-        included: number,
-        priceAfter: number,
-      }
-    },
-    month: {
-      price: number,
-      km: {
-        included: number,
-        priceAfter: number,
-      }
-    },
     minimum: number,
     start: number,
   },
-  priceWithCustomerCard: {
-    km: number,
-    hour: number,
-    minimum: number,
-  }
 }
 
-class ElmoCar implements BaseCar {
+class CityBeeCar implements BaseCar {
 
-  readonly carData: ElmoCarObject;
+  readonly carData: CityBeeCarObject;
 
   /**
    * Initialise car data.
    * 
    * @param car The car object.
    */
-  constructor( car: ElmoCarObject ) {
+  constructor( car: CityBeeCarObject ) {
     
     this.carData = car;
   }
@@ -78,20 +56,14 @@ class ElmoCar implements BaseCar {
       duration.minutes = 0;
     }
 
-    let kilometrePrice = this.carData.price.km.base;
-
-    if ( kilometrePrice > 100 ) {
-      kilometrePrice = this.carData.price.km.after100;
-    }
-
     let durationPrice = duration.days*this.carData.price.day + duration.hours*this.carData.price.hour + duration.minutes*this.carData.price.minute;
-    let total         = durationPrice + distance*kilometrePrice;
+    let total         = durationPrice + distance*this.carData.price.km;
 
     if ( total <= this.carData.price.minimum ) {
       return this.carData.price.minimum;
     }
 
-    return total;
+    return total + this.carData.price.start;
   }
 
   /**
@@ -101,7 +73,31 @@ class ElmoCar implements BaseCar {
 
     return ( this.getTotalPrice( minutes, distance ) ).toFixed(2) + " €";
   }
+
+  /**
+   * @inheritdoc
+   */
+  getFormattedLongTermDiscount( minutes: number, distance: number ): string {
+
+    return ( this.getTotalPrice( minutes, distance ) - this.carData.price.minute*minutes ).toFixed(2) + " €";
+  }
+
+  /**
+   * @inheritdoc
+   */
+  getFormattedMinutePrice(): string {
+
+    return this.carData.price.minute + ' €/min';
+  } 
+
+  /**
+   * @inheritdoc
+   */
+  getFormattedKilometrePrice(): string {
+
+    return this.carData.price.km + ' €/min';
+  }
 }
 
-export type { ElmoCarObject };
-export default ElmoCar;
+export type { CityBeeCarObject };
+export default CityBeeCar;

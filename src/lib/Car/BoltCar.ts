@@ -1,7 +1,7 @@
 import type BaseCar from "./BaseCar";
-import { breakdownMinutes } from "./Time";
+import { breakdownMinutes } from "../Time";
 
-type CityBeeCarObject = {
+type BoltCarObject = {
   name: string,
   type: string,
   price: {
@@ -10,20 +10,19 @@ type CityBeeCarObject = {
     hour: number,
     day: number,
     minimum: number,
-    start: number,
   },
 }
 
-class CityBeeCar implements BaseCar {
+class BoltCar implements BaseCar {
 
-  readonly carData: CityBeeCarObject;
+  readonly carData: BoltCarObject;
 
   /**
    * Initialise car data.
    * 
    * @param car The car object.
    */
-  constructor( car: CityBeeCarObject ) {
+  constructor( car: BoltCarObject ) {
     
     this.carData = car;
   }
@@ -63,7 +62,7 @@ class CityBeeCar implements BaseCar {
       return this.carData.price.minimum;
     }
 
-    return total + this.carData.price.start;
+    return total;
   }
 
   /**
@@ -73,7 +72,31 @@ class CityBeeCar implements BaseCar {
 
     return ( this.getTotalPrice( minutes, distance ) ).toFixed(2) + " €";
   }
+
+  /**
+   * @inheritdoc
+   */
+  getFormattedLongTermDiscount( minutes: number, distance: number ): string {
+
+    return ( this.getTotalPrice( minutes, distance ) - this.carData.price.minute*minutes ).toFixed(2) + " €";
+  }
+
+  /**
+   * @inheritdoc
+   */
+  getFormattedMinutePrice(): string {
+
+    return this.carData.price.minute + ' €/min';
+  } 
+
+  /**
+   * @inheritdoc
+   */
+  getFormattedKilometrePrice(): string {
+
+    return this.carData.price.km + ' €/min';
+  }
 }
 
-export type { CityBeeCarObject };
-export default CityBeeCar;
+export type { BoltCarObject };
+export default BoltCar;

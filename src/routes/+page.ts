@@ -1,15 +1,7 @@
-import BoltCar from "$lib/BoltCar";
-import type { BoltCarObject } from "$lib/BoltCar";
-
-import CityBeeCar from "$lib/CityBeeCar";
-import type { CityBeeCarObject } from "$lib/CityBeeCar";
-
-import ElmoCar from "$lib/ElmoCar";
-import type { ElmoCarObject } from "$lib/ElmoCar";
-
-import BeastCar from "$lib/BeastCar";
-import type { BeastCarObject } from "$lib/BeastCar";
-
+import BoltCar, { type BoltCarObject } from "$lib/Car/BoltCar";
+import CityBeeCar, { type CityBeeCarObject } from "$lib/Car/CityBeeCar";
+import ElmoCar, { type ElmoCarObject } from "$lib/Car/ElmoCar";
+import BeastCar, { type BeastCarObject } from "$lib/Car/BeastCar";
 
 /** @type {import('./$types').PageLoad} */
 export async function load({ fetch }) {
