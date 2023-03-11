@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { _, locale, locales } from 'svelte-i18n';
+
   import type BaseCar from "$lib/Car/BaseCar";
   import type { PageData } from "./$types";
   import { duration } from "$lib/Store/DurationStore";
@@ -21,18 +23,24 @@
 </script>
 
 <svelte:head>
-  <title>Car Sharing Comparison</title>
+  <title>{$_('title')}</title>
   <meta name="description" content="Effortlessly compare Bolt, CityBee, ELMO & Beast car sharing prices."/>
 
   <script defer data-domain="aanndryyyy.github.io/car-sharing-comparison" src="https://plausible.io/js/script.outbound-links.js"></script>
 </svelte:head>
 
 <header class="max-w-4xl mx-auto my-4 mb-16 lg:my-24 px-4 lg:px-0">
-  <h1 class="mb-2 text-4xl md:text-5xl font-bold">Car Sharing Comparison</h1>
+  <h1 class="mb-2 text-4xl md:text-5xl font-bold">{$_('title')}</h1>
   
   <small class="text-gray-500">
     By <a href="http://pedak.me" target="_blank" rel="noreferrer" class="hover:underline">Andry Pedak</a> | <a href="https://github.com/aanndryyyy/car-sharing-comparison" target="_blank" rel="noreferrer" class="hover:underline">GitHub</a>
   </small>
+
+  <select class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 p-1" bind:value={$locale}>
+    {#each $locales as locale}
+      <option value={locale}>{locale}</option>
+    {/each}
+  </select>
 </header>
 
 <main class="grid gap-8 md:grid-cols-3 max-w-4xl mx-auto px-4 lg:px-0 my-4 mb-16 lg:my-8">

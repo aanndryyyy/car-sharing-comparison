@@ -7,7 +7,8 @@
 			"extensions": [
 				"streetsidesoftware.code-spell-checker",
 				"svelte.svelte-vscode",
-				"bradlc.vscode-tailwindcss"
+				"bradlc.vscode-tailwindcss",
+				"Lokalise.i18n-ally"
 			]
 		}
 	},
