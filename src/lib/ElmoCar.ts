@@ -99,7 +99,7 @@ class ElmoCar implements BaseCar {
    */
   getFormattedTotalPrice( minutes: number, distance: number ): string {
 
-    return ( this.getTotalPrice( minutes, distance ) ).toFixed(2);
+    return ( this.getTotalPrice( minutes, distance ) ).toFixed(2) + " €";
   }
 }
 

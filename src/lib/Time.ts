@@ -6,3 +6,10 @@ export function breakdownMinutes( totalMinutes: number ): { days: number, hours:
 
   return { days, hours, minutes };
 }
+
+export function formatDuration( totalMinutes: number ): string {
+
+  const { days, hours, minutes } = breakdownMinutes( totalMinutes );
+  
+  return days + " days, " + hours + " hours, " + minutes + " minutes";
+}
