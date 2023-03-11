@@ -503,6 +503,9 @@ video {
 .mb-8 {
   margin-bottom: 2rem;
 }
+.mr-2 {
+  margin-right: 0.5rem;
+}
 .block {
   display: block;
 }
@@ -523,6 +526,9 @@ video {
 }
 .w-full {
   width: 100%;
+}
+.min-w-\[8rem\] {
+  min-width: 8rem;
 }
 .max-w-4xl {
   max-width: 56rem;
