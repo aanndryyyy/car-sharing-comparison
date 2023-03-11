@@ -32,15 +32,15 @@
 <header class="max-w-4xl mx-auto my-4 mb-16 lg:my-24 px-4 lg:px-0">
   <h1 class="mb-2 text-4xl md:text-5xl font-bold">{$_('title')}</h1>
   
+  <select class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 min-w-[8rem] p-1 mr-2" bind:value={$locale}>
+    {#each $locales as locale}
+      <option value={locale}>{$_('locale.' + locale)}</option>
+    {/each}
+  </select>
+
   <small class="text-gray-500">
     By <a href="http://pedak.me" target="_blank" rel="noreferrer" class="hover:underline">Andry Pedak</a> | <a href="https://github.com/aanndryyyy/car-sharing-comparison" target="_blank" rel="noreferrer" class="hover:underline">GitHub</a>
   </small>
-
-  <select class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 p-1" bind:value={$locale}>
-    {#each $locales as locale}
-      <option value={locale}>{locale}</option>
-    {/each}
-  </select>
 </header>
 
 <main class="grid gap-8 md:grid-cols-3 max-w-4xl mx-auto px-4 lg:px-0 my-4 mb-16 lg:my-8">

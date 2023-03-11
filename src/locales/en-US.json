@@ -1,5 +1,9 @@
 {
   "title": "Car Sharing Comparison",
+  "locale": {
+    "en-US": "🇬🇧 English",
+    "et": "🇪🇪 Estonian"
+  },
   "planner": {
     "title": "Planner",
     "subtitle": "Use sliders or enter manually"
