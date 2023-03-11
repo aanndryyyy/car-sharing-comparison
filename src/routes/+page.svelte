@@ -1,25 +1,26 @@
 <script lang="ts">
   import type BaseCar from "$lib/Car/BaseCar";
   import type { PageData } from "./$types";
-  import { breakdownMinutes, formatDuration } from "$lib/Time";
+  import { breakdownMinutes } from "$lib/Time";
+  import { totalDurationMinutes } from "$lib/Store/TotalDurationMinutesStore";
+  import { totalKilometres } from "$lib/Store/TotalKilometresStore";
+  import CarCard from "$lib/Components/CarCard.svelte";
+  import CarsSection from "$lib/Components/CarsSection.svelte";
 
   export let data: PageData;
-
-  let totalDurationInMinutes = 86;
-  let totalKilometres        = 86;
 
   let allCars: BaseCar[] = [ ...data.boltCars, ...data.cityBeeCars, ...data.elmoCars, ...data.beastCars ];
 
   $: sortedCars = allCars.sort( function( car1: BaseCar, car2: BaseCar ) {
-    let firstPer = car1.getTotalPrice( totalDurationInMinutes, totalKilometres );
-    let secPer   = car2.getTotalPrice( totalDurationInMinutes, totalKilometres );
+    let firstPer = car1.getTotalPrice( $totalDurationMinutes, $totalKilometres );
+    let secPer   = car2.getTotalPrice( $totalDurationMinutes, $totalKilometres );
 
     return firstPer - secPer;
   });
 
-  $: totalMinutes = breakdownMinutes( totalDurationInMinutes ).minutes;
-  $: totalHours   = breakdownMinutes( totalDurationInMinutes ).hours;
-  $: totalDays    = breakdownMinutes( totalDurationInMinutes ).days || 0;
+  $: totalMinutes = breakdownMinutes( $totalDurationMinutes ).minutes;
+  $: totalHours   = breakdownMinutes( $totalDurationMinutes ).hours;
+  $: totalDays    = breakdownMinutes( $totalDurationMinutes ).days || 0;
 
   function setManuallyMinutes( input: Event ) {
 
@@ -30,8 +31,8 @@
       value = 0;
     }
     
-    totalDurationInMinutes -= breakdownMinutes( totalDurationInMinutes ).minutes;
-    totalDurationInMinutes += value;
+    $totalDurationMinutes -= breakdownMinutes( $totalDurationMinutes ).minutes;
+    $totalDurationMinutes += value;
   }
 
   function setManuallyHours( input: Event ) {
@@ -43,8 +44,8 @@
       value = 0;
     }
     
-    totalDurationInMinutes -= breakdownMinutes( totalDurationInMinutes ).hours*60;
-    totalDurationInMinutes += value*60;
+    $totalDurationMinutes -= breakdownMinutes( $totalDurationMinutes ).hours*60;
+    $totalDurationMinutes += value*60;
   }
 
   function setManuallyDays( input: Event ) {
@@ -56,8 +57,8 @@
       value = 0;
     }
     
-    totalDurationInMinutes -= breakdownMinutes( totalDurationInMinutes ).days*24*60;
-    totalDurationInMinutes += value*24*60;
+    $totalDurationMinutes -= breakdownMinutes( $totalDurationMinutes ).days*24*60;
+    $totalDurationMinutes += value*24*60;
   }
 </script>
 
@@ -108,49 +109,24 @@
         </div>
       </div>
 
-      <input tabindex="-1" class="w-full h-2 bg-green-600 rounded-lg appearance-none cursor-pointer" type=range bind:value={totalDurationInMinutes} min=0 max=10080>
+      <input tabindex="-1" class="w-full h-2 bg-green-600 rounded-lg appearance-none cursor-pointer" type=range bind:value={$totalDurationMinutes} min=0 max=10080>
     </label>
     
     <label class="block mb-8">
       <span class="block mb-2">Kilometres</span>
 
       <div class="relative">
-        <input class="appearance-text block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type=number bind:value={totalKilometres} min=0>
+        <input class="appearance-text block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type=number bind:value={$totalKilometres} min=0>
         <span class="absolute leading-none text-gray-500 text-[10px] font-bold right-4 top-2/4 -translate-y-2/4">KM</span>
       </div>
 
-      <input tabindex="-1" class="w-full h-2 bg-green-600 rounded-lg appearance-none cursor-pointer" type=range bind:value={totalKilometres} min=0 max=2500>
+      <input tabindex="-1" class="w-full h-2 bg-green-600 rounded-lg appearance-none cursor-pointer" type=range bind:value={$totalKilometres} min=0 max=2500>
     </label>
   </aside>
 
-  <section class="md:col-start-2 md:col-end-4">
-  
-    <div class="mb-6">
-      <h2 class="text-3xl">Cars</h2>
-
-      <small class="text-gray-500">
-        Prices don't match? <a href="https://github.com/aanndryyyy/car-sharing-comparison/blob/main/README.md#data-scraping" target="_blank" rel="noreferrer" class="underline">Contribute</a>
-      </small>
-    </div>
-
-    <div class="grid gap-4 auto-cols-fr">
-      {#each sortedCars as genericCar, i }
-        <div class="flex justify-between items-center p-4 shadow-md rounded-md border border-gray-500" class:border-green-600={i === 0} class:border-2={i === 0}>
-          
-          <div>
-            <h2 class="font-semibold text-base mb-2">{genericCar.getName()}</h2>
-            <div class="flex align-center text-xs text-gray-600">
-              <img class="inline h-4 pr-4" src={genericCar.getLogo()} alt="Provider Logo">
-              {genericCar.getFormattedMinutePrice()} | {genericCar.getFormattedKilometrePrice()}
-            </div>
-          </div>
-    
-          <div class="text-2xl font-bold text-right" class:text-green-600={i === 0}>
-            {genericCar.getFormattedTotalPrice(totalDurationInMinutes, totalKilometres)}
-            <span class="block text-xs font-normal text-blue-600" title="Long-term rent discount">{genericCar.getFormattedLongTermDiscount(totalDurationInMinutes, totalKilometres)}</span>
-          </div>
-        </div>
-      {/each}
-    </div>
-  </section>
+  <CarsSection>
+    {#each sortedCars as genericCar, i }
+      <CarCard car={genericCar} index={i} />
+    {/each}
+  </CarsSection>
 </main>
