@@ -1,3 +1,11 @@
 {
-  "title": "Car Sharing Comparison"
+  "title": "Car Sharing Comparison",
+  "planner": {
+    "title": "Planner",
+    "subtitle": "Use sliders or enter manually"
+  },
+  "cars": {
+    "title": "Cars",
+    "subtitle": "Prices don't match? <a href='https://github.com/aanndryyyy/car-sharing-comparison/blob/main/README.md#data-scraping' target='_blank' rel='noreferrer' class='underline'>Contribute</a>"
+  }
 }

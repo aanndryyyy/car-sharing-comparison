@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { _ } from 'svelte-i18n';
+
   import { duration, minutes, hours, days } from "$lib/Store/DurationStore";
   import { totalKilometres } from "$lib/Store/TotalKilometresStore";
 
@@ -44,10 +46,10 @@
 
 <aside class="md:col-span-1">
   <div class="mb-6">
-    <h2 class="text-2xl md:text-3xl">Planner</h2>
+    <h2 class="text-2xl md:text-3xl">{$_('planner.title')}</h2>
   
     <small class="text-gray-500 mb-6">
-      Use sliders or enter manually
+      {$_('planner.subtitle')}
     </small>
   </div>
 

@@ -1,3 +1,11 @@
 {
-  "title": "Rendiautode võrdlus"
+  "title": "Rendiautode võrdlus",
+  "planner": {
+    "title": "Planeerija",
+    "subtitle": "Kasuta nuppe või sisesta käsitsi"
+  },
+  "cars": {
+    "title": "Autod",
+    "subtitle": "Hinnad ei klapi? <a href='https://github.com/aanndryyyy/car-sharing-comparison/blob/main/README.md#data-scraping' target='_blank' rel='noreferrer' class='underline'>Paranda</a>"
+  }
 }
