@@ -140,7 +140,7 @@
           <div>
             <h2 class="font-semibold text-base mb-2">{genericCar.getName()}</h2>
             <div class="flex align-center text-xs text-gray-600">
-              <img class="inline h-4 pr-4" src={genericCar.getLogo()}>
+              <img class="inline h-4 pr-4" src={genericCar.getLogo()} alt="Provider Logo">
               {genericCar.getFormattedMinutePrice()} | {genericCar.getFormattedKilometrePrice()}
             </div>
           </div>
