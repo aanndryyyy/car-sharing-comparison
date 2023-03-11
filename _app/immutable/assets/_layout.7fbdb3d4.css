@@ -488,6 +488,9 @@ video {
   margin-top: 1rem;
   margin-bottom: 1rem;
 }
+.mb-1 {
+  margin-bottom: 0.25rem;
+}
 .mb-16 {
   margin-bottom: 4rem;
 }
@@ -503,9 +506,6 @@ video {
 .block {
   display: block;
 }
-.inline {
-  display: inline;
-}
 .flex {
   display: flex;
 }
@@ -518,8 +518,8 @@ video {
 .h-2 {
   height: 0.5rem;
 }
-.h-4 {
-  height: 1rem;
+.h-6 {
+  height: 1.5rem;
 }
 .w-full {
   width: 100%;
@@ -542,8 +542,14 @@ video {
 .auto-cols-fr {
   grid-auto-columns: minmax(0, 1fr);
 }
-.flex-col {
-  flex-direction: column;
+.flex-row {
+  flex-direction: row;
+}
+.flex-col-reverse {
+  flex-direction: column-reverse;
+}
+.items-start {
+  align-items: flex-start;
 }
 .items-center {
   align-items: center;
@@ -591,9 +597,13 @@ video {
   --tw-bg-opacity: 1;
   background-color: rgb(229 231 235 / var(--tw-bg-opacity));
 }
-.bg-green-600 {
+.bg-gray-300 {
   --tw-bg-opacity: 1;
-  background-color: rgb(22 163 74 / var(--tw-bg-opacity));
+  background-color: rgb(209 213 219 / var(--tw-bg-opacity));
+}
+.object-contain {
+  -o-object-fit: contain;
+     object-fit: contain;
 }
 .p-4 {
   padding: 1rem;
@@ -606,9 +616,6 @@ video {
   padding-top: 0.75rem;
   padding-bottom: 0.75rem;
 }
-.pr-4 {
-  padding-right: 1rem;
-}
 .text-right {
   text-align: right;
 }
@@ -616,13 +623,9 @@ video {
   font-size: 1.5rem;
   line-height: 2rem;
 }
-.text-3xl {
-  font-size: 1.875rem;
-  line-height: 2.25rem;
-}
-.text-5xl {
-  font-size: 3rem;
-  line-height: 1;
+.text-4xl {
+  font-size: 2.25rem;
+  line-height: 2.5rem;
 }
 .text-\[10px\] {
   font-size: 10px;
@@ -698,12 +701,6 @@ video {
   outline: 2px solid transparent;
   outline-offset: 2px;
 }
-@media (min-width: 640px) {
-
-  .sm\:flex-row {
-    flex-direction: row;
-  }
-}
 @media (min-width: 768px) {
 
   .md\:col-span-1 {
@@ -718,8 +715,30 @@ video {
     grid-column-end: 4;
   }
 
+  .md\:mb-2 {
+    margin-bottom: 0.5rem;
+  }
+
   .md\:grid-cols-3 {
     grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .md\:flex-row {
+    flex-direction: row;
+  }
+
+  .md\:items-center {
+    align-items: center;
+  }
+
+  .md\:text-3xl {
+    font-size: 1.875rem;
+    line-height: 2.25rem;
+  }
+
+  .md\:text-5xl {
+    font-size: 3rem;
+    line-height: 1;
   }
 }
 @media (min-width: 1024px) {
