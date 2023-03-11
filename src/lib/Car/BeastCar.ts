@@ -1,6 +1,8 @@
 import type BaseCar from "./BaseCar";
 import { breakdownMinutes } from "../Time";
 
+import BeastLogo from '$lib/Images/beast.png';
+
 type BeastCarObject = {
   name: string,
   price: {
@@ -98,6 +100,14 @@ class BeastCar implements BaseCar {
   getFormattedKilometrePrice(): string {
 
     return this.carData.price.km + ' €/min';
+  }
+
+  /**
+   * @inheritdoc
+   */
+  getLogo(): string {
+
+    return BeastLogo;
   }
 }
 

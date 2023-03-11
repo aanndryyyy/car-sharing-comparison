@@ -1,6 +1,8 @@
 import type BaseCar from "./BaseCar";
 import { breakdownMinutes } from "../Time";
 
+import CityBeeLogo from '$lib/Images/citybee.svg';
+
 type CityBeeCarObject = {
   name: string,
   type: string,
@@ -96,6 +98,14 @@ class CityBeeCar implements BaseCar {
   getFormattedKilometrePrice(): string {
 
     return this.carData.price.km + ' €/min';
+  }
+
+  /**
+   * @inheritdoc
+   */
+  getLogo(): string {
+
+    return CityBeeLogo;
   }
 }
 

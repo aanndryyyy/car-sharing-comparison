@@ -1,6 +1,8 @@
 import type BaseCar from "./BaseCar";
 import { breakdownMinutes } from "../Time";
 
+import ElmoLogo from '$lib/Images/elmo.png';
+
 type ElmoCarObject = {
   name: string,
   type: string,
@@ -124,6 +126,14 @@ class ElmoCar implements BaseCar {
   getFormattedKilometrePrice(): string {
 
     return this.carData.price.km.base + ' €/min';
+  }
+
+  /**
+   * @inheritdoc
+   */
+  getLogo(): string {
+
+    return ElmoLogo;
   }
 }
 

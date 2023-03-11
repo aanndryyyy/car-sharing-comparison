@@ -61,4 +61,9 @@ export default interface BaseCar {
    * @returns Formatted price.
    */
   getFormattedKilometrePrice(): string;
+
+  /**
+   * Get the logo.
+   */
+  getLogo(): string;
 }

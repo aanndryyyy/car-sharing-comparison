@@ -1,6 +1,8 @@
 import type BaseCar from "./BaseCar";
 import { breakdownMinutes } from "../Time";
 
+import BoltLogo from '$lib/Images/bolt.png';
+
 type BoltCarObject = {
   name: string,
   type: string,
@@ -95,6 +97,14 @@ class BoltCar implements BaseCar {
   getFormattedKilometrePrice(): string {
 
     return this.carData.price.km + ' €/min';
+  }
+
+  /**
+   * @inheritdoc
+   */
+  getLogo(): string {
+
+    return BoltLogo;
   }
 }
 

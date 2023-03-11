@@ -2,6 +2,7 @@
   import type BaseCar from "$lib/Car/BaseCar";
   import type { PageData } from "./$types";
   import { breakdownMinutes, formatDuration } from "$lib/Time";
+
   export let data: PageData;
 
   let totalDurationInMinutes = 86;
@@ -57,13 +58,10 @@
     
     totalDurationInMinutes -= breakdownMinutes( totalDurationInMinutes ).days*24*60;
     totalDurationInMinutes += value*24*60;
-
-    console.log( breakdownMinutes( totalDurationInMinutes ) );
-    
   }
 </script>
 
-<header class="max-w-4xl mx-auto my-4 mb-16 lg:mt-24">
+<header class="max-w-4xl mx-auto my-4 mb-16 lg:my-24">
   <h1 class="mb-2 text-5xl font-bold">Car Sharing Comparison</h1>
   
   <small class="text-gray-500">
@@ -131,9 +129,13 @@
     <div class="grid gap-4 auto-cols-fr">
       {#each sortedCars as genericCar, i }
         <div class="flex justify-between items-center p-4 shadow-md rounded-md border border-gray-500" class:border-green-600={i === 0} class:border-2={i === 0}>
+          
           <div>
-            <h2 class="font-semibold text-base">{genericCar.getName()}</h2>
-            <p class="text-xs text-gray-600">{genericCar.getFormattedMinutePrice()} | {genericCar.getFormattedKilometrePrice()}</p>
+            <h2 class="font-semibold text-base mb-2">{genericCar.getName()}</h2>
+            <div class="flex align-center text-xs text-gray-600">
+              <img class="inline h-4 pr-4" src={genericCar.getLogo()}>
+              {genericCar.getFormattedMinutePrice()} | {genericCar.getFormattedKilometrePrice()}
+            </div>
           </div>
     
           <div class="text-2xl font-bold text-right" class:text-green-600={i === 0}>
