@@ -61,6 +61,13 @@
   }
 </script>
 
+<svelte:head>
+  <title>Car Sharing Comparison</title>
+  <meta name="description" content="Effortlessly compare Bolt, CityBee, ELMO & Beast car sharing prices."/>
+
+  <script defer data-domain="aanndryyyy.github.io/car-sharing-comparison" src="https://plausible.io/js/script.outbound-links.js"></script>
+</svelte:head>
+
 <header class="max-w-4xl mx-auto my-4 mb-16 lg:my-24">
   <h1 class="mb-2 text-5xl font-bold">Car Sharing Comparison</h1>
   
