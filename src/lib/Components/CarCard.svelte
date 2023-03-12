@@ -89,7 +89,7 @@
     role="tooltip"
   >
     <div class="px-3 py-2 bg-gray-100 border-b border-gray-200 rounded-t-lg">
-      <h3 class="font-semibold text-gray-900 dark:text-white">Details</h3>
+      <h3 class="font-semibold text-gray-900">Details</h3>
     </div>
     <div class="px-3 py-2">
       <svelte:component this={car.getDetailedDialog().component} {...car.getDetailedDialog().props}/>
