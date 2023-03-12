@@ -87,6 +87,9 @@ class ElmoCar implements BaseCar {
     if ( distance > 100 ) {
       kilometrePrice = this.carData.price.km.after100;
     }
+    
+    // TODO: Free 700km in week
+    // TODO: Free 3000km in month
 
     let durationPrice = duration.days*this.carData.price.day + duration.hours*this.carData.price.hour + duration.minutes*this.carData.price.minute;
     let total         = durationPrice + distance*kilometrePrice;
