@@ -1,3 +1,4 @@
+import type { SvelteComponent } from "svelte";
 import type { BeastCarObject } from "./BeastCar";
 import type { BoltCarObject } from "./BoltCar";
 import type { CityBeeCarObject } from "./CityBeeCar";
@@ -66,4 +67,9 @@ export default interface BaseCar {
    * Get the logo.
    */
   getLogo(): string;
+
+  /**
+   * The more info dialog component.
+   */
+  getDetailedDialog(): { component: typeof SvelteComponent, props: object };
 }

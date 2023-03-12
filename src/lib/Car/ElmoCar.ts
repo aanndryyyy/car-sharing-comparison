@@ -2,10 +2,12 @@ import type BaseCar from "./BaseCar";
 import { breakdownMinutes } from "../Time";
 
 import ElmoLogo from '$lib/Images/elmo.png';
+import type { SvelteComponent } from "svelte";
+import ElmoCarPopover from "$lib/Popovers/ElmoCarPopover.svelte";
 
 type ElmoCarObject = {
   name: string,
-  type: string,
+  type: "eco" | "comfy" | "classy",
   price: {
     km: {
       base: number,
@@ -82,7 +84,7 @@ class ElmoCar implements BaseCar {
 
     let kilometrePrice = this.carData.price.km.base;
 
-    if ( kilometrePrice > 100 ) {
+    if ( distance > 100 ) {
       kilometrePrice = this.carData.price.km.after100;
     }
 
@@ -134,6 +136,21 @@ class ElmoCar implements BaseCar {
   getLogo(): string {
 
     return ElmoLogo;
+  }
+
+  /**
+   * @inheritdoc
+   */
+  getDetailedDialog(): { component: typeof SvelteComponent, props: object } {
+
+    return {
+      component: ElmoCarPopover,
+      props: {
+        type: this.carData.type,
+        priceAfter100: this.carData.price.km.after100,
+        classyMinimumFee: this.carData.price.minimum,
+      }
+    };
   }
 }
 

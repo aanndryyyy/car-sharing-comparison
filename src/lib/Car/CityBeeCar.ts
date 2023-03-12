@@ -2,6 +2,8 @@ import type BaseCar from "./BaseCar";
 import { breakdownMinutes } from "../Time";
 
 import CityBeeLogo from '$lib/Images/citybee.svg';
+import type { SvelteComponent } from "svelte";
+import CityBeeCarPopover from "$lib/Popovers/CityBeeCarPopover.svelte";
 
 type CityBeeCarObject = {
   name: string,
@@ -106,6 +108,20 @@ class CityBeeCar implements BaseCar {
   getLogo(): string {
 
     return CityBeeLogo;
+  }
+
+  /**
+   * @inheritdoc
+   */
+  getDetailedDialog(): { component: typeof SvelteComponent, props: object } {
+
+    return {
+      component: CityBeeCarPopover,
+      props: {
+        minimumFee: this.carData.price.minimum,
+        startingFee: this.carData.price.start,
+      }
+    };
   }
 }
 

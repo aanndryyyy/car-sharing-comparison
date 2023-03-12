@@ -2,6 +2,8 @@ import type BaseCar from "./BaseCar";
 import { breakdownMinutes } from "../Time";
 
 import BoltLogo from '$lib/Images/bolt.png';
+import type { SvelteComponent } from "svelte";
+import BoltCarPopover from "$lib/Popovers/BoltCarPopover.svelte";
 
 type BoltCarObject = {
   name: string,
@@ -105,6 +107,19 @@ class BoltCar implements BaseCar {
   getLogo(): string {
 
     return BoltLogo;
+  }
+
+  /**
+   * @inheritdoc
+   */
+  getDetailedDialog(): { component: typeof SvelteComponent, props: object } {
+
+    return {
+      component: BoltCarPopover,
+      props: {
+        minimumFee: this.carData.price.minimum,
+      }
+    };
   }
 }
 

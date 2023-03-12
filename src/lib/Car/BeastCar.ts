@@ -2,6 +2,8 @@ import type BaseCar from "./BaseCar";
 import { breakdownMinutes } from "../Time";
 
 import BeastLogo from '$lib/Images/beast.png';
+import type { SvelteComponent } from "svelte";
+import BeastCarPopover from "$lib/Popovers/BeastCarPopover.svelte";
 
 type BeastCarObject = {
   name: string,
@@ -50,7 +52,7 @@ class BeastCar implements BaseCar {
     let kilometrePrice = 0;
     let durationPrice  = 0;
 
-    if ( distance > 300 ) {
+    if ( distance > ( 300 + duration.days*300 ) ) {
       kilometrePrice = this.carData.price.km;
     }
 
@@ -74,7 +76,7 @@ class BeastCar implements BaseCar {
    */
   getFormattedTotalPrice( minutes: number, distance: number ): string {
 
-    return ( this.getTotalPrice( minutes, distance ) ).toFixed(2) + " € (+" + this.carData.price.deposit.base + " €)";
+    return ( this.getTotalPrice( minutes, distance ) ).toFixed(2) + " €";
   }
 
   /**
@@ -107,6 +109,20 @@ class BeastCar implements BaseCar {
   getLogo(): string {
 
     return BeastLogo;
+  }
+
+  /**
+   * @inheritdoc
+   */
+  getDetailedDialog(): { component: typeof SvelteComponent, props: object } {
+
+    return {
+      component: BeastCarPopover,
+      props: {
+        depositBase: this.carData.price.deposit.base,
+        depositSpecial: this.carData.price.deposit.special,
+      }
+    };
   }
 }
 
