@@ -554,8 +554,8 @@ video {
 .min-w-\[8rem\] {
   min-width: 8rem;
 }
-.max-w-4xl {
-  max-width: 56rem;
+.max-w-screen-lg {
+  max-width: 1024px;
 }
 .-translate-y-2\/4 {
   --tw-translate-y: -50%;
@@ -872,6 +872,10 @@ video {
     flex-direction: row;
   }
 
+  .md\:flex-col {
+    flex-direction: column;
+  }
+
   .md\:items-center {
     align-items: center;
   }
@@ -898,8 +902,7 @@ video {
     margin-bottom: 2rem;
   }
 
-  .lg\:px-0 {
-    padding-left: 0px;
-    padding-right: 0px;
+  .lg\:flex-row {
+    flex-direction: row;
   }
 }
