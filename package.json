@@ -24,6 +24,7 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"chart.js": "^4.2.1",
 		"svelte-i18n": "^3.6.0"
 	}
 }

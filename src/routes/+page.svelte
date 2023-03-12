@@ -1,5 +1,8 @@
 <script lang="ts">
+  import { onMount } from 'svelte';
   import { _, locale, locales } from 'svelte-i18n';
+
+  import ChartJS from 'chart.js/auto'
 
   import type BaseCar from "$lib/Car/BaseCar";
   import type { PageData } from "./$types";
@@ -20,6 +23,41 @@
 
     return firstPer - secPer;
   });
+
+
+	let chartValues = [20, 10, 5, 2, 20, 30, 45];
+	let chartLabels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
+	let ctx;
+	let chartCanvas: HTMLCanvasElement;
+
+  onMount( async () => {
+
+    ctx = chartCanvas.getContext('2d');
+
+    if ( ctx === null ) {
+      return;
+    }
+
+    new ChartJS(
+      ctx, 
+      {
+        type: 'line',
+        options: {
+          responsive: true,
+        },
+        data: {
+          labels: chartLabels,
+          datasets: [{
+            label: 'Revenue',
+            backgroundColor: 'rgb(255, 99, 132)',
+            borderColor: 'rgb(255, 99, 132)',
+            data: chartValues
+          }]
+        }
+      }
+    );
+	});
+
 </script>
 
 <svelte:head>
@@ -43,7 +81,11 @@
   </small>
 </header>
 
-<main class="grid gap-8 md:grid-cols-3 max-w-4xl mx-auto px-4 lg:px-0 my-4 mb-16 lg:my-8">
+<div class="block mx-auto max-w-screen-lg">
+  <canvas bind:this={chartCanvas} />
+</div>
+
+<main class="grid gap-8 md:grid-cols-3 max-w-screen-lg mx-auto px-4 lg:px-0 my-4 mb-16 lg:my-8">
   <PlannerSection />
 
   <CarsSection>
