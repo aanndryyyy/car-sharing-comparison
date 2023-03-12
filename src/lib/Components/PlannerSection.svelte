@@ -57,7 +57,7 @@
   
     <label class="block mb-6">
   
-      <div class="flex-row flex gap-2">
+      <div class="flex-row md:flex-col lg:flex-row flex gap-2">
         
         <div class="relative">
           <input class="appearance-text block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type=number on:change={setManuallyDays} bind:value={inputDays} min=0>
