@@ -4,13 +4,13 @@
   import InfoIcon from '$lib/Images/info.svg?url';
   
   const [popperRef, popperContent] = createPopperActions({
-    placement: 'right',
+    placement: 'bottom',
     strategy: 'fixed',
   });
   
   const extraOpts = {
     modifiers: [
-      { name: 'offset', options: { offset: [0, 8] } }
+      { name: 'offset', options: { offset: [100, 8] } },
     ],
   };
 
@@ -24,6 +24,34 @@
   export let car: BaseCar;
   export let index: number;
 </script>
+
+<style>
+  
+  :global([data-popper-placement^='top'] > [data-popper-arrow]) {
+    bottom: -4px;
+  }
+  
+  :global([data-popper-placement^='top'] > [data-popper-arrow]:before) {
+    @apply border-b border-r;
+  }
+
+  :global([data-popper-placement^='bottom'] > [data-popper-arrow]) {
+    @apply bg-gray-100;
+    top: -4px;
+  }
+
+  :global([data-popper-placement^='bottom'] > [data-popper-arrow]::before) {
+    @apply border-b border-l;
+  }
+
+  :global([data-popper-placement^='left'] > [data-popper-arrow]) {
+    right: -4px;
+  }
+
+  :global([data-popper-placement^='right'] > [data-popper-arrow]) {
+    left: -4px;
+  }
+</style>
 
 <div class="flex justify-between items-center p-4 shadow-md rounded-md border border-gray-500" class:border-green-600={index === 0} class:border-4={index === 0}>
           
@@ -55,10 +83,10 @@
 {#if showTooltip}
   <div 
     use:popperContent={extraOpts} 
-    class="absolute z-10 inline-block w-64 text-sm font-light text-gray-600 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm" 
+    class="absolute z-10 inline-block w-64 text-sm font-light text-gray-600 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow" 
     role="tooltip"
   >
-    <div class="px-3 py-2 bg-gray-100 border-b border-gray-200 rounded-t-lg dark:border-gray-600 dark:bg-gray-700">
+    <div class="px-3 py-2 bg-gray-100 border-b border-gray-200 rounded-t-lg">
       <h3 class="font-semibold text-gray-900 dark:text-white">Details</h3>
     </div>
     <div class="px-3 py-2">
@@ -67,7 +95,7 @@
 
     <div 
       data-popper-arrow 
-      class="absolute w-2 h-2 bg-inherit invisible -left-1 before:border-b before:border-l before:border-gray-200 before:absolute before:w-2 before:h-2 before:bg-inherit before:visible before:rotate-45"
+      class="absolute w-2 h-2 bg-inherit invisible before:border-gray-200 before:absolute before:w-2 before:h-2 before:bg-inherit before:visible before:rotate-45"
     />
   </div>
 {/if}
