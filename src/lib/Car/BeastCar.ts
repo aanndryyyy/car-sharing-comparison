@@ -46,26 +46,25 @@ class BeastCar implements BaseCar {
    */
   getTotalPrice( minutes: number, distance: number ): number {
 
-    let duration = breakdownMinutes( minutes );
-
-    if ( ( duration.minutes + duration.hours*60 ) * this.carData.price.minute >= this.carData.price.day ) {
-      
-      duration.days++;
-      duration.hours   = 0;
-      duration.minutes = 0;
-    }
-
-    // TODO: if 3 day max.
-    // TODO: if week max.
-
+    let duration       = breakdownMinutes( minutes );
     let kilometrePrice = 0;
+    let durationPrice  = 0;
 
-    if ( kilometrePrice > 300 ) {
+    if ( distance > 300 ) {
       kilometrePrice = this.carData.price.km;
     }
 
-    let durationPrice = duration.minutes * this.carData.price.minute + (duration.hours*60) * this.carData.price.minute + duration.days * this.carData.price.day;
-    let total         = durationPrice + distance*kilometrePrice;
+    let theeDayCount = Math.floor( duration.days/3 );
+    let weekCount    = Math.floor( duration.days/7 );
+
+    durationPrice = Math.min( 
+      duration.minutes * this.carData.price.minute + (duration.hours*60) * this.carData.price.minute + duration.days * this.carData.price.day, 
+      this.carData.price.day + duration.days*this.carData.price.day,
+      this.carData.price.threeDays + theeDayCount*this.carData.price.threeDays,
+      this.carData.price.week + weekCount*this.carData.price.week,
+    );
+
+    let total = durationPrice + distance*kilometrePrice;
 
     return total + this.carData.price.start;
   }
@@ -99,7 +98,7 @@ class BeastCar implements BaseCar {
    */
   getFormattedKilometrePrice(): string {
 
-    return this.carData.price.km + ' €/min';
+    return this.carData.price.km + ' €/km after 300km';
   }
 
   /**
