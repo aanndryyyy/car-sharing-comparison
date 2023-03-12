@@ -53,6 +53,8 @@
   }
 </style>
 
+<svelte:window on:scroll={() => showTooltip = false}/>
+
 <div class="flex justify-between items-center p-4 shadow-md rounded-md border border-gray-500" class:border-green-600={index === 0} class:border-4={index === 0}>
           
   <div>
