@@ -10,6 +10,8 @@
   import CarsSection from "$lib/Components/CarsSection.svelte";
   import PlannerSection from "$lib/Components/PlannerSection.svelte";
 
+  import ogImage from "$lib/Images/og-image.png";
+
   export let data: PageData;
 
   let allCars: BaseCar[] = [ ...data.boltCars, ...data.cityBeeCars, ...data.elmoCars, ...data.beastCars ];
@@ -25,6 +27,10 @@
 <svelte:head>
   <title>{$_('title')}</title>
   <meta name="description" content="Effortlessly compare Bolt, CityBee, ELMO & Beast car sharing prices."/>
+
+  <meta property="og:image" content={ogImage} />
+  <meta name="twitter:image" content={ogImage} />
+  <meta name="twitter:card" content="summary_large_image" />
 
   <script defer data-domain="aanndryyyy.github.io/car-sharing-comparison" src="https://plausible.io/js/script.outbound-links.js"></script>
 </svelte:head>
