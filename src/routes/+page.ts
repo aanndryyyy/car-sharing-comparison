@@ -4,6 +4,7 @@ import ElmoCar, { type ElmoCarObject } from "$lib/Car/ElmoCar";
 import BeastCar, { type BeastCarObject } from "$lib/Car/BeastCar";
 
 /** @type {import('./$types').PageLoad} */
+// @ts-ignore
 export async function load({ fetch }) {
 
   const boltData          = await fetch('data/bolt.json');
