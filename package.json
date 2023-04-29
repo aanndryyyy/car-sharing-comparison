@@ -24,6 +24,7 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"svelte-i18n": "^3.6.0"
+		"svelte-i18n": "^3.6.0",
+		"vite-tsconfig-paths": "^4.2.0"
 	}
 }
