@@ -1,8 +1,6 @@
 import type { SvelteComponent } from "svelte";
-import type { BeastCarObject } from "./BeastCar";
-import type { BoltCarObject } from "./BoltCar";
-import type { CityBeeCarObject } from "./CityBeeCar";
-import type { ElmoCarObject } from "./ElmoCar";
+import type {Car} from "../DTO/Car";
+import type {SearchParamsObj} from "$lib/DTO/SearchParamsObj";
 
 /**
  * Defines a standard format for each company car so 
@@ -10,44 +8,48 @@ import type { ElmoCarObject } from "./ElmoCar";
  */
 export default interface BaseCar {
 
-  readonly carData: BoltCarObject | CityBeeCarObject | ElmoCarObject | BeastCarObject;
+  readonly carData: Car;
+  rentTotalPrice: number | undefined;
 
   /**
    * Get the name.
    * 
    * @return The name.
    */
-  getName(): string;
+  getName(): string
 
   /**
-   * The total price in number format, for sorting and etc.
-   * 
-   * @param minutes Total minutes.
-   * @param distance Total distance.
-   * 
+   * Calculating total price
+   *
+   *
+   * @returns The price.
+   * @param searchParamsObj
+   */
+  calculateRentTotalPrice(searchParamsObj: SearchParamsObj): void;
+
+  /**
+   * The total price in number format, for sorting
+   *
+   *
    * @returns The price.
    */
-  getTotalPrice( minutes: number, distance: number ): number;
+  getTotalPrice(): number;
 
   /**
    * The total price as formatted text.
-   * 
-   * @param minutes Total minutes.
-   * @param distance Total distance.
-   * 
+   *
+   *
    * @returns Formatted price.
    */
-  getFormattedTotalPrice( minutes: number, distance: number ): string;
+  getFormattedTotalPrice(): string;
 
   /**
    * The long term discount formatted as text.
-   * 
-   * @param minutes Total minutes.
-   * @param distance Total distance.
-   * 
+   *
+   *
    * @returns Formatted price.
    */
-  getFormattedLongTermDiscount( minutes: number, distance: number ): string;
+  getFormattedLongTermDiscount(): string;
 
   /**
    * The minute price as formatted text.

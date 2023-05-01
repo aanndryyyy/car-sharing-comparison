@@ -1,77 +1,82 @@
 [
   {
-    "name": "Model 3 Standard Range",
+    "name": "Tesla Model 3 Standard Range",
+    "bodyType": "SEDAN",
+    "motorType": "ELECTRIC",
+    "petFriendly": true,
+    "gearbox": "AUTOMATIC",
+    "imageUrl": "providers/beast/cars/Tesla-Model-3-Standard-Range.png",
     "price": {
-      "km": 0.22,
-      "minute": 0.28,
+      "km": 0.2,
+      "start": 4.99,
+      "minute": 0.25,
+      "day": 119.99,
+      "3days": 289.99,
+      "week": 549.99
+    }
+  },
+  {
+    "name": "Tesla Model 3 Long Range",
+    "bodyType": "SEDAN",
+    "motorType": "ELECTRIC",
+    "petFriendly": true,
+    "gearbox": "AUTOMATIC",
+    "imageUrl": "providers/beast/cars/Tesla-Model-3-Long-Range.png",
+    "price": {
+      "km": 0.2,
+      "start": 4.99,
+      "minute": 0.29,
       "day": 139.99,
-      "threeDays": 339.99,
-      "week": 649.99,
-      "start": 4.99,
-      "deposit": {
-        "base": 150,
-        "special": 450
-      }
+      "3days": 339.99,
+      "week": 649.99
     }
   },
   {
-    "name": "Model 3 Long Range",
+    "name": "Tesla Model 3 Performance",
+    "bodyType": "SEDAN",
+    "motorType": "ELECTRIC",
+    "petFriendly": true,
+    "gearbox": "AUTOMATIC",
+    "imageUrl": "providers/beast/cars/Tesla-Model-3-Performance.png",
     "price": {
-      "km": 0.22,
-      "minute": 0.32,
+      "km": 0.2,
+      "start": 9.99,
+      "minute": 0.33,
       "day": 159.99,
-      "threeDays": 379.99,
-      "week": 749.99,
-      "start": 4.99,
-      "deposit": {
-        "base": 150,
-        "special": 450
-      }
+      "3days": 379.99,
+      "week": 749.99
     }
   },
   {
-    "name": "Model 3 Performance",
+    "name": "Tesla Model Y Long Range",
+    "bodyType": "TOURING",
+    "motorType": "ELECTRIC",
+    "petFriendly": true,
+    "gearbox": "AUTOMATIC",
+    "imageUrl": "providers/beast/cars/Tesla-Model-Y-Long-Range.png",
     "price": {
-      "km": 0.22,
-      "minute": 0.36,
-      "day": 179.99,
-      "threeDays": 429.99,
-      "week": 849.99,
+      "km": 0.25,
       "start": 9.99,
-      "deposit": {
-        "base": 200,
-        "special": 600
-      }
+      "minute": 0.4,
+      "day": 189.99,
+      "3days": 459.99,
+      "week": 899.99
     }
   },
   {
-    "name": "Model Y Long Range",
+    "name": "Tesla Model X Ludicrous Perf",
+    "bodyType": "TOURING",
+    "motorType": "ELECTRIC",
+    "petFriendly": true,
+    "gearbox": "AUTOMATIC",
+    "imageUrl": "providers/beast/cars/Tesla-Model-X-Ludicrous-Perf.png",
     "price": {
-      "km": 0.28,
-      "minute": 0.43,
-      "day": 209.99,
-      "threeDays": 499.99,
-      "week": 999.99,
+      "km": 0.3,
       "start": 9.99,
-      "deposit": {
-        "base": 200,
-        "special": 600
-      }
-    }
-  },
-  {
-    "name": "Model X Performance",
-    "price": {
-      "km": 0.33,
-      "minute": 0.62,
-      "day": 299.99,
-      "threeDays": 719.99,
-      "week": 1449.99,
-      "start": 9.99,
-      "deposit": {
-        "base": 500,
-        "special": 1500
-      }
+      "minute": 0.56,
+      "day": 269.99,
+      "3days": 649.99,
+      "week": 1299.99
     }
   }
 ]

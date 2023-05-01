@@ -1,55 +1,23 @@
 import type BaseCar from "./BaseCar";
-import { breakdownMinutes } from "../Time";
 
 import ElmoLogo from '$lib/Images/elmo.png';
-import type { SvelteComponent } from "svelte";
+import type {SvelteComponent} from "svelte";
 import ElmoCarPopover from "$lib/Popovers/ElmoCarPopover.svelte";
-
-type ElmoCarObject = {
-  name: string,
-  type: "eco" | "comfy" | "classy",
-  price: {
-    km: {
-      base: number,
-      after100: number,
-    },
-    minute: number,
-    hour: number,
-    day: number,
-    week: {
-      price: number,
-      km: {
-        included: number,
-        priceAfter: number,
-      }
-    },
-    month: {
-      price: number,
-      km: {
-        included: number,
-        priceAfter: number,
-      }
-    },
-    minimum: number,
-    start: number,
-  },
-  priceWithCustomerCard: {
-    km: number,
-    hour: number,
-    minimum: number,
-  }
-}
+import type {SearchParamsObj} from "../DTO/SearchParamsObj";
+import calculateElmoPrice from "../../helpers/Calculators/CalculateElmoPrice";
+import type {Car} from "$lib/DTO/Car";
 
 class ElmoCar implements BaseCar {
 
-  readonly carData: ElmoCarObject;
+  readonly carData;
+  rentTotalPrice: number | undefined;
 
   /**
    * Initialise car data.
    * 
    * @param car The car object.
    */
-  constructor( car: ElmoCarObject ) {
+  constructor( car: Car ) {
     
     this.carData = car;
   }
@@ -61,60 +29,33 @@ class ElmoCar implements BaseCar {
     
     return this.carData.name;
   }
-  
+
+  calculateRentTotalPrice(searchParamsObj: SearchParamsObj): void {
+    this.rentTotalPrice = calculateElmoPrice(this.carData, JSON.parse(JSON.stringify(searchParamsObj)))
+  }
   /**
    * @inheritdoc
    */
-  getTotalPrice( minutes: number, distance: number ): number {
-
-    let duration = breakdownMinutes( minutes );
-
-    if ( ( duration.minutes + duration.hours*60 ) * this.carData.price.minute >= this.carData.price.day ) {
-      
-      duration.days++;
-      duration.hours   = 0;
-      duration.minutes = 0;
-    }
-    
-    if ( duration.minutes*this.carData.price.minute >= this.carData.price.hour ) {
-      
-      duration.hours++;
-      duration.minutes = 0;
-    }
-
-    let kilometrePrice = this.carData.price.km.base;
-
-    if ( distance > 100 ) {
-      kilometrePrice = this.carData.price.km.after100;
-    }
-    
-    // TODO: Free 700km in week
-    // TODO: Free 3000km in month
-
-    let durationPrice = duration.days*this.carData.price.day + duration.hours*this.carData.price.hour + duration.minutes*this.carData.price.minute;
-    let total         = durationPrice + distance*kilometrePrice;
-
-    if ( total <= this.carData.price.minimum ) {
-      return this.carData.price.minimum;
-    }
-
-    return total;
+  getTotalPrice(): number {
+    if (this.rentTotalPrice == undefined) throw "Car total rent price is not calculated"
+    return this.rentTotalPrice;
   }
 
   /**
    * @inheritdoc
    */
-  getFormattedTotalPrice( minutes: number, distance: number ): string {
+  getFormattedTotalPrice(): string {
 
-    return ( this.getTotalPrice( minutes, distance ) ).toFixed(2) + " €";
+    return ( this.getTotalPrice() ).toFixed(2) + " €";
   }
 
   /**
    * @inheritdoc
    */
-  getFormattedLongTermDiscount( minutes: number, distance: number ): string {
+  getFormattedLongTermDiscount(): string {
 
-    return ( this.getTotalPrice( minutes, distance ) - this.carData.price.minute*minutes ).toFixed(2) + " €";
+    return "TODO"
+    // return ( this.getTotalPrice() - this.carData.price.minute * searchParamsObj.minutes ).toFixed(2) + " €";
   }
 
   /**
@@ -130,7 +71,7 @@ class ElmoCar implements BaseCar {
    */
   getFormattedKilometrePrice(): string {
 
-    return this.carData.price.km.base + ' €/min';
+    return this.carData.price + ' €/min';
   }
 
   /**
@@ -149,13 +90,21 @@ class ElmoCar implements BaseCar {
     return {
       component: ElmoCarPopover,
       props: {
-        type: this.carData.type,
-        priceAfter100: this.carData.price.km.after100,
-        classyMinimumFee: this.carData.price.minimum,
+        type: "something",
+        priceAfter100: "something",
+        classyMinimumFee: "something"
       }
     };
+
+    // {
+    //   component: ElmoCarPopover,
+    //       props: {
+    //   type: this.carData.type,
+    //       priceAfter100: this.carData.price.km.after100,
+    //       classyMinimumFee: this.carData.price.minimum,
+    // }
+    // };
   }
 }
 
-export type { ElmoCarObject };
 export default ElmoCar;

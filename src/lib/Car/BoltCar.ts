@@ -1,32 +1,23 @@
 import type BaseCar from "./BaseCar";
-import { breakdownMinutes } from "../Time";
 
 import BoltLogo from '$lib/Images/bolt.png';
-import type { SvelteComponent } from "svelte";
+import type {SvelteComponent} from "svelte";
 import BoltCarPopover from "$lib/Popovers/BoltCarPopover.svelte";
-
-type BoltCarObject = {
-  name: string,
-  type: string,
-  price: {
-    km: number,
-    minute: number,
-    hour: number,
-    day: number,
-    minimum: number,
-  },
-}
+import type {SearchParamsObj} from "../DTO/SearchParamsObj";
+import calculateBoltPrice from "../../helpers/Calculators/CalculateBoltPrice";
+import type {Car} from "../DTO/Car";
 
 class BoltCar implements BaseCar {
 
-  readonly carData: BoltCarObject;
+  readonly carData;
+  rentTotalPrice: number | undefined;
 
   /**
    * Initialise car data.
    * 
    * @param car The car object.
    */
-  constructor( car: BoltCarObject ) {
+  constructor( car: Car ) {
     
     this.carData = car;
   }
@@ -38,51 +29,37 @@ class BoltCar implements BaseCar {
     
     return this.carData.name;
   }
+
+  /**
+   * @inheritdoc
+   */
+  calculateRentTotalPrice(searchParamsObj: SearchParamsObj): void {
+    this.rentTotalPrice = calculateBoltPrice(this.carData, JSON.parse(JSON.stringify(searchParamsObj)))
+  }
   
   /**
    * @inheritdoc
    */
-  getTotalPrice( minutes: number, distance: number ): number {
-
-    let duration = breakdownMinutes( minutes );
-
-    if ( ( duration.minutes + duration.hours*60 ) * this.carData.price.minute >= this.carData.price.day ) {
-      
-      duration.days++;
-      duration.hours   = 0;
-      duration.minutes = 0;
-    }
-    
-    if ( duration.minutes*this.carData.price.minute >= this.carData.price.hour ) {
-      
-      duration.hours++;
-      duration.minutes = 0;
-    }
-
-    let durationPrice = duration.days*this.carData.price.day + duration.hours*this.carData.price.hour + duration.minutes*this.carData.price.minute;
-    let total         = durationPrice + distance*this.carData.price.km;
-
-    if ( total <= this.carData.price.minimum ) {
-      return this.carData.price.minimum;
-    }
-
-    return total;
+  getTotalPrice(): number {
+    if (this.rentTotalPrice == undefined) throw "Car total rent price is not calculated"
+    return this.rentTotalPrice
   }
 
   /**
    * @inheritdoc
    */
-  getFormattedTotalPrice( minutes: number, distance: number ): string {
+  getFormattedTotalPrice(): string {
 
-    return ( this.getTotalPrice( minutes, distance ) ).toFixed(2) + " €";
+    return ( this.getTotalPrice() ).toFixed(2) + " €";
   }
 
   /**
    * @inheritdoc
    */
-  getFormattedLongTermDiscount( minutes: number, distance: number ): string {
+  getFormattedLongTermDiscount(): string {
 
-    return ( this.getTotalPrice( minutes, distance ) - this.carData.price.minute*minutes ).toFixed(2) + " €";
+    return "TODO"
+    // return ( this.getTotalPrice() - this.carData.price.minute * searchParamsObj.minutes ).toFixed(2) + " €";
   }
 
   /**
@@ -117,11 +94,10 @@ class BoltCar implements BaseCar {
     return {
       component: BoltCarPopover,
       props: {
-        minimumFee: this.carData.price.minimum,
+        minimumFee: this.carData.price.min,
       }
     };
   }
 }
 
-export type { BoltCarObject };
 export default BoltCar;
