@@ -71,6 +71,11 @@ export default interface BaseCar {
   getLogo(): string;
 
   /**
+   * Get the logo.
+   */
+  getCarImg(): string;
+
+  /**
    * The more info dialog component.
    */
   getDetailedDialog(): { component: typeof SvelteComponent, props: object };

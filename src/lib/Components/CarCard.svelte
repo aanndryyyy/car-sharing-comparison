@@ -54,10 +54,10 @@
 
 <svelte:window on:scroll={() => showTooltip = false}/>
 
-<div class="flex justify-between items-center p-4 shadow-md rounded-md border border-gray-500" class:border-green-600={index === 0} class:border-4={index === 0}>
+<div class="grid grid-cols-3 p-4 shadow-md rounded-md border border-gray-300">
           
-  <div>
-    <h2 class="font-semibold text-base mb-1 md:mb-2">
+  <div class="col-span-2">
+    <h2 class="text-base font-normal">
       {car.getName()}
       <img 
         class="inline h-5"
@@ -70,14 +70,18 @@
     </h2>
 
     <div class="flex flex-col-reverse md:flex-row items-start md:items-center gap-4 align-center text-xs text-gray-600">
-      <img class="object-contain h-6" src={car.getLogo()} alt="Provider Logo">
       <span>{car.getFormattedMinutePrice()} | {car.getFormattedKilometrePrice()}</span>
     </div>
+
+    <h4>
+      {car.getFormattedTotalPrice()}
+    </h4>
   </div>
 
-  <div class="text-2xl font-bold text-right" class:text-green-600={index === 0}>
-    {car.getFormattedTotalPrice()}
-    <span class="block text-xs font-normal text-blue-600" title="Long-term rent discount">{car.getFormattedLongTermDiscount()}</span>
+  <div class="col-span-1 grid grid-cols-1">
+
+    <img class="h-4 justify-self-center" src={car.getLogo()} alt="Provider Logo">
+    <img class="object-contain justify-self-center" src={car.getCarImg()} alt="Provider Logo">
   </div>
 </div>
 

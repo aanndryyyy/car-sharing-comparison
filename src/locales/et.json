@@ -10,7 +10,12 @@
     "input": {
       "day": "{count, plural, one {PÄEV} other {PÄEVA}}",
       "hour": "{count, plural, one {TUND} other {TUNDI}}",
-      "minute": "{count, plural, one {MIN} other {MIN}}"
+      "minute": "{count, plural, one {MIN} other {MIN}}",
+      "short": {
+        "day": "P",
+        "hour": "T",
+        "minute": "M"
+      }
     }
   },
   "cars": {

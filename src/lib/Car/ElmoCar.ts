@@ -82,6 +82,11 @@ class ElmoCar implements BaseCar {
     return ElmoLogo;
   }
 
+  getCarImg(): string {
+    // temp
+    return "https://citybee.ee/wp-content/uploads/2021/08/CityBee_ToyotaYaris_EE-1024x605.png"
+  }
+
   /**
    * @inheritdoc
    */

@@ -10,7 +10,12 @@
     "input": {
       "day": "{count, plural, one {DAY} other {DAYS}}",
       "hour": "{count, plural, one {HOUR} other {HRS}}",
-      "minute": "{count, plural, one {MIN} other {MINS}}"
+      "minute": "{count, plural, one {MIN} other {MINS}}",
+      "short": {
+        "day": "D",
+        "hour": "H",
+        "minute": "M"
+      }
     }
   },
   "cars": {
