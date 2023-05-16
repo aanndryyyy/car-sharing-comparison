@@ -1,3 +1,3 @@
 export enum GearboxType {
-    AUTOMATIC = "AUTOMATIC",
+  AUTOMATIC = 'AUTOMATIC',
 }

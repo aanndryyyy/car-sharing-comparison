@@ -1,9 +1,12 @@
 {
   "title": "Car Sharing Comparison",
+  "appShortDescription": "This calculator allows to you select the most optimal service provider for your trip with a shared car",
   "locale": {
     "en-US": "🇬🇧 English",
     "et": "🇪🇪 Estonian"
   },
+  "or": "Or",
+  "filters": "Filters",
   "planner": {
     "title": "Planner",
     "subtitle": "Use sliders or enter manually",

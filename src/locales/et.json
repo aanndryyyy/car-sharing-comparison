@@ -1,9 +1,12 @@
 {
   "title": "Rendiautode võrdlus",
+  "appShortDescription": "Kalkulaator võimaldab teil valida ühisautoga reisi jaoks optimaalseima teenusepakkuja",
   "locale": {
     "en-US": "🇬🇧 English",
     "et": "🇪🇪 Eesti"
   },
+  "or": "Või",
+  "filters": "Filtrid",
   "planner": {
     "title": "Planeerija",
     "subtitle": "Kasuta nuppe või sisesta käsitsi",

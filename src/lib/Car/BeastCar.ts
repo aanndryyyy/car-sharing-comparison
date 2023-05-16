@@ -1,65 +1,63 @@
-import calculateBeastPrice from "../../helpers/Calculators/CalculateBeastPrice";
-import type BaseCar from "./BaseCar";
+import calculateBeastPrice from '../../helpers/Calculators/CalculateBeastPrice'
+import type BaseCar from './BaseCar'
 
-import BeastLogo from '$lib/Images/beast.png';
-import type {SvelteComponent} from "svelte";
-import BeastCarPopover from "$lib/Popovers/BeastCarPopover.svelte";
-import type {SearchParamsObj} from "../DTO/SearchParamsObj";
-import type {Car} from "../DTO/Car";
+import BeastLogo from '$lib/Images/beast.png'
+import type { SvelteComponent } from 'svelte'
+import BeastCarPopover from '$lib/Popovers/BeastCarPopover.svelte'
+import type { SearchParamsObj } from '../DTO/SearchParamsObj'
+import type { Car } from '../DTO/Car'
 
 class BeastCar implements BaseCar {
-
-  readonly carData;
-  rentTotalPrice: number | undefined;
+  readonly carData
+  rentTotalPrice: number | undefined
 
   /**
    * Initialise car data.
    *
    * @param car The car object.
    */
-  constructor( car: Car ) {
-
-    this.carData = car;
+  constructor(car: Car) {
+    this.carData = car
   }
-
 
   /**
    * @inheritdoc
    */
   getName(): string {
-
-    return this.carData.name;
+    return this.carData.name
   }
 
   /**
    * @inheritdoc
    */
   calculateRentTotalPrice(searchParamsObj: SearchParamsObj): void {
-    this.rentTotalPrice = calculateBeastPrice(this.carData, JSON.parse(JSON.stringify(searchParamsObj)))
+    this.rentTotalPrice = calculateBeastPrice(
+      this.carData,
+      JSON.parse(JSON.stringify(searchParamsObj))
+    )
   }
 
   /**
    * @inheritdoc
    */
   getTotalPrice(): number {
-    if (this.rentTotalPrice == undefined) throw "Car total rent price is not calculated"
-    return this.rentTotalPrice;
+    if (this.rentTotalPrice == undefined)
+      throw 'Car total rent price is not calculated'
+    return this.rentTotalPrice
   }
 
   /**
    * @inheritdoc
    */
   getFormattedTotalPrice(): string {
-
-    return ( this.getTotalPrice()).toFixed(2) + " €";
+    return this.getTotalPrice().toFixed(2) + ' €'
   }
 
   /**
    * @inheritdoc
    */
   getFormattedLongTermDiscount(): string {
-
-    return "TODO"
+    return 'TODO'
     // return ( this.getTotalPrice() - this.carData.price.minute * searchParamsObj.minutes ).toFixed(2) + " €";
   }
 
@@ -67,43 +65,39 @@ class BeastCar implements BaseCar {
    * @inheritdoc
    */
   getFormattedMinutePrice(): string {
-
-    return this.carData.price.minute + ' €/min';
+    return this.carData.price.minute + ' €/min'
   }
 
   /**
    * @inheritdoc
    */
   getFormattedKilometrePrice(): string {
-
-    return this.carData.price.km + ' €/km after 300km';
+    return this.carData.price.km + ' €/km after 300km'
   }
 
   /**
    * @inheritdoc
    */
   getLogo(): string {
-
-    return BeastLogo;
+    return BeastLogo
   }
-
 
   getCarImg(): string {
     // temp
-    return "https://citybee.ee/wp-content/uploads/2021/08/CityBee_ToyotaYaris_EE-1024x605.png"
+    return 'https://citybee.ee/wp-content/uploads/2021/08/CityBee_ToyotaYaris_EE-1024x605.png'
   }
 
   /**
    * @inheritdoc
    */
-  getDetailedDialog(): { component: typeof SvelteComponent, props: object } {
+  getDetailedDialog(): { component: typeof SvelteComponent; props: object } {
     return {
       component: BeastCarPopover,
       props: {
         depositBase: 0,
-        depositSpecial:0,
-      }
-    };
+        depositSpecial: 0,
+      },
+    }
     // return {
     //   component: BeastCarPopover,
     //   props: {
@@ -114,4 +108,4 @@ class BeastCar implements BaseCar {
   }
 }
 
-export default BeastCar;
+export default BeastCar

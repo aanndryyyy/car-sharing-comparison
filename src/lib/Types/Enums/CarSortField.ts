@@ -1,3 +1,3 @@
 export enum CarSortField {
-    PRICE = "PRICE",
+  PRICE = 'PRICE',
 }

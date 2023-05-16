@@ -1,19 +1,18 @@
-import type { SvelteComponent } from "svelte";
-import type {Car} from "../DTO/Car";
-import type {SearchParamsObj} from "$lib/DTO/SearchParamsObj";
+import type { SvelteComponent } from 'svelte'
+import type { Car } from '../DTO/Car'
+import type { SearchParamsObj } from '$lib/DTO/SearchParamsObj'
 
 /**
- * Defines a standard format for each company car so 
+ * Defines a standard format for each company car so
  * prices can be easily compared.
  */
 export default interface BaseCar {
-
-  readonly carData: Car;
-  rentTotalPrice: number | undefined;
+  readonly carData: Car
+  rentTotalPrice: number | undefined
 
   /**
    * Get the name.
-   * 
+   *
    * @return The name.
    */
   getName(): string
@@ -25,7 +24,7 @@ export default interface BaseCar {
    * @returns The price.
    * @param searchParamsObj
    */
-  calculateRentTotalPrice(searchParamsObj: SearchParamsObj): void;
+  calculateRentTotalPrice(searchParamsObj: SearchParamsObj): void
 
   /**
    * The total price in number format, for sorting
@@ -33,7 +32,7 @@ export default interface BaseCar {
    *
    * @returns The price.
    */
-  getTotalPrice(): number;
+  getTotalPrice(): number
 
   /**
    * The total price as formatted text.
@@ -41,7 +40,7 @@ export default interface BaseCar {
    *
    * @returns Formatted price.
    */
-  getFormattedTotalPrice(): string;
+  getFormattedTotalPrice(): string
 
   /**
    * The long term discount formatted as text.
@@ -49,34 +48,34 @@ export default interface BaseCar {
    *
    * @returns Formatted price.
    */
-  getFormattedLongTermDiscount(): string;
+  getFormattedLongTermDiscount(): string
 
   /**
    * The minute price as formatted text.
-   * 
+   *
    * @returns Formatted price.
    */
-  getFormattedMinutePrice(): string;
+  getFormattedMinutePrice(): string
 
   /**
    * The kilometre price as formatted text.
-   * 
+   *
    * @returns Formatted price.
    */
-  getFormattedKilometrePrice(): string;
+  getFormattedKilometrePrice(): string
 
   /**
    * Get the logo.
    */
-  getLogo(): string;
+  getLogo(): string
 
   /**
    * Get the logo.
    */
-  getCarImg(): string;
+  getCarImg(): string
 
   /**
    * The more info dialog component.
    */
-  getDetailedDialog(): { component: typeof SvelteComponent, props: object };
+  getDetailedDialog(): { component: typeof SvelteComponent; props: object }
 }

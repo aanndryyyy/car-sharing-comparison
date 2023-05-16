@@ -1,3 +1,3 @@
 export enum CarBodyType {
-    SEDAN = "SEDAN",
+  SEDAN = 'SEDAN',
 }

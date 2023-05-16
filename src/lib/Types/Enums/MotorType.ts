@@ -1,3 +1,3 @@
 export enum MotorType {
-    ELECTRIC = "ELECTRIC",
+  ELECTRIC = 'ELECTRIC',
 }
