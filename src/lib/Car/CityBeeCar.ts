@@ -31,7 +31,7 @@ class CityBeeCar implements BaseCar {
   }
 
   calculateRentTotalPrice(searchParamsObj: SearchParamsObj): void {
-    this.rentTotalPrice = calculateCityBeePrice(this.carData, JSON.parse(JSON.stringify(searchParamsObj)))
+    this.rentTotalPrice = calculateCityBeePrice(this.carData, searchParamsObj)
   }
   
   /**

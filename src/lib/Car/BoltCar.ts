@@ -34,7 +34,7 @@ class BoltCar implements BaseCar {
    * @inheritdoc
    */
   calculateRentTotalPrice(searchParamsObj: SearchParamsObj): void {
-    this.rentTotalPrice = calculateBoltPrice(this.carData, JSON.parse(JSON.stringify(searchParamsObj)))
+    this.rentTotalPrice = calculateBoltPrice(this.carData, searchParamsObj)
   }
   
   /**

@@ -18,8 +18,6 @@
 
   import type BaseCar from "$lib/Car/BaseCar";
 
-  import { searchParamsObj } from "$lib/Store/SearchParamsObj";
-
   export let car: BaseCar;
   export let index: number;
 </script>
