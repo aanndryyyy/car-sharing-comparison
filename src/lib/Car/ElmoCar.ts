@@ -28,10 +28,7 @@ class ElmoCar implements BaseCar {
   }
 
   calculateRentTotalPrice(searchParamsObj: SearchParamsObj): void {
-    this.rentTotalPrice = calculateElmoPrice(
-      this.carData,
-      JSON.parse(JSON.stringify(searchParamsObj))
-    )
+    this.rentTotalPrice = calculateElmoPrice(this.carData, searchParamsObj)
   }
   /**
    * @inheritdoc

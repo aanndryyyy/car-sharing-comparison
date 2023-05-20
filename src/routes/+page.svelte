@@ -1,20 +1,22 @@
 <script lang="ts">
   import { _ } from 'svelte-i18n'
 
-  import type BaseCar from '$lib/Car/BaseCar'
-  import type { PageData } from './$types'
-  import { searchParamsObj } from '$lib/Store/SearchParamsObj'
+  import type BaseCar from "$lib/Car/BaseCar";
+  import type {PageData} from "./$types";
+
+  import CarCard from "$lib/Components/CarCard.svelte";
+  import CarsSection from "$lib/Components/CarsSection.svelte";
+  import PlannerSection from "$lib/Components/PlannerSection.svelte";
   import { Icon, XMark, ArrowSmallRight } from 'svelte-hero-icons'
   import { fly } from 'svelte/transition'
 
-  import CarCard from '$lib/Components/CarCard.svelte'
-  import CarsSection from '$lib/Components/CarsSection.svelte'
-  import PlannerSection from '$lib/Components/PlannerSection.svelte'
-
-  import ogImage from '$lib/Images/og-image.png'
-  import sortCars from '../helpers/SortCars'
-  import { CarSortField } from '../lib/Types/Enums/CarSortField'
-  import { SortState } from '../lib/Types/Enums/SortState'
+  import ogImage from "$lib/Images/og-image.png";
+  import sortCars from "../helpers/SortCars";
+  import { CarSortField } from "../lib/Types/Enums/CarSortField";
+  import { SortState } from "../lib/Types/Enums/SortState";
+  import { days, duration, hours, minutes } from "../lib/Store/DurationStore";
+  import { totalKilometres } from "../lib/Store/TotalKilometresStore";
+  import { SearchParamsObj } from "../lib/DTO/SearchParamsObj";
   import { Modal } from 'svelte-simple-modal'
 
   export let data: PageData
@@ -27,12 +29,18 @@
     ...data.beastCars,
   ]
 
-  function getSortedCars(searchParamsObj) {
-    allCars.forEach((car) => car.calculateRentTotalPrice(searchParamsObj))
+  function getSortedCars(duration, totalKilometres) {
+    const searchParamsObj: SearchParamsObj = new SearchParamsObj()
+    searchParamsObj.days = $days
+    searchParamsObj.hours = $hours
+    searchParamsObj.minutes = $minutes
+    searchParamsObj.distance = totalKilometres
+
+    allCars.forEach(car => car.calculateRentTotalPrice(searchParamsObj))
     return sortCars(allCars, CarSortField.PRICE, SortState.UP)
   }
 
-  $: sortedCars = getSortedCars($searchParamsObj)
+  $: sortedCars = getSortedCars($duration, $totalKilometres)
 </script>
 
 <svelte:head>
