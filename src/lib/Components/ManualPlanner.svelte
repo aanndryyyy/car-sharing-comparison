@@ -6,7 +6,6 @@
   import { totalKilometres } from '$lib/Store/TotalKilometresStore'
 
   function setManuallyMinutes(input: Event) {
-    console.log('input', input)
     const target = input.target as HTMLInputElement
     let value = target.valueAsNumber
 
@@ -19,7 +18,6 @@
   }
 
   function setManuallyHours(input: Event) {
-    console.log('input', input)
     const target = input.target as HTMLInputElement
     let value = target.valueAsNumber
 
@@ -32,7 +30,6 @@
   }
 
   function setManuallyDays(input: Event) {
-    console.log('input', input)
     const target = input.target as HTMLInputElement
     let value = target.valueAsNumber
 
@@ -47,6 +44,16 @@
   $: inputMinutes = $minutes
   $: inputHours = $hours
   $: inputDays = $days
+  $: inputDuration = [$duration]
+  $: inputTotalKilometres = [$totalKilometres]
+
+  function setDuration(input: CustomEvent) {
+    duration.set(input.detail.value)
+  }
+
+  function setTotalKilometres(input: CustomEvent) {
+    totalKilometres.set(input.detail.value)
+  }
 </script>
 
 <div>
@@ -92,7 +99,7 @@
       </div>
     </div>
 
-    <RangeSlider range="min" min={0} max={10000} bind:values={$duration} />
+    <RangeSlider range="min" min={0} max={10000} bind:values={inputDuration} on:change={setDuration} />
   </div>
 
   <div class="block mt-8">
@@ -106,6 +113,6 @@
       <span class="text-sm font-bold text-gray-500"> KM </span>
     </div>
 
-    <RangeSlider range="min" max={2500} bind:values={$totalKilometres} />
+    <RangeSlider range="min" max={2500} bind:values={inputTotalKilometres} on:change={setTotalKilometres} />
   </div>
 </div>
