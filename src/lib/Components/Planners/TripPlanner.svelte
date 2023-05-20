@@ -2,19 +2,14 @@
   import { onMount } from 'svelte'
   import { duration } from '$lib/Store/DurationStore'
   import { totalKilometres } from '$lib/Store/TotalKilometresStore'
-  import { MapContainer } from '$lib/Store/MapContainerStore'
+  import { map } from '$lib/Store/GoogleMapStore'
   import Ellipsis2Vertical from '$lib/Icons/Ellipsis2Vertical.svelte'
   import XCircle from '$lib/Icons/Mini/XCircle.svelte'
 
   let startingLocationInput: HTMLInputElement
-  let startingLocationInputBlur: boolean
   let destinationLocationInput: HTMLInputElement
   let autocompleteStartingLocation: google.maps.places.Autocomplete
   let autocompleteDestinationLocation: google.maps.places.Autocomplete
-
-  let map: google.maps.Map
-  let center: google.maps.LatLngLiteral = { lat: 59.437066, lng: 24.7509811 }
-  let zoom = 12
 
   const autocompleteOptions = {
     componentRestrictions: { country: 'ee' },
@@ -24,23 +19,24 @@
   }
 
   onMount(async () => {
-    let google = window.google
+    const { Autocomplete } = (await google.maps.importLibrary(
+      'places'
+    )) as google.maps.PlacesLibrary
 
-    map = new google.maps.Map($MapContainer, {
-      zoom,
-      center,
-    })
-
-    autocompleteStartingLocation = new google.maps.places.Autocomplete(
+    autocompleteStartingLocation = new Autocomplete(
       startingLocationInput,
       autocompleteOptions
     )
-    autocompleteDestinationLocation = new google.maps.places.Autocomplete(
+    autocompleteDestinationLocation = new Autocomplete(
       destinationLocationInput,
       autocompleteOptions
     )
 
     autocompleteStartingLocation.addListener('place_changed', calculateRoute)
+    autocompleteStartingLocation.addListener(
+      'place_changed',
+      showStartingLocation
+    )
     autocompleteDestinationLocation.addListener('place_changed', calculateRoute)
   })
 
@@ -76,22 +72,22 @@
 
       $duration = Math.ceil(route.duration?.value / 60)
       $totalKilometres = Math.ceil(route.distance?.value / 1000)
-
-      console.log(route.duration?.text, route.duration?.value, $duration)
-      console.log(route.distance?.text, route.distance?.value, $totalKilometres)
     })
+  }
+
+  function showStartingLocation() {
+    const placeStarting = autocompleteStartingLocation.getPlace()
+
+    if (!placeStarting?.geometry?.location) {
+      return
+    }
+
+    $map.panTo(placeStarting.geometry.location)
+    $map.setZoom(16)
   }
 
   export let visible: boolean = false
 </script>
-
-<svelte:head>
-  <script
-    defer
-    async
-    src="https://maps.googleapis.com/maps/api/js?key=&libraries=places"
-  ></script>
-</svelte:head>
 
 <div
   class={`space-y-4 ${$$props.class}`}
