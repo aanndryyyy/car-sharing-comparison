@@ -1,8 +1,11 @@
 <script lang="ts">
   import { _ } from 'svelte-i18n'
-  import Fa from 'svelte-fa/src/fa.svelte'
-  import { faXmark } from '@fortawesome/free-solid-svg-icons'
   import { Provider } from '../Types/Enums/Provider'
+  import { Icon, XMark } from 'svelte-hero-icons'
+  import BoltLogo from '$lib/Images/bolt.png'
+  import CityBeeLogo from '$lib/Images/citybee.png'
+  import ElmoLogo from '$lib/Images/elmo.png'
+  import BeastLogo from '$lib/Images/beast.png'
   export let open = false
 
   const filters = [
@@ -15,12 +18,28 @@
     },
     {
       title: 'Brands',
+      // $lib/Images/bolt.png
       values: [
-        { title: 'Bolt', value: Provider.BOLT, active: true },
-        { title: 'Citybee', value: Provider.CITYBEE, active: false },
-        { title: 'Elmo', value: Provider.ELMO, active: false },
-        { title: 'Avis', value: Provider.AVIS, active: false },
-        { title: 'Beast', value: Provider.BEAST, active: false },
+        { title: 'Bolt', value: Provider.BOLT, imgUrl: BoltLogo, active: true },
+        {
+          title: 'Citybee',
+          value: Provider.CITYBEE,
+          imgUrl: CityBeeLogo,
+          active: false,
+        },
+        {
+          title: 'Elmo',
+          value: Provider.ELMO,
+          imgUrl: ElmoLogo,
+          active: false,
+        },
+        { title: 'Avis', value: Provider.AVIS, imgUrl: null, active: false },
+        {
+          title: 'Beast',
+          value: Provider.BEAST,
+          imgUrl: BeastLogo,
+          active: false,
+        },
       ],
     },
     {
@@ -51,7 +70,7 @@
     </h3>
 
     <button on:click={() => (open = false)}>
-      <Fa icon={faXmark} size="1.5x" />
+      <Icon src={XMark} size="24" />
     </button>
   </div>
 
@@ -61,13 +80,19 @@
       <div class="flex gap-4 mt-1 overflow-scroll scrollbar-hide">
         {#each filter.values as value}
           <button
-            class="bg-gray-200 rounded p-1.5 border-2"
+            class="bg-gray-200 rounded py-1.5 px-2 border-2"
             style={value.active ? 'border-color: gray' : ''}
             on:click={() => (value.active = !value.active)}
           >
-            <p class="text-sm">
-              {value.title}
-            </p>
+            {#if value.imgUrl}
+              <div class="h-5 w-16 flex justify-center">
+                <img src={value.imgUrl} alt={value.title} width="48" />
+              </div>
+            {:else}
+              <p class="text-sm">
+                {value.title}
+              </p>
+            {/if}
           </button>
         {/each}
       </div>

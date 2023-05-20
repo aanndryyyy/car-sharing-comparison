@@ -38,17 +38,30 @@
 <svelte:window on:scroll={() => (showTooltip = false)} />
 
 <button
-  class="p-4 shadow-xl rounded-lg border border-slate-200"
+  class="shadow-xl rounded-lg border border-slate-200"
   on:click={openDetails}
 >
-  <div class="grid grid-cols-3">
-    <div class="col-span-2 text-left">
-      <h2 class="text-base font-normal">
+  <div class="flex p-4">
+    <div class="grid justify-center">
+      <img
+        class="h-4 justify-self-center"
+        src={car.getLogo()}
+        alt="Provider Logo"
+      />
+      <img
+        class="justify-self-center w-24 h-16 md:w-28 md:h-18"
+        src={car.getCarImg()}
+        alt="Provider Logo"
+      />
+    </div>
+    <div class="h-16 w-px bg-slate-200 mx-4 hidden md:block" />
+    <div class="text-left">
+      <h2 class="text-base font-normal md:font-medium">
         {car.getName()}
       </h2>
 
       <div
-        class="flex md:flex-row items-start md:items-center gap-1.5 text-xs text-slate-500"
+        class="flex md:flex-row items-start mt-1 gap-1.5 text-xs text-slate-500 md:text-sm"
       >
         <div class="flex gap-0.5">
           <Icon src={CurrencyEuro} size="14" />
@@ -64,26 +77,13 @@
         {car.getFormattedTotalPrice()}
       </h5>
     </div>
-
-    <div class="col-span-1 grid grid-cols-1">
-      <img
-        class="h-4 justify-self-center"
-        src={car.getLogo()}
-        alt="Provider Logo"
-      />
-      <img
-        class="justify-self-center w-28 h-18"
-        src={car.getCarImg()}
-        alt="Provider Logo"
-      />
-    </div>
   </div>
   <div
     class="transition-[height] ease-in-out delay-100 duration-500 overflow-hidden h-0"
     id={`offer-details-grow-${index}`}
   >
     <Divider />
-    <div class="grid gap-2" id={`offer-details-wrapper-${index}`}>
+    <div class="p-4 grid gap-2" id={`offer-details-wrapper-${index}`}>
       <div>
         <p class="text-left">
           For the cheapest ride select <b>package 1</b> and drive it over

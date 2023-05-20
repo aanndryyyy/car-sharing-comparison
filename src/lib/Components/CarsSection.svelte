@@ -37,7 +37,7 @@
     <CarsMap />
   </div>
 
-  <div class="flex justify-between hidden md:block">
+  <div class="flex justify-between hidden md:flex mt-8">
     <div>
       <p>closest first</p>
     </div>
@@ -48,7 +48,7 @@
     </div>
   </div>
 
-  <div class="grid gap-4 auto-cols-fr mt-8">
+  <div class="grid gap-4 auto-cols-fr mt-4">
     <slot />
   </div>
 </section>
