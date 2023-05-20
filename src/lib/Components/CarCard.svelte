@@ -98,7 +98,7 @@
       <div class="mt-2">
         <a href="https://bolt.eu/et-ee/" target="”_blank”">
           <button
-            class="bg-green hover:bg-green-600 text-white font-bold py-2 rounded w-60"
+            class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 rounded w-60"
           >
             {$_('openInApp')}
           </button>
