@@ -5,6 +5,7 @@
   import { getContext } from 'svelte'
   import Filters from '$lib/Components/Filters.svelte'
   import { Icon, Funnel, Map } from 'svelte-hero-icons'
+  import BrandMultiSelect from '$lib/Components/BrandMultiSelect.svelte'
   const modal = getContext('simple-modal')
 
   const openMap = () => modal.open(CarsMap)
@@ -42,7 +43,7 @@
       <p>closest first</p>
     </div>
     <div class="flex gap-4">
-      <p>brand</p>
+      <BrandMultiSelect />
       <p>type</p>
       <p>fuel</p>
     </div>
