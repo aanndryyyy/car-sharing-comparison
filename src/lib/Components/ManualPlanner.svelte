@@ -1,44 +1,52 @@
 <script lang="ts">
   import { _ } from 'svelte-i18n'
-  import { searchParamsObj } from '../Store/SearchParamsObj'
   import RangeSlider from 'svelte-range-slider-pips'
 
-  // FIXME this is broken here. Should be okei after feature/search-update merge
-  let duration = getDuration()
+  import { duration, minutes, hours, days } from '$lib/Store/DurationStore'
+  import { totalKilometres } from '$lib/Store/TotalKilometresStore'
 
-  function getDuration() {
-    let tempDuration =
-      $searchParamsObj.minutes +
-      $searchParamsObj.hours * 60 +
-      $searchParamsObj.days * 24 * 60
-    return tempDuration
-      ? Math.floor(Math.log(Math.ceil(tempDuration / 5) * 5) / Math.log(1.2))
-      : 0
-  }
+  function setManuallyMinutes(input: Event) {
+    console.log('input', input)
+    const target = input.target as HTMLInputElement
+    let value = target.valueAsNumber
 
-  function dateValueChanged() {
-    duration = getDuration()
-    if ($searchParamsObj.minutes == undefined) {
-      $searchParamsObj.minutes = 0
-    } else if ($searchParamsObj.hours == undefined) {
-      $searchParamsObj.hours = 0
-    } else if ($searchParamsObj.days == undefined) {
-      $searchParamsObj.days = 0
+    if (isNaN(value)) {
+      value = 0
     }
+
+    $duration -= $minutes
+    $duration += value
   }
 
-  function durationValueChanged() {
-    let exponentialDuration = Math.pow(1.2, duration)
-    exponentialDuration = Math.ceil(exponentialDuration / 5) * 5
-    $searchParamsObj.minutes = exponentialDuration % 60
-    $searchParamsObj.hours = Math.floor(exponentialDuration / 60) % 24
-    $searchParamsObj.days = Math.floor(exponentialDuration / (60 * 24))
+  function setManuallyHours(input: Event) {
+    console.log('input', input)
+    const target = input.target as HTMLInputElement
+    let value = target.valueAsNumber
+
+    if (isNaN(value)) {
+      value = 0
+    }
+
+    $duration -= $hours * 60
+    $duration += value * 60
   }
 
-  function removeLeadingZeros(e) {
-    if (e.currentTarget.value && e.currentTarget.value[0] === '0')
-      e.currentTarget.value = e.currentTarget.value.slice(1)
+  function setManuallyDays(input: Event) {
+    console.log('input', input)
+    const target = input.target as HTMLInputElement
+    let value = target.valueAsNumber
+
+    if (isNaN(value)) {
+      value = 0
+    }
+
+    $duration -= $days * 24 * 60
+    $duration += value * 24 * 60
   }
+
+  $: inputMinutes = $minutes
+  $: inputHours = $hours
+  $: inputDays = $days
 </script>
 
 <div>
@@ -48,9 +56,8 @@
         <input
           class="block w-full focus:outline-none"
           type="number"
-          on:input={removeLeadingZeros}
-          on:change={dateValueChanged}
-          bind:value={$searchParamsObj.days}
+          bind:value={inputDays}
+          on:change={setManuallyDays}
           min="0"
         />
         <span class="text-sm font-bold text-gray-500">
@@ -62,9 +69,8 @@
         <input
           class="block w-full focus:outline-none"
           type="number"
-          on:input={removeLeadingZeros}
-          on:change={dateValueChanged}
-          bind:value={$searchParamsObj.hours}
+          bind:value={inputHours}
+          on:change={setManuallyHours}
           min="0"
         />
         <span class="text-sm font-bold text-gray-500">
@@ -76,9 +82,8 @@
         <input
           class="block w-full focus:outline-none"
           type="number"
-          on:input={removeLeadingZeros}
-          on:change={dateValueChanged}
-          bind:value={$searchParamsObj.minutes}
+          bind:value={inputMinutes}
+          on:change={setManuallyMinutes}
           min="0"
         />
         <span class="text-sm font-bold text-gray-500">
@@ -87,13 +92,7 @@
       </div>
     </div>
 
-    <RangeSlider
-      range="min"
-      min={0}
-      max={50}
-      bind:values={duration}
-      on:change={durationValueChanged}
-    />
+    <RangeSlider range="min" min={0} max={10000} bind:values={$duration} />
   </div>
 
   <div class="block mt-8">
@@ -101,16 +100,12 @@
       <input
         class="block w-full focus:outline-none"
         type="number"
-        bind:value={$searchParamsObj.distance}
+        bind:value={$totalKilometres}
         min="0"
       />
       <span class="text-sm font-bold text-gray-500"> KM </span>
     </div>
 
-    <RangeSlider
-      range="min"
-      max={2500}
-      bind:values={$searchParamsObj.distance}
-    />
+    <RangeSlider range="min" max={2500} bind:values={$totalKilometres} />
   </div>
 </div>
