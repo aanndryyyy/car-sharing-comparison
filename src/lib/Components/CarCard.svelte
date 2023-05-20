@@ -1,6 +1,6 @@
 <script lang="ts">
   import { createPopperActions } from 'svelte-popperjs';
-  
+
   import InfoIcon from '$lib/Images/info.svg?url';
   
   const [popperRef, popperContent] = createPopperActions({
@@ -17,9 +17,8 @@
   let showTooltip = false;
 
   import type BaseCar from "$lib/Car/BaseCar";
-  
-  import { duration } from "$lib/Store/DurationStore";
-  import { totalKilometres } from "$lib/Store/TotalKilometresStore";
+
+  import { searchParamsObj } from "$lib/Store/SearchParamsObj";
 
   export let car: BaseCar;
   export let index: number;
@@ -77,8 +76,8 @@
   </div>
 
   <div class="text-2xl font-bold text-right" class:text-green-600={index === 0}>
-    {car.getFormattedTotalPrice( $duration, $totalKilometres )}
-    <span class="block text-xs font-normal text-blue-600" title="Long-term rent discount">{car.getFormattedLongTermDiscount( $duration, $totalKilometres )}</span>
+    {car.getFormattedTotalPrice()}
+    <span class="block text-xs font-normal text-blue-600" title="Long-term rent discount">{car.getFormattedLongTermDiscount()}</span>
   </div>
 </div>
 

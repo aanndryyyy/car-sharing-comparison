@@ -1,33 +1,23 @@
 import type BaseCar from "./BaseCar";
-import { breakdownMinutes } from "../Time";
 
 import CityBeeLogo from '$lib/Images/citybee.svg';
-import type { SvelteComponent } from "svelte";
+import type {SvelteComponent} from "svelte";
 import CityBeeCarPopover from "$lib/Popovers/CityBeeCarPopover.svelte";
-
-type CityBeeCarObject = {
-  name: string,
-  type: string,
-  price: {
-    km: number,
-    minute: number,
-    hour: number,
-    day: number,
-    minimum: number,
-    start: number,
-  },
-}
+import type {SearchParamsObj} from "../DTO/SearchParamsObj";
+import type {Car} from "../DTO/Car";
+import calculateCityBeePrice from "../../helpers/Calculators/CalculateCityBeePrice";
 
 class CityBeeCar implements BaseCar {
 
-  readonly carData: CityBeeCarObject;
+  readonly carData;
+  rentTotalPrice: number | undefined;
 
   /**
    * Initialise car data.
    * 
    * @param car The car object.
    */
-  constructor( car: CityBeeCarObject ) {
+  constructor( car: Car ) {
     
     this.carData = car;
   }
@@ -39,51 +29,34 @@ class CityBeeCar implements BaseCar {
     
     return this.carData.name;
   }
+
+  calculateRentTotalPrice(searchParamsObj: SearchParamsObj): void {
+    this.rentTotalPrice = calculateCityBeePrice(this.carData, JSON.parse(JSON.stringify(searchParamsObj)))
+  }
   
   /**
    * @inheritdoc
    */
-  getTotalPrice( minutes: number, distance: number ): number {
-
-    let duration = breakdownMinutes( minutes );
-
-    if ( ( duration.minutes + duration.hours*60 ) * this.carData.price.minute >= this.carData.price.day ) {
-      
-      duration.days++;
-      duration.hours   = 0;
-      duration.minutes = 0;
-    }
-    
-    if ( duration.minutes*this.carData.price.minute >= this.carData.price.hour ) {
-      
-      duration.hours++;
-      duration.minutes = 0;
-    }
-
-    let durationPrice = duration.days*this.carData.price.day + duration.hours*this.carData.price.hour + duration.minutes*this.carData.price.minute;
-    let total         = durationPrice + distance*this.carData.price.km;
-
-    if ( total <= this.carData.price.minimum ) {
-      return this.carData.price.minimum;
-    }
-
-    return total + this.carData.price.start;
+  getTotalPrice(): number {
+    if (this.rentTotalPrice == undefined) throw "Car total rent price is not calculated"
+    return this.rentTotalPrice
   }
 
   /**
    * @inheritdoc
    */
-  getFormattedTotalPrice( minutes: number, distance: number ): string {
+  getFormattedTotalPrice(): string {
 
-    return ( this.getTotalPrice( minutes, distance ) ).toFixed(2) + " €";
+    return ( this.getTotalPrice() ).toFixed(2) + " €";
   }
 
   /**
    * @inheritdoc
    */
-  getFormattedLongTermDiscount( minutes: number, distance: number ): string {
+  getFormattedLongTermDiscount(): string {
 
-    return ( this.getTotalPrice( minutes, distance ) - this.carData.price.minute*minutes ).toFixed(2) + " €";
+    return "TODO"
+    // return ( this.getTotalPrice() - this.carData.price.minute * searchParamsObj.minutes ).toFixed(2) + " €";
   }
 
   /**
@@ -118,12 +91,11 @@ class CityBeeCar implements BaseCar {
     return {
       component: CityBeeCarPopover,
       props: {
-        minimumFee: this.carData.price.minimum,
+        minimumFee: this.carData.price.min,
         startingFee: this.carData.price.start,
       }
     };
   }
 }
 
-export type { CityBeeCarObject };
 export default CityBeeCar;

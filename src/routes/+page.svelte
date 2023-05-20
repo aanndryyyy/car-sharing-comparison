@@ -1,27 +1,29 @@
 <script lang="ts">
-  import { _, locale, locales } from 'svelte-i18n';
+  import {_, locale, locales} from 'svelte-i18n';
 
   import type BaseCar from "$lib/Car/BaseCar";
-  import type { PageData } from "./$types";
-  import { duration } from "$lib/Store/DurationStore";
-  import { totalKilometres } from "$lib/Store/TotalKilometresStore";
+  import type {PageData} from "./$types";
+  import {searchParamsObj} from "$lib/Store/SearchParamsObj";
 
   import CarCard from "$lib/Components/CarCard.svelte";
   import CarsSection from "$lib/Components/CarsSection.svelte";
   import PlannerSection from "$lib/Components/PlannerSection.svelte";
 
   import ogImage from "$lib/Images/og-image.png";
+  import sortCars from "../helpers/SortCars";
+  import {CarSortField} from "../lib/Types/Enums/CarSortField";
+  import {SortState} from "../lib/Types/Enums/SortState";
 
   export let data: PageData;
 
   let allCars: BaseCar[] = [ ...data.boltCars, ...data.cityBeeCars, ...data.elmoCars, ...data.beastCars ];
 
-  $: sortedCars = allCars.sort( function( car1: BaseCar, car2: BaseCar ) {
-    let firstPer = car1.getTotalPrice( $duration, $totalKilometres );
-    let secPer   = car2.getTotalPrice( $duration, $totalKilometres );
+  function getSortedCars(searchParamsObj) {
+    allCars.forEach(car => car.calculateRentTotalPrice(searchParamsObj))
+    return sortCars(allCars, CarSortField.PRICE, SortState.UP)
+  }
 
-    return firstPer - secPer;
-  });
+  $: sortedCars = getSortedCars($searchParamsObj)
 </script>
 
 <svelte:head>
