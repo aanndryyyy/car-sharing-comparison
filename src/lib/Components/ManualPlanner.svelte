@@ -54,12 +54,18 @@
   function setTotalKilometres(input: CustomEvent) {
     totalKilometres.set(input.detail.value)
   }
+
+  export let visible: boolean = false
 </script>
 
-<div>
-  <div class="block mt-4">
-    <div class="flex-row md:flex-col lg:flex-row flex gap-2">
-      <div class="flex items-center rounded-md py-2 px-3 border">
+<div
+  class={$$props.class}
+  class:max-md:!block={visible}
+  class:max-md:!hidden={!visible}
+>
+  <div class="mt-4 block">
+    <div class="flex flex-row gap-2 md:flex-col lg:flex-row">
+      <div class="flex items-center rounded-md border py-2 px-3">
         <input
           class="block w-full focus:outline-none"
           type="number"
@@ -72,7 +78,7 @@
         </span>
       </div>
 
-      <div class="flex items-center rounded-md py-2 px-3 border">
+      <div class="flex items-center rounded-md border py-2 px-3">
         <input
           class="block w-full focus:outline-none"
           type="number"
@@ -85,7 +91,7 @@
         </span>
       </div>
 
-      <div class="flex items-center rounded-md py-2 px-3 border">
+      <div class="flex items-center rounded-md border py-2 px-3">
         <input
           class="block w-full focus:outline-none"
           type="number"
@@ -99,11 +105,17 @@
       </div>
     </div>
 
-    <RangeSlider range="min" min={0} max={10000} bind:values={inputDuration} on:change={setDuration} />
+    <RangeSlider
+      range="min"
+      min={0}
+      max={10000}
+      bind:values={inputDuration}
+      on:change={setDuration}
+    />
   </div>
 
-  <div class="block mt-8">
-    <div class="flex items-center rounded-md py-2 px-3 border">
+  <div class="mt-8 block">
+    <div class="flex items-center rounded-md border py-2 px-3">
       <input
         class="block w-full focus:outline-none"
         type="number"
@@ -113,6 +125,11 @@
       <span class="text-sm font-bold text-gray-500"> KM </span>
     </div>
 
-    <RangeSlider range="min" max={2500} bind:values={inputTotalKilometres} on:change={setTotalKilometres} />
+    <RangeSlider
+      range="min"
+      max={2500}
+      bind:values={inputTotalKilometres}
+      on:change={setTotalKilometres}
+    />
   </div>
 </div>

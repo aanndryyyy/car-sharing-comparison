@@ -10,12 +10,13 @@
 </script>
 
 <svelte:window bind:innerWidth={screenSize} />
+
 <aside class="md:col-span-1">
   <div class=" md:sticky md:top-6">
     <div class="flex justify-between">
       <h3>{$_('planner.title')}</h3>
       <button
-        class="block flex items-center justify-center rounded bg-green-600 p-2.5 text-white md:hidden"
+        class="flex items-center justify-center rounded bg-green-600 p-2.5 text-white md:hidden"
         on:click={() => (manualPlanner = !manualPlanner)}
       >
         <Icon src={ArrowsUpDown} size="24" />
@@ -23,9 +24,7 @@
     </div>
 
     <div>
-      {#if manualPlanner || screenSize >= 768}
-        <ManualPlanner />
-      {/if}
+      <ManualPlanner visible={manualPlanner} />
 
       <div class="relative my-8 flex items-center max-md:hidden">
         <div class="flex-grow border-t border-slate-300" />
@@ -35,9 +34,7 @@
         <div class="flex-grow border-t border-slate-300" />
       </div>
 
-      {#if (screenSize < 768 && !manualPlanner) || screenSize >= 768}
-        <AutoPlanner />
-      {/if}
+      <AutoPlanner visible={!manualPlanner} class="max-md:hidden" />
     </div>
   </div>
 </aside>
