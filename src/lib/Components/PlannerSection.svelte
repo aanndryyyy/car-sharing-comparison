@@ -1,8 +1,7 @@
 <script lang="ts">
   import { _ } from 'svelte-i18n'
-  import AutoPlanner from '$lib/Components/AutoPlanner.svelte'
-  import ManualPlanner from '$lib/Components/ManualPlanner.svelte'
-  import Divider from './Divider.svelte'
+  import AutoPlanner from '$lib/Components/Planners/TripPlanner.svelte'
+  import ManualPlanner from '$lib/Components/Planners/ManualPlanner.svelte'
   import { Icon, ArrowsUpDown } from 'svelte-hero-icons'
 
   let manualPlanner = true
