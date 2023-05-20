@@ -70,12 +70,12 @@
       class="rounded-md bg-green-100 text-green-900 p-4 block md:hidden"
       transition:fly={{ duration: 2000 }}
     >
-      <div class="flex">
+      <div class="flex justify-between">
         <p class="text-xs font-normal">
           {$_('appShortDescription')}.
         </p>
         <button
-          class="flex w-16"
+          class="flex"
           on:click={() => (showAppShortDescription = false)}
         >
           <Icon class="text-green-600" src={XMark} size="24" />
