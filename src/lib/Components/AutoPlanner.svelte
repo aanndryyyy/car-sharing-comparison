@@ -81,7 +81,7 @@
   <script defer async src="https://maps.googleapis.com/maps/api/js?key=&libraries=places&callback=initMap" />
 </svelte:head>
 
-<div class="space-y-4 mt-16">
+<div class="space-y-4">
 
   <div class="flex items-center gap-1 rounded-md p-2 pl-4 border border-slate-900/20">
     <input
