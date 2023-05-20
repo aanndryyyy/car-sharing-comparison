@@ -33,10 +33,10 @@
 
   export let car: BaseCar
   export let index: number
+  let screenSize
 </script>
 
-<svelte:window on:scroll={() => (showTooltip = false)} />
-
+<svelte:window on:scroll={() => (showTooltip = false)} bind:innerWidth={screenSize} />
 <button
   class="shadow-xl rounded-lg border border-slate-200"
   on:click={openDetails}
@@ -63,12 +63,15 @@
       <div
         class="flex md:flex-row items-start mt-1 gap-1.5 text-xs text-slate-500 md:text-sm"
       >
-        <div class="flex gap-0.5">
-          <Icon src={CurrencyEuro} size="14" />
-          {car.getFormattedMinutePrice()}
+        <div class="flex gap-0.5 items-center">
+          <Icon src={CurrencyEuro} size={(screenSize => 768) ? '16' : '14'} />
+          <p>
+            {car.getFormattedMinutePrice()}
+          </p>
+
         </div>
-        <div class="flex gap-0.5">
-          <Icon src={CurrencyEuro} size="14" />
+        <div class="flex gap-0.5 items-center">
+          <Icon src={CurrencyEuro} size={(screenSize => 768) ? '16' : '14'}  />
           {car.getFormattedKilometrePrice()}
         </div>
       </div>
