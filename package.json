@@ -32,6 +32,7 @@
 	"dependencies": {
 		"@babel/preset-typescript": "^7.21.5",
 		"babel-install": "^2.1.0",
+		"@sveltejs/adapter-vercel": "^2.4.3",
 		"svelte-i18n": "^3.6.0",
 		"svelte-jester": "^2.3.2",
 		"vite-tsconfig-paths": "^4.2.0"
