@@ -1,342 +1,282 @@
 [
   {
-    "name": "Volkswagen e-Up!'19",
-    "type": "eco",
-    "price": {
-      "km": {
-        "base": 0.23,
-        "after100": 0.1
-      },
-      "minute": 0.11,
-      "hour": 4.95,
-      "day": 29.7,
-      "week": {
-        "price": 220,
-        "km": {
-          "included": 700,
-          "priceAfter": 0.1
-        }
-      },
-      "month": {
-        "price": 799,
-        "km": {
-          "included": 3000,
-          "priceAfter": 0.1
-        }
-      },
-      "minimum": 0,
-      "start": 0
+    "name":"Volkswagen e-Up!'19",
+    "bodyType":"HATCHBACK",
+    "motorType":"ELECTRIC",
+    "petFriendly":true,
+    "gearbox":"AUTOMATIC",
+    "imageUrl":"providers/elmo/cars/VW-e-Up20.png",
+    "price":{
+      "km":0.2,
+      "minute":0.11,
+      "hour":6.6,
+      "day":33
     },
-    "priceWithCustomerCard": {
-      "km": 0.1,
-      "hour": 1,
-      "minimum": 0
-    }
+    "packages":[
+      {
+        "name": "WEEK",
+        "days":7,
+        "distance":700,
+        "price":225
+      },
+      {
+        "name": "MONTH",
+        "days":30,
+        "distance":3000,
+        "price":700
+      }
+    ]
   },
   {
-    "name": "Skoda Citigo",
-    "type": "eco",
-    "price": {
-      "km": {
-        "base": 0.23,
-        "after100": 0.1
-      },
-      "minute": 0.11,
-      "hour": 4.95,
-      "day": 29.7,
-      "week": {
-        "price": 220,
-        "km": {
-          "included": 700,
-          "priceAfter": 0.1
-        }
-      },
-      "month": {
-        "price": 799,
-        "km": {
-          "included": 3000,
-          "priceAfter": 0.1
-        }
-      },
-      "minimum": 0,
-      "start": 0
+    "name":"Škoda Citigo",
+    "bodyType":"HATCHBACK",
+    "motorType":"ELECTRIC",
+    "petFriendly":true,
+    "gearbox":"AUTOMATIC",
+    "imageUrl":"providers/elmo/cars/Skoda-Citigo.png",
+    "price":{
+      "km":0.2,
+      "minute":0.11,
+      "hour":6.6,
+      "day":33
     },
-    "priceWithCustomerCard": {
-      "km": 0.1,
-      "hour": 1,
-      "minimum": 0
-    }
+    "packages":[
+      {
+        "name": "WEEK",
+        "days":7,
+        "distance":700,
+        "price":225
+      },
+      {
+        "name": "MONTH",
+        "days":30,
+        "distance":3000,
+        "price":799
+      }
+    ]
   },
   {
-    "name": "Toyota Yaris Hybrid",
-    "type": "eco",
-    "price": {
-      "km": {
-        "base": 0.23,
-        "after100": 0.1
-      },
-      "minute": 0.11,
-      "hour": 4.95,
-      "day": 29.7,
-      "week": {
-        "price": 220,
-        "km": {
-          "included": 700,
-          "priceAfter": 0.1
-        }
-      },
-      "month": {
-        "price": 799,
-        "km": {
-          "included": 3000,
-          "priceAfter": 0.1
-        }
-      },
-      "minimum": 0,
-      "start": 0
+    "name":"Toyota Yaris Hybrid",
+    "bodyType":"HATCHBACK",
+    "motorType":"HYBRID",
+    "petFriendly":true,
+    "gearbox":"AUTOMATIC",
+    "imageUrl":"providers/elmo/cars/Toyota-Yaris-Hybrid.png",
+    "price":{
+      "km":0.2,
+      "minute":0.11,
+      "hour":6.6,
+      "day":33
     },
-    "priceWithCustomerCard": {
-      "km": 0.1,
-      "hour": 1,
-      "minimum": 0
-    }
+    "packages":[
+      {
+        "name": "WEEK",
+        "days":7,
+        "distance":700,
+        "price":249
+      },
+      {
+        "name": "MONTH",
+        "days":30,
+        "distance":3000,
+        "price":799
+      }
+    ]
   },
   {
-    "name": "Renault Zoe",
-    "type": "eco",
-    "price": {
-      "km": {
-        "base": 0.23,
-        "after100": 0.1
-      },
-      "minute": 0.11,
-      "hour": 4.95,
-      "day": 29.7,
-      "week": {
-        "price": 220,
-        "km": {
-          "included": 700,
-          "priceAfter": 0.1
-        }
-      },
-      "month": {
-        "price": 799,
-        "km": {
-          "included": 3000,
-          "priceAfter": 0.1
-        }
-      },
-      "minimum": 0,
-      "start": 0
+    "name":"Nissan Leaf",
+    "bodyType":"HATCHBACK",
+    "motorType":"ELECTRIC",
+    "petFriendly":true,
+    "gearbox":"AUTOMATIC",
+    "imageUrl":"providers/elmo/cars/Nissan-Leaf.png",
+    "price":{
+      "km":0.2,
+      "minute":0.11,
+      "hour":6.6,
+      "day":33
     },
-    "priceWithCustomerCard": {
-      "km": 0.1,
-      "hour": 1,
-      "minimum": 0
-    }
+    "packages":[
+      {
+        "name": "WEEK",
+        "days":7,
+        "distance":700,
+        "price":249
+      },
+      {
+        "name": "MONTH",
+        "days":30,
+        "distance":3000,
+        "price":799
+      }
+    ]
   },
   {
-    "name": "Renault Clio Hybrid 2021",
-    "type": "eco",
-    "price": {
-      "km": {
-        "base": 0.23,
-        "after100": 0.1
-      },
-      "minute": 0.11,
-      "hour": 4.95,
-      "day": 29.7,
-      "week": {
-        "price": 220,
-        "km": {
-          "included": 700,
-          "priceAfter": 0.1
-        }
-      },
-      "month": {
-        "price": 799,
-        "km": {
-          "included": 3000,
-          "priceAfter": 0.1
-        }
-      },
-      "minimum": 0,
-      "start": 0
+    "name":"Volkswagen e-Up'20",
+    "bodyType":"HATCHBACK",
+    "motorType":"ELECTRIC",
+    "petFriendly":true,
+    "gearbox":"AUTOMATIC",
+    "imageUrl":"providers/elmo/cars/VW-e-Up20.png",
+    "price":{
+      "km":0.2,
+      "minute":0.11,
+      "hour":6.6,
+      "day":33
     },
-    "priceWithCustomerCard": {
-      "km": 0.1,
-      "hour": 1,
-      "minimum": 0
-    }
+    "packages":[
+      {
+        "name": "WEEK",
+        "days":7,
+        "distance":700,
+        "price":260
+      },
+      {
+        "name": "MONTH",
+        "days":30,
+        "distance":3000,
+        "price":799
+      }
+    ]
   },
   {
-    "name": "Nissan Leaf",
-    "type": "comfy",
-    "price": {
-      "km": {
-        "base": 0.23,
-        "after100": 0.1
-      },
-      "minute": 0.13,
-      "hour": 6.5,
-      "day": 32.5,
-      "week": {
-        "price": 245,
-        "km": {
-          "included": 700,
-          "priceAfter": 0.1
-        }
-      },
-      "month": {
-        "price": 825,
-        "km": {
-          "included": 3000,
-          "priceAfter": 0.1
-        }
-      },
-      "minimum": 0,
-      "start": 0
+    "name":"Renault Clio Hybrid",
+    "bodyType":"HATCHBACK",
+    "motorType":"HYBRID",
+    "petFriendly":true,
+    "gearbox":"AUTOMATIC",
+    "imageUrl":"providers/elmo/cars/Renault-Clio-Hybrid.png",
+    "price":{
+      "km":0.2,
+      "minute":0.11,
+      "hour":6.6,
+      "day":33
     },
-    "priceWithCustomerCard": {
-      "km": 0.1,
-      "hour": 1,
-      "minimum": 0
-    }
+    "packages":[
+      {
+        "name": "WEEK",
+        "days":7,
+        "distance":700,
+        "price":260
+      },
+      {
+        "name": "MONTH",
+        "days":30,
+        "distance":3000,
+        "price":825
+      }
+    ]
   },
   {
-    "name": "Peugeot e208 GT",
-    "type": "comfy",
-    "price": {
-      "km": {
-        "base": 0.23,
-        "after100": 0.1
-      },
-      "minute": 0.13,
-      "hour": 6.5,
-      "day": 32.5,
-      "week": {
-        "price": 245,
-        "km": {
-          "included": 700,
-          "priceAfter": 0.1
-        }
-      },
-      "month": {
-        "price": 825,
-        "km": {
-          "included": 3000,
-          "priceAfter": 0.1
-        }
-      },
-      "minimum": 0,
-      "start": 0
+    "name":"Renault Zoe",
+    "bodyType":"HATCHBACK",
+    "motorType":"ELECTRIC",
+    "petFriendly":true,
+    "gearbox":"AUTOMATIC",
+    "imageUrl":"providers/elmo/cars/Renault-Zoe.png",
+    "price":{
+      "km":0.2,
+      "minute":0.13,
+      "hour":7.8,
+      "day":39
     },
-    "priceWithCustomerCard": {
-      "km": 0.1,
-      "hour": 1,
-      "minimum": 0
-    }
+    "packages":[
+      {
+        "name": "WEEK",
+        "days":7,
+        "distance":700,
+        "price":275
+      },
+      {
+        "name": "MONTH",
+        "days":30,
+        "distance":3000,
+        "price":825
+      }
+    ]
   },
   {
-    "name": "Renault Arkana Hybrid",
-    "type": "comfy",
-    "price": {
-      "km": {
-        "base": 0.23,
-        "after100": 0.1
-      },
-      "minute": 0.15,
-      "hour": 7.95,
-      "day": 39.75,
-      "week": {
-        "price": 275,
-        "km": {
-          "included": 700,
-          "priceAfter": 0.1
-        }
-      },
-      "month": {
-        "price": 825,
-        "km": {
-          "included": 3000,
-          "priceAfter": 0.1
-        }
-      },
-      "minimum": 0,
-      "start": 0
+    "name":"Peugeot e-208 GT",
+    "bodyType":"HATCHBACK",
+    "motorType":"ELECTRIC",
+    "petFriendly":true,
+    "gearbox":"AUTOMATIC",
+    "imageUrl":"providers/elmo/cars/Peugeot-e-208-GT.png",
+    "price":{
+      "km":0.2,
+      "minute":0.13,
+      "hour":7.8,
+      "day":39
     },
-    "priceWithCustomerCard": {
-      "km": 0.1,
-      "hour": 1,
-      "minimum": 0
-    }
+    "packages":[
+      {
+        "name": "WEEK",
+        "days":7,
+        "distance":700,
+        "price":275
+      },
+      {
+        "name": "MONTH",
+        "days":30,
+        "distance":3000,
+        "price":890
+      }
+    ]
   },
   {
-    "name": "Tesla Model 3",
-    "type": "classy",
-    "price": {
-      "km": {
-        "base": 0.24,
-        "after100": 0.1
-      },
-      "minute": 0.25,
-      "hour": 15,
-      "day": 75,
-      "week": {
-        "price": 525,
-        "km": {
-          "included": 700,
-          "priceAfter": 0.1
-        }
-      },
-      "month": {
-        "price": 1599,
-        "km": {
-          "included": 3000,
-          "priceAfter": 0.1
-        }
-      },
-      "minimum": 30,
-      "start": 0
+    "name":"Renault Arkana Hybrid",
+    "bodyType":"HATCHBACK",
+    "motorType":"HYBRID",
+    "petFriendly":true,
+    "gearbox":"AUTOMATIC",
+    "imageUrl":"providers/elmo/cars/Renault-Arkana-Hybrid.png",
+    "price":{
+      "km":0.22,
+      "minute":0.15,
+      "hour":9.0,
+      "day":45
     },
-    "priceWithCustomerCard": {
-      "km": 0.16,
-      "hour": 2.5,
-      "minimum": 25
-    }
+    "packages":[
+      {
+        "name": "WEEK",
+        "days":7,
+        "distance":700,
+        "price":350
+      },
+      {
+        "name": "MONTH",
+        "days":30,
+        "distance":3000,
+        "price":890
+      }
+    ]
   },
   {
-    "name": "Tesla Model Y",
-    "type": "classy",
-    "price": {
-      "km": {
-        "base": 0.24,
-        "after100": 0.1
-      },
-      "minute": 0.35,
-      "hour": 21,
-      "day": 105,
-      "week": {
-        "price": 750,
-        "km": {
-          "included": 700,
-          "priceAfter": 0.1
-        }
-      },
-      "month": {
-        "price": 2600,
-        "km": {
-          "included": 3000,
-          "priceAfter": 0.1
-        }
-      },
-      "minimum": 30,
-      "start": 0
+    "name":"Tesla Model 3 SR+",
+    "bodyType":"SEDAN",
+    "motorType":"ELECTRIC",
+    "petFriendly":true,
+    "gearbox":"AUTOMATIC",
+    "imageUrl":"providers/elmo/cars/Tesla-Model-3-SR+.png",
+    "price":{
+      "km":0.2,
+      "minute":0.25,
+      "hour":15,
+      "day":75
     },
-    "priceWithCustomerCard": {
-      "km": 0.16,
-      "hour": 2.5,
-      "minimum": 25
-    }
+    "packages":[
+      {
+        "name": "WEEK",
+        "days":7,
+        "distance":700,
+        "price":525
+      },
+      {
+        "name": "MONTH",
+        "days":30,
+        "distance":3000,
+        "price":1599
+      }
+    ]
   }
 ]
