@@ -1,10 +1,9 @@
 <script lang="ts">
   import { _ } from 'svelte-i18n'
-  import Fa from 'svelte-fa/src/fa.svelte'
-  import { faArrowRightArrowLeft } from '@fortawesome/free-solid-svg-icons'
   import AutoPlanner from '$lib/Components/AutoPlanner.svelte'
   import ManualPlanner from '$lib/Components/ManualPlanner.svelte'
   import Divider from './Divider.svelte'
+  import { Icon, ArrowsUpDown } from 'svelte-hero-icons'
 
   let manuelPlanner = true
   let screenSize
@@ -16,10 +15,10 @@
     <div class="flex justify-between">
       <h3>{$_('planner.title')}</h3>
       <button
-        class="w-8 h-8 p-5 flex items-center justify-center border-2 border-green rounded block md:hidden"
+        class="p-2.5 flex items-center justify-center rounded block md:hidden text-white bg-green-600"
         on:click={() => (manuelPlanner = !manuelPlanner)}
       >
-        <Fa icon={faArrowRightArrowLeft} rotate={90} color="green" />
+        <Icon src={ArrowsUpDown} size="24" />
       </button>
     </div>
 

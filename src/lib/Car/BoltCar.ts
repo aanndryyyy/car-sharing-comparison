@@ -72,7 +72,7 @@ class BoltCar implements BaseCar {
    * @inheritdoc
    */
   getFormattedKilometrePrice(): string {
-    return this.carData.price.km + ' €/min'
+    return this.carData.price.km + ' €/km'
   }
 
   /**

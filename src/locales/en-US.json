@@ -7,6 +7,8 @@
   },
   "or": "Or",
   "filters": "Filters",
+  "readMore": "Read more",
+  "openInApp": "Open in App",
   "planner": {
     "title": "Planner",
     "subtitle": "Use sliders or enter manually",

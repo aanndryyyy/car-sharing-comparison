@@ -4,6 +4,8 @@
   import type BaseCar from '$lib/Car/BaseCar'
   import type { PageData } from './$types'
   import { searchParamsObj } from '$lib/Store/SearchParamsObj'
+  import { Icon, XMark, ArrowSmallRight } from 'svelte-hero-icons'
+  import { fly } from 'svelte/transition'
 
   import CarCard from '$lib/Components/CarCard.svelte'
   import CarsSection from '$lib/Components/CarsSection.svelte'
@@ -16,6 +18,7 @@
   import { Modal } from 'svelte-simple-modal'
 
   export let data: PageData
+  let showAppShortDescription: boolean = true
 
   let allCars: BaseCar[] = [
     ...data.boltCars,
@@ -54,11 +57,30 @@
   <h1 class="mb-2 text-4xl md:text-5xl font-bold hidden md:block">
     {$_('title')}
   </h1>
-  <div
-    class="border-2 border-gray-200 rounded bg-gray-100 p-4 text-base block md:hidden"
-  >
-    {$_('appShortDescription')}.
-  </div>
+  {#if showAppShortDescription}
+    <div
+      class="rounded-md bg-green-100 text-green-900 p-4 block md:hidden"
+      transition:fly={{ duration: 2000 }}
+    >
+      <div class="flex">
+        <p class="text-xs font-normal">
+          {$_('appShortDescription')}.
+        </p>
+        <button
+          class="flex w-16"
+          on:click={() => (showAppShortDescription = false)}
+        >
+          <Icon class="text-green-600" src={XMark} size="24" />
+        </button>
+      </div>
+      <button class="flex items-center gap-1 pt-2 text-xs font-medium">
+        <p>
+          {$_('readMore')}
+        </p>
+        <Icon src={ArrowSmallRight} size="12" />
+      </button>
+    </div>
+  {/if}
 </header>
 
 <Modal>
@@ -75,6 +97,6 @@
   </main>
 </Modal>
 
-<footer class="grid items-center justify-center p-4">
+<footer class="grid items-center justify-center p-4 mb-8">
   <p class="text-base text-gray-500">Copyright © 2023</p>
 </footer>

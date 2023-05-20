@@ -1,7 +1,9 @@
 <script lang="ts">
   import { _ } from 'svelte-i18n'
   import { searchParamsObj } from '../Store/SearchParamsObj'
+  import RangeSlider from 'svelte-range-slider-pips'
 
+  // FIXME this is broken here. Should be okei after feature/search-update merge
   let duration = getDuration()
 
   function getDuration() {
@@ -42,9 +44,9 @@
 <div>
   <div class="block mt-4">
     <div class="flex-row md:flex-col lg:flex-row flex gap-2">
-      <div class="flex items-center rounded py-3 px-4 bg-gray-200">
+      <div class="flex items-center rounded-md py-2 px-3 border">
         <input
-          class="block w-full bg-gray-200 focus:outline-none"
+          class="block w-full focus:outline-none"
           type="number"
           on:input={removeLeadingZeros}
           on:change={dateValueChanged}
@@ -56,9 +58,9 @@
         </span>
       </div>
 
-      <div class="flex items-center rounded py-3 px-4 bg-gray-200">
+      <div class="flex items-center rounded-md py-2 px-3 border">
         <input
-          class="block w-full bg-gray-200 focus:outline-none"
+          class="block w-full focus:outline-none"
           type="number"
           on:input={removeLeadingZeros}
           on:change={dateValueChanged}
@@ -70,9 +72,9 @@
         </span>
       </div>
 
-      <div class="flex items-center rounded py-3 px-4 bg-gray-200">
+      <div class="flex items-center rounded-md py-2 px-3 border">
         <input
-          class="block w-full bg-gray-200 focus:outline-none"
+          class="block w-full focus:outline-none"
           type="number"
           on:input={removeLeadingZeros}
           on:change={dateValueChanged}
@@ -85,21 +87,19 @@
       </div>
     </div>
 
-    <input
-      tabindex="-1"
-      class="w-full mt-3"
-      type="range"
+    <RangeSlider
+      range="min"
+      min={0}
+      max={50}
+      bind:values={duration}
       on:change={durationValueChanged}
-      bind:value={duration}
-      min="0"
-      max="50"
     />
   </div>
 
-  <div class="block mt-4">
-    <div class="flex items-center rounded py-3 px-4 bg-gray-200">
+  <div class="block mt-8">
+    <div class="flex items-center rounded-md py-2 px-3 border">
       <input
-        class="block w-full bg-gray-200 focus:outline-none"
+        class="block w-full focus:outline-none"
         type="number"
         bind:value={$searchParamsObj.distance}
         min="0"
@@ -107,13 +107,10 @@
       <span class="text-sm font-bold text-gray-500"> KM </span>
     </div>
 
-    <input
-      tabindex="-1"
-      type="range"
-      class="w-full mt-3"
-      bind:value={$searchParamsObj.distance}
-      min="0"
-      max="2500"
+    <RangeSlider
+      range="min"
+      max={2500}
+      bind:values={$searchParamsObj.distance}
     />
   </div>
 </div>

@@ -1,7 +1,8 @@
 <script lang="ts">
+  import { _ } from 'svelte-i18n'
   import { createPopperActions } from 'svelte-popperjs'
 
-  import InfoIcon from '$lib/Images/info.svg?url'
+  import { Icon, CurrencyEuro } from 'svelte-hero-icons'
 
   const [popperRef, popperContent] = createPopperActions({
     placement: 'bottom',
@@ -37,34 +38,31 @@
 <svelte:window on:scroll={() => (showTooltip = false)} />
 
 <button
-  class="p-4 shadow-xl rounded-md border border-gray-300"
+  class="p-4 shadow-xl rounded-lg border border-slate-200"
   on:click={openDetails}
 >
   <div class="grid grid-cols-3">
     <div class="col-span-2 text-left">
       <h2 class="text-base font-normal">
         {car.getName()}
-        <img
-          class="inline h-5"
-          src={InfoIcon}
-          alt="Info"
-          use:popperRef
-          on:mouseenter={() => (showTooltip = true)}
-          on:mouseleave={() => (showTooltip = false)}
-        />
       </h2>
 
       <div
-        class="flex flex-col-reverse md:flex-row items-start md:items-center gap-4 align-center text-xs text-gray-600"
+        class="flex md:flex-row items-start md:items-center gap-1.5 text-xs text-slate-500"
       >
-        <span
-          >{car.getFormattedMinutePrice()} | {car.getFormattedKilometrePrice()}</span
-        >
+        <div class="flex gap-0.5">
+          <Icon src={CurrencyEuro} size="14" />
+          {car.getFormattedMinutePrice()}
+        </div>
+        <div class="flex gap-0.5">
+          <Icon src={CurrencyEuro} size="14" />
+          {car.getFormattedKilometrePrice()}
+        </div>
       </div>
 
-      <h4>
+      <h5 class="mt-1">
         {car.getFormattedTotalPrice()}
-      </h4>
+      </h5>
     </div>
 
     <div class="col-span-1 grid grid-cols-1">
@@ -85,17 +83,9 @@
     id={`offer-details-grow-${index}`}
   >
     <Divider />
-    <div
-      class="grid p-2 gap-2 justify-center"
-      id={`offer-details-wrapper-${index}`}
-    >
-      <!--      <div>-->
-      <!--        <p v-if="provider === 'citybee'" class="inline" id="to-app">-->
-      <!--          💰 Cashback TODO-->
-      <!--        </p>-->
-      <!--      </div>-->
+    <div class="grid gap-2" id={`offer-details-wrapper-${index}`}>
       <div>
-        <p>
+        <p class="text-left">
           For the cheapest ride select <b>package 1</b> and drive it over
           <b>23km</b>.
         </p>
@@ -103,9 +93,9 @@
       <div class="mt-2">
         <a href="https://bolt.eu/et-ee/" target="”_blank”">
           <button
-            class="bg-green hover:bg-green-600 text-white font-bold py-2 px-4 rounded w-60"
+            class="bg-green hover:bg-green-600 text-white font-bold py-2 rounded w-60"
           >
-            To App
+            {$_('openInApp')}
           </button>
         </a>
       </div>

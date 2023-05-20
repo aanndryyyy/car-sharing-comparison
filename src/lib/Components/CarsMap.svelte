@@ -13,7 +13,7 @@
     alt="testing"
   />
   <button
-    class="h-10 w-full border-gray-300 border-2 hidden md:block"
+    class="h-10 w-full border-gray-300 border-2 block md:hidden"
     on:click={() => (open = true)}
   >
     {$_('filters')}

@@ -1,12 +1,10 @@
 <script lang="ts">
   import { _ } from 'svelte-i18n'
-  import Fa from 'svelte-fa/src/fa.svelte'
-  import { faMap } from '@fortawesome/fontawesome-free-regular'
-  import { faSliders } from '@fortawesome/free-solid-svg-icons'
   import BottomSheet from 'svelte-swipeable-sheets/BottomSheet.svelte'
   import CarsMap from './CarsMap.svelte'
   import { getContext } from 'svelte'
   import Filters from '$lib/Components/Filters.svelte'
+  import { Icon, Funnel, Map } from 'svelte-hero-icons'
   const modal = getContext('simple-modal')
 
   const openMap = () => modal.open(CarsMap)
@@ -18,25 +16,36 @@
     <div>
       <h3>{$_('cars.title')}</h3>
       <button
-        class="flex gap-1 mt-2 block md:hidden"
+        class="flex gap-1 mt-2 block md:hidden text-green-600"
         on:click={() => (open = true)}
       >
-        <Fa icon={faSliders} rotate={90} color="green" size="1.2x" />
-        <p class="text-green">Cheapest first</p>
+        <Icon src={Funnel} size="16" />
+        <p class="text-xs font-medium">Sort & Filters</p>
       </button>
     </div>
 
     <button
-      class="h-11 py-1.5 px-2 gap-2 flex items-center justify-center border-2 border-green rounded text-green block md:hidden"
+      class="py-2 px-3 gap-1.5 flex items-center justify-center rounded text-white bg-green-600 block md:hidden"
       on:click={openMap}
     >
-      <Fa icon={faMap} color="green" size="1.2x" />
-      <h4>Map</h4>
+      <p class="text-base font-medium">Map</p>
+      <Icon src={Map} size="24" />
     </button>
   </div>
 
   <div class="hidden md:block mt-4">
     <CarsMap />
+  </div>
+
+  <div class="flex justify-between hidden md:block">
+    <div>
+      <p>closest first</p>
+    </div>
+    <div class="flex gap-4">
+      <p>brand</p>
+      <p>type</p>
+      <p>fuel</p>
+    </div>
   </div>
 
   <div class="grid gap-4 auto-cols-fr mt-8">
