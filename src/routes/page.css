@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+    html {
+        @apply antialiased scroll-smooth;
+    }
+}
+
 @layer utilities {
 
     .appearance-text {
