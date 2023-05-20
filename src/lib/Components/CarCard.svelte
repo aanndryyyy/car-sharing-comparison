@@ -21,18 +21,18 @@
     }
   }
 
-  let screenSize: number;
+  let screenSize: number
 </script>
 
 <svelte:window bind:innerWidth={screenSize} />
 
 <button
-  class="w-full p-4 text-left shadow-lg rounded-lg border border-slate-200 sm:p-0 focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+  class="w-full rounded-lg border border-slate-200 p-4 text-left shadow-lg focus:ring-2 focus:ring-green-500 focus:ring-offset-2 sm:p-0"
   on:click={openDetails}
 >
   <div class="flex sm:flex-row-reverse">
     <div
-      class="flex grow flex-col gap-1 sm:flex-row sm:items-center sm:px-6 sm:my-4 sm:justify-between sm:border-l sm:border-slate-200"
+      class="flex grow flex-col gap-1 sm:my-4 sm:flex-row sm:items-center sm:justify-between sm:border-l sm:border-slate-200 sm:px-6"
     >
       <div class="space-y-1">
         <h2 class="text-base font-normal md:font-medium">
@@ -40,14 +40,14 @@
         </h2>
 
         <div
-          class="flex md:flex-row items-start gap-2 sm:gap-4 text-xs text-slate-500 md:text-sm"
+          class="flex items-start gap-2 text-xs text-slate-500 sm:gap-4 md:flex-row md:text-sm"
         >
-          <div class="flex gap-0.5 items-center md:gap-1">
-            <CurrencyEuro class="stroke-slate-500 w-3 h-3 md:h-4 md:w-4" />
+          <div class="flex items-center gap-0.5 md:gap-1">
+            <CurrencyEuro class="h-3 w-3 stroke-slate-500 md:h-4 md:w-4" />
             {car.getFormattedMinutePrice()}
           </div>
-          <div class="flex gap-0.5 items-center md:gap-1">
-            <CurrencyEuro class="stroke-slate-500 w-3 h-3 md:h-4 md:w-4" />
+          <div class="flex items-center gap-0.5 md:gap-1">
+            <CurrencyEuro class="h-3 w-3 stroke-slate-500 md:h-4 md:w-4" />
             {car.getFormattedKilometrePrice()}
           </div>
         </div>
@@ -56,12 +56,12 @@
       <p class="font-semibold">{car.getFormattedTotalPrice()}</p>
     </div>
 
-    <div class="sm:w-32 relative flex items-center">
-      <div class="absolute flex justify-center top-0 inset-x-0 sm:top-4">
+    <div class="relative flex items-center sm:w-32">
+      <div class="absolute inset-x-0 top-0 flex justify-center sm:top-4">
         <img class="h-4" src={car.getLogo()} alt="Provider Logo" />
       </div>
       <img
-        class="w-auto h-10 mx-auto md:h-10"
+        class="mx-auto h-10 w-auto md:h-10"
         src={car.getCarImg()}
         alt="Provider Logo"
       />
@@ -69,11 +69,11 @@
   </div>
 
   <div
-    class="transition-[height] ease-in-out delay-100 duration-500 overflow-hidden h-0"
+    class="h-0 overflow-hidden transition-[height] delay-100 duration-500 ease-in-out"
     id={`offer-details-grow-${index}`}
   >
     <Divider />
-    <div class="p-4 grid gap-2" id={`offer-details-wrapper-${index}`}>
+    <div class="grid gap-2 p-4" id={`offer-details-wrapper-${index}`}>
       <div>
         <p class="text-left">
           For the cheapest ride select <b>package 1</b> and drive it over
@@ -83,7 +83,7 @@
       <div class="mt-2">
         <a href="https://bolt.eu/et-ee/" target="”_blank”">
           <button
-            class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 rounded w-60"
+            class="w-60 rounded bg-green-600 py-2 font-bold text-white hover:bg-green-700"
           >
             {$_('openInApp')}
           </button>

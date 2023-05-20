@@ -13,11 +13,11 @@
 </script>
 
 <section class="md:col-start-2 md:col-end-4">
-  <div class="flex justify-between items-center">
+  <div class="flex items-center justify-between">
     <div>
       <h3>{$_('cars.title')}</h3>
       <button
-        class="flex gap-1 mt-2 block md:hidden text-green-600"
+        class="mt-2 block flex gap-1 text-green-600 md:hidden"
         on:click={() => (open = true)}
       >
         <Icon src={Funnel} size="16" />
@@ -26,7 +26,7 @@
     </div>
 
     <button
-      class="py-2 px-3 gap-1.5 flex items-center justify-center rounded text-white bg-green-600 block md:hidden"
+      class="block flex items-center justify-center gap-1.5 rounded bg-green-600 py-2 px-3 text-white md:hidden"
       on:click={openMap}
     >
       <p class="text-base font-medium">Map</p>
@@ -34,11 +34,11 @@
     </button>
   </div>
 
-  <div class="hidden md:block mt-4">
+  <div class="mt-4 hidden md:block">
     <CarsMap />
   </div>
 
-  <div class="flex justify-between md:flex mt-8">
+  <div class="mt-8 flex justify-between md:flex">
     <div>
       <p>closest first</p>
     </div>
@@ -49,7 +49,7 @@
     </div>
   </div>
 
-  <div class="space-y-4 mt-4">
+  <div class="mt-4 space-y-4">
     <slot />
   </div>
 </section>
