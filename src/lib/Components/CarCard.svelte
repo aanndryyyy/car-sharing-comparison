@@ -26,7 +26,8 @@
 
 <svelte:window bind:innerWidth={screenSize} />
 
-<button
+<!-- svelte-ignore a11y-click-events-have-key-events -->
+<div
   class="w-full rounded-lg border border-slate-200 p-4 text-left shadow-lg focus:ring-2 focus:ring-green-500 focus:ring-offset-2 sm:p-0"
   on:click={openDetails}
 >
@@ -91,4 +92,4 @@
       </div>
     </div>
   </div>
-</button>
+</div>
