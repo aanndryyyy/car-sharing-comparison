@@ -7,17 +7,25 @@
   import { PUBLIC_GOOGLE_API_KEY } from '$env/static/public'
   import Ellipsis2Vertical from '$lib/Icons/Ellipsis2Vertical.svelte'
   import XCircle from '$lib/Icons/Mini/XCircle.svelte'
+  import WaypointInput from './WaypointInput.svelte'
 
   let startingLocationInput: HTMLInputElement
   let destinationLocationInput: HTMLInputElement
   let autocompleteStartingLocation: google.maps.places.Autocomplete
   let autocompleteDestinationLocation: google.maps.places.Autocomplete
 
-  const autocompleteOptions = {
+  let initAutocomplete: CallableFunction;
+  let inputWaypoints: {
+    id: number
+    input?: HTMLInputElement
+    autocomplete?: google.maps.places.Autocomplete
+  }[] = []
+
+  const autocompleteOptions: google.maps.places.AutocompleteOptions = {
     componentRestrictions: { country: 'ee' },
     fields: ['address_components', 'geometry', 'icon', 'name'],
     strictBounds: false,
-    types: ['street_address','street_number','locality','route'],
+    types: ['street_address', 'street_number', 'locality', 'route'],
   }
 
   const loader = new Loader({
@@ -49,6 +57,16 @@
         'place_changed',
         calculateRoute
       )
+
+
+      initAutocomplete = ( e ) => {
+        console.log(e.detail);
+
+        new Autocomplete(
+          e.detail,
+          autocompleteOptions
+        )
+      }
     })
   })
 
@@ -63,12 +81,28 @@
       return
     }
 
+    const waypoints: google.maps.DirectionsWaypoint[] = []
     const directionsService = new google.maps.DirectionsService()
 
-    const request: google.maps.DirectionsRequest = {
+    let request: google.maps.DirectionsRequest = {
       origin: placeStarting.geometry.location,
       destination: placeDestination.geometry.location,
       travelMode: google.maps.TravelMode.DRIVING,
+    }
+
+    inputWaypoints.forEach( waypoint => {
+      const place = waypoint?.autocomplete?.getPlace();
+
+      if (!place?.geometry?.location) return;
+
+      waypoints.push({
+        location: place.geometry.location,
+        stopover: true,
+      })
+    })
+
+    if ( waypoints.length != 0 ) {
+      request.waypoints = waypoints
     }
 
     directionsService.route(request, function (result, status) {
@@ -76,14 +110,19 @@
         return
       }
 
-      const route = result.routes[0].legs[0]
+      const legs = result.routes[0].legs
 
-      if (!route.duration?.value || !route.distance?.value) {
-        return
-      }
+      $duration = 0
+      $totalKilometres = 0
 
-      $duration = Math.ceil(route.duration?.value / 60)
-      $totalKilometres = Math.ceil(route.distance?.value / 1000)
+      legs.forEach((route) => {
+        if (!route.duration?.value || !route.distance?.value) {
+          return
+        }
+
+        $duration += Math.ceil(route.duration?.value / 60)
+        $totalKilometres += Math.ceil(route.distance?.value / 1000)
+      })
     })
   }
 
@@ -99,6 +138,14 @@
   }
 
   export let visible: boolean = false
+
+  function addWaypoint() {
+    if (inputWaypoints.length >= 5) return
+
+    inputWaypoints = inputWaypoints.concat({
+      id: (inputWaypoints.slice(-1)[0]?.id || 0) + 1,
+    })
+  }
 </script>
 
 <div
@@ -106,34 +153,42 @@
   class:max-md:!block={visible}
   class:max-md:!hidden={!visible}
 >
-  <div
-    class="flex items-center gap-1 rounded-md border border-slate-900/20 p-2 pl-4 focus-within:ring-2 focus-within:ring-green-500 focus-within:ring-offset-2"
-  >
-    <input
-      type="text"
-      bind:this={startingLocationInput}
-      class="block w-full outline-none"
-      placeholder="Starting location"
-    />
-    <span class="flex items-center gap-1">
-      <XCircle class="fill-slate-400" />
-      <Ellipsis2Vertical class="fill-slate-400" />
-    </span>
-  </div>
+  <button on:click={addWaypoint}>Add stop</button>
 
-  <div
-    class="group flex items-center rounded-md border border-slate-900/20 p-2 pl-4 focus-within:ring-2 focus-within:ring-green-500 focus-within:ring-offset-2"
-  >
-    <input
-      type="text"
-      bind:this={destinationLocationInput}
-      class="block w-full outline-none"
-      placeholder="Destination"
-    />
-    <span>
-      <Ellipsis2Vertical class="fill-slate-400" />
-    </span>
-  </div>
+  <ul class="space-y-4">
+    <li
+      class="flex items-center gap-1 rounded-md border border-slate-900/20 p-2 pl-4 focus-within:ring-2 focus-within:ring-green-500 focus-within:ring-offset-2"
+    >
+      <input
+        type="text"
+        bind:this={startingLocationInput}
+        class="block w-full outline-none"
+        placeholder="Starting location"
+      />
+      <span class="flex items-center gap-1">
+        <XCircle class="fill-slate-400" />
+        <Ellipsis2Vertical class="fill-slate-400" />
+      </span>
+    </li>
+
+    {#each inputWaypoints as { input, autocomplete }, i}
+      <WaypointInput on:mounted={initAutocomplete} />
+    {/each}
+
+    <li
+      class="group flex items-center rounded-md border border-slate-900/20 p-2 pl-4 focus-within:ring-2 focus-within:ring-green-500 focus-within:ring-offset-2"
+    >
+      <input
+        type="text"
+        bind:this={destinationLocationInput}
+        class="block w-full outline-none"
+        placeholder="Destination"
+      />
+      <span>
+        <Ellipsis2Vertical class="fill-slate-400" />
+      </span>
+    </li>
+  </ul>
 
   <p class="text-center text-sm text-slate-600">
     {$hours} hours and {$minutes} minutes<br />
