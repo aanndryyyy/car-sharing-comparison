@@ -111,7 +111,7 @@
 </script>
 
 <div class="relative">
-  <div class="h-96 rounded-lg shadow-lg" bind:this={mapCanvas} />
+  <div class="h-screen md:h-96 md:rounded-lg md:shadow-lg" bind:this={mapCanvas} />
 
   <MapZoomControl />
 </div>
