@@ -17,7 +17,7 @@
     componentRestrictions: { country: 'ee' },
     fields: ['address_components', 'geometry', 'icon', 'name'],
     strictBounds: false,
-    types: ['address'],
+    types: ['street_address','street_number','locality','route'],
   }
 
   const loader = new Loader({
