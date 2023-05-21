@@ -62,14 +62,14 @@ class BeastCar implements BaseCar {
    * @inheritdoc
    */
   getFormattedMinutePrice(): string {
-    return this.carData.price.minute + ' €/min'
+    return this.carData.price.minute + ' min'
   }
 
   /**
    * @inheritdoc
    */
   getFormattedKilometrePrice(): string {
-    return this.carData.price.km + ' €/km after 300km'
+    return this.carData.price.km + ' km'
   }
 
   /**

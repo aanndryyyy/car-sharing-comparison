@@ -59,14 +59,14 @@ class ElmoCar implements BaseCar {
    * @inheritdoc
    */
   getFormattedMinutePrice(): string {
-    return this.carData.price.minute + ' €/min'
+    return this.carData.price.minute + ' min'
   }
 
   /**
    * @inheritdoc
    */
   getFormattedKilometrePrice(): string {
-    return this.carData.price.km + ' €/km'
+    return this.carData.price.km + ' km'
   }
 
   /**

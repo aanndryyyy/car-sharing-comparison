@@ -64,7 +64,7 @@
       <img
         class="mx-auto h-10 w-auto md:h-10"
         src={car.getCarImg()}
-        alt="Provider Logo"
+        alt="Car"
       />
     </div>
   </div>

@@ -63,11 +63,6 @@ class BoltCar implements BaseCar {
    */
   getFormattedMinutePrice(): string {
     const price = this.carData.price.minute
-
-    if (price < 1) {
-      return '.' + Math.round(price * 100) + ' min'
-    }
-
     return price + ' min'
   }
 
@@ -76,11 +71,6 @@ class BoltCar implements BaseCar {
    */
   getFormattedKilometrePrice(): string {
     const price = this.carData.price.km
-
-    if (price < 1) {
-      return '.' + Math.round(price * 100) + ' km'
-    }
-
     return price + ' km'
   }
 
@@ -92,8 +82,7 @@ class BoltCar implements BaseCar {
   }
 
   getCarImg(): string {
-    // temp
-    return 'https://citybee.ee/wp-content/uploads/2021/08/CityBee_ToyotaYaris_EE-1024x605.png'
+    return this.carData.icon
   }
 
   /**

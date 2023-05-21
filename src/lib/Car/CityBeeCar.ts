@@ -60,14 +60,14 @@ class CityBeeCar implements BaseCar {
    * @inheritdoc
    */
   getFormattedMinutePrice(): string {
-    return this.carData.price.minute + ' €/min'
+    return this.carData.price.minute + ' min'
   }
 
   /**
    * @inheritdoc
    */
   getFormattedKilometrePrice(): string {
-    return this.carData.price.km + ' €/km'
+    return this.carData.price.km + ' km'
   }
 
   /**
@@ -78,8 +78,7 @@ class CityBeeCar implements BaseCar {
   }
 
   getCarImg(): string {
-    // temp
-    return 'https://citybee.ee/wp-content/uploads/2021/08/CityBee_ToyotaYaris_EE-1024x605.png'
+    return this.carData.icon
   }
 
   /**
