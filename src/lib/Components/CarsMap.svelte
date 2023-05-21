@@ -1,7 +1,7 @@
 <script lang="ts">
   import { onMount } from 'svelte'
   import { _ } from 'svelte-i18n'
-  import { map, mapCanvas } from '$lib/Store/GoogleMapStore'
+  import { map } from '$lib/Store/GoogleMapStore'
   import { Loader } from '@googlemaps/js-api-loader'
   import BottomSheet from 'svelte-swipeable-sheets/BottomSheet.svelte'
   import Filters from '$lib/Components/Filters.svelte'
@@ -39,7 +39,7 @@
       )) as google.maps.MapsLibrary
 
       map.set(
-        new Map($mapCanvas, {
+        new Map(mapCanvas, {
           zoom,
           center,
           mapId: PUBLIC_GOOGLE_MAP_ID,
@@ -117,11 +117,12 @@
   })
 
   let open = false
+  let mapCanvas: HTMLDivElement;
   let locations
 </script>
 
 <div class="relative">
-  <div class="h-96 rounded-lg shadow-lg" bind:this={$mapCanvas} />
+  <div class="h-96 rounded-lg shadow-lg" bind:this={mapCanvas} />
 
   <div
     class="absolute right-4 bottom-7 flex flex-col items-center justify-center rounded-md bg-white px-0.5 py-0 shadow-lg shadow-black/20"
