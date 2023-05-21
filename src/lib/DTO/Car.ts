@@ -6,11 +6,5 @@ import { CarRentPrice } from './CarRentPrice'
 
 export class Car implements ICar {
   name = ''
-  bodyType = CarBodyType.SEDAN
-  motorType = MotorType.ELECTRIC
-  gearbox = GearboxType.AUTOMATIC
-  petFriendly = true
-  imageUrl = ''
-  price = new CarRentPrice()
-  packages = []
+  price = {}
 }
