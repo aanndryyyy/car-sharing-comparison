@@ -4,7 +4,7 @@
   import SortingDropdown from './SortingDropdown.svelte'
 </script>
 
-<div class="mt-12 flex justify-between md:flex">
+<div class="mt-12 hidden justify-between md:flex">
   <div class="flex">
     <SortingDropdown />
   </div>
