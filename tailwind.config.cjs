@@ -12,7 +12,7 @@ module.exports = {
         brand: {
           bolt: '#34D186',
           citybee: '#FF3802',
-          elmo: '#215FDF'
+          elmo: '#215FDF',
           beast: '#000000',
           avis: '#D4002A'
         }
@@ -22,4 +22,4 @@ module.exports = {
   plugins: [
     require('tailwind-scrollbar-hide')
   ],
-};
+}
