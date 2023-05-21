@@ -38,7 +38,6 @@
   <div class="mt-4 hidden md:block">
     <CarsMap />
 
-
     <BottomSheet bind:open={filtersOpen}>
       <Filters bind:open={filtersOpen} />
     </BottomSheet>

@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onMount } from 'svelte'
-  import { duration } from '$lib/Store/DurationStore'
+  import { duration, hours, minutes } from '$lib/Store/DurationStore'
   import { totalKilometres } from '$lib/Store/TotalKilometresStore'
   import { map } from '$lib/Store/GoogleMapStore'
   import { Loader } from '@googlemaps/js-api-loader'
@@ -134,4 +134,9 @@
       <Ellipsis2Vertical class="fill-slate-400" />
     </span>
   </div>
+
+  <p class="text-center text-sm text-slate-600">
+    {$hours} hours and {$minutes} minutes<br />
+    {$totalKilometres} kilometers
+  </p>
 </div>
