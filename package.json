@@ -50,6 +50,7 @@
 		"svelte-jester": "^2.3.2",
 		"svelte-simple-modal": "^1.5.2",
 		"svelte-transition": "^0.0.7",
+		"svelte-use-click-outside": "^1.0.0",
 		"tailwind-scrollbar-hide": "^1.1.7",
 		"vite-tsconfig-paths": "^4.2.0"
 	}
