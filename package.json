@@ -41,6 +41,7 @@
 	"type": "module",
 	"dependencies": {
 		"@babel/eslint-parser": "^7.21.8",
+		"@googlemaps/js-api-loader": "^1.15.2",
 		"@sveltejs/adapter-vercel": "^3.0.0",
 		"babel-install": "^2.1.0",
 		"postcss-import": "^15.1.0",
