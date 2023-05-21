@@ -3,6 +3,8 @@
   import { duration } from '$lib/Store/DurationStore'
   import { totalKilometres } from '$lib/Store/TotalKilometresStore'
   import { map } from '$lib/Store/GoogleMapStore'
+  import { Loader } from '@googlemaps/js-api-loader'
+  import { PUBLIC_GOOGLE_API_KEY } from '$env/static/public'
   import Ellipsis2Vertical from '$lib/Icons/Ellipsis2Vertical.svelte'
   import XCircle from '$lib/Icons/Mini/XCircle.svelte'
 
@@ -18,26 +20,36 @@
     types: ['address'],
   }
 
+  const loader = new Loader({
+    apiKey: PUBLIC_GOOGLE_API_KEY,
+    version: 'weekly',
+  })
+
   onMount(async () => {
-    const { Autocomplete } = (await google.maps.importLibrary(
-      'places'
-    )) as google.maps.PlacesLibrary
+    loader.load().then(async () => {
+      const { Autocomplete } = (await google.maps.importLibrary(
+        'places'
+      )) as google.maps.PlacesLibrary
 
-    autocompleteStartingLocation = new Autocomplete(
-      startingLocationInput,
-      autocompleteOptions
-    )
-    autocompleteDestinationLocation = new Autocomplete(
-      destinationLocationInput,
-      autocompleteOptions
-    )
+      autocompleteStartingLocation = new Autocomplete(
+        startingLocationInput,
+        autocompleteOptions
+      )
+      autocompleteDestinationLocation = new Autocomplete(
+        destinationLocationInput,
+        autocompleteOptions
+      )
 
-    autocompleteStartingLocation.addListener('place_changed', calculateRoute)
-    autocompleteStartingLocation.addListener(
-      'place_changed',
-      showStartingLocation
-    )
-    autocompleteDestinationLocation.addListener('place_changed', calculateRoute)
+      autocompleteStartingLocation.addListener('place_changed', calculateRoute)
+      autocompleteStartingLocation.addListener(
+        'place_changed',
+        showStartingLocation
+      )
+      autocompleteDestinationLocation.addListener(
+        'place_changed',
+        calculateRoute
+      )
+    })
   })
 
   function calculateRoute() {
