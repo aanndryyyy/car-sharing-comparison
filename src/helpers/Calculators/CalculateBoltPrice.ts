@@ -1,40 +1,45 @@
+import { get } from 'svelte/store'
+import { totalKilometres } from '$lib/Store/TotalKilometresStore'
+import {
+  days as storeDays,
+  hours as storeHours,
+  minutes as storeMinutes,
+} from '$lib/Store/DurationStore'
+
 import type { Car } from '../../lib/DTO/Car'
-import type { SearchParamsObj } from '../../lib/DTO/SearchParamsObj'
 
-const calculateBoltPrice = (
-  car: Car,
-  searchParamsObj: SearchParamsObj
-): number => {
+const calculateBoltPrice = (car: Car): number => {
   const price = car.price
+  let distance = get(totalKilometres)
+  let days = get(storeDays)
+  let hours = get(storeHours)
+  let minutes = get(storeMinutes)
 
-  const distanceCost = searchParamsObj.distance * price.km
+  const distanceCost = distance * price.km
+
   // Days
   let daysCost = 0
-  if (searchParamsObj.days >= 1) {
-    daysCost += searchParamsObj.days * price.day
+  if (days >= 1) {
+    daysCost += days * price.day
   }
   // Hours
   let hoursCost = 0
-  if (searchParamsObj.hours >= 1) {
-    if (
-      searchParamsObj.hours * price.hour +
-        searchParamsObj.minutes * price.minute >
-      price.day
-    ) {
+  if (hours >= 1) {
+    if (hours * price.hour + minutes * price.minute > price.day) {
       daysCost += price.day
-      searchParamsObj.hours = 0
-      searchParamsObj.minutes = 0
+      hours = 0
+      minutes = 0
     } else {
-      hoursCost += searchParamsObj.hours * price.hour
+      hoursCost += hours * price.hour
     }
   }
   // Minutes
   let minutesCost = 0
-  if (searchParamsObj.minutes >= 1) {
-    if (searchParamsObj.minutes * price.minute > price.hour) {
+  if (minutes >= 1) {
+    if (minutes * price.minute > price.hour) {
       hoursCost += price.hour
     } else {
-      minutesCost += searchParamsObj.minutes * price.minute
+      minutesCost += minutes * price.minute
     }
   }
   let totalCost = distanceCost + daysCost + hoursCost + minutesCost

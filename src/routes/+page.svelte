@@ -1,46 +1,14 @@
 <script lang="ts">
   import { _ } from 'svelte-i18n'
-
-  import type BaseCar from '$lib/Car/BaseCar'
-  import type { PageData } from './$types'
-
-  import CarCard from '$lib/Components/CarCard.svelte'
+  import { fly } from 'svelte/transition'
   import CarsSection from '$lib/Components/CarsSection.svelte'
   import PlannerSection from '$lib/Components/PlannerSection.svelte'
   import { Icon, XMark, ArrowSmallRight } from 'svelte-hero-icons'
-  import { fly } from 'svelte/transition'
 
   import ogImage from '$lib/Images/og-image.png'
-  import sortCars from '../helpers/SortCars'
-  import { CarSortField } from '../lib/Types/Enums/CarSortField'
-  import { SortState } from '../lib/Types/Enums/SortState'
-  import { days, duration, hours, minutes } from '../lib/Store/DurationStore'
-  import { totalKilometres } from '../lib/Store/TotalKilometresStore'
-  import { SearchParamsObj } from '../lib/DTO/SearchParamsObj'
   import { Modal } from 'svelte-simple-modal'
 
-  export let data: PageData
   let showAppShortDescription: boolean = true
-
-  let allCars: BaseCar[] = [
-    ...data.boltCars,
-    ...data.cityBeeCars,
-    ...data.elmoCars,
-    ...data.beastCars,
-  ]
-
-  function getSortedCars(duration, totalKilometres) {
-    const searchParamsObj: SearchParamsObj = new SearchParamsObj()
-    searchParamsObj.days = $days
-    searchParamsObj.hours = $hours
-    searchParamsObj.minutes = $minutes
-    searchParamsObj.distance = totalKilometres
-
-    allCars.forEach((car) => car.calculateRentTotalPrice(searchParamsObj))
-    return sortCars(allCars, CarSortField.PRICE, SortState.UP)
-  }
-
-  $: sortedCars = getSortedCars($duration, $totalKilometres)
 </script>
 
 <svelte:head>
@@ -61,23 +29,20 @@
   ></script>
 </svelte:head>
 
-<header class="max-w-screen-lg mx-auto my-4 md:my-8 lg:my-16 px-4">
-  <h1 class="mb-2 text-4xl md:text-5xl font-bold hidden md:block">
+<header class="mx-auto my-4 max-w-screen-lg px-4 md:my-8 lg:my-16">
+  <h1 class="mb-2 hidden text-4xl font-bold md:block md:text-5xl">
     {$_('title')}
   </h1>
   {#if showAppShortDescription}
     <div
-      class="rounded-md bg-green-100 text-green-900 p-4 block md:hidden"
+      class="block rounded-md bg-green-100 p-4 text-green-900 md:hidden"
       transition:fly={{ duration: 2000 }}
     >
       <div class="flex justify-between">
         <p class="text-xs font-normal">
           {$_('appShortDescription')}.
         </p>
-        <button
-          class="flex"
-          on:click={() => (showAppShortDescription = false)}
-        >
+        <button class="flex" on:click={() => (showAppShortDescription = false)}>
           <Icon class="text-green-600" src={XMark} size="24" />
         </button>
       </div>
@@ -93,18 +58,14 @@
 
 <Modal>
   <main
-    class="max-w-screen-lg grid gap-8 md:grid-cols-3 mx-auto px-4 my-4 lg:my-8"
+    class="mx-auto my-4 grid max-w-screen-lg gap-8 px-4 md:grid-cols-3 lg:my-8"
   >
     <PlannerSection />
 
-    <CarsSection>
-      {#each sortedCars as genericCar, i}
-        <CarCard car={genericCar} index={i} />
-      {/each}
-    </CarsSection>
+    <CarsSection />
   </main>
 </Modal>
 
-<footer class="grid items-center justify-center p-4 mb-8">
+<footer class="mb-8 grid items-center justify-center p-4">
   <p class="text-base text-gray-500">Copyright © 2023</p>
 </footer>

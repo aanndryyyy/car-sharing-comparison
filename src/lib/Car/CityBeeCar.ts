@@ -27,9 +27,9 @@ class CityBeeCar implements BaseCar {
     return this.carData.name
   }
 
-  calculateRentTotalPrice(searchParamsObj: SearchParamsObj): void {
+  calculateRentTotalPrice(): void {
     //this.rentTotalPrice = calculateCityBeePrice(this.carData, searchParamsObj)
-    this.rentTotalPrice = 10
+    this.rentTotalPrice = 10000
   }
 
   /**

@@ -27,7 +27,7 @@ export default interface BaseCar {
    * @returns The price.
    * @param searchParamsObj
    */
-  calculateRentTotalPrice(searchParamsObj: SearchParamsObj): void
+  calculateRentTotalPrice(): void
 
   /**
    * The total price in number format, for sorting

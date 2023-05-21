@@ -97,7 +97,9 @@
             const priceIcon = document.createElement('div')
             priceIcon.className = 'price-icon'
 
-            priceIcon.innerText = marker.serviceId + '€'
+            let price = marker.serviceId
+
+            priceIcon.innerText = price + '€'
             priceIcon.appendChild(dotIcon)
 
             marker.marker.content = priceIcon
@@ -111,7 +113,10 @@
 </script>
 
 <div class="relative">
-  <div class="h-screen md:h-96 md:rounded-lg md:shadow-lg" bind:this={mapCanvas} />
+  <div
+    class="h-screen md:h-96 md:rounded-lg md:shadow-lg"
+    bind:this={mapCanvas}
+  />
 
   <MapZoomControl />
 </div>

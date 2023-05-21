@@ -30,8 +30,8 @@ class BeastCar implements BaseCar {
   /**
    * @inheritdoc
    */
-  calculateRentTotalPrice(searchParamsObj: SearchParamsObj): void {
-    this.rentTotalPrice = calculateBeastPrice(this.carData, searchParamsObj)
+  calculateRentTotalPrice(): void {
+    this.rentTotalPrice = calculateBeastPrice(this.carData)
   }
 
   /**

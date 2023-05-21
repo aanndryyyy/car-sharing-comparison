@@ -30,17 +30,15 @@ class BoltCar implements BaseCar {
   /**
    * @inheritdoc
    */
-  calculateRentTotalPrice(searchParamsObj: SearchParamsObj): void {
-    this.rentTotalPrice = calculateBoltPrice(this.carData, searchParamsObj)
+  calculateRentTotalPrice(): void {
+    this.rentTotalPrice = calculateBoltPrice(this.carData)
   }
 
   /**
    * @inheritdoc
    */
   getTotalPrice(): number {
-    if (this.rentTotalPrice == undefined)
-      throw 'Car total rent price is not calculated'
-    return this.rentTotalPrice
+    return (this.rentTotalPrice = calculateBoltPrice(this.carData))
   }
 
   /**
