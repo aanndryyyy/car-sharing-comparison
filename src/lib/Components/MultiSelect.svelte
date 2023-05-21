@@ -11,7 +11,7 @@
 
 <div>
   <button
-    class="flex items-center gap-1 text-sm font-medium text-slate-600"
+    class="flex items-center gap-1 font-medium text-slate-600"
     on:click={() => (showDropdown = !showDropdown)}
   >
     <p>
@@ -29,7 +29,7 @@
 
   {#if showDropdown}
     <div
-      class="absolute grid w-36 gap-2 rounded border bg-white p-2"
+      class="absolute z-10 grid w-36 gap-2 rounded border bg-white p-2"
       use:clickOutside={() => {
         showDropdown = false
       }}

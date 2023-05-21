@@ -9,7 +9,7 @@
 
 <div>
   <button
-    class="flex items-center gap-1 text-sm font-medium text-slate-600"
+    class="flex items-center gap-1 font-medium text-slate-600"
     on:click={() => (showDropdown = !showDropdown)}
   >
     <p>
@@ -24,30 +24,28 @@
 
   {#if showDropdown}
     <div
-      class="absolute z-10 grid w-36 gap-2 rounded border bg-white p-2"
+      class="absolute z-10 grid gap-2 rounded border bg-white py-1 shadow-2xl"
       use:clickOutside={() => {
         showDropdown = false
       }}
     >
       <div
-        class="flex gap-2"
-        style={$cheapestFirst ? 'font-weight: 600' : null}
+        class="flex cursor-pointer gap-2 px-4 py-2 hover:bg-slate-100"
         on:click={() => {
           $cheapestFirst = true
           showDropdown = false
         }}
       >
-        <p class="cursor-pointer">Cheapest first</p>
+        <p>Cheapest first</p>
       </div>
       <div
-        class="flex gap-2"
-        style={$cheapestFirst ? null : 'font-weight: 600'}
+        class="flex cursor-pointer gap-2 px-4 py-2 hover:bg-slate-100"
         on:click={() => {
           $cheapestFirst = false
           showDropdown = false
         }}
       >
-        <p class="cursor-pointer">Closest first</p>
+        <p>Closest first</p>
       </div>
     </div>
   {/if}
