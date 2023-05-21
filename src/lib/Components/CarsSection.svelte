@@ -1,7 +1,7 @@
 <script lang="ts">
   import { _ } from 'svelte-i18n'
   import BottomSheet from 'svelte-swipeable-sheets/BottomSheet.svelte'
-  import CarsMap from './CarsMap.svelte'
+  import CarsMap from './CarsMap/CarsMap.svelte'
   import { getContext } from 'svelte'
   import Filters from '$lib/Components/Filters.svelte'
   import { Icon, Funnel, Map } from 'svelte-hero-icons'
@@ -9,7 +9,8 @@
   const modal = getContext('simple-modal')
 
   const openMap = () => modal.open(CarsMap)
-  let open = false
+  let open: boolean = false
+  let filtersOpen: boolean = false
 </script>
 
 <section class="md:col-start-2 md:col-end-4">
@@ -36,6 +37,11 @@
 
   <div class="mt-4 hidden md:block">
     <CarsMap />
+
+
+    <BottomSheet bind:open={filtersOpen}>
+      <Filters bind:open={filtersOpen} />
+    </BottomSheet>
   </div>
 
   <div class="mt-8 flex justify-between md:flex">

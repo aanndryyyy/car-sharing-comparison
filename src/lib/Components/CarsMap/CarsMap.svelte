@@ -3,17 +3,13 @@
   import { _ } from 'svelte-i18n'
   import { map } from '$lib/Store/GoogleMapStore'
   import { Loader } from '@googlemaps/js-api-loader'
-  import BottomSheet from 'svelte-swipeable-sheets/BottomSheet.svelte'
-  import Filters from '$lib/Components/Filters.svelte'
-
-  import MinusIcon from '$lib/Icons/Mini/MinusIcon.svelte'
-  import PlusIcon from '$lib/Icons/Mini/PlusIcon.svelte'
 
   import {
     PUBLIC_GOOGLE_MAP_ID,
     PUBLIC_GOOGLE_API_KEY,
     PUBLIC_BACKEND_BASE_URL,
   } from '$env/static/public'
+  import MapZoomControl from './MapZoomControl.svelte'
 
   export let center: google.maps.LatLngLiteral = {
     lat: 59.437066,
@@ -51,7 +47,7 @@
       )
 
       const res = await fetch(PUBLIC_BACKEND_BASE_URL + 'location')
-      locations = await res.json()
+      const locations = await res.json()
 
       const { AdvancedMarkerElement } = (await google.maps.importLibrary(
         'marker'
@@ -60,16 +56,12 @@
       locations.forEach((provider) => {
         provider.coordinates.forEach((location) => {
           const { lat, lng } = location
-
           const dotIcon = document.createElement('div')
-          const priceIcon = document.createElement('div')
 
           if (provider.provider === 'citybee') {
             dotIcon.className = 'dot-icon bg-brand-citybee'
-            priceIcon.className = 'price-icon bg-brand-citybee'
           } else if (provider.provider === 'bolt') {
             dotIcon.className = 'dot-icon bg-brand-bolt'
-            priceIcon.className = 'price-icon bg-brand-bolt'
           }
 
           const marker = new AdvancedMarkerElement({
@@ -92,23 +84,22 @@
 
         markers.forEach((marker) => {
           const dotIcon = document.createElement('div')
-          const priceIcon = document.createElement('div')
-          const priceDotIcon = document.createElement('div')
 
           if (marker.provider === 'citybee') {
             dotIcon.className = 'dot-icon bg-brand-citybee'
-            priceIcon.className = 'price-icon bg-brand-citybee'
           } else if (marker.provider === 'bolt') {
             dotIcon.className = 'dot-icon bg-brand-bolt'
-            priceIcon.className = 'price-icon bg-brand-bolt'
           }
-
-          priceIcon.innerText = marker.serviceId + '€'
-          priceIcon.appendChild(dotIcon)
 
           if (zoom < 14) {
             marker.marker.content = dotIcon
           } else {
+            const priceIcon = document.createElement('div')
+            priceIcon.className = 'price-icon'
+
+            priceIcon.innerText = marker.serviceId + '€'
+            priceIcon.appendChild(dotIcon)
+
             marker.marker.content = priceIcon
           }
         })
@@ -116,35 +107,14 @@
     })
   })
 
-  let open = false
-  let mapCanvas: HTMLDivElement;
-  let locations
+  let mapCanvas: HTMLDivElement
 </script>
 
 <div class="relative">
   <div class="h-96 rounded-lg shadow-lg" bind:this={mapCanvas} />
 
-  <div
-    class="absolute right-4 bottom-7 flex flex-col items-center justify-center rounded-md bg-white px-0.5 py-0 shadow-lg shadow-black/20"
-  >
-    <button
-      on:click={() => $map.setZoom($map.getZoom() + 1)}
-      class="flex h-8 w-7 items-center justify-center border-b border-slate-200 fill-slate-600 transition-[fill] hover:fill-green-600"
-    >
-      <PlusIcon />
-    </button>
-    <button
-      on:click={() => $map.setZoom($map.getZoom() - 1)}
-      class="flex h-8 w-7 items-center justify-center fill-slate-600 transition-[fill] hover:fill-green-600"
-    >
-      <MinusIcon />
-    </button>
-  </div>
+  <MapZoomControl />
 </div>
-
-<BottomSheet bind:open>
-  <Filters bind:open />
-</BottomSheet>
 
 <style lang="postcss">
   :global(.dot-icon) {
@@ -152,7 +122,7 @@
   }
 
   :global(.price-icon) {
-    @apply flex flex-row-reverse items-center justify-center gap-1.5 rounded-full border border-slate-400 bg-white pr-1.5 pl-[2px] shadow-sm;
+    @apply flex flex-row-reverse items-center justify-center gap-1.5 rounded-full border border-slate-400 bg-white pl-[2px] pr-1.5 shadow-sm;
     @apply h-[22px] font-sans text-sm leading-none;
   }
   :global(.price-icon > .dot-icon) {
