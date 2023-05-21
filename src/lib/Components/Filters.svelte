@@ -77,15 +77,15 @@
   {#each filters as filter}
     <div class="mt-6">
       <p>{filter.title}</p>
-      <div class="flex gap-4 mt-1 overflow-scroll scrollbar-hide">
+      <div class="mt-1 flex gap-4 overflow-scroll scrollbar-hide">
         {#each filter.values as value}
           <button
-            class="bg-gray-200 rounded py-1.5 px-2 border-2"
+            class="rounded border-2 bg-gray-200 px-2 py-1.5"
             style={value.active ? 'border-color: gray' : ''}
             on:click={() => (value.active = !value.active)}
           >
             {#if value.imgUrl}
-              <div class="h-5 w-16 flex justify-center">
+              <div class="flex h-5 w-16 justify-center">
                 <img src={value.imgUrl} alt={value.title} width="48" />
               </div>
             {:else}

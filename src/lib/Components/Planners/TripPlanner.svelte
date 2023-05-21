@@ -146,8 +146,13 @@
     <button on:click={addWaypoint}>Add stop</button>
 
     <ul class="space-y-4">
-      {#each inputWaypoints as { input, autocomplete }, i }
-        <WaypointInput isFirst={i==0} isLast={i==(inputWaypoints.length-1)} index={i} on:mounted={initAutocomplete} />
+      {#each inputWaypoints as { input, autocomplete }, i}
+        <WaypointInput
+          isFirst={i == 0}
+          isLast={i == inputWaypoints.length - 1}
+          index={i}
+          on:mounted={initAutocomplete}
+        />
       {/each}
     </ul>
 

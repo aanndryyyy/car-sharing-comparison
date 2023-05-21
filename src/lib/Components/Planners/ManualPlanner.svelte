@@ -65,7 +65,7 @@
 >
   <div class="mt-4 block">
     <div class="flex flex-row gap-2 md:flex-col lg:flex-row">
-      <div class="flex items-center rounded-md border py-2 px-3">
+      <div class="flex items-center rounded-md border px-3 py-2">
         <input
           class="block w-full focus:outline-none"
           type="number"
@@ -78,7 +78,7 @@
         </span>
       </div>
 
-      <div class="flex items-center rounded-md border py-2 px-3">
+      <div class="flex items-center rounded-md border px-3 py-2">
         <input
           class="block w-full focus:outline-none"
           type="number"
@@ -91,7 +91,7 @@
         </span>
       </div>
 
-      <div class="flex items-center rounded-md border py-2 px-3">
+      <div class="flex items-center rounded-md border px-3 py-2">
         <input
           class="block w-full focus:outline-none"
           type="number"
@@ -115,7 +115,7 @@
   </div>
 
   <div class="mt-8 block">
-    <div class="flex items-center rounded-md border py-2 px-3">
+    <div class="flex items-center rounded-md border px-3 py-2">
       <input
         class="block w-full focus:outline-none"
         type="number"

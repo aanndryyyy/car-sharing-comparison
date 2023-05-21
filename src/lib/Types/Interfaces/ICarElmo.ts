@@ -1,4 +1,4 @@
-import type { ICar } from "./ICar"
+import type { ICar } from './ICar'
 
 export interface ICarElmo extends ICar {
   type: string
