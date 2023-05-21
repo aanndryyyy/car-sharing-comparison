@@ -24,13 +24,14 @@
 
   {#if showDropdown}
     <div
-      class="absolute grid w-36 gap-2 rounded border bg-white p-2"
+      class="absolute z-10 grid w-36 gap-2 rounded border bg-white p-2"
       use:clickOutside={() => {
         showDropdown = false
       }}
     >
       <div
         class="flex gap-2"
+        style={$cheapestFirst ? 'font-weight: 600' : null}
         on:click={() => {
           $cheapestFirst = true
           showDropdown = false
@@ -40,6 +41,7 @@
       </div>
       <div
         class="flex gap-2"
+        style={$cheapestFirst ? null : 'font-weight: 600'}
         on:click={() => {
           $cheapestFirst = false
           showDropdown = false

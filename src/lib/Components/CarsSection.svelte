@@ -67,28 +67,7 @@
   </div>
 
   <div class="mt-8 flex justify-between md:flex">
-    <div class="flex">
-      <div
-        class="flex gap-px overflow-hidden rounded-md bg-gray-400 p-px text-sm font-medium hover:cursor-pointer"
-      >
-        <div
-          class="rounded-bl-md rounded-tl-md bg-white p-1"
-          style={$cheapestFirst ? 'background: #e2e8f0' : 'background: white'}
-          on:click={() => ($cheapestFirst = true)}
-        >
-          Cheapest first
-        </div>
-        <div
-          class="rounded-br-md rounded-tr-md bg-white p-1"
-          style={$cheapestFirst ? 'background: white' : 'background: #e2e8f0'}
-          on:click={() => ($cheapestFirst = false)}
-        >
-          Closest first
-        </div>
-      </div>
-
-      <FilterDropdown />
-    </div>
+    <FilterDropdown />
     <div class="flex gap-4">
       <MultiSelect name="Brand" items={brands} />
       <MultiSelect name="Type" items={types} />
