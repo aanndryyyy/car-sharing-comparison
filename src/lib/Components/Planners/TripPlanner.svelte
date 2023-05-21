@@ -5,21 +5,13 @@
   import { map } from '$lib/Store/GoogleMapStore'
   import { Loader } from '@googlemaps/js-api-loader'
   import { PUBLIC_GOOGLE_API_KEY } from '$env/static/public'
-  import Ellipsis2Vertical from '$lib/Icons/Ellipsis2Vertical.svelte'
-  import XCircle from '$lib/Icons/Mini/XCircle.svelte'
   import WaypointInput from './WaypointInput.svelte'
 
-  let startingLocationInput: HTMLInputElement
-  let destinationLocationInput: HTMLInputElement
-  let autocompleteStartingLocation: google.maps.places.Autocomplete
-  let autocompleteDestinationLocation: google.maps.places.Autocomplete
-
-  let initAutocomplete: CallableFunction;
+  let GoogleAutocomplete: typeof google.maps.places.Autocomplete
   let inputWaypoints: {
-    id: number
     input?: HTMLInputElement
     autocomplete?: google.maps.places.Autocomplete
-  }[] = []
+  }[] = [{}, {}]
 
   const autocompleteOptions: google.maps.places.AutocompleteOptions = {
     componentRestrictions: { country: 'ee' },
@@ -39,40 +31,13 @@
         'places'
       )) as google.maps.PlacesLibrary
 
-      autocompleteStartingLocation = new Autocomplete(
-        startingLocationInput,
-        autocompleteOptions
-      )
-      autocompleteDestinationLocation = new Autocomplete(
-        destinationLocationInput,
-        autocompleteOptions
-      )
-
-      autocompleteStartingLocation.addListener('place_changed', calculateRoute)
-      autocompleteStartingLocation.addListener(
-        'place_changed',
-        showStartingLocation
-      )
-      autocompleteDestinationLocation.addListener(
-        'place_changed',
-        calculateRoute
-      )
-
-
-      initAutocomplete = ( e ) => {
-        console.log(e.detail);
-
-        new Autocomplete(
-          e.detail,
-          autocompleteOptions
-        )
-      }
+      GoogleAutocomplete = Autocomplete
     })
   })
 
   function calculateRoute() {
-    const placeStarting = autocompleteStartingLocation.getPlace()
-    const placeDestination = autocompleteDestinationLocation.getPlace()
+    const placeStarting = inputWaypoints[0].autocomplete.getPlace()
+    const placeDestination = inputWaypoints.slice(-1)[0].autocomplete.getPlace()
 
     if (
       !placeStarting?.geometry?.location ||
@@ -90,18 +55,18 @@
       travelMode: google.maps.TravelMode.DRIVING,
     }
 
-    inputWaypoints.forEach( waypoint => {
-      const place = waypoint?.autocomplete?.getPlace();
+    for (let i = 1; i < inputWaypoints.length - 1; i++) {
+      const place = inputWaypoints[i]?.autocomplete?.getPlace()
 
-      if (!place?.geometry?.location) return;
+      if (!place?.geometry?.location) return
 
       waypoints.push({
         location: place.geometry.location,
         stopover: true,
       })
-    })
+    }
 
-    if ( waypoints.length != 0 ) {
+    if (waypoints.length != 0) {
       request.waypoints = waypoints
     }
 
@@ -127,14 +92,14 @@
   }
 
   function showStartingLocation() {
-    const placeStarting = autocompleteStartingLocation.getPlace()
+    const placeStarting = inputWaypoints[0].autocomplete.getPlace()
 
     if (!placeStarting?.geometry?.location) {
       return
     }
 
     $map.panTo(placeStarting.geometry.location)
-    $map.setZoom(16)
+    $map.setZoom(15)
   }
 
   export let visible: boolean = false
@@ -142,9 +107,33 @@
   function addWaypoint() {
     if (inputWaypoints.length >= 5) return
 
-    inputWaypoints = inputWaypoints.concat({
-      id: (inputWaypoints.slice(-1)[0]?.id || 0) + 1,
-    })
+    inputWaypoints.push({})
+
+    console.log(inputWaypoints)
+
+    inputWaypoints = inputWaypoints
+  }
+
+  function initAutocomplete(e) {
+    console.log(e.detail)
+
+    inputWaypoints[e.detail.index].input = e.detail.input
+    inputWaypoints[e.detail.index].autocomplete = new GoogleAutocomplete(
+      e.detail.input,
+      autocompleteOptions
+    )
+
+    if (e.detail.index === 0) {
+      inputWaypoints[0].autocomplete.addListener(
+        'place_changed',
+        showStartingLocation
+      )
+    }
+
+    inputWaypoints[e.detail.index].autocomplete.addListener(
+      'place_changed',
+      calculateRoute
+    )
   }
 </script>
 
@@ -153,45 +142,43 @@
   class:max-md:!block={visible}
   class:max-md:!hidden={!visible}
 >
-  <button on:click={addWaypoint}>Add stop</button>
+  {#if GoogleAutocomplete}
+    <button on:click={addWaypoint}>Add stop</button>
 
-  <ul class="space-y-4">
-    <li
-      class="flex items-center gap-1 rounded-md border border-slate-900/20 p-2 pl-4 focus-within:ring-2 focus-within:ring-green-500 focus-within:ring-offset-2"
+    <ul class="space-y-4">
+      {#each inputWaypoints as { input, autocomplete }, i }
+        <WaypointInput isFirst={i==0} isLast={i==(inputWaypoints.length-1)} index={i} on:mounted={initAutocomplete} />
+      {/each}
+    </ul>
+
+    <p class="text-center text-sm text-slate-600">
+      {$hours} hours and {$minutes} minutes<br />
+      {$totalKilometres} kilometers
+    </p>
+  {:else}
+    <div
+      class="flex w-full justify-center rounded-md bg-slate-100 fill-slate-800 p-8"
     >
-      <input
-        type="text"
-        bind:this={startingLocationInput}
-        class="block w-full outline-none"
-        placeholder="Starting location"
-      />
-      <span class="flex items-center gap-1">
-        <XCircle class="fill-slate-400" />
-        <Ellipsis2Vertical class="fill-slate-400" />
-      </span>
-    </li>
-
-    {#each inputWaypoints as { input, autocomplete }, i}
-      <WaypointInput on:mounted={initAutocomplete} />
-    {/each}
-
-    <li
-      class="group flex items-center rounded-md border border-slate-900/20 p-2 pl-4 focus-within:ring-2 focus-within:ring-green-500 focus-within:ring-offset-2"
-    >
-      <input
-        type="text"
-        bind:this={destinationLocationInput}
-        class="block w-full outline-none"
-        placeholder="Destination"
-      />
-      <span>
-        <Ellipsis2Vertical class="fill-slate-400" />
-      </span>
-    </li>
-  </ul>
-
-  <p class="text-center text-sm text-slate-600">
-    {$hours} hours and {$minutes} minutes<br />
-    {$totalKilometres} kilometers
-  </p>
+      <svg
+        class="h-5 w-5 animate-spin text-slate-500"
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+      >
+        <circle
+          class="opacity-25"
+          cx="12"
+          cy="12"
+          r="10"
+          stroke="currentColor"
+          stroke-width="4"
+        />
+        <path
+          class="opacity-75"
+          fill="currentColor"
+          d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+        />
+      </svg>
+    </div>
+  {/if}
 </div>
