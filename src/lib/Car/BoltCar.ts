@@ -5,10 +5,10 @@ import type { SvelteComponent } from 'svelte'
 import BoltCarPopover from '$lib/Popovers/BoltCarPopover.svelte'
 import type { SearchParamsObj } from '../DTO/SearchParamsObj'
 import calculateBoltPrice from '../../helpers/Calculators/CalculateBoltPrice'
-import type { Car } from '../DTO/Car'
+import type { ICarBolt } from '$lib/Types/Interfaces/ICarBolt'
 
 class BoltCar implements BaseCar {
-  readonly carData
+  readonly carData: ICarBolt
   rentTotalPrice: number | undefined
 
   /**
@@ -16,7 +16,7 @@ class BoltCar implements BaseCar {
    *
    * @param car The car object.
    */
-  constructor(car: Car) {
+  constructor(car: ICarBolt) {
     this.carData = car
   }
 
@@ -62,14 +62,26 @@ class BoltCar implements BaseCar {
    * @inheritdoc
    */
   getFormattedMinutePrice(): string {
-    return this.carData.price.minute + ' €/min'
+    const price = this.carData.price.minute
+
+    if (price < 1) {
+      return '.' + Math.round(price * 100) + ' min'
+    }
+
+    return price + ' min'
   }
 
   /**
    * @inheritdoc
    */
   getFormattedKilometrePrice(): string {
-    return this.carData.price.km + ' €/km'
+    const price = this.carData.price.km
+
+    if (price < 1) {
+      return '.' + Math.round(price * 100) + ' km'
+    }
+
+    return price + ' km'
   }
 
   /**

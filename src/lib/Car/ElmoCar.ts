@@ -5,10 +5,10 @@ import type { SvelteComponent } from 'svelte'
 import ElmoCarPopover from '$lib/Popovers/ElmoCarPopover.svelte'
 import type { SearchParamsObj } from '../DTO/SearchParamsObj'
 import calculateElmoPrice from '../../helpers/Calculators/CalculateElmoPrice'
-import type { Car } from '$lib/DTO/Car'
+import type { ICarElmo } from '$lib/Types/Interfaces/ICarElmo'
 
 class ElmoCar implements BaseCar {
-  readonly carData
+  readonly carData: ICarElmo
   rentTotalPrice: number | undefined
 
   /**
@@ -16,7 +16,7 @@ class ElmoCar implements BaseCar {
    *
    * @param car The car object.
    */
-  constructor(car: Car) {
+  constructor(car: ICarElmo) {
     this.carData = car
   }
 
@@ -28,7 +28,8 @@ class ElmoCar implements BaseCar {
   }
 
   calculateRentTotalPrice(searchParamsObj: SearchParamsObj): void {
-    this.rentTotalPrice = calculateElmoPrice(this.carData, searchParamsObj)
+    //this.rentTotalPrice = calculateElmoPrice(this.carData, searchParamsObj)
+    this.rentTotalPrice = 10
   }
   /**
    * @inheritdoc

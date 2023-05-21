@@ -5,10 +5,10 @@ import BeastLogo from '$lib/Images/beast.png'
 import type { SvelteComponent } from 'svelte'
 import BeastCarPopover from '$lib/Popovers/BeastCarPopover.svelte'
 import type { SearchParamsObj } from '../DTO/SearchParamsObj'
-import type { Car } from '../DTO/Car'
+import type { ICarBeast } from '$lib/Types/Interfaces/ICarBeast'
 
 class BeastCar implements BaseCar {
-  readonly carData
+  readonly carData: ICarBeast
   rentTotalPrice: number | undefined
 
   /**
@@ -16,7 +16,7 @@ class BeastCar implements BaseCar {
    *
    * @param car The car object.
    */
-  constructor(car: Car) {
+  constructor(car: ICarBeast) {
     this.carData = car
   }
 

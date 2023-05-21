@@ -1,13 +1,16 @@
 import type { SvelteComponent } from 'svelte'
-import type { Car } from '../DTO/Car'
 import type { SearchParamsObj } from '$lib/DTO/SearchParamsObj'
+import type { ICarBolt } from '$lib/Types/Interfaces/ICarBolt'
+import type { ICarBeast } from '$lib/Types/Interfaces/ICarBeast'
+import type { ICarCityBee } from '$lib/Types/Interfaces/ICarCityBee'
+import type { ICarElmo } from '$lib/Types/Interfaces/ICarElmo'
 
 /**
  * Defines a standard format for each company car so
  * prices can be easily compared.
  */
 export default interface BaseCar {
-  readonly carData: Car
+  readonly carData: ICarBolt | ICarCityBee | ICarElmo | ICarBeast
   rentTotalPrice: number | undefined
 
   /**

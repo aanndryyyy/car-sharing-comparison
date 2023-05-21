@@ -4,11 +4,11 @@ import CityBeeLogo from '$lib/Images/citybee.svg'
 import type { SvelteComponent } from 'svelte'
 import CityBeeCarPopover from '$lib/Popovers/CityBeeCarPopover.svelte'
 import type { SearchParamsObj } from '../DTO/SearchParamsObj'
-import type { Car } from '../DTO/Car'
 import calculateCityBeePrice from '../../helpers/Calculators/CalculateCityBeePrice'
+import type { ICarCityBee } from '$lib/Types/Interfaces/ICarCityBee'
 
 class CityBeeCar implements BaseCar {
-  readonly carData
+  readonly carData: ICarCityBee
   rentTotalPrice: number | undefined
 
   /**
@@ -16,7 +16,7 @@ class CityBeeCar implements BaseCar {
    *
    * @param car The car object.
    */
-  constructor(car: Car) {
+  constructor(car: ICarCityBee) {
     this.carData = car
   }
 
@@ -28,7 +28,8 @@ class CityBeeCar implements BaseCar {
   }
 
   calculateRentTotalPrice(searchParamsObj: SearchParamsObj): void {
-    this.rentTotalPrice = calculateCityBeePrice(this.carData, searchParamsObj)
+    //this.rentTotalPrice = calculateCityBeePrice(this.carData, searchParamsObj)
+    this.rentTotalPrice = 10
   }
 
   /**

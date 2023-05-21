@@ -2,42 +2,45 @@ import BoltCar from '$lib/Car/BoltCar'
 import CityBeeCar from '$lib/Car/CityBeeCar'
 import ElmoCar from '$lib/Car/ElmoCar'
 import BeastCar from '$lib/Car/BeastCar'
-import type { Car } from '$lib/DTO/Car'
+import { PUBLIC_BACKEND_BASE_URL } from '$env/static/public'
+import { Provider } from '$lib/Types/Enums/Provider.js'
 
 /** @type {import('./$types').PageLoad} */
-// @ts-ignore
 export async function load({ fetch }) {
-  const boltData = await fetch('data/bolt.json')
-  const rawBoltCars = await boltData.json()
+  const response = await fetch(PUBLIC_BACKEND_BASE_URL + 'detail')
+  const details = await response.json() as {provider: string, services: [] }[]
+
   let boltCars: BoltCar[] = []
-
-  rawBoltCars.forEach((rawBoltCar: Car) => {
-    boltCars.push(new BoltCar(rawBoltCar))
-  })
-
-  const cityBeeData = await fetch('data/citybee.json')
-  const rawCityBeeCars = await cityBeeData.json()
   let cityBeeCars: CityBeeCar[] = []
-
-  rawCityBeeCars.forEach((rawBoltCar: Car) => {
-    cityBeeCars.push(new CityBeeCar(rawBoltCar))
-  })
-
-  const elmoData = await fetch('data/elmo.json')
-  const rawElmoCars = await elmoData.json()
   let elmoCars: ElmoCar[] = []
-
-  rawElmoCars.forEach((rawCar: Car) => {
-    elmoCars.push(new ElmoCar(rawCar))
-  })
-
-  const beastData = await fetch('data/beast.json')
-  const rawBeastCars = await beastData.json()
   let beastCars: BeastCar[] = []
 
-  rawBeastCars.forEach((rawCar: Car) => {
-    beastCars.push(new BeastCar(rawCar))
-  })
+  details.forEach( ({provider, services}) => {
+
+    services.forEach( data => {
+
+      switch (provider.toUpperCase()) {
+        case Provider.BOLT:
+          boltCars.push(new BoltCar(data))
+          break;
+      
+        case Provider.CITYBEE:
+          cityBeeCars.push(new CityBeeCar(data))
+          break;
+      
+        case Provider.ELMO:
+          elmoCars.push(new ElmoCar(data))
+          break;
+      
+        case Provider.BEAST:
+          beastCars.push(new BeastCar(data))
+          break;
+      
+        default:
+          throw new Error( 'Data provider ' + provider + ' is not implemented!');
+      }
+    })
+  });
 
   return {
     boltCars,
