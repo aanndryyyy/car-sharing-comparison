@@ -6,6 +6,9 @@
   import BottomSheet from 'svelte-swipeable-sheets/BottomSheet.svelte'
   import Filters from '$lib/Components/Filters.svelte'
 
+  import MinusIcon from '$lib/Icons/Mini/MinusIcon.svelte'
+  import PlusIcon from '$lib/Icons/Mini/PlusIcon.svelte'
+
   import {
     PUBLIC_GOOGLE_MAP_ID,
     PUBLIC_GOOGLE_API_KEY,
@@ -42,6 +45,7 @@
           mapId: PUBLIC_GOOGLE_MAP_ID,
           mapTypeControl: false,
           fullscreenControl: false,
+          zoomControl: false,
           streetViewControl: false,
         })
       )
@@ -116,8 +120,25 @@
   let locations
 </script>
 
-<div>
+<div class="relative">
   <div class="h-96 rounded-lg shadow-lg" bind:this={$mapCanvas} />
+
+  <div
+    class="absolute right-4 bottom-7 flex flex-col items-center justify-center rounded-md bg-white px-0.5 py-0 shadow-lg shadow-black/20"
+  >
+    <button
+      on:click={() => $map.setZoom($map.getZoom() + 1)}
+      class="flex h-8 w-7 items-center justify-center border-b border-slate-200 fill-slate-600 transition-[fill] hover:fill-green-600"
+    >
+      <PlusIcon />
+    </button>
+    <button
+      on:click={() => $map.setZoom($map.getZoom() - 1)}
+      class="flex h-8 w-7 items-center justify-center fill-slate-600 transition-[fill] hover:fill-green-600"
+    >
+      <MinusIcon />
+    </button>
+  </div>
 </div>
 
 <BottomSheet bind:open>
