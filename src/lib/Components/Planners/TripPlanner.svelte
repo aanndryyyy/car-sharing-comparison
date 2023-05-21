@@ -95,12 +95,12 @@
   class:max-md:!hidden={!visible}
 >
   <div
-    class="flex items-center gap-1 rounded-md border border-slate-900/20 p-2 pl-4"
+    class="flex items-center gap-1 rounded-md border border-slate-900/20 p-2 pl-4 focus-within:ring-2 focus-within:ring-green-500 focus-within:ring-offset-2"
   >
     <input
       type="text"
       bind:this={startingLocationInput}
-      class="block w-full focus:outline-none"
+      class="block w-full outline-none"
       placeholder="Starting location"
     />
     <span class="flex items-center gap-1">
@@ -109,11 +109,13 @@
     </span>
   </div>
 
-  <div class="flex items-center rounded-md border border-slate-900/20 p-2 pl-4">
+  <div
+    class="group flex items-center rounded-md border border-slate-900/20 p-2 pl-4 focus-within:ring-2 focus-within:ring-green-500 focus-within:ring-offset-2"
+  >
     <input
       type="text"
       bind:this={destinationLocationInput}
-      class="block w-full focus:outline-none"
+      class="block w-full outline-none"
       placeholder="Destination"
     />
     <span>
