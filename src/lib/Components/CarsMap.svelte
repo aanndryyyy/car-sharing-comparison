@@ -5,6 +5,8 @@
   import BottomSheet from 'svelte-swipeable-sheets/BottomSheet.svelte'
   import Filters from '$lib/Components/Filters.svelte'
 
+  import { PUBLIC_GOOGLE_MAP_ID, PUBLIC_GOOGLE_API_KEY, PUBLIC_BACKEND_BASE_URL } from '$env/static/public';
+
   export let center: google.maps.LatLngLiteral = {
     lat: 59.437066,
     lng: 24.7509811,
@@ -25,14 +27,14 @@
       new Map($mapCanvas, {
         zoom,
         center,
-        mapId: 'b5879390dd7b6dad',
+        mapId: PUBLIC_GOOGLE_MAP_ID,
         mapTypeControl: false,
         fullscreenControl: false,
         streetViewControl: false,
       })
     )
 
-    const res = await fetch('')
+    const res = await fetch( PUBLIC_BACKEND_BASE_URL + 'location' )
     locations = await res.json()
 
     const { AdvancedMarkerElement } = (await google.maps.importLibrary(
@@ -134,7 +136,7 @@
         ? console.warn(p + ' only loads once. Ignoring:', g)
         : (d[l] = (f, ...n) => r.add(f) && u().then(() => d[l](f, ...n)))
     })({
-      key: '',
+      key: PUBLIC_GOOGLE_API_KEY,
       v: 'weekly',
     })
   </script>
@@ -149,6 +151,7 @@
 </BottomSheet>
 
 <style lang="postcss">
+  
   :global(.dot-icon) {
     @apply h-3 w-3 rounded-full shadow ring-1 ring-gray-300 ring-offset-1;
   }
