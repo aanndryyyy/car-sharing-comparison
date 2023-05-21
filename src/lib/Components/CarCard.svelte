@@ -58,11 +58,11 @@
     </div>
 
     <div class="relative flex items-center sm:w-32">
-      <div class="absolute inset-x-0 top-0 flex justify-center sm:top-4">
+      <div class="absolute opacity-60 inset-x-0 top-0 flex justify-center sm:top-4">
         <img class="h-4" src={car.getLogo()} alt="Provider Logo" />
       </div>
       <img
-        class="mx-auto h-10 w-auto md:h-10"
+        class="mx-auto h-14 w-auto"
         src={car.getCarImg()}
         alt="Car"
       />
