@@ -37,7 +37,7 @@
   </div>
 
   <div class="mt-4 hidden md:block">
-    <CarsMap />
+    <CarsMap class="md:h-96 md:rounded-lg md:shadow-lg" />
 
     <BottomSheet bind:open={filtersOpen}>
       <Filters bind:open={filtersOpen} />

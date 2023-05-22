@@ -12,6 +12,7 @@
     PUBLIC_BACKEND_BASE_URL,
   } from '$env/static/public'
   import MapZoomControl from './MapZoomControl.svelte'
+  import MapFullScreenControl from './MapFullScreenControl.svelte'
 
   export let center: google.maps.LatLngLiteral = {
     lat: 59.437066,
@@ -120,13 +121,11 @@
   let mapCanvas: HTMLDivElement
 </script>
 
-<div
-  class="relative h-screen overflow-hidden md:h-96 md:rounded-lg md:shadow-lg"
->
+<div class={`relative overflow-hidden ${$$props.class}`}>
   <img
     src={placeholder}
     alt=""
-    class="absolute inset-0 z-10"
+    class="absolute inset-0 z-10 h-full w-full"
     class:hidden={mapLoaded}
   />
   <div
@@ -140,6 +139,7 @@
   </div>
 
   <div class="h-full" bind:this={mapCanvas} />
+  <MapFullScreenControl />
   <MapZoomControl />
 </div>
 
