@@ -25,9 +25,11 @@
     class="group flex items-center gap-1 font-medium text-slate-600 transition-colors duration-75 hover:text-slate-900"
   >
     Brand
-    <span class="inline-block h-5 w-5 rounded-md bg-slate-200"
-      >{$filterSelectedProvidersCount}</span
-    >
+    {#if $filterSelectedProvidersCount}
+      <span class="inline-block h-5 w-5 rounded-md bg-slate-200"
+        >{$filterSelectedProvidersCount}</span
+      >
+    {/if}
     <ChevronDownIcon
       class="text-slate-400 transition-colors group-hover:text-slate-900 group-hover:transition-colors group-hover:duration-75"
     />
