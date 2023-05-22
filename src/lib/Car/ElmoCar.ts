@@ -3,9 +3,8 @@ import type BaseCar from './BaseCar'
 import ElmoLogo from '$lib/Images/elmo.png'
 import type { SvelteComponent } from 'svelte'
 import ElmoCarPopover from '$lib/Popovers/ElmoCarPopover.svelte'
-import type { SearchParamsObj } from '../DTO/SearchParamsObj'
-import calculateElmoPrice from '../../helpers/Calculators/CalculateElmoPrice'
 import type { ICarElmo } from '$lib/Types/Interfaces/ICarElmo'
+import { Provider } from '../Types/Enums/Provider'
 
 class ElmoCar implements BaseCar {
   readonly carData: ICarElmo
@@ -25,6 +24,13 @@ class ElmoCar implements BaseCar {
    */
   getName(): string {
     return this.carData.name
+  }
+
+  /**
+   * @inheritdoc
+   */
+  getProvider(): string {
+    return Provider.ELMO
   }
 
   calculateRentTotalPrice(): void {

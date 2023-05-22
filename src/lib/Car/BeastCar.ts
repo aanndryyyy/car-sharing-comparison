@@ -4,8 +4,8 @@ import type BaseCar from './BaseCar'
 import BeastLogo from '$lib/Images/beast.png'
 import type { SvelteComponent } from 'svelte'
 import BeastCarPopover from '$lib/Popovers/BeastCarPopover.svelte'
-import type { SearchParamsObj } from '../DTO/SearchParamsObj'
 import type { ICarBeast } from '$lib/Types/Interfaces/ICarBeast'
+import { Provider } from '../Types/Enums/Provider'
 
 class BeastCar implements BaseCar {
   readonly carData: ICarBeast
@@ -25,6 +25,13 @@ class BeastCar implements BaseCar {
    */
   getName(): string {
     return this.carData.name
+  }
+
+  /**
+   * @inheritdoc
+   */
+  getProvider(): string {
+    return Provider.BEAST
   }
 
   /**

@@ -3,9 +3,8 @@ import type BaseCar from './BaseCar'
 import CityBeeLogo from '$lib/Images/citybee.svg'
 import type { SvelteComponent } from 'svelte'
 import CityBeeCarPopover from '$lib/Popovers/CityBeeCarPopover.svelte'
-import type { SearchParamsObj } from '../DTO/SearchParamsObj'
-import calculateCityBeePrice from '../../helpers/Calculators/CalculateCityBeePrice'
 import type { ICarCityBee } from '$lib/Types/Interfaces/ICarCityBee'
+import { Provider } from '../Types/Enums/Provider'
 
 class CityBeeCar implements BaseCar {
   readonly carData: ICarCityBee
@@ -25,6 +24,13 @@ class CityBeeCar implements BaseCar {
    */
   getName(): string {
     return this.carData.name
+  }
+
+  /**
+   * @inheritdoc
+   */
+  getProvider(): string {
+    return Provider.CITYBEE
   }
 
   calculateRentTotalPrice(): void {

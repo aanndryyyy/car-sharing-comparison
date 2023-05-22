@@ -1,5 +1,4 @@
 import type { SvelteComponent } from 'svelte'
-import type { SearchParamsObj } from '$lib/DTO/SearchParamsObj'
 import type { ICarBolt } from '$lib/Types/Interfaces/ICarBolt'
 import type { ICarBeast } from '$lib/Types/Interfaces/ICarBeast'
 import type { ICarCityBee } from '$lib/Types/Interfaces/ICarCityBee'
@@ -19,6 +18,13 @@ export default interface BaseCar {
    * @return The name.
    */
   getName(): string
+
+  /**
+   * Get the provider name.
+   *
+   * @return The provider name.
+   */
+  getProvider(): string
 
   /**
    * Calculating total price

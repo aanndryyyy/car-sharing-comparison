@@ -6,59 +6,41 @@
   import CityBeeLogo from '$lib/Images/citybee.png'
   import ElmoLogo from '$lib/Images/elmo.png'
   import BeastLogo from '$lib/Images/beast.png'
+  import FilterItemLayer from '$lib/Components/FilterItemLayer.svelte'
+  import { carsFilter } from '../Store/FilterStore'
+
   export let open = false
 
-  const filters = [
+  const providers = [
     {
-      title: 'Sorting',
-      values: [
-        { title: 'Cheapest first', value: 'cheapestFirst', active: false },
-        { title: 'Closest first', value: 'closestFirst', active: false },
-      ],
+      title: 'Bolt',
+      value: Provider.BOLT,
+      imgUrl: BoltLogo,
+      active: $carsFilter.provider.BOLT,
     },
     {
-      title: 'Brands',
-      // $lib/Images/bolt.png
-      values: [
-        { title: 'Bolt', value: Provider.BOLT, imgUrl: BoltLogo, active: true },
-        {
-          title: 'Citybee',
-          value: Provider.CITYBEE,
-          imgUrl: CityBeeLogo,
-          active: false,
-        },
-        {
-          title: 'Elmo',
-          value: Provider.ELMO,
-          imgUrl: ElmoLogo,
-          active: false,
-        },
-        { title: 'Avis', value: Provider.AVIS, imgUrl: null, active: false },
-        {
-          title: 'Beast',
-          value: Provider.BEAST,
-          imgUrl: BeastLogo,
-          active: false,
-        },
-      ],
+      title: 'Citybee',
+      value: Provider.CITYBEE,
+      imgUrl: CityBeeLogo,
+      active: $carsFilter.provider.CITYBEE,
     },
     {
-      title: 'Car Type',
-      values: [
-        { title: 'Compact', value: 'Compact', active: false },
-        { title: 'Everyday', value: 'Everyday', active: false },
-        { title: 'SUV', value: 'SUV', active: false },
-        { title: 'Premium', value: 'Premium', active: false },
-        { title: 'Cargo', value: 'Cargo', active: false },
-        { title: 'Other', value: 'Other', active: false },
-      ],
+      title: 'Elmo',
+      value: Provider.ELMO,
+      imgUrl: ElmoLogo,
+      active: $carsFilter.provider.ELMO,
     },
     {
-      title: 'Fuel',
-      values: [
-        { title: 'Electric', value: 'Electric', active: false },
-        { title: 'Gas', value: 'Gas', active: false },
-      ],
+      title: 'Avis',
+      value: Provider.AVIS,
+      imgUrl: null,
+      active: $carsFilter.provider.AVIS,
+    },
+    {
+      title: 'Beast',
+      value: Provider.BEAST,
+      imgUrl: BeastLogo,
+      active: $carsFilter.provider.BEAST,
     },
   ]
 </script>
@@ -74,28 +56,24 @@
     </button>
   </div>
 
-  {#each filters as filter}
-    <div class="mt-6">
-      <p>{filter.title}</p>
+  <div>
+    <div>
+      <p>Brands</p>
       <div class="mt-1 flex gap-4 overflow-scroll scrollbar-hide">
-        {#each filter.values as value}
-          <button
-            class="rounded border-2 bg-gray-200 px-2 py-1.5"
-            style={value.active ? 'border-color: gray' : ''}
-            on:click={() => (value.active = !value.active)}
+        {#each providers as provider}
+          <FilterItemLayer
+            active={provider.active}
+            onClick={() => {
+              provider.active = !provider.active
+              $carsFilter.provider[provider.value] = provider.active
+            }}
           >
-            {#if value.imgUrl}
-              <div class="flex h-5 w-16 justify-center">
-                <img src={value.imgUrl} alt={value.title} width="48" />
-              </div>
-            {:else}
-              <p class="text-sm">
-                {value.title}
-              </p>
-            {/if}
-          </button>
+            <div class="flex h-5 w-16 justify-center">
+              <img src={provider.imgUrl} alt={provider.title} width="48" />
+            </div>
+          </FilterItemLayer>
         {/each}
       </div>
     </div>
-  {/each}
+  </div>
 </div>

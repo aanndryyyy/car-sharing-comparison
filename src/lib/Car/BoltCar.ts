@@ -3,9 +3,9 @@ import type BaseCar from './BaseCar'
 import BoltLogo from '$lib/Images/bolt.png'
 import type { SvelteComponent } from 'svelte'
 import BoltCarPopover from '$lib/Popovers/BoltCarPopover.svelte'
-import type { SearchParamsObj } from '../DTO/SearchParamsObj'
 import calculateBoltPrice from '../../helpers/Calculators/CalculateBoltPrice'
 import type { ICarBolt } from '$lib/Types/Interfaces/ICarBolt'
+import { Provider } from '../Types/Enums/Provider'
 
 class BoltCar implements BaseCar {
   readonly carData: ICarBolt
@@ -25,6 +25,13 @@ class BoltCar implements BaseCar {
    */
   getName(): string {
     return this.carData.name
+  }
+
+  /**
+   * @inheritdoc
+   */
+  getProvider(): string {
+    return Provider.BOLT
   }
 
   /**
