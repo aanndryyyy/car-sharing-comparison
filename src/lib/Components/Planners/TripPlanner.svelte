@@ -9,6 +9,7 @@
   import LoaderIcon from '$lib/Icons/Loader.svelte'
 
   let GoogleAutocomplete: typeof google.maps.places.Autocomplete
+  let GoogleAdvancedMarkerElement: typeof google.maps.marker.AdvancedMarkerElement
   let inputWaypoints: {
     input?: HTMLInputElement
     autocomplete?: google.maps.places.Autocomplete
@@ -33,6 +34,12 @@
       )) as google.maps.PlacesLibrary
 
       GoogleAutocomplete = Autocomplete
+
+      const { AdvancedMarkerElement } = (await google.maps.importLibrary(
+        'marker'
+      )) as google.maps.MarkerLibrary
+
+      GoogleAdvancedMarkerElement = AdvancedMarkerElement
     })
   })
 
@@ -92,12 +99,22 @@
     })
   }
 
+  let startingMarker: google.maps.marker.AdvancedMarkerElement
   function showStartingLocation() {
     const placeStarting = inputWaypoints[0].autocomplete.getPlace()
 
     if (!placeStarting?.geometry?.location) {
       return
     }
+
+    if (startingMarker?.map) {
+      startingMarker.map = null
+    }
+
+    startingMarker = new GoogleAdvancedMarkerElement({
+      map: $map,
+      position: placeStarting.geometry.location,
+    })
 
     $map.panTo(placeStarting.geometry.location)
     $map.setZoom(15)
@@ -110,14 +127,10 @@
 
     inputWaypoints.push({})
 
-    console.log(inputWaypoints)
-
     inputWaypoints = inputWaypoints
   }
 
   function initAutocomplete(e) {
-    console.log(e.detail)
-
     inputWaypoints[e.detail.index].input = e.detail.input
     inputWaypoints[e.detail.index].autocomplete = new GoogleAutocomplete(
       e.detail.input,
