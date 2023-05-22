@@ -8,10 +8,19 @@
   import WaypointInput from './WaypointInput.svelte'
   import LoaderIcon from '$lib/Icons/Loader.svelte'
 
-  import { Switch } from '@rgossiaux/svelte-headlessui'
+  import {
+    Switch,
+    SwitchLabel,
+    SwitchGroup,
+  } from '@rgossiaux/svelte-headlessui'
   import PlusCircleIcon from '$lib/Icons/Outline/PlusCircleIcon.svelte'
 
   let isRoundTrip: boolean = false
+
+  // TODO: :)
+  $: if (isRoundTrip || !isRoundTrip) {
+    calculateRoute()
+  }
 
   let GoogleAutocomplete: typeof google.maps.places.Autocomplete
   let GoogleAdvancedMarkerElement: typeof google.maps.marker.AdvancedMarkerElement
@@ -50,8 +59,15 @@
   })
 
   function calculateRoute() {
-    const placeStarting = inputWaypoints[0].autocomplete.getPlace()
-    const placeDestination = inputWaypoints.slice(-1)[0].autocomplete.getPlace()
+    const starting = inputWaypoints[0]?.autocomplete
+    const destination = inputWaypoints.slice(-1)[0]?.autocomplete
+
+    if (!starting || !destination) {
+      return
+    }
+
+    const placeStarting = starting.getPlace()
+    const placeDestination = destination.getPlace()
 
     if (
       !placeStarting?.geometry?.location ||
@@ -100,6 +116,11 @@
         $duration += Math.ceil(route.duration?.value / 60)
         $totalKilometres += Math.ceil(route.distance?.value / 1000)
       })
+
+      if (isRoundTrip) {
+        $duration *= 2
+        $totalKilometres *= 2
+      }
     })
   }
 
@@ -176,20 +197,26 @@
         class="flex gap-2 text-slate-600 transition-colors hover:text-slate-900 disabled:text-slate-400"
         disabled={inputWaypoints.length >= 5}
       >
-        <PlusCircleIcon /> Add stop</button
-      >
-      <Switch
-        checked={isRoundTrip}
-        on:change={(e) => (isRoundTrip = e.detail)}
-        class={isRoundTrip ? 'switch switch-enabled' : 'switch switch-disabled'}
-      >
-        <span class="sr-only">Enable notifications</span>
-        <span
-          class="toggle"
-          class:toggle-on={isRoundTrip}
-          class:toggle-off={!isRoundTrip}
-        />
-      </Switch>
+        <PlusCircleIcon /> Add stop
+      </button>
+
+      <SwitchGroup class="relative flex items-center gap-2 text-slate-600">
+        <SwitchLabel class="">Round trip</SwitchLabel>
+        <Switch
+          checked={isRoundTrip}
+          on:change={(e) => (isRoundTrip = e.detail)}
+          class={isRoundTrip
+            ? 'switch switch-enabled'
+            : 'switch switch-disabled'}
+        >
+          <span class="sr-only">Enable notifications</span>
+          <span
+            class="toggle"
+            class:toggle-on={isRoundTrip}
+            class:toggle-off={!isRoundTrip}
+          />
+        </Switch>
+      </SwitchGroup>
     </div>
 
     <ul class="space-y-4">
@@ -217,3 +244,52 @@
     </div>
   {/if}
 </div>
+
+<style lang="postcss">
+  :global(.switch) {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    border-radius: 9999px;
+    height: 1.5rem;
+    width: 2.75rem;
+  }
+
+  :global(.switch-enabled) {
+    /* Blue */
+    background-color: rgb(37 99 235);
+  }
+
+  :global(.switch-disabled) {
+    /* Gray */
+    background-color: rgb(229 231 235);
+  }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
+
+  .toggle {
+    display: inline-block;
+    width: 1rem;
+    height: 1rem;
+    background-color: rgb(255 255 255);
+    border-radius: 9999px;
+  }
+
+  .toggle-on {
+    transform: translateX(1.5rem);
+  }
+
+  .toggle-off {
+    transform: translateX(0.25rem);
+  }
+</style>
