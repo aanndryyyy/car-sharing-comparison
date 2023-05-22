@@ -205,15 +205,13 @@
         <Switch
           checked={isRoundTrip}
           on:change={(e) => (isRoundTrip = e.detail)}
-          class={isRoundTrip
-            ? 'switch switch-enabled'
-            : 'switch switch-disabled'}
+          class={`relative inline-flex h-6 w-11 items-center rounded-full 
+            ${isRoundTrip ? 'bg-green-600' : 'bg-slate-200'}`}
         >
-          <span class="sr-only">Enable notifications</span>
           <span
-            class="toggle"
-            class:toggle-on={isRoundTrip}
-            class:toggle-off={!isRoundTrip}
+            class="inline-block h-4 w-4 rounded-full bg-white"
+            class:translate-x-6={isRoundTrip}
+            class:translate-x-1={!isRoundTrip}
           />
         </Switch>
       </SwitchGroup>
@@ -244,52 +242,3 @@
     </div>
   {/if}
 </div>
-
-<style lang="postcss">
-  :global(.switch) {
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-    border-radius: 9999px;
-    height: 1.5rem;
-    width: 2.75rem;
-  }
-
-  :global(.switch-enabled) {
-    /* Blue */
-    background-color: rgb(37 99 235);
-  }
-
-  :global(.switch-disabled) {
-    /* Gray */
-    background-color: rgb(229 231 235);
-  }
-
-  .sr-only {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border-width: 0;
-  }
-
-  .toggle {
-    display: inline-block;
-    width: 1rem;
-    height: 1rem;
-    background-color: rgb(255 255 255);
-    border-radius: 9999px;
-  }
-
-  .toggle-on {
-    transform: translateX(1.5rem);
-  }
-
-  .toggle-off {
-    transform: translateX(0.25rem);
-  }
-</style>
