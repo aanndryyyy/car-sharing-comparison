@@ -34,10 +34,7 @@
     {$_('title')}
   </h1>
   {#if showAppShortDescription}
-    <div
-      class="block rounded-md bg-green-100 p-4 text-green-900 md:hidden"
-      transition:fly={{ duration: 2000 }}
-    >
+    <div class="block rounded-md bg-green-100 p-4 text-green-900 md:hidden">
       <div class="flex justify-between">
         <p class="text-xs font-normal">
           {$_('appShortDescription')}.

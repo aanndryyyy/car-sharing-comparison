@@ -7,9 +7,7 @@
   import { Icon, Funnel, Map } from 'svelte-hero-icons'
   import CarList from './Section/CarList/CarList.svelte'
   import CarListControls from './Section/CarListControls/CarListControls.svelte'
-  const modal = getContext('simple-modal')
 
-  const openMap = () => modal.open(CarsMap)
   let open: boolean = false
   let filtersOpen: boolean = false
 </script>
@@ -19,7 +17,7 @@
     <div>
       <h3>{$_('cars.title')}</h3>
       <button
-        class="mt-2 block flex gap-1 text-green-600 md:hidden"
+        class="mt-2 flex gap-1 text-green-600 md:hidden"
         on:click={() => (open = true)}
       >
         <Icon src={Funnel} size="16" />
@@ -27,13 +25,13 @@
       </button>
     </div>
 
-    <button
-      class="block flex items-center justify-center gap-1.5 rounded bg-green-600 px-3 py-2 text-white md:hidden"
-      on:click={openMap}
+    <a
+      href="/map"
+      class="flex items-center justify-center gap-1.5 rounded bg-green-600 px-3 py-2 text-base font-medium text-white md:hidden"
     >
-      <p class="text-base font-medium">Map</p>
+      Map
       <Icon src={Map} size="24" />
-    </button>
+    </a>
   </div>
 
   <div class="mt-4 hidden md:block">
