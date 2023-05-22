@@ -74,10 +74,11 @@
           bind:value={inputDays}
           on:change={setManuallyDays}
           min="0"
+          id="days"
         />
-        <span class="text-sm font-bold text-gray-500">
+        <label class="text-sm font-bold text-gray-500" for="days">
           {$_('planner.input.short.day')}
-        </span>
+        </label>
       </div>
 
       <div
@@ -89,10 +90,11 @@
           bind:value={inputHours}
           on:change={setManuallyHours}
           min="0"
+          id="hours"
         />
-        <span class="text-sm font-bold text-gray-500">
+        <label class="text-sm font-bold text-gray-500" for="hours">
           {$_('planner.input.short.hour')}
-        </span>
+        </label>
       </div>
 
       <div
@@ -104,10 +106,11 @@
           bind:value={inputMinutes}
           on:change={setManuallyMinutes}
           min="0"
+          id="minutes"
         />
-        <span class="text-sm font-bold text-gray-500">
+        <label class="text-sm font-bold text-gray-500" for="minutes">
           {$_('planner.input.short.minute')}
-        </span>
+        </label>
       </div>
     </div>
 
@@ -129,8 +132,9 @@
         type="number"
         bind:value={$totalKilometres}
         min="0"
+        id="kms"
       />
-      <span class="text-sm font-bold text-gray-500"> KM </span>
+      <label class="text-sm font-bold text-gray-500" for="kms">KM</label>
     </div>
 
     <RangeSlider
