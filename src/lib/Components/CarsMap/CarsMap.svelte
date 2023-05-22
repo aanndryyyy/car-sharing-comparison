@@ -13,6 +13,7 @@
   } from '$env/static/public'
   import MapZoomControl from './MapZoomControl.svelte'
   import MapFullScreenControl from './MapFullScreenControl.svelte'
+  import ExclamationTriangleIcon from '$lib/Icons/Outline/ExclamationTriangleIcon.svelte'
 
   export let center: google.maps.LatLngLiteral = {
     lat: 59.437066,
@@ -32,6 +33,7 @@
   })
 
   let mapLoaded: boolean = false
+  let isError: boolean = false
 
   onMount(async () => {
     loader.load().then(async () => {
@@ -51,38 +53,45 @@
         })
       )
 
-      const res = await fetch(PUBLIC_BACKEND_BASE_URL + 'location')
-      const locations = await res.json()
+      let locations
 
-      const { AdvancedMarkerElement } = (await google.maps.importLibrary(
-        'marker'
-      )) as google.maps.MarkerLibrary
+      try {
+        const res = await fetch(PUBLIC_BACKEND_BASE_URL + 'location')
+        locations = await res.json()
 
-      locations.forEach((provider) => {
-        provider.coordinates.forEach((location) => {
-          const { lat, lng } = location
-          const dotIcon = document.createElement('div')
+        const { AdvancedMarkerElement } = (await google.maps.importLibrary(
+          'marker'
+        )) as google.maps.MarkerLibrary
 
-          if (provider.provider === 'citybee') {
-            dotIcon.className = 'dot-icon bg-brand-citybee'
-          } else if (provider.provider === 'bolt') {
-            dotIcon.className = 'dot-icon bg-brand-bolt'
-          }
+        locations.forEach((provider) => {
+          provider.coordinates.forEach((location) => {
+            const { lat, lng } = location
+            const dotIcon = document.createElement('div')
 
-          const marker = new AdvancedMarkerElement({
-            map: $map,
-            position: { lat, lng } as google.maps.LatLngLiteral,
-            title: provider.provider + ', ' + location.serviceId,
-            content: dotIcon,
-          })
+            if (provider.provider === 'citybee') {
+              dotIcon.className = 'dot-icon bg-brand-citybee'
+            } else if (provider.provider === 'bolt') {
+              dotIcon.className = 'dot-icon bg-brand-bolt'
+            }
 
-          markers.push({
-            provider: provider.provider,
-            serviceId: location.serviceId,
-            marker,
+            const marker = new AdvancedMarkerElement({
+              map: $map,
+              position: { lat, lng } as google.maps.LatLngLiteral,
+              title: provider.provider + ', ' + location.serviceId,
+              content: dotIcon,
+            })
+
+            markers.push({
+              provider: provider.provider,
+              serviceId: location.serviceId,
+              marker,
+            })
           })
         })
-      })
+      } catch (e) {
+        isError = true
+        return
+      }
 
       google.maps.event.addListener($map, 'tilesloaded', () => {
         mapLoaded = true
@@ -122,25 +131,33 @@
 </script>
 
 <div class={`relative overflow-hidden ${$$props.class}`}>
-  <img
-    src={placeholder}
-    alt=""
-    class="absolute inset-0 z-10 h-full w-full"
-    class:hidden={mapLoaded}
-  />
-  <div
-    class="absolute inset-0 z-20 flex items-center justify-center bg-white/10 backdrop-blur-md transition-[backdrop-filter]"
-    class:pointer-events-none={mapLoaded}
-    class:backdrop-blur-none={mapLoaded}
-  >
-    <LoaderIcon
-      class={`h-10 w-10 animate-spin text-white ${mapLoaded ? 'hidden' : ''}`}
+  {#if !isError}
+    <img
+      src={placeholder}
+      alt=""
+      class="absolute inset-0 z-10 h-full w-full"
+      class:hidden={mapLoaded}
     />
-  </div>
+    <div
+      class="absolute inset-0 z-20 flex items-center justify-center bg-white/10 backdrop-blur-md transition-[backdrop-filter]"
+      class:pointer-events-none={mapLoaded}
+      class:backdrop-blur-none={mapLoaded}
+    >
+      <LoaderIcon
+        class={`h-10 w-10 animate-spin text-white ${mapLoaded ? 'hidden' : ''}`}
+      />
+    </div>
 
-  <div class="h-full" bind:this={mapCanvas} />
-  <MapFullScreenControl />
-  <MapZoomControl />
+    <div class="h-full" bind:this={mapCanvas} />
+    <MapFullScreenControl />
+    <MapZoomControl />
+  {:else}
+    <div
+      class="absolute inset-0 z-20 flex items-center justify-center bg-amber-400"
+    >
+      <ExclamationTriangleIcon class="h-10 w-10 text-white" />
+    </div>
+  {/if}
 </div>
 
 <style lang="postcss">
