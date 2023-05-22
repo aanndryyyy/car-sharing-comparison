@@ -2,7 +2,7 @@ import type { ICar } from './ICar'
 
 export interface ICarBolt extends ICar {
   serviceId: number
-  icon: string
+  imageUrl: string
   price: {
     km: number
     minute: number
@@ -10,4 +10,9 @@ export interface ICarBolt extends ICar {
     day: number
     minimum: number
   }
+  coordinates: {
+    serviceId: number
+    lat: number
+    lng: number
+  }[]
 }

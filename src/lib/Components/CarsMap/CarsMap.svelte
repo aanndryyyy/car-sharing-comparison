@@ -14,6 +14,7 @@
   import MapZoomControl from './MapZoomControl.svelte'
   import MapFullScreenControl from './MapFullScreenControl.svelte'
   import ExclamationTriangleIcon from '$lib/Icons/Outline/ExclamationTriangleIcon.svelte'
+  import { carsBolt, carsCityBee } from '$lib/Store/Cars'
 
   export let center: google.maps.LatLngLiteral = {
     lat: 59.437066,
@@ -53,75 +54,48 @@
         })
       )
 
-      let locations
-
-      try {
-        const res = await fetch(PUBLIC_BACKEND_BASE_URL + 'location')
-        locations = await res.json()
-
-        const { AdvancedMarkerElement } = (await google.maps.importLibrary(
-          'marker'
-        )) as google.maps.MarkerLibrary
-
-        locations.forEach((provider) => {
-          provider.coordinates.forEach((location) => {
-            const { lat, lng } = location
-            const dotIcon = document.createElement('div')
-
-            if (provider.provider === 'citybee') {
-              dotIcon.className = 'dot-icon bg-brand-citybee'
-            } else if (provider.provider === 'bolt') {
-              dotIcon.className = 'dot-icon bg-brand-bolt'
-            }
-
-            const marker = new AdvancedMarkerElement({
-              map: $map,
-              position: { lat, lng } as google.maps.LatLngLiteral,
-              title: provider.provider + ', ' + location.serviceId,
-              content: dotIcon,
-            })
-
-            markers.push({
-              provider: provider.provider,
-              serviceId: location.serviceId,
-              marker,
-            })
-          })
-        })
-      } catch (e) {
-        isError = true
-        return
-      }
-
       google.maps.event.addListener($map, 'tilesloaded', () => {
         mapLoaded = true
+      })
+
+      const { AdvancedMarkerElement } = (await google.maps.importLibrary(
+        'marker'
+      )) as google.maps.MarkerLibrary
+
+      const boltContent = document.createElement('div')
+      boltContent.className = 'dot-icon bg-brand-bolt'
+
+      $carsBolt.forEach((car) => {
+        car.initialiseMarkers(AdvancedMarkerElement, boltContent, $map)
+      })
+
+      const cityBeeContent = document.createElement('div')
+      cityBeeContent.className = 'dot-icon bg-brand-citybee'
+
+      $carsCityBee.forEach((car) => {
+        car.initialiseMarkers(AdvancedMarkerElement, cityBeeContent, $map)
       })
 
       google.maps.event.addListener($map, 'zoom_changed', () => {
         zoom = $map.getZoom()
 
-        markers.forEach((marker) => {
-          const dotIcon = document.createElement('div')
+        const dotIcon = document.createElement('div')
+        const priceIcon = document.createElement('div')
+        priceIcon.className = 'price-icon'
 
-          if (marker.provider === 'citybee') {
-            dotIcon.className = 'dot-icon bg-brand-citybee'
-          } else if (marker.provider === 'bolt') {
-            dotIcon.className = 'dot-icon bg-brand-bolt'
-          }
+        $carsBolt.forEach((car) => {
+          dotIcon.className = 'dot-icon bg-brand-bolt'
 
-          if (zoom < 14) {
-            marker.marker.content = dotIcon
-          } else {
-            const priceIcon = document.createElement('div')
-            priceIcon.className = 'price-icon'
+          car.markers.forEach((marker) => {
+            if (zoom < 14) {
+              marker.content = dotIcon
+            } else {
+              priceIcon.innerText = Math.round(Math.random() * 100) + '€'
+              priceIcon.appendChild(dotIcon)
 
-            let price = marker.serviceId
-
-            priceIcon.innerText = price + '€'
-            priceIcon.appendChild(dotIcon)
-
-            marker.marker.content = priceIcon
-          }
+              marker.content = priceIcon
+            }
+          })
         })
       })
     })

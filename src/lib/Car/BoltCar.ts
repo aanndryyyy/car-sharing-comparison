@@ -9,6 +9,7 @@ import { Provider } from '../Types/Enums/Provider'
 
 class BoltCar implements BaseCar {
   readonly carData: ICarBolt
+  markers: google.maps.marker.AdvancedMarkerElement[]
   rentTotalPrice: number | undefined
 
   /**
@@ -18,6 +19,7 @@ class BoltCar implements BaseCar {
    */
   constructor(car: ICarBolt) {
     this.carData = car
+    this.markers = []
   }
 
   /**
@@ -87,7 +89,7 @@ class BoltCar implements BaseCar {
   }
 
   getCarImg(): string {
-    return this.carData.icon
+    return this.carData.imageUrl
   }
 
   /**
@@ -100,6 +102,29 @@ class BoltCar implements BaseCar {
         minimumFee: this.carData.price.min,
       },
     }
+  }
+
+  initialiseMarkers(
+    AdvancedMarkerElement: typeof google.maps.marker.AdvancedMarkerElement,
+    content?: Element,
+    map?: google.maps.Map
+  ) {
+    this.carData.coordinates.forEach(({ lat, lng }) => {
+      const position = { lat, lng } as google.maps.LatLngLiteral
+      const marker = new AdvancedMarkerElement({
+        map,
+        content,
+        position,
+      })
+
+      this.markers.push(marker)
+    })
+  }
+
+  setMarkersMap(map?: google.maps.Map) {
+    this.markers.forEach((marker) => {
+      marker.map = map
+    })
   }
 }
 

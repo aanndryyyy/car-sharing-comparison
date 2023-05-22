@@ -10,14 +10,17 @@
     carsFilter,
     filterSelectedProvidersCount,
   } from '$lib/Store/FilterStore'
+  import { brandFilter } from '$lib/Store/Cars'
 
   let items = [
-    { value: Provider.BOLT, title: 'Bolt' },
-    { value: Provider.CITYBEE, title: 'CityBee' },
-    { value: Provider.ELMO, title: 'Elmo' },
-    { value: Provider.BEAST, title: 'Beast' },
-    { value: Provider.AVIS, title: 'AVIS' },
+    Provider.BOLT,
+    Provider.CITYBEE,
+    Provider.ELMO,
+    Provider.BEAST,
+    Provider.AVIS,
   ]
+
+  $brandFilter = items
 </script>
 
 <Popover class="relative px-4 text-sm">
@@ -46,10 +49,10 @@
           type="checkbox"
           class="form-checkbox h-4 w-4 rounded border-slate-400 text-green-600 focus:ring-green-500"
           id={'provider-' + index}
-          value={item.value}
-          bind:checked={$carsFilter.provider[item.value]}
+          value={item}
+          bind:group={$brandFilter}
         />
-        {item.title}
+        {item}
       </label>
     {/each}
   </PopoverPanel>

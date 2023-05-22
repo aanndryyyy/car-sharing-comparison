@@ -2,7 +2,7 @@ import type { ICar } from './ICar'
 
 export interface ICarCityBee extends ICar {
   id: number
-  icon: string
+  imageUrl: string
   price: {
     km: number
     minute: number
