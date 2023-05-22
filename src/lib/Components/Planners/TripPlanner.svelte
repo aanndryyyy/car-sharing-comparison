@@ -8,12 +8,18 @@
   import WaypointInput from './WaypointInput.svelte'
   import LoaderIcon from '$lib/Icons/Loader.svelte'
 
+  import { Switch } from '@rgossiaux/svelte-headlessui'
+  import PlusCircleIcon from '$lib/Icons/Outline/PlusCircleIcon.svelte'
+
+  let isRoundTrip: boolean = false
+
   let GoogleAutocomplete: typeof google.maps.places.Autocomplete
   let GoogleAdvancedMarkerElement: typeof google.maps.marker.AdvancedMarkerElement
   let inputWaypoints: {
+    id: number
     input?: HTMLInputElement
     autocomplete?: google.maps.places.Autocomplete
-  }[] = [{}, {}]
+  }[] = [{ id: Date.now() + Math.random() }, { id: Date.now() + Math.random() }]
 
   const autocompleteOptions: google.maps.places.AutocompleteOptions = {
     componentRestrictions: { country: 'ee' },
@@ -66,7 +72,7 @@
     for (let i = 1; i < inputWaypoints.length - 1; i++) {
       const place = inputWaypoints[i]?.autocomplete?.getPlace()
 
-      if (!place?.geometry?.location) return
+      if (!place?.geometry?.location) continue
 
       waypoints.push({
         location: place.geometry.location,
@@ -89,9 +95,7 @@
       $totalKilometres = 0
 
       legs.forEach((route) => {
-        if (!route.duration?.value || !route.distance?.value) {
-          return
-        }
+        if (!route.duration?.value || !route.distance?.value) return
 
         $duration += Math.ceil(route.duration?.value / 60)
         $totalKilometres += Math.ceil(route.distance?.value / 1000)
@@ -125,9 +129,18 @@
   function addWaypoint() {
     if (inputWaypoints.length >= 5) return
 
-    inputWaypoints.push({})
+    inputWaypoints.splice(-1, 0, { id: Date.now() + Math.random() })
 
     inputWaypoints = inputWaypoints
+    calculateRoute()
+  }
+
+  function removeWaypoint(e) {
+    if (inputWaypoints.length < 2) return
+
+    inputWaypoints.splice(e.detail.index, 1)
+    inputWaypoints = inputWaypoints
+    calculateRoute()
   }
 
   function initAutocomplete(e) {
@@ -157,15 +170,37 @@
   class:max-md:!hidden={!visible}
 >
   {#if GoogleAutocomplete}
-    <button on:click={addWaypoint}>Add stop</button>
+    <div class="flex justify-between">
+      <button
+        on:click={addWaypoint}
+        class="flex gap-2 text-slate-600 transition-colors hover:text-slate-900 disabled:text-slate-400"
+        disabled={inputWaypoints.length >= 5}
+      >
+        <PlusCircleIcon /> Add stop</button
+      >
+      <Switch
+        checked={isRoundTrip}
+        on:change={(e) => (isRoundTrip = e.detail)}
+        class={isRoundTrip ? 'switch switch-enabled' : 'switch switch-disabled'}
+      >
+        <span class="sr-only">Enable notifications</span>
+        <span
+          class="toggle"
+          class:toggle-on={isRoundTrip}
+          class:toggle-off={!isRoundTrip}
+        />
+      </Switch>
+    </div>
 
     <ul class="space-y-4">
-      {#each inputWaypoints as { input, autocomplete }, i}
+      {#each inputWaypoints as { id, input, autocomplete }, i (id)}
         <WaypointInput
           isFirst={i == 0}
           isLast={i == inputWaypoints.length - 1}
           index={i}
+          {id}
           on:mounted={initAutocomplete}
+          on:delete={removeWaypoint}
         />
       {/each}
     </ul>

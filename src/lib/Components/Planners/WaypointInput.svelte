@@ -36,12 +36,14 @@
       class="block w-full outline-none"
       {placeholder}
     />
-    <span class="flex">
+    <span class="hidden">
       <Ellipsis2Vertical class="fill-slate-400 hover:cursor-grab" />
     </span>
   </div>
 
   {#if !isFirst && !isLast}
-    <XMarkIcon class="fill-red-600" />
+    <button on:click={() => dispatch('delete', { index })}>
+      <XMarkIcon class="fill-red-600" />
+    </button>
   {/if}
 </li>
