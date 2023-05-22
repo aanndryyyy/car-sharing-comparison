@@ -59,12 +59,18 @@
 
     <div class="relative flex items-center sm:w-32">
       <div class="absolute inset-x-0 top-0 flex justify-center sm:top-4">
-        <img class="h-4" src={car.getLogo()} alt="Provider Logo" />
+        <img
+          class="h-4"
+          src={car.getLogo()}
+          alt="Provider Logo"
+          loading="lazy"
+        />
       </div>
       <img
         class="mx-auto h-14 w-auto md:mb-2 md:mt-6"
         src={car.getCarImg()}
         alt="Car"
+        loading="lazy"
       />
     </div>
   </div>
