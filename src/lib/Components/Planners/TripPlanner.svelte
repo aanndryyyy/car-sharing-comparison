@@ -185,23 +185,21 @@
   }
 </script>
 
-<div
-  class={`space-y-4 ${$$props.class}`}
-  class:max-md:!block={visible}
-  class:max-md:!hidden={!visible}
->
+<div class:max-md:!block={visible} class:max-md:!hidden={!visible}>
   {#if GoogleAutocomplete}
-    <div class="flex justify-between">
+    <div class="flex justify-between text-sm text-slate-600 transition-colors">
       <button
         on:click={addWaypoint}
-        class="flex gap-2 text-slate-600 transition-colors hover:text-slate-900 disabled:text-slate-400"
+        class="flex items-center gap-2 hover:text-slate-900 disabled:text-slate-400"
         disabled={inputWaypoints.length >= 5}
       >
         <PlusCircleIcon /> Add stop
       </button>
 
-      <SwitchGroup class="relative flex items-center gap-2 text-slate-600">
-        <SwitchLabel class="">Round trip</SwitchLabel>
+      <SwitchGroup
+        class="relative flex items-center gap-2 hover:text-slate-900 "
+      >
+        <SwitchLabel>Round trip</SwitchLabel>
         <Switch
           checked={isRoundTrip}
           on:change={(e) => (isRoundTrip = e.detail)}
@@ -217,20 +215,19 @@
       </SwitchGroup>
     </div>
 
-    <ul class="space-y-4">
+    <ul class="mt-3 space-y-2">
       {#each inputWaypoints as { id, input, autocomplete }, i (id)}
         <WaypointInput
           isFirst={i == 0}
           isLast={i == inputWaypoints.length - 1}
           index={i}
-          {id}
           on:mounted={initAutocomplete}
           on:delete={removeWaypoint}
         />
       {/each}
     </ul>
 
-    <p class="text-center text-sm text-slate-600">
+    <p class="mt-8 text-center text-sm text-slate-600">
       {$hours} hours and {$minutes} minutes<br />
       {$totalKilometres} kilometers
     </p>

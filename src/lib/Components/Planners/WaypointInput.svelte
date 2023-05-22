@@ -17,8 +17,12 @@
 
   let placeholder: string = 'Add stop'
 
-  if (index === 0) {
+  if (isFirst) {
     placeholder = 'Starting location'
+  }
+
+  if (isLast) {
+    placeholder = 'Destination'
   }
 </script>
 

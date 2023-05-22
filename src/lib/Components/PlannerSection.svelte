@@ -25,7 +25,7 @@
     <div>
       <ManualPlanner visible={manualPlanner} />
 
-      <div class="relative my-8 flex items-center max-md:hidden">
+      <div class="relative my-8 mt-10 flex items-center max-md:hidden">
         <div class="flex-grow border-t border-slate-300" />
         <span class="mx-4 flex-shrink font-bold text-slate-300">
           {$_('or').toUpperCase()}
