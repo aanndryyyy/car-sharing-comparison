@@ -4,6 +4,7 @@
   import { map } from '$lib/Store/GoogleMapStore'
   import { Loader } from '@googlemaps/js-api-loader'
   import placeholder from '$lib/Images/placeholder.png'
+  import LoaderIcon from '$lib/Icons/Loader.svelte'
 
   import {
     PUBLIC_GOOGLE_MAP_ID,
@@ -129,10 +130,14 @@
     class:hidden={mapLoaded}
   />
   <div
-    class="absolute inset-0 z-20 bg-white/10 backdrop-blur-md transition-[backdrop-filter]"
+    class="absolute inset-0 z-20 flex items-center justify-center bg-white/10 backdrop-blur-md transition-[backdrop-filter]"
     class:pointer-events-none={mapLoaded}
     class:backdrop-blur-none={mapLoaded}
-  />
+  >
+    <LoaderIcon
+      class={`h-10 w-10 animate-spin text-white ${mapLoaded ? 'hidden' : ''}`}
+    />
+  </div>
 
   <div class="h-full" bind:this={mapCanvas} />
   <MapZoomControl />
