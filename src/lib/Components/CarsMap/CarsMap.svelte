@@ -3,6 +3,7 @@
   import { _ } from 'svelte-i18n'
   import { map } from '$lib/Store/GoogleMapStore'
   import { Loader } from '@googlemaps/js-api-loader'
+  import placeholder from '$lib/Images/placeholder.png'
 
   import {
     PUBLIC_GOOGLE_MAP_ID,
@@ -27,6 +28,8 @@
     apiKey: PUBLIC_GOOGLE_API_KEY,
     version: 'weekly',
   })
+
+  let mapLoaded: boolean = false
 
   onMount(async () => {
     loader.load().then(async () => {
@@ -79,6 +82,10 @@
         })
       })
 
+      google.maps.event.addListener($map, 'tilesloaded', () => {
+        mapLoaded = true
+      })
+
       google.maps.event.addListener($map, 'zoom_changed', () => {
         zoom = $map.getZoom()
 
@@ -112,12 +119,22 @@
   let mapCanvas: HTMLDivElement
 </script>
 
-<div class="relative">
+<div
+  class="relative h-screen overflow-hidden md:h-96 md:rounded-lg md:shadow-lg"
+>
+  <img
+    src={placeholder}
+    alt=""
+    class="absolute inset-0 z-10"
+    class:hidden={mapLoaded}
+  />
   <div
-    class="h-screen md:h-96 md:rounded-lg md:shadow-lg"
-    bind:this={mapCanvas}
+    class="absolute inset-0 z-20 bg-white/10 backdrop-blur-md transition-[backdrop-filter]"
+    class:pointer-events-none={mapLoaded}
+    class:backdrop-blur-none={mapLoaded}
   />
 
+  <div class="h-full" bind:this={mapCanvas} />
   <MapZoomControl />
 </div>
 
