@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onMount } from 'svelte'
-  import { duration, hours, minutes } from '$lib/Store/DurationStore'
+  import { days, duration, hours, minutes } from '$lib/Store/DurationStore'
   import { totalKilometres } from '$lib/Store/TotalKilometresStore'
   import { map } from '$lib/Store/GoogleMapStore'
   import { Loader } from '@googlemaps/js-api-loader'
@@ -228,7 +228,7 @@
     </ul>
 
     <p class="mt-8 text-center text-sm text-slate-600">
-      {$hours} hours and {$minutes} minutes<br />
+      {$days * 24 + $hours} hours and {$minutes} minutes<br />
       {$totalKilometres} kilometers
     </p>
   {:else}
