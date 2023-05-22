@@ -69,7 +69,7 @@
         class="flex items-center rounded-md border px-3 py-2 focus-within:ring-2 focus-within:ring-green-500 focus-within:ring-offset-1"
       >
         <input
-          class="block w-full focus:outline-none"
+          class="appearance-text block w-full focus:outline-none"
           type="number"
           bind:value={inputDays}
           on:change={setManuallyDays}
@@ -84,7 +84,7 @@
         class="flex items-center rounded-md border px-3 py-2 focus-within:ring-2 focus-within:ring-green-500 focus-within:ring-offset-1"
       >
         <input
-          class="block w-full focus:outline-none"
+          class="appearance-text block w-full focus:outline-none"
           type="number"
           bind:value={inputHours}
           on:change={setManuallyHours}
@@ -99,7 +99,7 @@
         class="flex items-center rounded-md border px-3 py-2 focus-within:ring-2 focus-within:ring-green-500 focus-within:ring-offset-1"
       >
         <input
-          class="block w-full focus:outline-none"
+          class="appearance-text block w-full focus:outline-none"
           type="number"
           bind:value={inputMinutes}
           on:change={setManuallyMinutes}
@@ -125,7 +125,7 @@
       class="flex items-center rounded-md border px-3 py-2 focus-within:ring-2 focus-within:ring-green-500 focus-within:ring-offset-2"
     >
       <input
-        class="block w-full focus:outline-none"
+        class="appearance-text block w-full focus:outline-none"
         type="number"
         bind:value={$totalKilometres}
         min="0"
