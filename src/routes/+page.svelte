@@ -1,14 +1,55 @@
 <script lang="ts">
   import { _ } from 'svelte-i18n'
-  import { fly } from 'svelte/transition'
   import CarsSection from '$lib/Components/CarsSection.svelte'
   import PlannerSection from '$lib/Components/PlannerSection.svelte'
   import { Icon, XMark, ArrowSmallRight } from 'svelte-hero-icons'
+  import BoltCar from '$lib/Car/BoltCar'
+  import CityBeeCar from '$lib/Car/CityBeeCar'
+  import ElmoCar from '$lib/Car/ElmoCar'
+  import BeastCar from '$lib/Car/BeastCar'
+  import { Provider } from '$lib/Types/Enums/Provider'
+  import { carsBolt, carsCityBee } from '$lib/Store/Cars'
 
   import ogImage from '$lib/Images/og-image.png'
   import { Modal } from 'svelte-simple-modal'
 
   let showAppShortDescription: boolean = true
+
+  /** @type {import('./$types').PageData} */
+  export let data
+
+  data.providerDetails.forEach((providers) => {
+    const { provider, services } = providers
+
+    services.forEach((carData) => {
+      switch (provider.toUpperCase()) {
+        case Provider.BOLT:
+          $carsBolt = $carsBolt
+            ? [...$carsBolt, new BoltCar(carData)]
+            : [new BoltCar(carData)]
+
+          break
+
+        case Provider.CITYBEE:
+          $carsCityBee = $carsCityBee
+            ? [...$carsCityBee, new CityBeeCar(carData)]
+            : [new CityBeeCar(carData)]
+
+          break
+
+        // case Provider.ELMO:
+        //   rawCars.push(new ElmoCar(data))
+        //   break
+
+        // case Provider.BEAST:
+        //   rawCars.push(new BeastCar(data))
+        //   break
+
+        // default:
+        //   throw new Error('Data provider ' + provider + ' is not implemented!')
+      }
+    })
+  })
 </script>
 
 <svelte:head>

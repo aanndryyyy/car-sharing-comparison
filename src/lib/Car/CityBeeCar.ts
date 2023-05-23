@@ -37,7 +37,7 @@ class CityBeeCar implements BaseCar {
 
   calculateRentTotalPrice(): void {
     //this.rentTotalPrice = calculateCityBeePrice(this.carData, searchParamsObj)
-    this.rentTotalPrice = 10000
+    this.rentTotalPrice = 100
   }
 
   /**
@@ -104,11 +104,12 @@ class CityBeeCar implements BaseCar {
 
   initialiseMarkers(
     AdvancedMarkerElement: typeof google.maps.marker.AdvancedMarkerElement,
-    content?: Element,
     map?: google.maps.Map
   ) {
     this.carData.coordinates.forEach(({ lat, lng }) => {
+      const content = this.getMarkerRegularIcon()
       const position = { lat, lng } as google.maps.LatLngLiteral
+
       const marker = new AdvancedMarkerElement({
         map,
         content,
@@ -117,6 +118,40 @@ class CityBeeCar implements BaseCar {
 
       this.markers.push(marker)
     })
+  }
+
+  setMarkerIcons(type?: string) {
+    this.markers.forEach((marker) => {
+      switch (type) {
+        case 'price':
+          marker.content = this.getMarkerPriceIcon()
+          break
+
+        default:
+          marker.content = this.getMarkerRegularIcon()
+          break
+      }
+    })
+  }
+
+  getMarkerRegularIcon(): HTMLDivElement {
+    const content = document.createElement('div')
+    content.className = 'dot-icon bg-brand-citybee'
+
+    return content
+  }
+
+  getMarkerPriceIcon(): HTMLDivElement {
+    const content = document.createElement('div')
+    content.className = 'dot-icon bg-brand-citybee'
+
+    const priceIcon = document.createElement('div')
+    priceIcon.className = 'price-icon'
+
+    priceIcon.innerText = 10 + '€'
+    priceIcon.appendChild(content)
+
+    return priceIcon
   }
 }
 

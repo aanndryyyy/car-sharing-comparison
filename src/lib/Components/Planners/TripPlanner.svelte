@@ -37,25 +37,18 @@
     types: ['street_address', 'street_number', 'locality', 'route'],
   }
 
-  const loader = new Loader({
-    apiKey: PUBLIC_GOOGLE_API_KEY,
-    version: 'weekly',
-  })
-
   onMount(async () => {
-    loader.load().then(async () => {
-      const { Autocomplete } = (await google.maps.importLibrary(
-        'places'
-      )) as google.maps.PlacesLibrary
+    const { Autocomplete } = (await google.maps.importLibrary(
+      'places'
+    )) as google.maps.PlacesLibrary
 
-      GoogleAutocomplete = Autocomplete
+    GoogleAutocomplete = Autocomplete
 
-      const { AdvancedMarkerElement } = (await google.maps.importLibrary(
-        'marker'
-      )) as google.maps.MarkerLibrary
+    const { AdvancedMarkerElement } = (await google.maps.importLibrary(
+      'marker'
+    )) as google.maps.MarkerLibrary
 
-      GoogleAdvancedMarkerElement = AdvancedMarkerElement
-    })
+    GoogleAdvancedMarkerElement = AdvancedMarkerElement
   })
 
   function calculateRoute() {

@@ -14,6 +14,19 @@
         appearance: textfield;
     }
 
+    .dot-icon {
+        @apply h-3 w-3 rounded-full shadow ring-1 ring-gray-300 ring-offset-1;
+    }
+
+    .price-icon {
+        @apply flex flex-row-reverse items-center justify-center gap-1.5 rounded-full border border-slate-400 bg-white pl-[2px] pr-1.5 shadow-sm;
+        @apply h-[22px] font-sans text-sm leading-none;
+    }
+    
+    .price-icon > .dot-icon {
+        @apply h-4 w-4 shadow-none ring-0 ring-offset-0;
+    }
+
 }
 
 h1, h2, h3, h4, h5, h6 {

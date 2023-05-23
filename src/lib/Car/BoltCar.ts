@@ -106,11 +106,14 @@ class BoltCar implements BaseCar {
 
   initialiseMarkers(
     AdvancedMarkerElement: typeof google.maps.marker.AdvancedMarkerElement,
-    content?: Element,
     map?: google.maps.Map
   ) {
     this.carData.coordinates.forEach(({ lat, lng }) => {
+      const content = document.createElement('div')
+      content.className = 'dot-icon bg-brand-bolt'
+
       const position = { lat, lng } as google.maps.LatLngLiteral
+
       const marker = new AdvancedMarkerElement({
         map,
         content,
@@ -121,10 +124,38 @@ class BoltCar implements BaseCar {
     })
   }
 
-  setMarkersMap(map?: google.maps.Map) {
+  setMarkerIcons(type?: string) {
     this.markers.forEach((marker) => {
-      marker.map = map
+      switch (type) {
+        case 'price':
+          marker.content = this.getMarkerPriceIcon()
+          break
+
+        default:
+          marker.content = this.getMarkerRegularIcon()
+          break
+      }
     })
+  }
+
+  getMarkerRegularIcon(): HTMLDivElement {
+    const content = document.createElement('div')
+    content.className = 'dot-icon bg-brand-bolt'
+
+    return content
+  }
+
+  getMarkerPriceIcon(): HTMLDivElement {
+    const content = document.createElement('div')
+    content.className = 'dot-icon bg-brand-bolt'
+
+    const priceIcon = document.createElement('div')
+    priceIcon.className = 'price-icon'
+
+    priceIcon.innerText = this.getTotalPrice().toFixed(0) + '€'
+    priceIcon.appendChild(content)
+
+    return priceIcon
   }
 }
 

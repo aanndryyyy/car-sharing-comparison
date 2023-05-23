@@ -15,6 +15,7 @@
   import MapFullScreenControl from './MapFullScreenControl.svelte'
   import ExclamationTriangleIcon from '$lib/Icons/Outline/ExclamationTriangleIcon.svelte'
   import { carsBolt, carsCityBee } from '$lib/Store/Cars'
+  import { duration } from '$lib/Store/DurationStore'
 
   export let center: google.maps.LatLngLiteral = {
     lat: 59.437066,
@@ -28,76 +29,74 @@
     marker: google.maps.marker.AdvancedMarkerElement
   }[] = []
 
-  const loader = new Loader({
-    apiKey: PUBLIC_GOOGLE_API_KEY,
-    version: 'weekly',
-  })
-
   let mapLoaded: boolean = false
   let isError: boolean = false
 
   onMount(async () => {
-    loader.load().then(async () => {
-      const { Map } = (await google.maps.importLibrary(
-        'maps'
-      )) as google.maps.MapsLibrary
+    const { Map } = (await google.maps.importLibrary(
+      'maps'
+    )) as google.maps.MapsLibrary
 
-      map.set(
-        new Map(mapCanvas, {
-          zoom,
-          center,
-          mapId: PUBLIC_GOOGLE_MAP_ID,
-          mapTypeControl: false,
-          fullscreenControl: false,
-          zoomControl: false,
-          streetViewControl: false,
-        })
-      )
-
-      google.maps.event.addListener($map, 'tilesloaded', () => {
-        mapLoaded = true
+    map.set(
+      new Map(mapCanvas, {
+        zoom,
+        center,
+        mapId: PUBLIC_GOOGLE_MAP_ID,
+        mapTypeControl: false,
+        fullscreenControl: false,
+        zoomControl: false,
+        streetViewControl: false,
       })
+    )
 
-      const { AdvancedMarkerElement } = (await google.maps.importLibrary(
-        'marker'
-      )) as google.maps.MarkerLibrary
+    google.maps.event.addListener($map, 'tilesloaded', () => {
+      mapLoaded = true
+    })
 
-      const boltContent = document.createElement('div')
-      boltContent.className = 'dot-icon bg-brand-bolt'
+    const { AdvancedMarkerElement } = (await google.maps.importLibrary(
+      'marker'
+    )) as google.maps.MarkerLibrary
 
-      $carsBolt.forEach((car) => {
-        car.initialiseMarkers(AdvancedMarkerElement, boltContent, $map)
-      })
+    $carsBolt.forEach((car) => {
+      car.initialiseMarkers(AdvancedMarkerElement, $map)
+    })
 
-      const cityBeeContent = document.createElement('div')
-      cityBeeContent.className = 'dot-icon bg-brand-citybee'
+    $carsCityBee.forEach((car) => {
+      car.initialiseMarkers(AdvancedMarkerElement, $map)
+    })
+
+    google.maps.event.addListener($map, 'zoom_changed', () => {
+      zoom = $map.getZoom()
 
       $carsCityBee.forEach((car) => {
-        car.initialiseMarkers(AdvancedMarkerElement, cityBeeContent, $map)
+        if (zoom < 14) {
+          car.setMarkerIcons()
+        } else {
+          car.setMarkerIcons('price')
+        }
       })
 
-      google.maps.event.addListener($map, 'zoom_changed', () => {
-        zoom = $map.getZoom()
-
-        const dotIcon = document.createElement('div')
-        const priceIcon = document.createElement('div')
-        priceIcon.className = 'price-icon'
-
-        $carsBolt.forEach((car) => {
-          dotIcon.className = 'dot-icon bg-brand-bolt'
-
-          car.markers.forEach((marker) => {
-            if (zoom < 14) {
-              marker.content = dotIcon
-            } else {
-              priceIcon.innerText = Math.round(Math.random() * 100) + '€'
-              priceIcon.appendChild(dotIcon)
-
-              marker.content = priceIcon
-            }
-          })
-        })
+      $carsBolt.forEach((car) => {
+        if (zoom < 14) {
+          car.setMarkerIcons()
+        } else {
+          car.setMarkerIcons('price')
+        }
       })
+    })
+  })
+
+  duration.subscribe(() => {
+    zoom = $map?.getZoom() || 13
+
+    $carsCityBee.forEach((car) => {
+      if (zoom < 14) return
+      car.setMarkerIcons('price')
+    })
+
+    $carsBolt.forEach((car) => {
+      if (zoom < 14) return
+      car.setMarkerIcons('price')
     })
   })
 
@@ -133,17 +132,3 @@
     </div>
   {/if}
 </div>
-
-<style lang="postcss">
-  :global(.dot-icon) {
-    @apply h-3 w-3 rounded-full shadow ring-1 ring-gray-300 ring-offset-1;
-  }
-
-  :global(.price-icon) {
-    @apply flex flex-row-reverse items-center justify-center gap-1.5 rounded-full border border-slate-400 bg-white pl-[2px] pr-1.5 shadow-sm;
-    @apply h-[22px] font-sans text-sm leading-none;
-  }
-  :global(.price-icon > .dot-icon) {
-    @apply h-4 w-4 shadow-none ring-0 ring-offset-0;
-  }
-</style>
