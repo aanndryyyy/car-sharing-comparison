@@ -57,7 +57,7 @@
       <p class="font-semibold">{car.getFormattedTotalPrice()}</p>
     </div>
 
-    <div class="relative flex items-center sm:w-32">
+    <div class="relative flex items-center w-24 sm:w-32">
       <div class="absolute inset-x-0 top-0 flex justify-center sm:top-4">
         <img
           class="h-4"
