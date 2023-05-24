@@ -95,21 +95,21 @@ class BeastCar implements BaseCar {
 
   getCarImg(): string {
     switch (this.carData.name) {
-      case "Model 3 Standard Range":
+      case 'Model 3 Standard Range':
         return Tesla_Model_3_Standard_Range
-      case "Model 3 Long Range":
+      case 'Model 3 Long Range':
         return Tesla_Model_3_Long_Range
-      case "Model 3 Performance":
+      case 'Model 3 Performance':
         return Tesla_Model_3_Performance
-      case "Model Y Long Range":
+      case 'Model Y Long Range':
         return Tesla_Model_Y_Long_Range
-      case "Model S Standard Range":
+      case 'Model S Standard Range':
         return Tesla_Model_S
-      case "Model Y Performance":
+      case 'Model Y Performance':
         return Tesla_Model_Y_Long_Range
-      case "Model S Performance":
+      case 'Model S Performance':
         return Tesla_Model_S
-      case "Model X Performance":
+      case 'Model X Performance':
         return Tesla_Model_X_Performance
       default:
         return No_image_available

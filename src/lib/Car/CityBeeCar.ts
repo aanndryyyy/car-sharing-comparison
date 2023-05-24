@@ -117,67 +117,67 @@ class CityBeeCar implements BaseCar {
 
   getCarImg(): string {
     switch (this.carData.name) {
-      case "Toyota Corolla":
+      case 'Toyota Corolla':
         return VW_T_Cross
-      case "VW Crafter":
+      case 'VW Crafter':
         return VW_Crafter
-      case "Toyota Yaris":
+      case 'Toyota Yaris':
         return Toyota_Yaris
-      case "Skoda Fabia":
+      case 'Skoda Fabia':
         return Skoda_Fabia
-      case "Nissan Juke":
+      case 'Nissan Juke':
         return Nissan_Juke
-      case "VW T-Cross":
+      case 'VW T-Cross':
         return VW_T_Cross
-      case "Toyota RAV4":
+      case 'Toyota RAV4':
         return Toyota_RAV4
-      case "Toyota Yaris Cross":
+      case 'Toyota Yaris Cross':
         return Toyota_Yaris_Cross
-      case "Citroen C3":
+      case 'Citroen C3':
         return Citroen_C3
-      case "VW T-Roc R-Line":
+      case 'VW T-Roc R-Line':
         return VW_T_Roc_R_Line
-      case "Renault Master":
+      case 'Renault Master':
         return Renault_Master
-      case "Ford Focus":
+      case 'Ford Focus':
         return Ford_Focus
-      case "Ford Kuga":
+      case 'Ford Kuga':
         return Ford_Kuga
-      case "Jeep Compass":
+      case 'Jeep Compass':
         return Jeep_Compass
-      case "Ford Fiesta":
+      case 'Ford Fiesta':
         return Ford_Fiesta
-      case "Skoda Kamiq":
+      case 'Skoda Kamiq':
         return Skoda_Kamiq
-      case "VW Taigo":
+      case 'VW Taigo':
         return VW_Taigo
-      case "VW":
+      case 'VW':
         return VW_Taigo
-      case "Toyota C-HR":
+      case 'Toyota C-HR':
         return Toyota_C_HR
-      case "Nissan Qashqai":
+      case 'Nissan Qashqai':
         return Nissan_Qashqai
-      case "Renault Clio":
+      case 'Renault Clio':
         return Renault_Clio
-      case "Renault Arkana":
+      case 'Renault Arkana':
         return Renult_Arkana
-      case "Ford Transit":
+      case 'Ford Transit':
         return Ford_Transit
-      case "Kia Sportage":
+      case 'Kia Sportage':
         return Kia_Sportage
-      case "MAN TGE":
+      case 'MAN TGE':
         return MAN_TGE
-      case "Opel Crossland ":
+      case 'Opel Crossland ':
         return Opel_Crossland
-      case "Ford Focus Estate":
+      case 'Ford Focus Estate':
         return Ford_Focus_Estate
-      case "Fiat Multipla":
+      case 'Fiat Multipla':
         return Fiat_Multipla
-      case "BMW 118i":
+      case 'BMW 118i':
         return BMW_118i
-      case "Fiat 500e":
+      case 'Fiat 500e':
         return Fiat_500e
-      case "Peugeot 308":
+      case 'Peugeot 308':
         return Peugeot_308
       default:
         return No_image_available

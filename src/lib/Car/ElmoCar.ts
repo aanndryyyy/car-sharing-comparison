@@ -17,7 +17,6 @@ import Tesla_Model_Y from '$lib/Images/Providers/Elmo/Cars/Tesla-Model-Y.png'
 import Toyota_Yaris_Hybrid from '$lib/Images/Providers/Elmo/Cars/Toyota-Yaris-Hybrid.png'
 import VW_e_Up20 from '$lib/Images/Providers/Elmo/Cars/VW-e-Up20.png'
 
-
 class ElmoCar implements BaseCar {
   readonly carData: ICarElmo
   rentTotalPrice: number | undefined
@@ -98,23 +97,23 @@ class ElmoCar implements BaseCar {
     switch (this.carData.name) {
       case "Volkswagen e-Up!'19":
         return VW_e_Up20
-      case "Skoda Citigo":
+      case 'Skoda Citigo':
         return Skoda_Citigo
-      case "Toyota Yaris Hybrid":
+      case 'Toyota Yaris Hybrid':
         return Toyota_Yaris_Hybrid
-      case "Renault Clio Hybrid 2021":
+      case 'Renault Clio Hybrid 2021':
         return Renault_Clio_Hybrid
-      case "Nissan Leaf":
+      case 'Nissan Leaf':
         return Nissan_Leaf
-      case "Peugeot e208 GT":
+      case 'Peugeot e208 GT':
         return Peugeot_e_208_GT
-      case "Renault Arkana Hybrid":
+      case 'Renault Arkana Hybrid':
         return Renault_Arkana_Hybrid
-      case "Renault Zoe":
+      case 'Renault Zoe':
         return Renault_Zoe
-      case "Tesla Model 3":
+      case 'Tesla Model 3':
         return Tesla_Model_3_SR
-      case "Tesla Model Y":
+      case 'Tesla Model Y':
         return Tesla_Model_Y
       default:
         return No_image_available
