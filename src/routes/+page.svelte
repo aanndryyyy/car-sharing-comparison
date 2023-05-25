@@ -3,47 +3,28 @@
   import CarsSection from '$lib/Components/CarsSection.svelte'
   import PlannerSection from '$lib/Components/PlannerSection.svelte'
   import { Icon, XMark, ArrowSmallRight } from 'svelte-hero-icons'
-  import BoltCar from '$lib/Car/BoltCar'
-  import CityBeeCar from '$lib/Car/CityBeeCar'
-  import ElmoCar from '$lib/Car/ElmoCar'
-  import BeastCar from '$lib/Car/BeastCar'
-  import { Provider } from '$lib/Types/Enums/Provider'
   import { cars } from '$lib/Store/Cars'
+
+  import type { Provider as EProvider } from '$lib/Types/Enums/Provider'
+  import type { Provider } from '$lib/types'
 
   import ogImage from '$lib/Images/og-image.png'
   import { Modal } from 'svelte-simple-modal'
+  import GenericCar from '$lib/Car/GenericCar'
 
   let showAppShortDescription: boolean = true
 
   /** @type {import('./$types').PageData} */
-  export let data
+  export let data: { providerDetails: Provider[] }
 
   data.providerDetails.forEach((providers) => {
     const { provider, services } = providers
 
     services.forEach((carData) => {
-      switch (provider.toUpperCase()) {
-        case Provider.BOLT:
-          $cars = [...$cars, new BoltCar(carData)]
-
-          break
-
-        case Provider.CITYBEE:
-          $cars = [...$cars, new CityBeeCar(carData)]
-
-          break
-
-        case Provider.ELMO:
-          $cars = [...$cars, new ElmoCar(carData)]
-          break
-
-        case Provider.BEAST:
-          $cars = [...$cars, new BeastCar(carData)]
-          break
-
-        default:
-          throw new Error('Data provider ' + provider + ' is not implemented!')
-      }
+      $cars = [
+        ...$cars,
+        new GenericCar(provider.toUpperCase() as EProvider, carData),
+      ]
     })
   })
 </script>

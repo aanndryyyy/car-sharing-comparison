@@ -1,41 +1,22 @@
-<script>
-  import BoltCar from '$lib/Car/BoltCar'
-  import CityBeeCar from '$lib/Car/CityBeeCar'
-  import ElmoCar from '$lib/Car/ElmoCar'
-  import BeastCar from '$lib/Car/BeastCar'
-  import { Provider } from '$lib/Types/Enums/Provider'
+<script lang="ts">
   import { cars } from '$lib/Store/Cars'
   import CarsMap from '$lib/Components/CarsMap/CarsMap.svelte'
+  import GenericCar from '$lib/Car/GenericCar'
+
+  import type { Provider as EProvider } from '$lib/Types/Enums/Provider'
+  import type { Provider } from '$lib/types'
 
   /** @type {import('./$types').PageData} */
-  export let data
+  export let data: { providerDetails: Provider[] }
 
   data.providerDetails.forEach((providers) => {
     const { provider, services } = providers
 
     services.forEach((carData) => {
-      switch (provider.toUpperCase()) {
-        case Provider.BOLT:
-          $cars = [...$cars, new BoltCar(carData)]
-
-          break
-
-        case Provider.CITYBEE:
-          $cars = [...$cars, new CityBeeCar(carData)]
-
-          break
-
-        case Provider.ELMO:
-          $cars = [...$cars, new ElmoCar(carData)]
-          break
-
-        case Provider.BEAST:
-          $cars = [...$cars, new BeastCar(carData)]
-          break
-
-        default:
-          throw new Error('Data provider ' + provider + ' is not implemented!')
-      }
+      $cars = [
+        ...$cars,
+        new GenericCar(provider.toUpperCase() as EProvider, carData),
+      ]
     })
   })
 </script>
