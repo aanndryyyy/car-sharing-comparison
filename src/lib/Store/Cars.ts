@@ -12,37 +12,9 @@ import filterCars from '../../helpers/FilterCars'
 import { CarSortField } from '$lib/Types/Enums/CarSortField'
 import { SortState } from '$lib/Types/Enums/SortState'
 
-export const carsBolt = writable<BoltCar[]>([])
-export const carsCityBee = writable<CityBeeCar[]>([])
-
-//export const cars = writable<(BoltCar | CityBeeCar | ElmoCar | BeastCar)[]>([])
+export const cars = writable<(BoltCar | CityBeeCar | ElmoCar | BeastCar)[]>([])
 
 export const brandFilter = writable([])
-
-export const cars = derived(
-  [brandFilter, carsBolt, carsCityBee],
-  ([$brandFilter, $carsBolt, $carsCityBee], set) => {
-    let cars = []
-
-    if ($brandFilter.includes(Provider.BOLT)) {
-      $carsBolt.forEach((car) => car.calculateRentTotalPrice())
-      cars = [...cars, ...$carsBolt]
-    } else {
-      $carsBolt.forEach((car) => car.setMarkersMap())
-    }
-
-    if ($brandFilter.includes(Provider.CITYBEE)) {
-      $carsCityBee.forEach((car) => car.calculateRentTotalPrice())
-      cars = [...cars, ...$carsCityBee]
-    }
-
-    let sortedCars = sortCars(cars, CarSortField.PRICE, SortState.UP)
-
-    // @ts-expect-error
-    set(sortedCars)
-  },
-  []
-)
 
 export const sortedCars = derived(
   [cars, duration, totalKilometres, carsFilter],

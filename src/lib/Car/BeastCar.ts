@@ -135,6 +135,11 @@ class BeastCar implements BaseCar {
     //   }
     // };
   }
+
+  initialiseMarkers(
+    AdvancedMarkerElement: typeof google.maps.marker.AdvancedMarkerElement,
+    map?: google.maps.Map
+  ): void {}
 }
 
 export default BeastCar

@@ -209,7 +209,7 @@ class BoltCar implements BaseCar {
   initialiseMarkers(
     AdvancedMarkerElement: typeof google.maps.marker.AdvancedMarkerElement,
     map?: google.maps.Map
-  ) {
+  ): void {
     this.carData.coordinates.forEach(({ lat, lng }) => {
       const content = document.createElement('div')
       content.className = 'dot-icon bg-brand-bolt'

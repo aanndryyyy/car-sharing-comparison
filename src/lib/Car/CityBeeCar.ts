@@ -200,7 +200,7 @@ class CityBeeCar implements BaseCar {
   initialiseMarkers(
     AdvancedMarkerElement: typeof google.maps.marker.AdvancedMarkerElement,
     map?: google.maps.Map
-  ) {
+  ): void {
     this.carData.coordinates.forEach(({ lat, lng }) => {
       const content = this.getMarkerRegularIcon()
       const position = { lat, lng } as google.maps.LatLngLiteral

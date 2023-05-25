@@ -87,4 +87,12 @@ export default interface BaseCar {
    * The more info dialog component.
    */
   getDetailedDialog(): { component: typeof SvelteComponent; props: object }
+
+  /**
+   * Initialise the markers.
+   */
+  initialiseMarkers(
+    AdvancedMarkerElement: typeof google.maps.marker.AdvancedMarkerElement,
+    map?: google.maps.Map
+  ): void
 }

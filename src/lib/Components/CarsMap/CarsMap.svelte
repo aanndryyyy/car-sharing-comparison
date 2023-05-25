@@ -14,7 +14,7 @@
   import MapZoomControl from './MapZoomControl.svelte'
   import MapFullScreenControl from './MapFullScreenControl.svelte'
   import ExclamationTriangleIcon from '$lib/Icons/Outline/ExclamationTriangleIcon.svelte'
-  import { carsBolt, carsCityBee } from '$lib/Store/Cars'
+  import { cars } from '$lib/Store/Cars'
   import { duration } from '$lib/Store/DurationStore'
 
   export let center: google.maps.LatLngLiteral = {
@@ -22,12 +22,6 @@
     lng: 24.7509811,
   }
   export let zoom: number = 12
-
-  let markers: {
-    provider: string
-    serviceId: number
-    marker: google.maps.marker.AdvancedMarkerElement
-  }[] = []
 
   let mapLoaded: boolean = false
   let isError: boolean = false
@@ -57,46 +51,12 @@
       'marker'
     )) as google.maps.MarkerLibrary
 
-    $carsBolt.forEach((car) => {
-      car.initialiseMarkers(AdvancedMarkerElement, $map)
-    })
-
-    $carsCityBee.forEach((car) => {
+    $cars.forEach((car) => {
       car.initialiseMarkers(AdvancedMarkerElement, $map)
     })
 
     google.maps.event.addListener($map, 'zoom_changed', () => {
       zoom = $map.getZoom()
-
-      $carsCityBee.forEach((car) => {
-        if (zoom < 14) {
-          car.setMarkerIcons()
-        } else {
-          car.setMarkerIcons('price')
-        }
-      })
-
-      $carsBolt.forEach((car) => {
-        if (zoom < 14) {
-          car.setMarkerIcons()
-        } else {
-          car.setMarkerIcons('price')
-        }
-      })
-    })
-  })
-
-  duration.subscribe(() => {
-    zoom = $map?.getZoom() || 13
-
-    $carsCityBee.forEach((car) => {
-      if (zoom < 14) return
-      car.setMarkerIcons('price')
-    })
-
-    $carsBolt.forEach((car) => {
-      if (zoom < 14) return
-      car.setMarkerIcons('price')
     })
   })
 

@@ -8,7 +8,7 @@
   import ElmoCar from '$lib/Car/ElmoCar'
   import BeastCar from '$lib/Car/BeastCar'
   import { Provider } from '$lib/Types/Enums/Provider'
-  import { carsBolt, carsCityBee } from '$lib/Store/Cars'
+  import { cars } from '$lib/Store/Cars'
 
   import ogImage from '$lib/Images/og-image.png'
   import { Modal } from 'svelte-simple-modal'
@@ -24,29 +24,25 @@
     services.forEach((carData) => {
       switch (provider.toUpperCase()) {
         case Provider.BOLT:
-          $carsBolt = $carsBolt
-            ? [...$carsBolt, new BoltCar(carData)]
-            : [new BoltCar(carData)]
+          $cars = [...$cars, new BoltCar(carData)]
 
           break
 
         case Provider.CITYBEE:
-          $carsCityBee = $carsCityBee
-            ? [...$carsCityBee, new CityBeeCar(carData)]
-            : [new CityBeeCar(carData)]
+          $cars = [...$cars, new CityBeeCar(carData)]
 
           break
 
-        // case Provider.ELMO:
-        //   rawCars.push(new ElmoCar(data))
-        //   break
+        case Provider.ELMO:
+          $cars = [...$cars, new ElmoCar(carData)]
+          break
 
-        // case Provider.BEAST:
-        //   rawCars.push(new BeastCar(data))
-        //   break
+        case Provider.BEAST:
+          $cars = [...$cars, new BeastCar(carData)]
+          break
 
-        // default:
-        //   throw new Error('Data provider ' + provider + ' is not implemented!')
+        default:
+          throw new Error('Data provider ' + provider + ' is not implemented!')
       }
     })
   })
