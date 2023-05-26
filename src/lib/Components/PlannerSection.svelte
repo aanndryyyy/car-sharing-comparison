@@ -33,7 +33,7 @@
         <div class="flex-grow border-t border-slate-300" />
       </div>
 
-      <AutoPlanner visible={!manualPlanner} class="max-md:hidden" />
+      <AutoPlanner visible={!manualPlanner} />
     </div>
   </div>
 </aside>
