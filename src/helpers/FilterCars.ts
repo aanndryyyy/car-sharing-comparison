@@ -11,7 +11,7 @@ const _searchProvider = (cars: Car[], value) => {
     (provider) => value[provider]
   )
   if (!haveSomeProvider) return cars
-  return cars.filter((car) => value[car.getProvider()])
+  return cars.filter((car) => value[car.provider])
 }
 
 export default filterCars

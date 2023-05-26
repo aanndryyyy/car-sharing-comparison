@@ -36,13 +36,6 @@ export default abstract class GenericCar<
   }
 
   /**
-   * Get the provider name.
-   */
-  public getProvider(): Provider {
-    return this.provider
-  }
-
-  /**
    * The total rent price.
    */
   public getTotalPrice(): number {
