@@ -11,6 +11,12 @@ import type { Car } from '$lib/Car/GenericCar'
 export const cars = writable<Car[]>([])
 export const brandFilter = writable([])
 
+// Store for subscription for items that require updating if duration or distance changes.
+export const pricingParams = derived(
+  [duration, totalKilometres],
+  ([$duration, $totalKilometres], set) => set({ $duration, $totalKilometres })
+)
+
 export const visibleCars = derived<
   [Readable<Car[]>, Readable<any>, Readable<number>, Readable<number>],
   Car[]

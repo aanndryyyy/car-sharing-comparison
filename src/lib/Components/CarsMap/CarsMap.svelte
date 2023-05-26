@@ -2,20 +2,16 @@
   import { onMount } from 'svelte'
   import { _ } from 'svelte-i18n'
   import { map } from '$lib/Store/GoogleMapStore'
-  import { Loader } from '@googlemaps/js-api-loader'
   import placeholder from '$lib/Images/placeholder.png'
   import LoaderIcon from '$lib/Icons/Loader.svelte'
 
-  import {
-    PUBLIC_GOOGLE_MAP_ID,
-    PUBLIC_GOOGLE_API_KEY,
-    PUBLIC_BACKEND_BASE_URL,
-  } from '$env/static/public'
+  import { PUBLIC_GOOGLE_MAP_ID } from '$env/static/public'
   import MapZoomControl from './MapZoomControl.svelte'
   import MapFullScreenControl from './MapFullScreenControl.svelte'
   import ExclamationTriangleIcon from '$lib/Icons/Outline/ExclamationTriangleIcon.svelte'
-  import { cars } from '$lib/Store/Cars'
-  import { duration } from '$lib/Store/DurationStore'
+  import { cars, pricingParams, visibleCars } from '$lib/Store/Cars'
+  import BoltCar from '$lib/Car/BoltCar'
+  import CityBeeCar from '$lib/Car/CityBeeCar'
 
   export let center: google.maps.LatLngLiteral = {
     lat: 59.437066,
@@ -43,7 +39,7 @@
       })
     )
 
-    google.maps.event.addListener($map, 'tilesloaded', () => {
+    $map.addListener('tilesloaded', () => {
       mapLoaded = true
     })
 
@@ -55,9 +51,46 @@
       car.initialiseMarkers(AdvancedMarkerElement, $map)
     })
 
-    google.maps.event.addListener($map, 'zoom_changed', () => {
-      zoom = $map.getZoom()
+    $map.addListener('zoom_changed', () => {
+      let mapZoom = $map.getZoom()!
+
+      $visibleCars.forEach((car) => {
+        if (!(car instanceof BoltCar) && !(car instanceof CityBeeCar)) {
+          return
+        }
+
+        if (mapZoom < 14) {
+          car.setMarkerIcons()
+        } else {
+          car.setMarkerIcons('price')
+        }
+      })
     })
+
+    pricingParams.subscribe(updateMarkers)
+    $map.addListener('dragend', updateMarkers)
+
+    function updateMarkers() {
+      let mapZoom = $map.getZoom()
+
+      if (!mapZoom || mapZoom < 14) {
+        return
+      }
+
+      $visibleCars.forEach((car) => {
+        if (!(car instanceof BoltCar) && !(car instanceof CityBeeCar)) {
+          return
+        }
+
+        car.markers.forEach((marker) => {
+          if (!$map.getBounds()?.contains(marker.position!)) {
+            return
+          }
+
+          car.setMarkerIcon(marker, 'price')
+        })
+      })
+    }
   })
 
   let mapCanvas: HTMLDivElement
