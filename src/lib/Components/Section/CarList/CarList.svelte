@@ -1,9 +1,9 @@
 <script lang="ts">
   import CarCard from '$lib/Components/CarCard.svelte'
 
-  import { sortedCars } from '$lib/Store/Cars'
+  import { visibleCars } from '$lib/Store/Cars'
 
-  $: cars = $sortedCars
+  $: cars = $visibleCars
 </script>
 
 <div class="mt-4 space-y-4">

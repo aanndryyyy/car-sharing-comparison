@@ -1,4 +1,4 @@
-import type BaseCar from './BaseCar'
+import type BaseCar from './GenericCar'
 
 import BoltLogo from '$lib/Images/bolt.png'
 import type { SvelteComponent } from 'svelte'
@@ -42,35 +42,10 @@ import VW_ID3 from '$lib/Images/Providers/Bolt/Cars/VW-ID3.png'
 import VW_T_Cross from '$lib/Images/Providers/Bolt/Cars/VW-T-Cross.png'
 import VW_T_Roc from '$lib/Images/Providers/Bolt/Cars/VW-T-Roc.png'
 import VW_T_Roc_Cabrio from '$lib/Images/Providers/Bolt/Cars/VW-T-Roc-Cabrio.png'
+import GenericCar from './GenericCar'
 
-class BoltCar implements BaseCar {
-  readonly carData: ICarBolt
-  markers: google.maps.marker.AdvancedMarkerElement[]
-  rentTotalPrice: number | undefined
-
-  /**
-   * Initialise car data.
-   *
-   * @param car The car object.
-   */
-  constructor(car: ICarBolt) {
-    this.carData = car
-    this.markers = []
-  }
-
-  /**
-   * @inheritdoc
-   */
-  getName(): string {
-    return this.carData.name
-  }
-
-  /**
-   * @inheritdoc
-   */
-  getProvider(): string {
-    return Provider.BOLT
-  }
+export default class BoltCar extends GenericCar<ICarBolt> {
+  markers?: google.maps.marker.AdvancedMarkerElement[]
 
   /**
    * @inheritdoc
@@ -260,5 +235,3 @@ class BoltCar implements BaseCar {
     return priceIcon
   }
 }
-
-export default BoltCar

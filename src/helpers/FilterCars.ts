@@ -1,18 +1,12 @@
-import type BoltCar from '$lib/Car/BoltCar'
-import type CityBeeCar from '$lib/Car/CityBeeCar'
-import type ElmoCar from '$lib/Car/ElmoCar'
-import type BeastCar from '$lib/Car/BeastCar'
+import type { Car } from '$lib/Car/GenericCar'
 
-const filterCars = (
-  cars: (BoltCar | CityBeeCar | ElmoCar | BeastCar)[],
-  filters
-): (BoltCar | CityBeeCar | ElmoCar | BeastCar)[] => {
+const filterCars = (cars: Car[], filters): Car[] => {
   cars = _searchProvider(cars, filters.provider)
 
   return cars
 }
 
-const _searchProvider = (cars, value) => {
+const _searchProvider = (cars: Car[], value) => {
   const haveSomeProvider = Object.keys(value).some(
     (provider) => value[provider]
   )

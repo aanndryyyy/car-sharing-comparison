@@ -1,5 +1,5 @@
 import calculateBeastPrice from '../../helpers/Calculators/CalculateBeastPrice'
-import type BaseCar from './BaseCar'
+import GenericCar from './GenericCar'
 
 import BeastLogo from '$lib/Images/beast.png'
 import type { SvelteComponent } from 'svelte'
@@ -14,33 +14,7 @@ import Tesla_Model_X_Performance from '../Images/Providers/Beast/Cars/Tesla-Mode
 import Tesla_Model_Y_Long_Range from '$lib/Images/Providers/Beast/Cars/Tesla-Model-Y-Long-Range.png'
 import Tesla_Model_S from '$lib/Images/Providers/Beast/Cars/Tesla-Model-S.png'
 
-class BeastCar implements BaseCar {
-  readonly carData: ICarBeast
-  rentTotalPrice: number | undefined
-
-  /**
-   * Initialise car data.
-   *
-   * @param car The car object.
-   */
-  constructor(car: ICarBeast) {
-    this.carData = car
-  }
-
-  /**
-   * @inheritdoc
-   */
-  getName(): string {
-    return this.carData.name
-  }
-
-  /**
-   * @inheritdoc
-   */
-  getProvider(): string {
-    return Provider.BEAST
-  }
-
+export default class BeastCar extends GenericCar<ICarBeast> {
   /**
    * @inheritdoc
    */
@@ -141,5 +115,3 @@ class BeastCar implements BaseCar {
     map?: google.maps.Map
   ): void {}
 }
-
-export default BeastCar

@@ -1,16 +1,12 @@
-import type BaseCar from '../lib/Car/BaseCar'
 import { SortState } from '../lib/Types/Enums/SortState'
 import { CarSortField } from '../lib/Types/Enums/CarSortField'
-import type BoltCar from '$lib/Car/BoltCar'
-import type CityBeeCar from '$lib/Car/CityBeeCar'
-import type ElmoCar from '$lib/Car/ElmoCar'
-import type BeastCar from '$lib/Car/BeastCar'
+import type { Car } from '../lib/Car/GenericCar'
 
 const sortCars = (
-  cars: (BoltCar | CityBeeCar | ElmoCar | BeastCar)[],
+  cars: Car[],
   carSortField: CarSortField,
   sortState: SortState
-): (BoltCar | CityBeeCar | ElmoCar | BeastCar)[] => {
+): Car[] => {
   if (sortState === SortState.NONE || cars.length === 0) return cars
 
   switch (carSortField) {

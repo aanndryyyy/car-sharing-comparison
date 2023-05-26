@@ -1,4 +1,4 @@
-import type BaseCar from './BaseCar'
+import type BaseCar from './GenericCar'
 
 import CityBeeLogo from '$lib/Images/citybee.svg'
 import type { SvelteComponent } from 'svelte'
@@ -35,35 +35,10 @@ import Fiat_Multipla from '$lib/Images/Providers/Citybee/Cars/Fiat-Multipla.png'
 import BMW_118i from '$lib/Images/Providers/Citybee/Cars/BMW-118i.png'
 import Fiat_500e from '$lib/Images/Providers/Citybee/Cars/Fiat-500e.png'
 import Peugeot_308 from '$lib/Images/Providers/Citybee/Cars/Peugeot-308.png'
+import GenericCar from './GenericCar'
 
-class CityBeeCar implements BaseCar {
-  readonly carData: ICarCityBee
-  markers: google.maps.marker.AdvancedMarkerElement[]
-  rentTotalPrice: number | undefined
-
-  /**
-   * Initialise car data.
-   *
-   * @param car The car object.
-   */
-  constructor(car: ICarCityBee) {
-    this.carData = car
-    this.markers = []
-  }
-
-  /**
-   * @inheritdoc
-   */
-  getName(): string {
-    return this.carData.name
-  }
-
-  /**
-   * @inheritdoc
-   */
-  getProvider(): string {
-    return Provider.CITYBEE
-  }
+export default class CityBeeCar extends GenericCar<ICarCityBee> {
+  markers?: google.maps.marker.AdvancedMarkerElement[]
 
   calculateRentTotalPrice(): void {
     //this.rentTotalPrice = calculateCityBeePrice(this.carData, searchParamsObj)
@@ -249,5 +224,3 @@ class CityBeeCar implements BaseCar {
     return priceIcon
   }
 }
-
-export default CityBeeCar

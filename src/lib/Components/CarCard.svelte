@@ -2,9 +2,9 @@
   import { _ } from 'svelte-i18n'
   import Divider from '$lib/Components/Divider.svelte'
   import CurrencyEuro from '$lib/Icons/Outline/CurrencyEuro.svelte'
-  import type BaseCar from '$lib/Car/BaseCar'
+  import type GenericCar from '$lib/Car/GenericCar'
 
-  export let car: BaseCar
+  export let car: GenericCar
   export let index: number
 
   const openDetails = () => {
@@ -57,7 +57,7 @@
       <p class="font-semibold">{car.getFormattedTotalPrice()}</p>
     </div>
 
-    <div class="relative flex items-center w-24 sm:w-32">
+    <div class="relative flex w-24 items-center sm:w-32">
       <div class="absolute inset-x-0 top-0 flex justify-center sm:top-4">
         <img
           class="h-4"

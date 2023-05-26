@@ -1,5 +1,3 @@
-import type BaseCar from './BaseCar'
-
 import ElmoLogo from '$lib/Images/elmo.png'
 import type { SvelteComponent } from 'svelte'
 import ElmoCarPopover from '$lib/Popovers/ElmoCarPopover.svelte'
@@ -16,34 +14,9 @@ import Tesla_Model_3_SR from '$lib/Images/Providers/Elmo/Cars/Tesla-Model-3-SR+.
 import Tesla_Model_Y from '$lib/Images/Providers/Elmo/Cars/Tesla-Model-Y.png'
 import Toyota_Yaris_Hybrid from '$lib/Images/Providers/Elmo/Cars/Toyota-Yaris-Hybrid.png'
 import VW_e_Up20 from '$lib/Images/Providers/Elmo/Cars/VW-e-Up20.png'
+import GenericCar from './GenericCar'
 
-class ElmoCar implements BaseCar {
-  readonly carData: ICarElmo
-  rentTotalPrice: number | undefined
-
-  /**
-   * Initialise car data.
-   *
-   * @param car The car object.
-   */
-  constructor(car: ICarElmo) {
-    this.carData = car
-  }
-
-  /**
-   * @inheritdoc
-   */
-  getName(): string {
-    return this.carData.name
-  }
-
-  /**
-   * @inheritdoc
-   */
-  getProvider(): string {
-    return Provider.ELMO
-  }
-
+export default class ElmoCar extends GenericCar<ICarElmo> {
   calculateRentTotalPrice(): void {
     //this.rentTotalPrice = calculateElmoPrice(this.carData, searchParamsObj)
     this.rentTotalPrice = 10000
@@ -148,5 +121,3 @@ class ElmoCar implements BaseCar {
     map?: google.maps.Map
   ): void {}
 }
-
-export default ElmoCar
