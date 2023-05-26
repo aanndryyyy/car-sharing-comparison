@@ -51,6 +51,20 @@ export default abstract class GenericCar<
   }
 
   /**
+   * The minute price as formatted text.
+   */
+  public getFormattedMinutePrice(): string {
+    return this.carData.price.minute + ' min'
+  }
+
+  /**
+   * The kilometre price as formatted text.
+   */
+  public getFormattedKilometrePrice(): string {
+    return this.carData.price.km + ' km'
+  }
+
+  /**
    * Calculating total price
    *
    * @returns The price.
@@ -65,20 +79,6 @@ export default abstract class GenericCar<
    * @returns The price.
    */
   abstract getTotalPrice(): number
-
-  /**
-   * The minute price as formatted text.
-   *
-   * @returns Formatted price.
-   */
-  abstract getFormattedMinutePrice(): string
-
-  /**
-   * The kilometre price as formatted text.
-   *
-   * @returns Formatted price.
-   */
-  abstract getFormattedKilometrePrice(): string
 
   /**
    * Get the logo.

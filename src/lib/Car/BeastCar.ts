@@ -34,20 +34,6 @@ export default class BeastCar extends GenericCar<ICarBeast> {
   /**
    * @inheritdoc
    */
-  getFormattedMinutePrice(): string {
-    return this.carData.price.minute + ' min'
-  }
-
-  /**
-   * @inheritdoc
-   */
-  getFormattedKilometrePrice(): string {
-    return this.carData.price.km + ' km'
-  }
-
-  /**
-   * @inheritdoc
-   */
   getLogo(): string {
     return BeastLogo
   }

@@ -64,22 +64,6 @@ export default class BoltCar extends GenericCar<ICarBolt> {
   /**
    * @inheritdoc
    */
-  getFormattedMinutePrice(): string {
-    const price = this.carData.price.minute
-    return price + ' min'
-  }
-
-  /**
-   * @inheritdoc
-   */
-  getFormattedKilometrePrice(): string {
-    const price = this.carData.price.km
-    return price + ' km'
-  }
-
-  /**
-   * @inheritdoc
-   */
   getLogo(): string {
     return BoltLogo
   }
