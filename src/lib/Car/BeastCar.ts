@@ -61,26 +61,6 @@ export default class BeastCar extends GenericCar<ICarBeast> {
     }
   }
 
-  /**
-   * @inheritdoc
-   */
-  getDetailedDialog(): { component: typeof SvelteComponent; props: object } {
-    return {
-      component: BeastCarPopover,
-      props: {
-        depositBase: 0,
-        depositSpecial: 0,
-      },
-    }
-    // return {
-    //   component: BeastCarPopover,
-    //   props: {
-    //     depositBase: this.carData.price.deposit.base,
-    //     depositSpecial: this.carData.price.deposit.special,
-    //   }
-    // };
-  }
-
   initialiseMarkers(
     AdvancedMarkerElement: typeof google.maps.marker.AdvancedMarkerElement,
     map?: google.maps.Map

@@ -64,29 +64,6 @@ export default class ElmoCar extends GenericCar<ICarElmo> {
     }
   }
 
-  /**
-   * @inheritdoc
-   */
-  getDetailedDialog(): { component: typeof SvelteComponent; props: object } {
-    return {
-      component: ElmoCarPopover,
-      props: {
-        type: 'something',
-        priceAfter100: 'something',
-        classyMinimumFee: 'something',
-      },
-    }
-
-    // {
-    //   component: ElmoCarPopover,
-    //       props: {
-    //   type: this.carData.type,
-    //       priceAfter100: this.carData.price.km.after100,
-    //       classyMinimumFee: this.carData.price.minimum,
-    // }
-    // };
-  }
-
   initialiseMarkers(
     AdvancedMarkerElement: typeof google.maps.marker.AdvancedMarkerElement,
     map?: google.maps.Map

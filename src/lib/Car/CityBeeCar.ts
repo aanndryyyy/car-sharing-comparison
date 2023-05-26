@@ -130,19 +130,6 @@ export default class CityBeeCar extends GenericCar<ICarCityBee> {
     }
   }
 
-  /**
-   * @inheritdoc
-   */
-  getDetailedDialog(): { component: typeof SvelteComponent; props: object } {
-    return {
-      component: CityBeeCarPopover,
-      props: {
-        minimumFee: this.carData.price.min,
-        startingFee: this.carData.price.start,
-      },
-    }
-  }
-
   initialiseMarkers(
     AdvancedMarkerElement: typeof google.maps.marker.AdvancedMarkerElement,
     map?: google.maps.Map

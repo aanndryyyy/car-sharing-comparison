@@ -138,18 +138,6 @@ export default class BoltCar extends GenericCar<ICarBolt> {
     // return this.carData.imageUrl
   }
 
-  /**
-   * @inheritdoc
-   */
-  getDetailedDialog(): { component: typeof SvelteComponent; props: object } {
-    return {
-      component: BoltCarPopover,
-      props: {
-        minimumFee: this.carData.price.min,
-      },
-    }
-  }
-
   initialiseMarkers(
     AdvancedMarkerElement: typeof google.maps.marker.AdvancedMarkerElement,
     map?: google.maps.Map

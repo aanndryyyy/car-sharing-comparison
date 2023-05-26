@@ -91,14 +91,6 @@ export default abstract class GenericCar<
   abstract getCarImg(): string
 
   /**
-   * The more info dialog component.
-   */
-  abstract getDetailedDialog(): {
-    component: typeof SvelteComponent
-    props: object
-  }
-
-  /**
    * Initialise the markers.
    */
   abstract initialiseMarkers(
