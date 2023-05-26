@@ -38,7 +38,7 @@ import Peugeot_308 from '$lib/Images/Providers/Citybee/Cars/Peugeot-308.png'
 import GenericCar from './GenericCar'
 
 export default class CityBeeCar extends GenericCar<ICarCityBee> {
-  markers?: google.maps.marker.AdvancedMarkerElement[] = []
+  markers: google.maps.marker.AdvancedMarkerElement[] = []
 
   calculateRentTotalPrice(): void {
     //this.rentTotalPrice = calculateCityBeePrice(this.carData, searchParamsObj)
@@ -126,31 +126,35 @@ export default class CityBeeCar extends GenericCar<ICarCityBee> {
     map?: google.maps.Map
   ): void {
     this.carData.coordinates.forEach(({ lat, lng }) => {
-      const content = this.getMarkerRegularIcon()
-      const position = { lat, lng } as google.maps.LatLngLiteral
-
       const marker = new AdvancedMarkerElement({
         map,
-        content,
-        position,
+        content: this.getMarkerRegularIcon(),
+        position: { lat, lng },
       })
 
       this.markers.push(marker)
     })
   }
 
-  setMarkerIcons(type?: string) {
+  setMarkerIcons(type?: 'price') {
     this.markers.forEach((marker) => {
-      switch (type) {
-        case 'price':
-          marker.content = this.getMarkerPriceIcon()
-          break
-
-        default:
-          marker.content = this.getMarkerRegularIcon()
-          break
-      }
+      this.setMarkerIcon(marker, type)
     })
+  }
+
+  setMarkerIcon(
+    marker: google.maps.marker.AdvancedMarkerElement,
+    type?: 'price'
+  ) {
+    switch (type) {
+      case 'price':
+        marker.content = this.getMarkerPriceIcon()
+        break
+
+      default:
+        marker.content = this.getMarkerRegularIcon()
+        break
+    }
   }
 
   getMarkerRegularIcon(): HTMLDivElement {

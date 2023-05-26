@@ -45,7 +45,7 @@ import VW_T_Roc_Cabrio from '$lib/Images/Providers/Bolt/Cars/VW-T-Roc-Cabrio.png
 import GenericCar from './GenericCar'
 
 export default class BoltCar extends GenericCar<ICarBolt> {
-  markers?: google.maps.marker.AdvancedMarkerElement[] = []
+  markers: google.maps.marker.AdvancedMarkerElement[] = []
 
   /**
    * @inheritdoc
@@ -136,33 +136,35 @@ export default class BoltCar extends GenericCar<ICarBolt> {
     map?: google.maps.Map
   ): void {
     this.carData.coordinates.forEach(({ lat, lng }) => {
-      const content = document.createElement('div')
-      content.className = 'dot-icon bg-brand-bolt'
-
-      const position = { lat, lng } as google.maps.LatLngLiteral
-
       const marker = new AdvancedMarkerElement({
         map,
-        content,
-        position,
+        content: this.getMarkerRegularIcon(),
+        position: { lat, lng },
       })
 
       this.markers.push(marker)
     })
   }
 
-  setMarkerIcons(type?: string) {
+  setMarkerIcons(type?: 'price') {
     this.markers.forEach((marker) => {
-      switch (type) {
-        case 'price':
-          marker.content = this.getMarkerPriceIcon()
-          break
-
-        default:
-          marker.content = this.getMarkerRegularIcon()
-          break
-      }
+      this.setMarkerIcon(marker, type)
     })
+  }
+
+  setMarkerIcon(
+    marker: google.maps.marker.AdvancedMarkerElement,
+    type?: 'price'
+  ) {
+    switch (type) {
+      case 'price':
+        marker.content = this.getMarkerPriceIcon()
+        break
+
+      default:
+        marker.content = this.getMarkerRegularIcon()
+        break
+    }
   }
 
   getMarkerRegularIcon(): HTMLDivElement {
