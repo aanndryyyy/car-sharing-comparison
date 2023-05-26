@@ -44,6 +44,13 @@ export default abstract class GenericCar<
   }
 
   /**
+   * Formatted total rent price to two decimal points with currency symbol.
+   */
+  public getFormattedTotalPrice(): string {
+    return this.getTotalPrice().toFixed(2) + ' €'
+  }
+
+  /**
    * Calculating total price
    *
    * @returns The price.
@@ -58,22 +65,6 @@ export default abstract class GenericCar<
    * @returns The price.
    */
   abstract getTotalPrice(): number
-
-  /**
-   * The total price as formatted text.
-   *
-   *
-   * @returns Formatted price.
-   */
-  abstract getFormattedTotalPrice(): string
-
-  /**
-   * The long term discount formatted as text.
-   *
-   *
-   * @returns Formatted price.
-   */
-  abstract getFormattedLongTermDiscount(): string
 
   /**
    * The minute price as formatted text.

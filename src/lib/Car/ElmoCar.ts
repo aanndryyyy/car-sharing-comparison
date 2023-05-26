@@ -33,21 +33,6 @@ export default class ElmoCar extends GenericCar<ICarElmo> {
   /**
    * @inheritdoc
    */
-  getFormattedTotalPrice(): string {
-    return this.getTotalPrice().toFixed(2) + ' €'
-  }
-
-  /**
-   * @inheritdoc
-   */
-  getFormattedLongTermDiscount(): string {
-    return 'TODO'
-    // return ( this.getTotalPrice() - this.carData.price.minute * searchParamsObj.minutes ).toFixed(2) + " €";
-  }
-
-  /**
-   * @inheritdoc
-   */
   getFormattedMinutePrice(): string {
     return this.carData.price.minute + ' min'
   }
