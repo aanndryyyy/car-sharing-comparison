@@ -21,14 +21,6 @@ export default class ElmoCar extends GenericCar<ICarElmo> {
     //this.rentTotalPrice = calculateElmoPrice(this.carData, searchParamsObj)
     this.rentTotalPrice = 10000
   }
-  /**
-   * @inheritdoc
-   */
-  getTotalPrice(): number {
-    if (this.rentTotalPrice == undefined)
-      throw 'Car total rent price is not calculated'
-    return this.rentTotalPrice
-  }
 
   /**
    * @inheritdoc

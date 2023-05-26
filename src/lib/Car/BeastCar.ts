@@ -25,15 +25,6 @@ export default class BeastCar extends GenericCar<ICarBeast> {
   /**
    * @inheritdoc
    */
-  getTotalPrice(): number {
-    if (this.rentTotalPrice == undefined)
-      throw 'Car total rent price is not calculated'
-    return this.rentTotalPrice
-  }
-
-  /**
-   * @inheritdoc
-   */
   getLogo(): string {
     return BeastLogo
   }

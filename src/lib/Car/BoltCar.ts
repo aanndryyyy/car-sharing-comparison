@@ -45,20 +45,13 @@ import VW_T_Roc_Cabrio from '$lib/Images/Providers/Bolt/Cars/VW-T-Roc-Cabrio.png
 import GenericCar from './GenericCar'
 
 export default class BoltCar extends GenericCar<ICarBolt> {
-  markers?: google.maps.marker.AdvancedMarkerElement[]
+  markers?: google.maps.marker.AdvancedMarkerElement[] = []
 
   /**
    * @inheritdoc
    */
   calculateRentTotalPrice(): void {
     this.rentTotalPrice = calculateBoltPrice(this.carData)
-  }
-
-  /**
-   * @inheritdoc
-   */
-  getTotalPrice(): number {
-    return (this.rentTotalPrice = calculateBoltPrice(this.carData))
   }
 
   /**

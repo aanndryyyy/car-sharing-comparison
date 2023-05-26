@@ -1,4 +1,3 @@
-import type { SvelteComponent } from 'svelte'
 import type BoltCar from './BoltCar'
 import type CityBeeCar from './CityBeeCar'
 import type ElmoCar from './ElmoCar'
@@ -19,7 +18,7 @@ export type Car = BoltCar | CityBeeCar | ElmoCar | BeastCar
 export default abstract class GenericCar<
   CarDataType extends CarData = CarData
 > {
-  rentTotalPrice?: number
+  rentTotalPrice: number = 0
 
   /**
    * Initialise Car with data.
@@ -41,6 +40,13 @@ export default abstract class GenericCar<
    */
   public getProvider(): Provider {
     return this.provider
+  }
+
+  /**
+   * The total rent price.
+   */
+  public getTotalPrice(): number {
+    return this.rentTotalPrice
   }
 
   /**
@@ -71,14 +77,6 @@ export default abstract class GenericCar<
    * @param searchParamsObj
    */
   abstract calculateRentTotalPrice(): void
-
-  /**
-   * The total price in number format, for sorting
-   *
-   *
-   * @returns The price.
-   */
-  abstract getTotalPrice(): number
 
   /**
    * Get the logo.

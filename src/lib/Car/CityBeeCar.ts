@@ -38,20 +38,11 @@ import Peugeot_308 from '$lib/Images/Providers/Citybee/Cars/Peugeot-308.png'
 import GenericCar from './GenericCar'
 
 export default class CityBeeCar extends GenericCar<ICarCityBee> {
-  markers?: google.maps.marker.AdvancedMarkerElement[]
+  markers?: google.maps.marker.AdvancedMarkerElement[] = []
 
   calculateRentTotalPrice(): void {
     //this.rentTotalPrice = calculateCityBeePrice(this.carData, searchParamsObj)
     this.rentTotalPrice = 100
-  }
-
-  /**
-   * @inheritdoc
-   */
-  getTotalPrice(): number {
-    if (this.rentTotalPrice == undefined)
-      throw 'Car total rent price is not calculated'
-    return this.rentTotalPrice
   }
 
   /**
