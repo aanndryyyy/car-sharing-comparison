@@ -1,24 +1,11 @@
 <script lang="ts">
   import { cars } from '$lib/Store/Cars'
+  import type { Car } from '$lib/Car/GenericCar'
   import CarsMap from '$lib/Components/CarsMap/CarsMap.svelte'
-  import GenericCar from '$lib/Car/GenericCar'
-
-  import type { Provider as EProvider } from '$lib/Types/Enums/Provider'
-  import type { Provider } from '$lib/types'
 
   /** @type {import('./$types').PageData} */
-  export let data: { providerDetails: Provider[] }
-
-  data.providerDetails.forEach((providers) => {
-    const { provider, services } = providers
-
-    services.forEach((carData) => {
-      $cars = [
-        ...$cars,
-        new GenericCar(provider.toUpperCase() as EProvider, carData),
-      ]
-    })
-  })
+  export let data: { cars: Car[] }
+  $cars = data.cars
 </script>
 
 <main
