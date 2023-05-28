@@ -1,4 +1,4 @@
-<script lang="ts">
+<!-- <script lang="ts">
   import { clickOutside } from 'svelte-use-click-outside'
   import { Icon, ChevronDown } from 'svelte-hero-icons'
   import { cheapestFirst } from '$lib/Store/FilterStore'
@@ -49,4 +49,4 @@
       </div>
     </div>
   {/if}
-</div>
+</div> -->
