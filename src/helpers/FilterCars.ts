@@ -1,9 +1,10 @@
 import type { Car } from '$lib/Car/GenericCar'
+import type { carsFilters } from '$lib/Store/FilterStore'
 import type { Provider } from '$lib/Types/Enums/Provider'
 
 const filterCars = (
   cars: Car[],
-  filters
+  filters: carsFilters
 ): { visible: Car[]; hidden: Car[] } => {
   let { visible, hidden } = _searchProvider(cars, filters.providers)
 
