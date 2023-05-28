@@ -9,7 +9,7 @@
   import MapZoomControl from './MapZoomControl.svelte'
   import MapFullScreenControl from './MapFullScreenControl.svelte'
   import ExclamationTriangleIcon from '$lib/Icons/Outline/ExclamationTriangleIcon.svelte'
-  import { cars, pricingParams, visibleCars } from '$lib/Store/Cars'
+  import { cars, visibleCars } from '$lib/Store/Cars'
   import BoltCar from '$lib/Car/BoltCar'
   import CityBeeCar from '$lib/Car/CityBeeCar'
 
@@ -54,7 +54,7 @@
     $map.addListener('zoom_changed', () => {
       let mapZoom = $map.getZoom()!
 
-      $visibleCars.forEach((car) => {
+      $visibleCars.visible.forEach((car) => {
         if (!(car instanceof BoltCar) && !(car instanceof CityBeeCar)) {
           return
         }
@@ -67,17 +67,39 @@
       })
     })
 
-    pricingParams.subscribe(updateMarkers)
-    $map.addListener('dragend', updateMarkers)
+    visibleCars.subscribe(updateMarkerIcons)
+    visibleCars.subscribe(updateMarkersVisiblity)
+    $map.addListener('dragend', updateMarkerIcons)
 
-    function updateMarkers() {
+    function updateMarkersVisiblity() {
+      $visibleCars.visible.forEach((car) => {
+        if (!(car instanceof BoltCar) && !(car instanceof CityBeeCar)) {
+          return
+        }
+
+        car.markers.forEach((marker) => {
+          marker.map = $map
+        })
+      })
+
+      $visibleCars.hidden.forEach((car) => {
+        if (!(car instanceof BoltCar) && !(car instanceof CityBeeCar)) {
+          return
+        }
+
+        car.markers.forEach((marker) => {
+          marker.map = null
+        })
+      })
+    }
+    function updateMarkerIcons() {
       let mapZoom = $map.getZoom()
 
       if (!mapZoom || mapZoom < 14) {
         return
       }
 
-      $visibleCars.forEach((car) => {
+      $visibleCars.visible.forEach((car) => {
         if (!(car instanceof BoltCar) && !(car instanceof CityBeeCar)) {
           return
         }

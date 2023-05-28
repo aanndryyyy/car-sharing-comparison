@@ -1,19 +1,14 @@
 import { derived, writable } from 'svelte/store'
+import { Provider } from '$lib/Types/Enums/Provider'
 
 export const cheapestFirst = writable(true)
-export const carsFilter = writable({
-  provider: {
-    BOLT: false,
-    CITYBEE: false,
-    ELMO: false,
-    BEAST: false,
-    AVIS: false,
-  },
-})
 
-export const filterSelectedProvidersCount = derived(
-  carsFilter,
-  ($carsFilter) =>
-    Object.keys($carsFilter.provider).filter((p) => $carsFilter.provider[p])
-      .length
-)
+export const carsFilter = writable({
+  providers: [
+    Provider.BOLT,
+    Provider.CITYBEE,
+    Provider.ELMO,
+    Provider.BEAST,
+    Provider.AVIS,
+  ],
+})

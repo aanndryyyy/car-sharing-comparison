@@ -3,7 +3,7 @@
 
   import { visibleCars } from '$lib/Store/Cars'
 
-  $: cars = $visibleCars
+  $: cars = $visibleCars.visible
 </script>
 
 <div class="mt-4 space-y-4">

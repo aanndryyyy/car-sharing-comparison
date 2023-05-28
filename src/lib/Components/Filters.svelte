@@ -1,4 +1,4 @@
-<script lang="ts">
+<!-- <script lang="ts">
   import { _ } from 'svelte-i18n'
   import { Provider } from '../Types/Enums/Provider'
   import { Icon, XMark } from 'svelte-hero-icons'
@@ -16,31 +16,31 @@
       title: 'Bolt',
       value: Provider.BOLT,
       imgUrl: BoltLogo,
-      active: $carsFilter.provider.BOLT,
+      active: $carsFilter.providers[Provider.BOLT],
     },
     {
       title: 'Citybee',
       value: Provider.CITYBEE,
       imgUrl: CityBeeLogo,
-      active: $carsFilter.provider.CITYBEE,
+      active: $carsFilter.providers[Provider.BOLT],
     },
     {
       title: 'Elmo',
       value: Provider.ELMO,
       imgUrl: ElmoLogo,
-      active: $carsFilter.provider.ELMO,
+      active: $carsFilter.providers[Provider.BOLT],
     },
     {
       title: 'Avis',
       value: Provider.AVIS,
       imgUrl: null,
-      active: $carsFilter.provider.AVIS,
+      active: $carsFilter.providers[Provider.BOLT],
     },
     {
       title: 'Beast',
       value: Provider.BEAST,
       imgUrl: BeastLogo,
-      active: $carsFilter.provider.BEAST,
+      active: $carsFilter.providers[Provider.BOLT],
     },
   ]
 </script>
@@ -76,4 +76,4 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->

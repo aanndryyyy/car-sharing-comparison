@@ -1,38 +1,23 @@
 <script>
-  import { Provider } from '$lib/Types/Enums/Provider'
   import ChevronDownIcon from '$lib/Icons/Mini/ChevronDownIcon.svelte'
   import {
     Popover,
     PopoverButton,
     PopoverPanel,
   } from '@rgossiaux/svelte-headlessui'
-  import {
-    carsFilter,
-    filterSelectedProvidersCount,
-  } from '$lib/Store/FilterStore'
-  import { brandFilter } from '$lib/Store/Cars'
+  import { carsFilter } from '$lib/Store/FilterStore'
 
-  let items = [
-    Provider.BOLT,
-    Provider.CITYBEE,
-    Provider.ELMO,
-    Provider.BEAST,
-    Provider.AVIS,
-  ]
-
-  $brandFilter = items
+  let brandFilter = $carsFilter.providers
 </script>
 
-<Popover class="relative px-4 text-sm">
+<Popover class="title relative px-4 text-sm">
   <PopoverButton
     class="group flex items-center gap-1 font-medium text-slate-600 transition-colors duration-75 hover:text-slate-900"
   >
     Brand
-    {#if $filterSelectedProvidersCount}
-      <span class="inline-block h-5 w-5 rounded-md bg-slate-200"
-        >{$filterSelectedProvidersCount}</span
-      >
-    {/if}
+    <span class="inline-block h-5 w-5 rounded-md bg-slate-200"
+      >{brandFilter.length}</span
+    >
     <ChevronDownIcon
       class="text-slate-400 transition-colors group-hover:text-slate-900 group-hover:transition-colors group-hover:duration-75"
     />
@@ -41,16 +26,16 @@
   <PopoverPanel
     class="absolute right-4 z-10 mt-2 w-36 whitespace-nowrap rounded-md bg-white py-1 font-medium text-slate-600 shadow-xl ring-1 ring-black ring-opacity-5 focus:outline-none"
   >
-    {#each items as item, index}
+    {#each brandFilter as item, index}
       <label
-        class="flex items-center gap-3 px-4 py-2 hover:bg-slate-100 hover:text-slate-900"
+        class="flex items-center gap-3 px-4 py-2 capitalize hover:bg-slate-100 hover:text-slate-900"
       >
         <input
           type="checkbox"
           class="form-checkbox h-4 w-4 rounded border-slate-400 text-green-600 focus:ring-green-500"
           id={'provider-' + index}
           value={item}
-          bind:group={$brandFilter}
+          bind:group={$carsFilter.providers}
         />
         {item}
       </label>
