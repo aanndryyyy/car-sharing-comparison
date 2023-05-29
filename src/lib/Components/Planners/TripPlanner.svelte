@@ -178,7 +178,7 @@
   }
 </script>
 
-<div class:max-md:!block={visible} class:max-md:!hidden={!visible}>
+<div class="mt-8" class:max-md:!block={visible} class:max-md:!hidden={!visible}>
   {#if GoogleAutocomplete}
     <div class="flex justify-between text-sm text-slate-600 transition-colors">
       <button
@@ -208,12 +208,12 @@
       </SwitchGroup>
     </div>
 
-    <ul class="mt-3 space-y-2">
-      {#each inputWaypoints as { id, input, autocomplete }, i (id)}
+    <ul class="mt-4 space-y-3 md:mt-3 md:space-y-2">
+      {#each inputWaypoints as { id }, index (id)}
         <WaypointInput
-          isFirst={i == 0}
-          isLast={i == inputWaypoints.length - 1}
-          index={i}
+          isFirst={index == 0}
+          isLast={index == inputWaypoints.length - 1}
+          {index}
           on:mounted={initAutocomplete}
           on:delete={removeWaypoint}
         />

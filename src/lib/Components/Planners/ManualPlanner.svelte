@@ -59,11 +59,11 @@
 </script>
 
 <div
-  class={$$props.class}
+  class="mt-4 space-y-8"
   class:max-md:!block={visible}
   class:max-md:!hidden={!visible}
 >
-  <div class="mt-4 block">
+  <div class="block">
     <div class="flex flex-row gap-2 md:flex-col lg:flex-row">
       <div
         class="flex items-center rounded-md border px-3 py-2 focus-within:ring-2 focus-within:ring-green-500 focus-within:ring-offset-1"
@@ -123,7 +123,7 @@
     />
   </div>
 
-  <div class="mt-8 block">
+  <div class="block">
     <div
       class="flex items-center rounded-md border px-3 py-2 focus-within:ring-2 focus-within:ring-green-500 focus-within:ring-offset-2"
     >
