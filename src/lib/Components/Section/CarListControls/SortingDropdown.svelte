@@ -1,6 +1,8 @@
 <script lang="ts">
   import Loader from '$lib/Icons/Loader.svelte'
   import ChevronDownIcon from '$lib/Icons/Mini/ChevronDownIcon.svelte'
+  import PersonWalkingIcon from '$lib/Icons/Solid/PersonWalkingIcon.svelte'
+  import CurrencyEuro from '$lib/Icons/Outline/CurrencyEuro.svelte'
   import { carsSort, type SortingSelection } from '$lib/Store/FilterStore'
   import { userPosition } from '$lib/Store/GoogleMapStore'
   import { CarSortField } from '$lib/Types/Enums/CarSortField'
@@ -92,11 +94,17 @@
     {#each sortingOptions as option}
       <MenuItem
         as="button"
-        class={`flex w-full cursor-pointer gap-2 px-4 py-2 hover:bg-slate-100 hover:text-slate-900 ${
+        class={`group flex w-full cursor-pointer items-center gap-3 px-4 py-2 hover:bg-slate-100 hover:text-slate-900 ${
           $carsSort.value === option.value ? 'text-slate-900' : ''
         }`}
         on:click={() => setSortingOption(option)}
       >
+        {#if option.value === CarSortField.DISTANCE}
+          <PersonWalkingIcon class="h-5 w-5 group-hover:text-green-600" />
+        {/if}
+        {#if option.value === CarSortField.PRICE}
+          <CurrencyEuro class="h-5 w-5 group-hover:text-green-600" />
+        {/if}
         {getSortingLabel(option.value, option.direction)}
       </MenuItem>
     {/each}
