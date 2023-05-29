@@ -1,12 +1,11 @@
 <script lang="ts">
   import { _ } from 'svelte-i18n'
   import BottomSheet from 'svelte-swipeable-sheets/BottomSheet.svelte'
-  import CarsMap from './CarsMap/CarsMap.svelte'
-  import { getContext } from 'svelte'
+  import CarsMap from '../CarsMap/CarsMap.svelte'
   import Filters from '$lib/Components/Filters.svelte'
   import { Icon, Funnel, Map } from 'svelte-hero-icons'
-  import CarList from './Section/CarList/CarList.svelte'
-  import CarListControls from './Section/CarListControls/CarListControls.svelte'
+  import CarList from './CarList/CarList.svelte'
+  import CarListControls from './CarListControls/CarListControls.svelte'
 
   let open: boolean = false
   let filtersOpen: boolean = false
@@ -23,7 +22,7 @@
         on:click={() => (open = true)}
       >
         <Icon src={Funnel} size="16" />
-        <p class="text-xs font-medium">Sort & Filters</p>
+        <p class="text-xs font-medium">Sort & Filter</p>
       </button>
     </div>
 
