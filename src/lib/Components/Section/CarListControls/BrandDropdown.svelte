@@ -16,7 +16,7 @@
   >
     Brand
     <span class="inline-block h-5 w-5 rounded-md bg-slate-200"
-      >{brandFilter.length}</span
+      >{$carsFilter.providers.length}</span
     >
     <ChevronDownIcon
       class="text-slate-400 transition-colors group-hover:text-slate-900 group-hover:transition-colors group-hover:duration-75"
