@@ -5,6 +5,7 @@ export default abstract class GenericMappableCar<
   CarDataType extends CarData = CarData
 > extends GenericCar<CarDataType> {
   markers: google.maps.marker.AdvancedMarkerElement[] = []
+  closestMarker?: google.maps.marker.AdvancedMarkerElement
 
   /**
    * Initialise the markers.
