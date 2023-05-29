@@ -1,18 +1,18 @@
 <script lang="ts">
+  import { getPosition } from '$lib/helpers/position'
   import Loader from '$lib/Icons/Loader.svelte'
   import ChevronDownIcon from '$lib/Icons/Mini/ChevronDownIcon.svelte'
-  import PersonWalkingIcon from '$lib/Icons/Solid/PersonWalkingIcon.svelte'
   import CurrencyEuro from '$lib/Icons/Outline/CurrencyEuro.svelte'
+  import PersonWalkingIcon from '$lib/Icons/Solid/PersonWalkingIcon.svelte'
   import { carsSort, type SortingSelection } from '$lib/Store/FilterStore'
   import { userPosition } from '$lib/Store/GoogleMapStore'
   import { CarSortField } from '$lib/Types/Enums/CarSortField'
   import { SortDirection } from '$lib/Types/Enums/SortDirection'
-  import { getPosition } from '$lib/helpers/position'
   import {
     Menu,
     MenuButton,
-    MenuItems,
     MenuItem,
+    MenuItems,
   } from '@rgossiaux/svelte-headlessui'
 
   let sortingOptions: SortingSelection[] = [

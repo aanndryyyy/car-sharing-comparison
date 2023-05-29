@@ -1,14 +1,13 @@
 <script lang="ts">
+  import Filters from '$lib/Components/Filters.svelte'
+  import { Funnel, Icon, Map } from 'svelte-hero-icons'
   import { _ } from 'svelte-i18n'
   import BottomSheet from 'svelte-swipeable-sheets/BottomSheet.svelte'
   import CarsMap from '../CarsMap/CarsMap.svelte'
-  import Filters from '$lib/Components/Filters.svelte'
-  import { Icon, Funnel, Map } from 'svelte-hero-icons'
   import CarList from './CarList/CarList.svelte'
   import CarListControls from './CarListControls/CarListControls.svelte'
 
   let open: boolean = false
-  let filtersOpen: boolean = false
 </script>
 
 <section class="md:col-start-2 md:col-end-4">
@@ -37,10 +36,6 @@
 
   <div class="mt-4 hidden md:mt-6 md:block">
     <CarsMap class="md:h-96 md:rounded-lg md:shadow-lg" />
-
-    <BottomSheet bind:open={filtersOpen}>
-      <Filters bind:open={filtersOpen} />
-    </BottomSheet>
   </div>
 
   <CarListControls />
