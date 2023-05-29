@@ -15,9 +15,11 @@
 <section class="md:col-start-2 md:col-end-4">
   <div class="flex items-center justify-between">
     <div>
-      <h3>{$_('cars.title')}</h3>
+      <h2 class="text-2xl font-semibold md:text-3xl md:font-medium">
+        {$_('cars.title')}
+      </h2>
       <button
-        class="mt-2 flex gap-1 text-green-600 md:hidden"
+        class="mt-1 flex gap-1 text-green-600 md:hidden"
         on:click={() => (open = true)}
       >
         <Icon src={Funnel} size="16" />
@@ -34,7 +36,7 @@
     </a>
   </div>
 
-  <div class="mt-4 hidden md:block">
+  <div class="mt-4 hidden md:mt-6 md:block">
     <CarsMap class="md:h-96 md:rounded-lg md:shadow-lg" />
 
     <BottomSheet bind:open={filtersOpen}>

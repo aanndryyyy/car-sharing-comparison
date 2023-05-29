@@ -12,8 +12,11 @@
 
 <aside class="md:col-span-1">
   <div class=" md:sticky md:top-6">
-    <div class="flex justify-between">
-      <h3>{$_('planner.title')}</h3>
+    <div class="flex items-center justify-between">
+      <h2 class="text-2xl font-semibold md:text-3xl md:font-medium">
+        {$_('planner.title')}
+      </h2>
+
       <button
         class="flex items-center justify-center rounded bg-green-600 p-2.5 text-white md:hidden"
         on:click={() => (manualPlanner = !manualPlanner)}

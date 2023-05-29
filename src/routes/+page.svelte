@@ -34,10 +34,11 @@
   ></script>
 </svelte:head>
 
-<header class="mx-auto my-4 max-w-screen-lg px-4 md:my-8 lg:my-16">
-  <h1 class="mb-2 hidden text-4xl font-bold md:block md:text-5xl">
+<header class="mx-auto my-4 max-w-screen-lg px-4 md:my-8 lg:my-32">
+  <h1 class="mb-2 hidden text-5xl font-semibold md:block">
     {$_('title')}
   </h1>
+
   {#if showAppShortDescription}
     <div class="block rounded-md bg-green-100 p-4 text-green-900 md:hidden">
       <div class="flex justify-between">

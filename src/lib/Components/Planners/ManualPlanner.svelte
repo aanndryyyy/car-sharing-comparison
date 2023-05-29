@@ -59,7 +59,7 @@
 </script>
 
 <div
-  class="mt-4 space-y-8"
+  class="mt-4 space-y-8 md:mt-6"
   class:max-md:!block={visible}
   class:max-md:!hidden={!visible}
 >
