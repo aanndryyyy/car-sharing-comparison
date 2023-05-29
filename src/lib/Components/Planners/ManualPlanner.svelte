@@ -2,7 +2,7 @@
   import { _ } from 'svelte-i18n'
   import RangeSlider from 'svelte-range-slider-pips'
 
-  import { duration, minutes, hours, days } from '$lib/Store/DurationStore'
+  import { days, duration, hours, minutes } from '$lib/Store/DurationStore'
   import { totalKilometres } from '$lib/Store/TotalKilometresStore'
 
   function setManuallyMinutes(input: Event) {
@@ -44,8 +44,8 @@
   $: inputMinutes = $minutes
   $: inputHours = $hours
   $: inputDays = $days
-  $: inputDuration = [$duration]
-  $: inputTotalKilometres = [$totalKilometres]
+  let inputDuration = [$duration]
+  let inputTotalKilometres = [$totalKilometres]
 
   function setDuration(input: CustomEvent) {
     duration.set(input.detail.value)
@@ -117,8 +117,8 @@
     <RangeSlider
       range="min"
       min={0}
-      max={10000}
-      bind:values={inputDuration}
+      max={6000}
+      values={inputDuration}
       on:change={setDuration}
     />
   </div>
@@ -139,8 +139,8 @@
 
     <RangeSlider
       range="min"
-      max={2500}
-      bind:values={inputTotalKilometres}
+      max={1500}
+      values={inputTotalKilometres}
       on:change={setTotalKilometres}
     />
   </div>

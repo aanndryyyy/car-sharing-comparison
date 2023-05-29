@@ -1,17 +1,15 @@
 <script lang="ts">
-  import { onMount } from 'svelte'
-  import { _ } from 'svelte-i18n'
-  import { map } from '$lib/Store/GoogleMapStore'
-  import placeholder from '$lib/Images/placeholder.png'
   import LoaderIcon from '$lib/Icons/Loader.svelte'
+  import placeholder from '$lib/Images/placeholder.png'
+  import { map } from '$lib/Store/GoogleMapStore'
+  import { onMount } from 'svelte'
 
   import { PUBLIC_GOOGLE_MAP_ID } from '$env/static/public'
-  import MapBottomRightControls from './MapBottomRightControls.svelte'
-  import MapFullScreenControl from './MapFullScreenControl.svelte'
+  import GenericMappableCar from '$lib/Car/GenericMappableCar'
   import ExclamationTriangleIcon from '$lib/Icons/Outline/ExclamationTriangleIcon.svelte'
   import { cars, visibleCars } from '$lib/Store/Cars'
-  import BoltCar from '$lib/Car/BoltCar'
-  import CityBeeCar from '$lib/Car/CityBeeCar'
+  import MapBottomRightControls from './MapBottomRightControls.svelte'
+  import MapFullScreenControl from './MapFullScreenControl.svelte'
 
   export let center: google.maps.LatLngLiteral = {
     lat: 59.437066,
@@ -55,7 +53,7 @@
       let mapZoom = $map.getZoom()!
 
       $visibleCars.visible.forEach((car) => {
-        if (!(car instanceof BoltCar) && !(car instanceof CityBeeCar)) {
+        if (!(car instanceof GenericMappableCar)) {
           return
         }
 
@@ -67,49 +65,39 @@
       })
     })
 
-    visibleCars.subscribe(updateMarkerIcons)
-    visibleCars.subscribe(updateMarkersVisiblity)
-    $map.addListener('dragend', updateMarkerIcons)
+    visibleCars.subscribe(updateMarkers)
+    $map.addListener('dragend', updateMarkers)
 
-    function updateMarkersVisiblity() {
+    function updateMarkers() {
+      let mapZoom = $map.getZoom()!
+
       $visibleCars.visible.forEach((car) => {
-        if (!(car instanceof BoltCar) && !(car instanceof CityBeeCar)) {
+        if (!(car instanceof GenericMappableCar)) {
           return
         }
 
         car.markers.forEach((marker) => {
           marker.map = $map
+
+          if (!$map.getBounds()?.contains(marker.position!)) {
+            return
+          }
+
+          if (!mapZoom || mapZoom < 14) {
+            return
+          }
+
+          car.setMarkerIcon(marker, 'price')
         })
       })
 
       $visibleCars.hidden.forEach((car) => {
-        if (!(car instanceof BoltCar) && !(car instanceof CityBeeCar)) {
+        if (!(car instanceof GenericMappableCar)) {
           return
         }
 
         car.markers.forEach((marker) => {
           marker.map = null
-        })
-      })
-    }
-    function updateMarkerIcons() {
-      let mapZoom = $map.getZoom()
-
-      if (!mapZoom || mapZoom < 14) {
-        return
-      }
-
-      $visibleCars.visible.forEach((car) => {
-        if (!(car instanceof BoltCar) && !(car instanceof CityBeeCar)) {
-          return
-        }
-
-        car.markers.forEach((marker) => {
-          if (!$map.getBounds()?.contains(marker.position!)) {
-            return
-          }
-
-          car.setMarkerIcon(marker, 'price')
         })
       })
     }
