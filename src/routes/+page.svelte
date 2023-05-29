@@ -1,7 +1,7 @@
 <script lang="ts">
   import { _ } from 'svelte-i18n'
-  import CarsSection from '$lib/Components/CarsSection.svelte'
-  import PlannerSection from '$lib/Components/PlannerSection.svelte'
+  import CarsSection from '$lib/Components/Section/Cars.svelte'
+  import PlannerSection from '$lib/Components/Section/Planner.svelte'
   import { Icon, XMark, ArrowSmallRight } from 'svelte-hero-icons'
   import { cars } from '$lib/Store/Cars'
 

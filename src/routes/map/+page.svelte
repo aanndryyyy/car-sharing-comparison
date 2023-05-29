@@ -16,7 +16,7 @@
   </aside>
 
   <div class="grow bg-gray-300">
-    <CarsMap class="h-full w-full" />
+    <CarsMap zoom={13} class="h-full w-full" />
   </div>
 
   <aside class="block h-20 md:hidden">

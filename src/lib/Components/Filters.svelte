@@ -1,4 +1,4 @@
-<!-- <script lang="ts">
+<script lang="ts">
   import { _ } from 'svelte-i18n'
   import { Provider } from '../Types/Enums/Provider'
   import { Icon, XMark } from 'svelte-hero-icons'
@@ -6,46 +6,30 @@
   import CityBeeLogo from '$lib/Images/citybee.png'
   import ElmoLogo from '$lib/Images/elmo.png'
   import BeastLogo from '$lib/Images/beast.png'
-  import FilterItemLayer from '$lib/Components/FilterItemLayer.svelte'
   import { carsFilter } from '../Store/FilterStore'
 
   export let open = false
 
-  const providers = [
-    {
-      title: 'Bolt',
-      value: Provider.BOLT,
-      imgUrl: BoltLogo,
-      active: $carsFilter.providers[Provider.BOLT],
-    },
-    {
+  let providers = $carsFilter.providers
+
+  const providersInfo: Record<Provider, any> = {
+    [Provider.BOLT]: { title: 'Bolt', value: Provider.BOLT, imgUrl: BoltLogo },
+    [Provider.CITYBEE]: {
       title: 'Citybee',
       value: Provider.CITYBEE,
       imgUrl: CityBeeLogo,
-      active: $carsFilter.providers[Provider.BOLT],
     },
-    {
-      title: 'Elmo',
-      value: Provider.ELMO,
-      imgUrl: ElmoLogo,
-      active: $carsFilter.providers[Provider.BOLT],
-    },
-    {
-      title: 'Avis',
-      value: Provider.AVIS,
-      imgUrl: null,
-      active: $carsFilter.providers[Provider.BOLT],
-    },
-    {
+    [Provider.ELMO]: { title: 'Elmo', value: Provider.ELMO, imgUrl: ElmoLogo },
+    [Provider.AVIS]: { title: 'Avis', value: Provider.AVIS, imgUrl: ElmoLogo },
+    [Provider.BEAST]: {
       title: 'Beast',
       value: Provider.BEAST,
       imgUrl: BeastLogo,
-      active: $carsFilter.providers[Provider.BOLT],
     },
-  ]
+  }
 </script>
 
-<div class="p-4">
+<div class="space-y-4 p-4">
   <div class="flex justify-between">
     <h3>
       {$_('filters')}
@@ -56,24 +40,30 @@
     </button>
   </div>
 
-  <div>
-    <div>
-      <p>Brands</p>
-      <div class="mt-1 flex gap-4 overflow-scroll scrollbar-hide">
-        {#each providers as provider}
-          <FilterItemLayer
-            active={provider.active}
-            onClick={() => {
-              provider.active = !provider.active
-              $carsFilter.provider[provider.value] = provider.active
-            }}
+  <div class="space-y-1">
+    <p>Brands</p>
+    <div class="space-x-4 overflow-x-scroll whitespace-nowrap scrollbar-hide">
+      {#each providers as provider, index}
+        <div class="inline-block">
+          <input
+            type="checkbox"
+            class="peer hidden"
+            id={'provider-' + index}
+            value={provider}
+            bind:group={$carsFilter.providers}
+          />
+          <label
+            class="block rounded border-2 border-slate-300 px-4 py-3 peer-checked:border-green-600"
+            for={'provider-' + index}
           >
-            <div class="flex h-5 w-16 justify-center">
-              <img src={provider.imgUrl} alt={provider.title} width="48" />
-            </div>
-          </FilterItemLayer>
-        {/each}
-      </div>
+            <img
+              class="block h-5 w-12 object-contain"
+              src={providersInfo[provider].imgUrl}
+              alt={providersInfo[provider].title}
+            />
+          </label>
+        </div>
+      {/each}
     </div>
   </div>
-</div> -->
+</div>
