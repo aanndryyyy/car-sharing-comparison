@@ -17,11 +17,6 @@
 
   let isRoundTrip: boolean = false
 
-  // TODO: :)
-  $: if (isRoundTrip || !isRoundTrip) {
-    calculateRoute()
-  }
-
   let GoogleAutocomplete: typeof google.maps.places.Autocomplete
   let GoogleAdvancedMarkerElement: typeof google.maps.marker.AdvancedMarkerElement
   let inputWaypoints: {
@@ -51,7 +46,7 @@
     GoogleAdvancedMarkerElement = AdvancedMarkerElement
   })
 
-  function calculateRoute() {
+  function calculateRoute(roundTrip: boolean) {
     const starting = inputWaypoints[0]?.autocomplete
     const destination = inputWaypoints.slice(-1)[0]?.autocomplete
 
@@ -110,7 +105,7 @@
         $totalKilometres += Math.ceil(route.distance?.value / 1000)
       })
 
-      if (isRoundTrip) {
+      if (roundTrip) {
         $duration *= 2
         $totalKilometres *= 2
       }
@@ -146,7 +141,7 @@
     inputWaypoints.splice(-1, 0, { id: Date.now() + Math.random() })
 
     inputWaypoints = inputWaypoints
-    calculateRoute()
+    calculateRoute(isRoundTrip)
   }
 
   function removeWaypoint(e) {
@@ -154,7 +149,7 @@
 
     inputWaypoints.splice(e.detail.index, 1)
     inputWaypoints = inputWaypoints
-    calculateRoute()
+    calculateRoute(isRoundTrip)
   }
 
   function initAutocomplete(e) {
@@ -173,9 +168,11 @@
 
     inputWaypoints[e.detail.index].autocomplete.addListener(
       'place_changed',
-      calculateRoute
+      () => calculateRoute(isRoundTrip)
     )
   }
+
+  $: calculateRoute(isRoundTrip)
 </script>
 
 <div class="mt-8" class:max-md:!block={visible} class:max-md:!hidden={!visible}>
