@@ -12,7 +12,25 @@ const sortCars = (cars: Car[], sortingOption: SortingSelection): Car[] => {
       cars.sort((car1, car2) => car1.getTotalPrice() - car2.getTotalPrice())
       break
     case CarSortField.DISTANCE:
-      //cars.sort((car1, car2) => car1.getTotalPrice() - car2.getTotalPrice())
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            const { latitude, longitude } = position.coords
+
+            cars.sort((car1, car2) => {
+              // Find closest car on map to user pos.
+              // Cache closest marker for each car?
+              // Pick closest location on map and display on carCard.
+              return car1.getTotalPrice() - car2.getTotalPrice()
+            })
+          },
+          (err) => {
+            alert('Not possible to get user location.')
+          }
+        )
+      } else {
+        alert('Not possible to get user location.')
+      }
       break
   }
 
