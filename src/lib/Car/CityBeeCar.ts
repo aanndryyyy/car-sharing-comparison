@@ -36,10 +36,9 @@ import BMW_118i from '$lib/Images/Providers/Citybee/Cars/BMW-118i.png'
 import Fiat_500e from '$lib/Images/Providers/Citybee/Cars/Fiat-500e.png'
 import Peugeot_308 from '$lib/Images/Providers/Citybee/Cars/Peugeot-308.png'
 import GenericCar from './GenericCar'
+import GenericMappableCar from './GenericMappableCar'
 
-export default class CityBeeCar extends GenericCar<ICarCityBee> {
-  markers: google.maps.marker.AdvancedMarkerElement[] = []
-
+export default class CityBeeCar extends GenericMappableCar<ICarCityBee> {
   calculateRentTotalPrice(): void {
     //this.rentTotalPrice = calculateCityBeePrice(this.carData, searchParamsObj)
     this.rentTotalPrice = 100

@@ -80,12 +80,4 @@ export default abstract class GenericCar<
    * Get the logo.
    */
   abstract getCarImg(): string
-
-  /**
-   * Initialise the markers.
-   */
-  abstract initialiseMarkers(
-    AdvancedMarkerElement: typeof google.maps.marker.AdvancedMarkerElement,
-    map?: google.maps.Map
-  ): void
 }

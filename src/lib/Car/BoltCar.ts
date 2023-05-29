@@ -43,10 +43,9 @@ import VW_T_Cross from '$lib/Images/Providers/Bolt/Cars/VW-T-Cross.png'
 import VW_T_Roc from '$lib/Images/Providers/Bolt/Cars/VW-T-Roc.png'
 import VW_T_Roc_Cabrio from '$lib/Images/Providers/Bolt/Cars/VW-T-Roc-Cabrio.png'
 import GenericCar from './GenericCar'
+import GenericMappableCar from './GenericMappableCar'
 
-export default class BoltCar extends GenericCar<ICarBolt> {
-  markers: google.maps.marker.AdvancedMarkerElement[] = []
-
+export default class BoltCar extends GenericMappableCar<ICarBolt> {
   /**
    * @inheritdoc
    */
