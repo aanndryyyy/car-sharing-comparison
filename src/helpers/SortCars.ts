@@ -11,9 +11,12 @@ const sortCars = (cars: Car[], sortingOption: SortingSelection): Car[] => {
     case CarSortField.PRICE:
       cars.sort((car1, car2) => car1.getTotalPrice() - car2.getTotalPrice())
       break
+    case CarSortField.DISTANCE:
+      //cars.sort((car1, car2) => car1.getTotalPrice() - car2.getTotalPrice())
+      break
   }
 
-  if (sortingOption.direction === SortDirection.ASCENDING) cars.reverse()
+  if (sortingOption.direction === SortDirection.DESCENDING) cars.reverse()
 
   return cars
 }

@@ -10,30 +10,43 @@
     MenuItem,
   } from '@rgossiaux/svelte-headlessui'
 
-  const sortingOptions: SortingSelection[] = [
+  let sortingOptions: SortingSelection[] = [
     {
       value: CarSortField.PRICE,
-      direction: SortDirection.DESCENDING,
+      direction: SortDirection.ASCENDING,
     },
     {
       value: CarSortField.DISTANCE,
-      direction: SortDirection.DESCENDING,
+      direction: SortDirection.ASCENDING,
     },
-  ]
-
-  const sortingLabels = [
-    { [(CarSortField.PRICE, SortDirection.ASCENDING)]: 'Cheapest first' },
-    { [(CarSortField.PRICE, SortDirection.DESCENDING)]: 'Expensive first' },
-    { [(CarSortField.DISTANCE, SortDirection.ASCENDING)]: 'Closest first' },
-    { [(CarSortField.DISTANCE, SortDirection.DESCENDING)]: 'Furthest first' },
   ]
 
   function getSortingLabel(
     value: CarSortField,
     direction: SortDirection
   ): string {
-    // TODO: Sorting label logic
-    return 'Cheapest first'
+    if (value === CarSortField.PRICE && direction === SortDirection.ASCENDING) {
+      return 'Cheapest first'
+    }
+    if (
+      value === CarSortField.PRICE &&
+      direction === SortDirection.DESCENDING
+    ) {
+      return 'Expensive first'
+    }
+    if (
+      value === CarSortField.DISTANCE &&
+      direction === SortDirection.ASCENDING
+    ) {
+      return 'Closest first'
+    }
+    if (
+      value === CarSortField.DISTANCE &&
+      direction === SortDirection.DESCENDING
+    ) {
+      return 'Furthest first'
+    }
+    return 'No label'
   }
 
   $: sortingLabel = getSortingLabel($carsSort.value, $carsSort.direction)

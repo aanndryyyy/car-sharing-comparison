@@ -16,7 +16,7 @@ export const cheapestFirst = writable(true)
 
 export const carsSort = writable<SortingSelection>({
   value: CarSortField.PRICE,
-  direction: SortDirection.DESCENDING,
+  direction: SortDirection.ASCENDING,
 })
 
 export const carsFilter = writable<carsFilters>({
