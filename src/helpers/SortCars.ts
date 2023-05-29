@@ -2,8 +2,14 @@ import { SortDirection } from '../lib/Types/Enums/SortDirection'
 import { CarSortField } from '../lib/Types/Enums/CarSortField'
 import type { Car } from '../lib/Car/GenericCar'
 import type { SortingSelection } from '$lib/Store/FilterStore'
+import GenericMappableCar from '$lib/Car/GenericMappableCar'
+import { haversineRaw } from '$lib/helpers/haversine'
 
-const sortCars = (cars: Car[], sortingOption: SortingSelection): Car[] => {
+const sortCars = (
+  cars: Car[],
+  sortingOption: SortingSelection,
+  userPosition: GeolocationPosition
+): Car[] => {
   if (sortingOption.direction === SortDirection.NONE || cars.length === 0)
     return cars
 
@@ -11,32 +17,61 @@ const sortCars = (cars: Car[], sortingOption: SortingSelection): Car[] => {
     case CarSortField.PRICE:
       cars.sort((car1, car2) => car1.getTotalPrice() - car2.getTotalPrice())
       break
-    case CarSortField.DISTANCE:
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(
-          (position) => {
-            const { latitude, longitude } = position.coords
 
-            cars.sort((car1, car2) => {
-              // Find closest car on map to user pos.
-              // Cache closest marker for each car?
-              // Pick closest location on map and display on carCard.
-              return car1.getTotalPrice() - car2.getTotalPrice()
-            })
-          },
-          (err) => {
-            alert('Not possible to get user location.')
-          }
-        )
-      } else {
-        alert('Not possible to get user location.')
-      }
+    case CarSortField.DISTANCE:
+      sortByDistance(cars, userPosition)
       break
   }
 
   if (sortingOption.direction === SortDirection.DESCENDING) cars.reverse()
 
   return cars
+}
+
+const sortByDistance = async (
+  cars: Car[],
+  userPosition: GeolocationPosition
+) => {
+  if (!navigator.geolocation || !userPosition) {
+    alert('Not possible to get user location.')
+    return
+  }
+
+  const { latitude, longitude } = userPosition.coords
+
+  cars.sort((car1, car2) => {
+    if (
+      !(car1 instanceof GenericMappableCar) ||
+      !(car2 instanceof GenericMappableCar)
+    ) {
+      return 1
+    }
+
+    if (!car1.closestMarker) {
+      car1.findClosestMarkerTo(latitude, longitude)
+    }
+
+    if (!car2.closestMarker) {
+      car2.findClosestMarkerTo(latitude, longitude)
+    }
+
+    return (
+      haversineRaw(
+        { lat: latitude, lng: longitude },
+        {
+          lat: car1.closestMarker?.position?.lat,
+          lng: car1.closestMarker?.position?.lng,
+        }
+      ) -
+      haversineRaw(
+        { lat: latitude, lng: longitude },
+        {
+          lat: car2.closestMarker?.position?.lat,
+          lng: car2.closestMarker?.position?.lng,
+        }
+      )
+    )
+  })
 }
 
 export default sortCars

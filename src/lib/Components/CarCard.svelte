@@ -3,6 +3,8 @@
   import Divider from '$lib/Components/Divider.svelte'
   import CurrencyEuro from '$lib/Icons/Outline/CurrencyEuro.svelte'
   import type GenericCar from '$lib/Car/GenericCar'
+  import GenericMappableCar from '$lib/Car/GenericMappableCar'
+  import PersonWalkingIcon from '$lib/Icons/Mini/PersonWalkingIcon.svelte'
 
   export let car: GenericCar
   export let index: number
@@ -51,6 +53,18 @@
             <CurrencyEuro class="h-3 w-3 stroke-slate-500 md:h-4 md:w-4" />
             {car.getFormattedKilometrePrice()}
           </div>
+          {#if car instanceof GenericMappableCar}
+            <div
+              class="flex items-center gap-0.5 md:gap-1"
+              class:hidden={!car.closestMarkerDistance}
+            >
+              <PersonWalkingIcon class="h-3 w-3 text-slate-500 md:h-4 md:w-4" />
+              {(car.closestMarkerDistance || 0) >= 1000
+                ? (car.closestMarkerDistance || 0)?.toFixed(0)
+                : ((car.closestMarkerDistance || 0) * 1000)?.toFixed(0)}
+              {(car.closestMarkerDistance || 0) >= 1000 ? ' km' : ' m'}
+            </div>
+          {/if}
         </div>
       </div>
 

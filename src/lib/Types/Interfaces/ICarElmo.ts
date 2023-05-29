@@ -1,6 +1,7 @@
 import type { ICar } from './ICar'
 
 export interface ICarElmo extends ICar {
+  serviceId: number
   type: string
   price: {
     km: {

@@ -7,7 +7,7 @@
 </script>
 
 <div class="mt-4 space-y-4">
-  {#each cars as genericCar, i}
-    <CarCard car={genericCar} index={i} />
+  {#each cars as car, i (car.getName() + '_' + car.carData.serviceId)}
+    <CarCard {car} index={i} />
   {/each}
 </div>

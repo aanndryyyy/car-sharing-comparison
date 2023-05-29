@@ -1,8 +1,10 @@
 <script lang="ts">
   import ChevronDownIcon from '$lib/Icons/Mini/ChevronDownIcon.svelte'
   import { carsSort, type SortingSelection } from '$lib/Store/FilterStore'
+  import { userPosition } from '$lib/Store/GoogleMapStore'
   import { CarSortField } from '$lib/Types/Enums/CarSortField'
   import { SortDirection } from '$lib/Types/Enums/SortDirection'
+  import { getPosition } from '$lib/helpers/position'
   import {
     Menu,
     MenuButton,
@@ -49,6 +51,16 @@
     return 'No label'
   }
 
+  async function setSortingOption(option: SortingSelection) {
+    if (option.value === CarSortField.DISTANCE) {
+      await getPosition().then((position) => {
+        $userPosition = position
+      })
+    }
+
+    $carsSort = option
+  }
+
   $: sortingLabel = getSortingLabel($carsSort.value, $carsSort.direction)
 </script>
 
@@ -70,7 +82,7 @@
           $carsSort.value === option.value ? 'text-slate-900' : ''
         }`}
       >
-        <button on:click={() => ($carsSort = option)}>
+        <button on:click={() => setSortingOption(option)}>
           {getSortingLabel(option.value, option.direction)}
         </button>
       </MenuItem>

@@ -1,6 +1,7 @@
 import type { ICar } from './ICar'
 
 export interface ICarBeast extends ICar {
+  serviceId: number
   price: {
     km: number
     minute: number
