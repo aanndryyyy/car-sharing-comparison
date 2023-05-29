@@ -6,7 +6,7 @@
   import LoaderIcon from '$lib/Icons/Loader.svelte'
 
   import { PUBLIC_GOOGLE_MAP_ID } from '$env/static/public'
-  import MapZoomControl from './MapZoomControl.svelte'
+  import MapBottomRightControls from './MapBottomRightControls.svelte'
   import MapFullScreenControl from './MapFullScreenControl.svelte'
   import ExclamationTriangleIcon from '$lib/Icons/Outline/ExclamationTriangleIcon.svelte'
   import { cars, visibleCars } from '$lib/Store/Cars'
@@ -138,7 +138,7 @@
 
     <div class="h-full" bind:this={mapCanvas} />
     <MapFullScreenControl />
-    <MapZoomControl />
+    <MapBottomRightControls />
   {:else}
     <div
       class="absolute inset-0 z-20 flex items-center justify-center bg-amber-400"
