@@ -1,4 +1,5 @@
 <script lang="ts">
+  import Loader from '$lib/Icons/Loader.svelte'
   import ChevronDownIcon from '$lib/Icons/Mini/ChevronDownIcon.svelte'
   import { carsSort, type SortingSelection } from '$lib/Store/FilterStore'
   import { userPosition } from '$lib/Store/GoogleMapStore'
@@ -53,15 +54,24 @@
 
   async function setSortingOption(option: SortingSelection) {
     if (option.value === CarSortField.DISTANCE) {
-      await getPosition().then((position) => {
-        $userPosition = position
-      })
+      isLoading = true
+      await getPosition()
+        .then((position) => {
+          $userPosition = position
+        })
+        .catch((err) => {
+          alert('Failed to load location: ' + err)
+        })
+        .finally(() => {
+          isLoading = false
+        })
     }
 
     $carsSort = option
   }
 
   $: sortingLabel = getSortingLabel($carsSort.value, $carsSort.direction)
+  let isLoading = false
 </script>
 
 <Menu class="relative text-sm">
@@ -72,19 +82,22 @@
     <ChevronDownIcon
       class="text-slate-400 transition-colors group-hover:text-slate-900 group-hover:transition-colors group-hover:duration-75"
     />
+    {#if isLoading}
+      <Loader class="h-5 w-5 animate-spin text-slate-500" />
+    {/if}
   </MenuButton>
   <MenuItems
     class="absolute left-0 z-10 mt-2 whitespace-nowrap rounded-md bg-white py-1 font-medium text-slate-600 shadow-xl ring-1 ring-black ring-opacity-5 focus:outline-none"
   >
     {#each sortingOptions as option}
       <MenuItem
-        class={`flex cursor-pointer gap-2 px-4 py-2 hover:bg-slate-100 hover:text-slate-900 ${
+        as="button"
+        class={`flex w-full cursor-pointer gap-2 px-4 py-2 hover:bg-slate-100 hover:text-slate-900 ${
           $carsSort.value === option.value ? 'text-slate-900' : ''
         }`}
+        on:click={() => setSortingOption(option)}
       >
-        <button on:click={() => setSortingOption(option)}>
-          {getSortingLabel(option.value, option.direction)}
-        </button>
+        {getSortingLabel(option.value, option.direction)}
       </MenuItem>
     {/each}
   </MenuItems>
