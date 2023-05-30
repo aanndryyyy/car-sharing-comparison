@@ -11,8 +11,7 @@
 
   let showAppShortDescription: boolean = true
 
-  /** @type {import('./$types').PageData} */
-  export let data: { cars: Car[] }
+  export let data
   $cars = data.cars
 </script>
 

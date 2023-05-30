@@ -3,8 +3,7 @@
   import type { Car } from '$lib/Car/GenericCar'
   import CarsMap from '$lib/Components/CarsMap/CarsMap.svelte'
 
-  /** @type {import('./$types').PageData} */
-  export let data: { cars: Car[] }
+  export let data
   $cars = data.cars
 </script>
 

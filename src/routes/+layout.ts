@@ -53,5 +53,7 @@ export async function load({ fetch }) {
 
   return {
     cars,
+  } as {
+    cars: Car[]
   }
 }
