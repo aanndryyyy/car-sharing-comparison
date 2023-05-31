@@ -137,7 +137,7 @@ export default class BoltCar extends GenericMappableCar<ICarBolt> {
     this.carData.coordinates.forEach(({ lat, lng }) => {
       const marker = new AdvancedMarkerElement({
         map,
-        content: this.getMarkerRegularIcon(),
+        content: this.getMarkerDotIcon(),
         position: { lat, lng },
       })
 
@@ -161,12 +161,12 @@ export default class BoltCar extends GenericMappableCar<ICarBolt> {
         break
 
       default:
-        marker.content = this.getMarkerRegularIcon()
+        marker.content = this.getMarkerDotIcon()
         break
     }
   }
 
-  getMarkerRegularIcon(): HTMLDivElement {
+  getMarkerDotIcon(): HTMLDivElement {
     const content = document.createElement('div')
     content.className = 'dot-icon bg-brand-bolt'
 

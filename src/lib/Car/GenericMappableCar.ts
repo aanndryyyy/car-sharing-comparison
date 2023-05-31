@@ -38,4 +38,14 @@ export default abstract class GenericMappableCar<
     AdvancedMarkerElement: typeof google.maps.marker.AdvancedMarkerElement,
     map?: google.maps.Map
   ): void
+
+  /**
+   * The Element for dot icon.
+   */
+  abstract getMarkerDotIcon(): Element
+
+  /**
+   * The Element for icon with price.
+   */
+  abstract getMarkerPriceIcon(): Element
 }

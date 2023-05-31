@@ -127,7 +127,7 @@ export default class CityBeeCar extends GenericMappableCar<ICarCityBee> {
     this.carData.coordinates.forEach(({ lat, lng }) => {
       const marker = new AdvancedMarkerElement({
         map,
-        content: this.getMarkerRegularIcon(),
+        content: this.getMarkerDotIcon(),
         position: { lat, lng },
       })
 
@@ -151,26 +151,26 @@ export default class CityBeeCar extends GenericMappableCar<ICarCityBee> {
         break
 
       default:
-        marker.content = this.getMarkerRegularIcon()
+        marker.content = this.getMarkerDotIcon()
         break
     }
   }
 
-  getMarkerRegularIcon(): HTMLDivElement {
+  getMarkerDotIcon(): Element {
     const content = document.createElement('div')
     content.className = 'dot-icon bg-brand-citybee'
 
     return content
   }
 
-  getMarkerPriceIcon(): HTMLDivElement {
+  getMarkerPriceIcon(): Element {
     const content = document.createElement('div')
     content.className = 'dot-icon bg-brand-citybee'
 
     const priceIcon = document.createElement('div')
     priceIcon.className = 'price-icon'
 
-    priceIcon.innerText = 10 + '€'
+    priceIcon.innerText = this.getTotalPrice().toFixed(0) + '€'
     priceIcon.appendChild(content)
 
     return priceIcon
