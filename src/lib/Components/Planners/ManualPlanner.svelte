@@ -5,48 +5,6 @@
   import { days, duration, hours, minutes } from '$lib/Store/DurationStore'
   import { totalKilometres } from '$lib/Store/TotalKilometresStore'
 
-  function setManuallyMinutes(input: Event) {
-    const target = input.target as HTMLInputElement
-    let value = target.valueAsNumber
-
-    if (isNaN(value)) {
-      value = 0
-    }
-
-    $duration -= $minutes
-    $duration += value
-  }
-
-  function setManuallyHours(input: Event) {
-    const target = input.target as HTMLInputElement
-    let value = target.valueAsNumber
-
-    if (isNaN(value)) {
-      value = 0
-    }
-
-    $duration -= $hours * 60
-    $duration += value * 60
-  }
-
-  function setManuallyDays(input: Event) {
-    const target = input.target as HTMLInputElement
-    let value = target.valueAsNumber
-
-    if (isNaN(value)) {
-      value = 0
-    }
-
-    $duration -= $days * 24 * 60
-    $duration += value * 24 * 60
-  }
-
-  $: inputMinutes = $minutes
-  $: inputHours = $hours
-  $: inputDays = $days
-  let inputDuration = [$duration]
-  let inputTotalKilometres = [$totalKilometres]
-
   function setDuration(input: CustomEvent) {
     duration.set(input.detail.value)
   }
@@ -71,8 +29,7 @@
         <input
           class="appearance-text block w-full focus:outline-none"
           type="number"
-          bind:value={inputDays}
-          on:change={setManuallyDays}
+          bind:value={$days}
           min="0"
           id="days"
         />
@@ -87,8 +44,7 @@
         <input
           class="appearance-text block w-full focus:outline-none"
           type="number"
-          bind:value={inputHours}
-          on:change={setManuallyHours}
+          bind:value={$hours}
           min="0"
           id="hours"
         />
@@ -103,8 +59,7 @@
         <input
           class="appearance-text block w-full focus:outline-none"
           type="number"
-          bind:value={inputMinutes}
-          on:change={setManuallyMinutes}
+          bind:value={$minutes}
           min="0"
           id="minutes"
         />
@@ -118,7 +73,7 @@
       range="min"
       min={0}
       max={6000}
-      values={inputDuration}
+      values={[$duration]}
       on:change={setDuration}
     />
   </div>
@@ -140,7 +95,7 @@
     <RangeSlider
       range="min"
       max={1500}
-      values={inputTotalKilometres}
+      values={[$totalKilometres]}
       on:change={setTotalKilometres}
     />
   </div>
