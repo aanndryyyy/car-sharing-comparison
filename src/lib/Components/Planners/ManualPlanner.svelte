@@ -1,17 +1,8 @@
 <script lang="ts">
-  import { _ } from 'svelte-i18n'
-  import RangeSlider from 'svelte-range-slider-pips'
-
   import { days, duration, hours, minutes } from '$lib/Store/DurationStore'
   import { totalKilometres } from '$lib/Store/TotalKilometresStore'
-
-  function setDuration(input: CustomEvent) {
-    duration.set(input.detail.value)
-  }
-
-  function setTotalKilometres(input: CustomEvent) {
-    totalKilometres.set(input.detail.value)
-  }
+  import { _ } from 'svelte-i18n'
+  import RangeSlider from 'svelte-range-slider-pips'
 
   export let visible: boolean = false
 </script>
@@ -21,7 +12,7 @@
   class:max-md:!block={visible}
   class:max-md:!hidden={!visible}
 >
-  <div class="block">
+  <div>
     <div class="flex flex-row gap-2 md:flex-col lg:flex-row">
       <div
         class="flex items-center rounded-md border px-3 py-2 focus-within:ring-2 focus-within:ring-green-500 focus-within:ring-offset-1"
@@ -74,11 +65,11 @@
       min={0}
       max={6000}
       values={[$duration]}
-      on:change={setDuration}
+      on:change={(e) => ($duration = e.detail.value)}
     />
   </div>
 
-  <div class="block">
+  <div>
     <div
       class="flex items-center rounded-md border px-3 py-2 focus-within:ring-2 focus-within:ring-green-500 focus-within:ring-offset-2"
     >
@@ -96,7 +87,7 @@
       range="min"
       max={1500}
       values={[$totalKilometres]}
-      on:change={setTotalKilometres}
+      on:change={(e) => ($totalKilometres = e.detail.value)}
     />
   </div>
 </div>
