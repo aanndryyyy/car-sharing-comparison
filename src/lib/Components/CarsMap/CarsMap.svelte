@@ -8,6 +8,8 @@
   import GenericMappableCar from '$lib/Car/GenericMappableCar'
   import ExclamationTriangleIcon from '$lib/Icons/Outline/ExclamationTriangleIcon.svelte'
   import { cars, visibleCars } from '$lib/Store/Cars'
+  import { duration } from '$lib/Store/DurationStore'
+  import { totalKilometres } from '$lib/Store/TotalKilometresStore'
   import MapBottomRightControls from './MapBottomRightControls.svelte'
   import MapFullScreenControl from './MapFullScreenControl.svelte'
 
@@ -16,6 +18,7 @@
     lng: 24.7509811,
   }
   export let zoom: number = 12
+  export let iconsZoom: number = 14
 
   let mapLoaded: boolean = false
   let isError: boolean = false
@@ -25,19 +28,19 @@
       'maps'
     )) as google.maps.MapsLibrary
 
-    map.set(
-      new Map(mapCanvas, {
-        zoom,
-        center,
-        mapId: PUBLIC_GOOGLE_MAP_ID,
-        mapTypeControl: false,
-        fullscreenControl: false,
-        zoomControl: false,
-        streetViewControl: false,
-      })
-    )
+    const googleMap = new Map(mapCanvas, {
+      zoom,
+      center,
+      mapId: PUBLIC_GOOGLE_MAP_ID,
+      mapTypeControl: false,
+      fullscreenControl: false,
+      zoomControl: false,
+      streetViewControl: false,
+    })
 
-    $map.addListener('tilesloaded', () => {
+    $map = googleMap
+
+    googleMap.addListener('tilesloaded', () => {
       mapLoaded = true
     })
 
@@ -49,15 +52,15 @@
       car.initialiseMarkers(AdvancedMarkerElement, $map)
     })
 
-    $map.addListener('zoom_changed', () => {
-      let mapZoom = $map.getZoom()!
+    googleMap.addListener('zoom_changed', () => {
+      let mapZoom = googleMap.getZoom()!
 
       $visibleCars.visible.forEach((car) => {
         if (!(car instanceof GenericMappableCar)) {
           return
         }
 
-        if (mapZoom < 14) {
+        if (mapZoom < iconsZoom) {
           car.setMarkerIcons()
         } else {
           car.setMarkerIcons('price')
@@ -65,40 +68,51 @@
       })
     })
 
-    visibleCars.subscribe(updateMarkers)
-    $map.addListener('dragend', updateMarkers)
+    duration.subscribe(updateMarkers)
+    totalKilometres.subscribe(updateMarkers)
+    visibleCars.subscribe(toggleMarkers)
+    googleMap.addListener('dragend', updateMarkers)
 
     function updateMarkers() {
-      let mapZoom = $map.getZoom()!
+      const carsToUpdate = $visibleCars.visible.filter(
+        (car) => car instanceof GenericMappableCar
+      ) as GenericMappableCar[]
 
-      $visibleCars.visible.forEach((car) => {
-        if (!(car instanceof GenericMappableCar)) {
-          return
-        }
+      const mapZoom = $map.getZoom()
+      const mapBounds = $map.getBounds()
 
+      carsToUpdate.forEach((car) => {
         car.markers.forEach((marker) => {
-          marker.map = $map
-
-          if (!$map.getBounds()?.contains(marker.position!)) {
+          if (!mapBounds || !mapBounds.contains(marker.position!)) {
             return
           }
 
-          if (!mapZoom || mapZoom < 14) {
+          if (!mapZoom || mapZoom < iconsZoom) {
             return
           }
 
           car.setMarkerIcon(marker, 'price')
         })
       })
+    }
 
-      $visibleCars.hidden.forEach((car) => {
-        if (!(car instanceof GenericMappableCar)) {
-          return
-        }
+    function toggleMarkers() {
+      const carsToShow = $visibleCars.visible.filter(
+        (car) => car instanceof GenericMappableCar
+      ) as GenericMappableCar[]
 
-        car.markers.forEach((marker) => {
-          marker.map = null
-        })
+      carsToShow.forEach((car) => {
+        const markers = car.markers.filter((marker) => marker.map === null)
+        markers.forEach((marker) => (marker.map = $map))
+      })
+
+      const carsToHide = $visibleCars.hidden.filter(
+        (car) => car instanceof GenericMappableCar
+      ) as GenericMappableCar[]
+
+      carsToHide.forEach((car) => {
+        const markers = car.markers.filter((marker) => marker.map !== null)
+        markers.forEach((marker) => (marker.map = null))
       })
     }
   })
