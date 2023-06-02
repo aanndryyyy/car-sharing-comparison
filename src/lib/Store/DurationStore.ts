@@ -1,11 +1,16 @@
-import { derived, get, writable } from 'svelte/store'
+import { derived, writable } from 'svelte/store'
 
 function createMinutes() {
-  const { subscribe } = derived(duration, ($duration) => $duration % 60)
+  let _minutes = 0
+
+  const { subscribe } = derived(
+    duration,
+    ($duration) => (_minutes = $duration % 60)
+  )
 
   const modify = (value: number) => {
     duration.update((totalDurationInMinutes) => {
-      totalDurationInMinutes -= get(minutes)
+      totalDurationInMinutes -= _minutes
       totalDurationInMinutes += value
 
       return totalDurationInMinutes
@@ -20,14 +25,16 @@ function createMinutes() {
 }
 
 function createHours() {
+  let _hours = 0
+
   const { subscribe } = derived(
     duration,
-    ($duration) => Math.floor($duration / 60) % 24
+    ($duration) => (_hours = Math.floor($duration / 60) % 24)
   )
 
   const modify = (value: number) => {
     duration.update((totalDurationInMinutes) => {
-      totalDurationInMinutes -= get(hours) * 60
+      totalDurationInMinutes -= _hours * 60
       totalDurationInMinutes += value * 60
 
       return totalDurationInMinutes
@@ -42,13 +49,16 @@ function createHours() {
 }
 
 function createDays() {
-  const { subscribe } = derived(duration, ($duration) =>
-    Math.floor($duration / (60 * 24))
+  let _days = 0
+
+  const { subscribe } = derived(
+    duration,
+    ($duration) => (_days = Math.floor($duration / (60 * 24)))
   )
 
   const modify = (value: number) => {
     duration.update((totalDurationInMinutes) => {
-      totalDurationInMinutes -= get(days) * 24 * 60
+      totalDurationInMinutes -= _days * 24 * 60
       totalDurationInMinutes += value * 24 * 60
 
       return totalDurationInMinutes
