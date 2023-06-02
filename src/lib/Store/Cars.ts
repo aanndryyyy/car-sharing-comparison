@@ -21,7 +21,7 @@ export const visibleCars = derived<
   { visible: Car[]; hidden: Car[] }
 >(
   [cars, carsFilter, carsSort, userPosition, duration, totalKilometres],
-  ([$cars, $carsFilter, $sortOptions, $userPosition], set) => {
+  ([$cars, $carsFilter, $sortOptions, $userPosition, $duration, $totalKilometres], set) => {
     // Calculate the total price once for performance.
     $cars.forEach((car) => car.calculateRentTotalPrice())
 

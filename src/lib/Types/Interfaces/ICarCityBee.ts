@@ -1,4 +1,5 @@
 import type { ICar } from './ICar'
+import {ICarCityBeePricePackage} from "./ICityBeePricePackage";
 
 export interface ICarCityBee extends ICar {
   serviceId: number
@@ -10,14 +11,9 @@ export interface ICarCityBee extends ICar {
     day: number
     week: number
     month: number
+    minimum: number
   }
-  package: {
-    km: number
-    minute: number
-    hour: number
-    day: number
-    base: number
-  }
+  packages: ICarCityBeePricePackage[]
   category: string
   gearbox: string
   coordinates: { serviceId: number; carId: number; lat: number; lng: number }[]
