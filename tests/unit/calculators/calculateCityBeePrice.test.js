@@ -1,20 +1,20 @@
 import cars from "../../../static/data/citybee.json";
 import calculateCityBeePrice from "../../../src/helpers/Calculators/CalculateCityBeePrice";
-import {SearchParamsObj} from "../../../src/lib/DTO/SearchParamsObj";
+import {minutes, days, hours} from "../../../src/lib/Store/DurationStore";
+import {totalKilometres} from "../../../src/lib/Store/TotalKilometresStore";
 
 describe("CityBee price calculator", function () {
 
   test("Volkswagen T-Roc - 30min", async () => {
     // ARRANGE
     const car = JSON.parse(JSON.stringify(cars.find(car => car.name === "Volkswagen T-Roc")))
-    const searchParamsObj = new SearchParamsObj();
-    searchParamsObj.distance = 0;
-    searchParamsObj.days = 0;
-    searchParamsObj.hours = 0;
-    searchParamsObj.minutes = 30;
+    totalKilometres.set(0)
+    days.set(0)
+    hours.set(0)
+    minutes.set(30)
 
     // ACT
-    let result = calculateCityBeePrice(car, searchParamsObj);
+    let result = calculateCityBeePrice(car);
 
     // ASSERT
     expect(result).toBe(5.3);

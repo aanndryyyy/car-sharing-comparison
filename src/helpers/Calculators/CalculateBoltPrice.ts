@@ -1,15 +1,16 @@
 import { get } from 'svelte/store'
-import { totalKilometres } from '$lib/Store/TotalKilometresStore'
+import { totalKilometres } from '../../lib/Store/TotalKilometresStore'
 import {
   days as storeDays,
   hours as storeHours,
   minutes as storeMinutes,
-} from '$lib/Store/DurationStore'
+} from '../../lib/Store/DurationStore'
 
 import type { Car } from '../../lib/DTO/Car'
+import type { ICarBolt } from "../../lib/Types/Interfaces/ICarBolt";
 
 const calculateBoltPrice = (car: Car): number => {
-  const price = car.price
+  const price = (car as ICarBolt).price
   let distance = get(totalKilometres)
   let days = get(storeDays)
   let hours = get(storeHours)
@@ -43,11 +44,10 @@ const calculateBoltPrice = (car: Car): number => {
     }
   }
   let totalCost = distanceCost + daysCost + hoursCost + minutesCost
-  if (totalCost < (price.min ?? 1.99)) {
-    totalCost = price.min ?? 1.99
+  if (totalCost < price.minimum) {
+    totalCost = price.minimum
   }
   return totalCost
-  // { price: totalCost, preOrder: -1 };
 }
 
 export default calculateBoltPrice

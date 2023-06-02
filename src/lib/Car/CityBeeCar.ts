@@ -35,13 +35,12 @@ import Fiat_Multipla from '$lib/Images/Providers/Citybee/Cars/Fiat-Multipla.png'
 import BMW_118i from '$lib/Images/Providers/Citybee/Cars/BMW-118i.png'
 import Fiat_500e from '$lib/Images/Providers/Citybee/Cars/Fiat-500e.png'
 import Peugeot_308 from '$lib/Images/Providers/Citybee/Cars/Peugeot-308.png'
-import GenericCar from './GenericCar'
 import GenericMappableCar from './GenericMappableCar'
+import calculateCityBeePrice from "../../helpers/Calculators/CalculateCityBeePrice";
 
 export default class CityBeeCar extends GenericMappableCar<ICarCityBee> {
   calculateRentTotalPrice(): void {
-    //this.rentTotalPrice = calculateCityBeePrice(this.carData, searchParamsObj)
-    this.rentTotalPrice = 100
+    this.rentTotalPrice = calculateCityBeePrice(this.carData as ICarCityBee)
   }
 
   /**
