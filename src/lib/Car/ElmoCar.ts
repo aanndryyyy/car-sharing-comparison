@@ -1,8 +1,5 @@
 import ElmoLogo from '$lib/Images/elmo.png'
-import type { SvelteComponent } from 'svelte'
-import ElmoCarPopover from '$lib/Popovers/ElmoCarPopover.svelte'
 import type { ICarElmo } from '$lib/Types/Interfaces/ICarElmo'
-import { Provider } from '../Types/Enums/Provider'
 import No_image_available from '$lib/Images/no-image-available.png'
 import Nissan_Leaf from '$lib/Images/Providers/Elmo/Cars/Nissan-Leaf.png'
 import Peugeot_e_208_GT from '$lib/Images/Providers/Elmo/Cars/Peugeot-e-208-GT.png'
@@ -15,11 +12,15 @@ import Tesla_Model_Y from '$lib/Images/Providers/Elmo/Cars/Tesla-Model-Y.png'
 import Toyota_Yaris_Hybrid from '$lib/Images/Providers/Elmo/Cars/Toyota-Yaris-Hybrid.png'
 import VW_e_Up20 from '$lib/Images/Providers/Elmo/Cars/VW-e-Up20.png'
 import GenericCar from './GenericCar'
+import { SearchParamsObj } from '../DTO/SearchParamsObj'
+import calculateElmoPrice from '../../helpers/Calculators/CalculateElmoPrice'
 
 export default class ElmoCar extends GenericCar<ICarElmo> {
-  calculateRentTotalPrice(): void {
-    //this.rentTotalPrice = calculateElmoPrice(this.carData, searchParamsObj)
-    this.rentTotalPrice = 10000
+  calculateRentTotalPrice(searchParamsObj: SearchParamsObj): void {
+    this.rentTotalPrice = calculateElmoPrice(
+      this.carData as ICarElmo,
+      searchParamsObj
+    )
   }
 
   /**

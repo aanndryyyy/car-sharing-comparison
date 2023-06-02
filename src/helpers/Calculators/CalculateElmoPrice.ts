@@ -2,11 +2,12 @@ import { calculateTime } from './CalculatorHelper'
 import type { SearchParamsObj } from '../../lib/DTO/SearchParamsObj'
 import { ElmoCheapestPackage } from '../../lib/DTO/ElmoCheapestPackage'
 import { ElmoPackageCalculatingData } from '../../lib/DTO/ElmoPackageCalculatingData'
-import { PackageName } from '../../lib/Types/Enums/PackageName'
-import type { ICar } from '../../lib/Types/Interfaces/ICar'
+import type { ICarElmo } from '../../lib/Types/Interfaces/ICarElmo'
+import type { ICarRentPrice } from '../../lib/Types/Interfaces/ICarRentPrice'
+import type { ICarRentPricePackage } from '../../lib/Types/Interfaces/ICarRentPricePackage'
 
 const calculateElmoPrice = (
-  car: ICar,
+  car: ICarElmo,
   searchParamsObj: SearchParamsObj
 ): number => {
   if (car.packages.length < 2) throw 'Elmo package data broken!'
@@ -17,21 +18,22 @@ const calculateElmoPrice = (
   } else {
     distanceCost = searchParamsObj.distance * price.km
   }
-  const totalTime =
-    searchParamsObj.days * 24 * 60 +
-    searchParamsObj.hours * 60 +
-    searchParamsObj.minutes
+  const totalTime = searchParamsObj.getDuration()
 
   // Time
-  let { daysCost, hoursCost, minutesCost } = calculateTime(totalTime, price)
+  let { daysCost, hoursCost, minutesCost } = calculateTime(
+    totalTime,
+    price as ICarRentPrice
+  )
   // Calculate if weeks or months package comes cheaper
   const elmoPackageCalculatingData: ElmoPackageCalculatingData =
     new ElmoPackageCalculatingData()
   elmoPackageCalculatingData.timeLeft = totalTime
   elmoPackageCalculatingData.distanceLeft = searchParamsObj.distance
-  elmoPackageCalculatingData.price = price
-  elmoPackageCalculatingData.weekPrice = car.packages[0]
-  elmoPackageCalculatingData.monthPrice = car.packages[1]
+  elmoPackageCalculatingData.price = price as ICarRentPrice
+  elmoPackageCalculatingData.weekPrice = car.packages[0] as ICarRentPricePackage
+  elmoPackageCalculatingData.monthPrice = car
+    .packages[1] as ICarRentPricePackage
 
   const cheapestPackage: ElmoCheapestPackage = _calculateCheapestPackages(
     elmoPackageCalculatingData,
@@ -44,13 +46,10 @@ const calculateElmoPrice = (
     (cheapestPackage.months > 0 || cheapestPackage.weeks > 0) &&
     cheapestPackage.price < distanceCost + daysCost + hoursCost + minutesCost
   ) {
-    const carMonthPackage = car.packages.find(
-      (p) => p.name === PackageName.MONTH
-    )
-    const carWeekPackage = car.packages.find((p) => p.name === PackageName.WEEK)
-
-    monthsCost = cheapestPackage.months * carMonthPackage!.price
-    weeksCost = cheapestPackage.weeks * carWeekPackage!.price
+    monthsCost =
+      cheapestPackage.months * elmoPackageCalculatingData.monthPrice!.price
+    weeksCost =
+      cheapestPackage.weeks * elmoPackageCalculatingData.weekPrice!.price
     daysCost = cheapestPackage.withNormalPricing.daysCost
     hoursCost = cheapestPackage.withNormalPricing.hoursCost
     minutesCost = cheapestPackage.withNormalPricing.minutesCost
@@ -59,25 +58,13 @@ const calculateElmoPrice = (
   let totalCost =
     monthsCost + weeksCost + daysCost + hoursCost + minutesCost + distanceCost
 
-  if (price.min && totalCost < price.min) {
-    totalCost = price.min
+  if (price.minimum && totalCost < price.minimum) {
+    totalCost = price.minimum
   }
-  // if (car.name === "Tesla Model 3 SR+" && totalCost < 30) {
-  //   totalCost = 30;
-  // }
 
   return totalCost
-  // {
-  //   package: {
-  //     ...this.cheapest,
-  //     distance: this.cheapest.months * 3000 + this.cheapest.weeks * 700,
-  //   },
-  //   preOrder: Math.max(0, 10 - totalCost),
-  //   price: totalCost,
-  // };
 }
 
-// TODO this function need refactor
 // Global variable to calculate weeks and months
 const _calculateCheapestPackages = (
   calculatingData: ElmoPackageCalculatingData,

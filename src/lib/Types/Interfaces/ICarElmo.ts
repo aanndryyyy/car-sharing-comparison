@@ -4,30 +4,19 @@ export interface ICarElmo extends ICar {
   serviceId: number
   type: string
   price: {
-    km: {
-      base: number
-      after100: number
-    }
+    km: number
     minute: number
     hour: number
     day: number
-    week: {
-      price: number
-      km: {
-        included: number
-        priceAfter: number
-      }
-    }
-    month: {
-      price: number
-      km: {
-        included: number
-        priceAfter: number
-      }
-    }
     minimum: number
-    start: number
   }
+  packages: [
+    {
+      days: number
+      distance: number
+      price: number
+    }
+  ]
   priceWithCustomerCard: {
     km: number
     hour: number
