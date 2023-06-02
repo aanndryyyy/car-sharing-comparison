@@ -36,11 +36,15 @@ import BMW_118i from '$lib/Images/Providers/Citybee/Cars/BMW-118i.png'
 import Fiat_500e from '$lib/Images/Providers/Citybee/Cars/Fiat-500e.png'
 import Peugeot_308 from '$lib/Images/Providers/Citybee/Cars/Peugeot-308.png'
 import GenericMappableCar from './GenericMappableCar'
-import calculateCityBeePrice from "../../helpers/Calculators/CalculateCityBeePrice";
+import calculateCityBeePrice from '../../helpers/Calculators/CalculateCityBeePrice'
+import { SearchParamsObj } from '../DTO/SearchParamsObj'
 
 export default class CityBeeCar extends GenericMappableCar<ICarCityBee> {
-  calculateRentTotalPrice(): void {
-    this.rentTotalPrice = calculateCityBeePrice(this.carData as ICarCityBee)
+  calculateRentTotalPrice(searchParamsObj: SearchParamsObj): void {
+    this.rentTotalPrice = calculateCityBeePrice(
+      this.carData as ICarCityBee,
+      searchParamsObj
+    )
   }
 
   /**

@@ -7,6 +7,7 @@ import type { ICarBeast } from '$lib/Types/Interfaces/ICarBeast'
 import type { ICarCityBee } from '$lib/Types/Interfaces/ICarCityBee'
 import type { ICarElmo } from '$lib/Types/Interfaces/ICarElmo'
 import type { Provider } from '$lib/Types/Enums/Provider'
+import type { ISearchParamsObj } from '../Types/Interfaces/ISearchParamsObj'
 
 export type CarData = ICarBolt | ICarCityBee | ICarElmo | ICarBeast
 export type Car = BoltCar | CityBeeCar | ElmoCar | BeastCar
@@ -69,7 +70,7 @@ export default abstract class GenericCar<
    * @returns The price.
    * @param searchParamsObj
    */
-  abstract calculateRentTotalPrice(): void
+  abstract calculateRentTotalPrice(searchParamsObj: ISearchParamsObj): void
 
   /**
    * Get the logo.

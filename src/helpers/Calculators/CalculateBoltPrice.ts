@@ -1,46 +1,41 @@
-import { get } from 'svelte/store'
-import { totalKilometres } from '../../lib/Store/TotalKilometresStore'
-import {
-  days as storeDays,
-  hours as storeHours,
-  minutes as storeMinutes,
-} from '../../lib/Store/DurationStore'
-
 import type { Car } from '../../lib/DTO/Car'
-import type { ICarBolt } from "../../lib/Types/Interfaces/ICarBolt";
+import type { ICarBolt } from '../../lib/Types/Interfaces/ICarBolt'
+import type { SearchParamsObj } from '../../lib/DTO/SearchParamsObj'
 
-const calculateBoltPrice = (car: Car): number => {
+const calculateBoltPrice = (
+  car: Car,
+  searchParamsObj: SearchParamsObj
+): number => {
   const price = (car as ICarBolt).price
-  let distance = get(totalKilometres)
-  let days = get(storeDays)
-  let hours = get(storeHours)
-  let minutes = get(storeMinutes)
-
-  const distanceCost = distance * price.km
+  const distanceCost = searchParamsObj.distance * price.km
 
   // Days
   let daysCost = 0
-  if (days >= 1) {
-    daysCost += days * price.day
+  if (searchParamsObj.days >= 1) {
+    daysCost += searchParamsObj.days * price.day
   }
   // Hours
   let hoursCost = 0
-  if (hours >= 1) {
-    if (hours * price.hour + minutes * price.minute > price.day) {
+  if (searchParamsObj.hours >= 1) {
+    if (
+      searchParamsObj.hours * price.hour +
+        searchParamsObj.minutes * price.minute >
+      price.day
+    ) {
       daysCost += price.day
-      hours = 0
-      minutes = 0
+      searchParamsObj.hours = 0
+      searchParamsObj.minutes = 0
     } else {
-      hoursCost += hours * price.hour
+      hoursCost += searchParamsObj.hours * price.hour
     }
   }
   // Minutes
   let minutesCost = 0
-  if (minutes >= 1) {
-    if (minutes * price.minute > price.hour) {
+  if (searchParamsObj.minutes >= 1) {
+    if (searchParamsObj.minutes * price.minute > price.hour) {
       hoursCost += price.hour
     } else {
-      minutesCost += minutes * price.minute
+      minutesCost += searchParamsObj.minutes * price.minute
     }
   }
   let totalCost = distanceCost + daysCost + hoursCost + minutesCost

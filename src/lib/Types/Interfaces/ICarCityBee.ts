@@ -1,5 +1,5 @@
 import type { ICar } from './ICar'
-import {ICarCityBeePricePackage} from "./ICityBeePricePackage";
+import { ICarCityBeePricePackage } from './ICityBeePricePackage'
 
 export interface ICarCityBee extends ICar {
   serviceId: number

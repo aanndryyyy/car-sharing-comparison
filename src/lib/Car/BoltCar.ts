@@ -1,11 +1,7 @@
-import type BaseCar from './GenericCar'
-
 import BoltLogo from '$lib/Images/bolt.png'
-import type { SvelteComponent } from 'svelte'
-import BoltCarPopover from '$lib/Popovers/BoltCarPopover.svelte'
 import calculateBoltPrice from '../../helpers/Calculators/CalculateBoltPrice'
 import type { ICarBolt } from '$lib/Types/Interfaces/ICarBolt'
-import { Provider } from '../Types/Enums/Provider'
+
 import No_image_available from '$lib/Images/no-image-available.png'
 import Audi_A1 from '$lib/Images/Providers/Bolt/Cars/Audi-A1.png'
 import Audi_A3 from '$lib/Images/Providers/Bolt/Cars/Audi-A3.png'
@@ -44,13 +40,14 @@ import VW_T_Roc from '$lib/Images/Providers/Bolt/Cars/VW-T-Roc.png'
 import VW_T_Roc_Cabrio from '$lib/Images/Providers/Bolt/Cars/VW-T-Roc-Cabrio.png'
 import GenericCar from './GenericCar'
 import GenericMappableCar from './GenericMappableCar'
+import { SearchParamsObj } from '../DTO/SearchParamsObj'
 
 export default class BoltCar extends GenericMappableCar<ICarBolt> {
   /**
    * @inheritdoc
    */
-  calculateRentTotalPrice(): void {
-    this.rentTotalPrice = calculateBoltPrice(this.carData)
+  calculateRentTotalPrice(searchParamsObj: SearchParamsObj): void {
+    this.rentTotalPrice = calculateBoltPrice(this.carData, searchParamsObj)
   }
 
   /**

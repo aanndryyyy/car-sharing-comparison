@@ -1,354 +1,772 @@
 [
   {
-    "name": "Toyota Corolla",
-    "bodyType": "HATCHBACK",
-    "motorType": "HYBRID",
-    "petFriendly": true,
-    "gearbox": "AUTOMATIC",
-    "imageUrl": "providers/bolt/cars/Toyota-Corolla.png",
-    "price": {
-      "km": 0.24,
-      "minute": 0.14,
-      "hour": 5.89,
-      "day": 27.9
+    "serviceId":1,
+    "name":"VW T-Cross",
+    "imageUrl":"https://images.bolt.eu/store/2023/2023-04-11/12f99a74-edcf-4e22-a6a8-d75a49a31400.png",
+    "price":{
+      "km":0.25,
+      "minute":0.16,
+      "hour":6.99,
+      "day":19.9,
+      "minimum":3.29
+    },
+    "bodyType":"1",
+    "gearbox":"Automatic",
+    "petFriendly":true,
+    "coordinates":[
+
+    ],
+    "packages":[
+
+    ],
+    "motorType":"PETROL"
+  },
+  {
+    "serviceId":3,
+    "name":"Toyota Yaris",
+    "imageUrl":"https://images.bolt.eu/store/2022/2022-05-25/f425e81e-bf9a-4696-bbfd-ffa5e4ff8c4c.png",
+    "price":{
+      "km":0.25,
+      "minute":0.13,
+      "hour":5.99,
+      "day":19.9,
+      "minimum":3.29
+    },
+    "bodyType":"1",
+    "gearbox":"Automatic",
+    "petFriendly":true,
+    "coordinates":[
+
+    ],
+    "packages":[
+
+    ],
+    "motorType":"PETROL"
+  },
+  {
+    "serviceId":6,
+    "name":"Toyota C-HR",
+    "imageUrl":"https://images.bolt.eu/store/2022/2022-05-25/891038e8-69f8-4906-97b9-75bad3a9c37a.png",
+    "price":{
+      "km":0.25,
+      "minute":0.16,
+      "hour":6.99,
+      "day":19.9,
+      "minimum":3.29
+    },
+    "bodyType":"1",
+    "gearbox":"Automatic",
+    "petFriendly":true,
+    "coordinates":[
+
+    ],
+    "packages":[
+
+    ],
+    "motorType":"PETROL"
+  },
+  {
+    "serviceId":9,
+    "name":"VW T-Roc",
+    "imageUrl":"https://images.bolt.eu/rentals/car_models/troc_grey.png",
+    "price":{
+      "km":0.25,
+      "minute":0.16,
+      "hour":6.99,
+      "day":19.9,
+      "minimum":3.29
+    },
+    "bodyType":"1",
+    "gearbox":"Automatic",
+    "petFriendly":true,
+    "coordinates":[
+
+    ],
+    "packages":[
+
+    ],
+    "motorType":"PETROL"
+  },
+  {
+    "serviceId":15,
+    "name":"VW Arteon",
+    "imageUrl":"https://images.bolt.eu/rentals/car_models/arteon_red.png",
+    "price":{
+      "km":0.26,
+      "minute":0.3,
+      "hour":13.9,
+      "day":45.9,
+      "minimum":3.29
+    },
+    "bodyType":"3",
+    "gearbox":"Automatic",
+    "petFriendly":true,
+    "coordinates":[
+
+    ],
+    "packages":[
+
+    ],
+    "motorType":"PETROL"
+  },
+  {
+    "serviceId":18,
+    "name":"VW Crafter",
+    "imageUrl":"https://images.bolt.eu/rentals/car_models/vw_crafter_white.png",
+    "price":{
+      "km":0.27,
+      "minute":0.15,
+      "hour":6.9,
+      "day":39.9,
+      "minimum":3.29
+    },
+    "bodyType":"5",
+    "gearbox":"Manual",
+    "petFriendly":true,
+    "coordinates":[
+
+    ],
+    "packages":[
+
+    ],
+    "motorType":"PETROL"
+  },
+  {
+    "serviceId":24,
+    "name":"VW T-Roc Cabrio",
+    "imageUrl":"https://images.bolt.eu/rentals/car_models/vw_troc_cabrio_blue_v2.png",
+    "price":{
+      "km":0.25,
+      "minute":0.23,
+      "hour":11.9,
+      "day":44.9,
+      "minimum":3.29
+    },
+    "bodyType":"1",
+    "gearbox":"Automatic",
+    "petFriendly":true,
+    "coordinates":[
+
+    ],
+    "packages":[
+
+    ],
+    "motorType":"PETROL"
+  },
+  {
+    "serviceId":60,
+    "name":"Toyota Land Cruiser",
+    "imageUrl":"https://images.bolt.eu/store/2022/2022-02-14/1f86602a-bcb9-43fb-b810-0d62dc94d725.png",
+    "price":{
+      "km":0.29,
+      "minute":0.39,
+      "hour":16.89,
+      "day":64.9,
+      "minimum":3.29
+    },
+    "bodyType":"3",
+    "gearbox":"Automatic",
+    "petFriendly":true,
+    "coordinates":[
+
+    ],
+    "packages":[
+
+    ],
+    "motorType":"PETROL"
+  },
+  {
+    "serviceId":61,
+    "name":"Audi A1",
+    "imageUrl":"https://images.bolt.eu/store/2022/2022-04-20/bebded59-2990-4bc7-8908-072faa1c2fa9.png",
+    "price":{
+      "km":0.24,
+      "minute":0.16,
+      "hour":7.99,
+      "day":19.9,
+      "minimum":3.29
+    },
+    "bodyType":"1",
+    "gearbox":"Automatic",
+    "petFriendly":true,
+    "coordinates":[
+
+    ],
+    "packages":[
+
+    ],
+    "motorType":"PETROL"
+  },
+  {
+    "serviceId":62,
+    "name":"Audi A3",
+    "imageUrl":"https://images.bolt.eu/store/2022/2022-04-20/526254e8-3ad8-470d-8b8f-693ce77f3972.png",
+    "price":{
+      "km":0.25,
+      "minute":0.18,
+      "hour":7.99,
+      "day":19.9,
+      "minimum":3.29
+    },
+    "bodyType":"1",
+    "gearbox":"Automatic",
+    "petFriendly":true,
+    "coordinates":[
+
+    ],
+    "packages":[
+
+    ],
+    "motorType":"PETROL"
+  },
+  {
+    "serviceId":63,
+    "name":"Audi Q2",
+    "imageUrl":"https://images.bolt.eu/store/2022/2022-04-20/4efda9a2-90f6-4d2f-8e05-3ed6de45fb61.png",
+    "price":{
+      "km":0.25,
+      "minute":0.17,
+      "hour":7.99,
+      "day":19.9,
+      "minimum":3.29
+    },
+    "bodyType":"1",
+    "gearbox":"Automatic",
+    "petFriendly":true,
+    "coordinates":[
+
+    ],
+    "packages":[
+
+    ],
+    "motorType":"PETROL"
+  },
+  {
+    "serviceId":64,
+    "name":"Audi e-tron",
+    "imageUrl":"https://images.bolt.eu/store/2022/2022-04-20/523b7e6a-cbb4-4ef3-a221-7fc405131b9f.png",
+    "price":{
+      "km":0.25,
+      "minute":0.69,
+      "hour":39.9,
+      "day":149.9,
+      "minimum":3.29
+    },
+    "bodyType":"3",
+    "gearbox":"Automatic",
+    "petFriendly":true,
+    "coordinates":[
+
+    ],
+    "packages":[
+
+    ],
+    "motorType":"PETROL"
+  },
+  {
+    "serviceId":65,
+    "name":"Škoda Fabia",
+    "imageUrl":"https://images.bolt.eu/store/2022/2022-05-25/839c7880-6862-4488-8bdd-6c22825c6bf9.png",
+    "price":{
+      "km":0.25,
+      "minute":0.15,
+      "hour":6.29,
+      "day":19.9,
+      "minimum":3.29
+    },
+    "bodyType":"1",
+    "gearbox":"Automatic",
+    "petFriendly":true,
+    "coordinates":[
+
+    ],
+    "packages":[
+
+    ],
+    "motorType":"PETROL"
+  },
+  {
+    "serviceId":67,
+    "name":"Hyundai i20",
+    "imageUrl":"https://images.bolt.eu/store/2021/2021-08-04/91e9ae2d-2b00-489f-80b0-368c9c57af41.png",
+    "price":{
+      "km":0.25,
+      "minute":0.13,
+      "hour":5.99,
+      "day":19.9,
+      "minimum":3.29
+    },
+    "bodyType":"1",
+    "gearbox":"Automatic",
+    "petFriendly":true,
+    "coordinates":[
+
+    ],
+    "packages":[
+
+    ],
+    "motorType":"PETROL"
+  },
+  {
+    "serviceId":68,
+    "name":"Mercedes Sprinter",
+    "imageUrl":"https://images.bolt.eu/store/2022/2022-06-02/57c2f81c-a9a5-49f0-a818-b18dba854633.png",
+    "price":{
+      "km":0.28,
+      "minute":0.17,
+      "hour":9.9,
+      "day":44.9,
+      "minimum":3.29
+    },
+    "bodyType":"5",
+    "gearbox":"Manual",
+    "petFriendly":true,
+    "coordinates":[
+
+    ],
+    "packages":[
+
+    ],
+    "motorType":"PETROL"
+  },
+  {
+    "serviceId":69,
+    "name":"Toyota Corolla",
+    "imageUrl":"https://images.bolt.eu/store/2022/2022-07-08/455bd1fc-9e91-4fd0-97a3-af7706cee2bb.png",
+    "price":{
+      "km":0.25,
+      "minute":0.15,
+      "hour":6.29,
+      "day":19.9,
+      "minimum":3.29
+    },
+    "bodyType":"1",
+    "gearbox":"Automatic",
+    "petFriendly":true,
+    "coordinates":[
+
+    ],
+    "packages":[
+
+    ],
+    "motorType":"PETROL"
+  },
+  {
+    "serviceId":70,
+    "name":"Toyota Yaris Cross",
+    "imageUrl":"https://images.bolt.eu/store/2022/2022-07-28/620bdf8c-6ef3-421c-a59a-be75029e58d0.png",
+    "price":{
+      "km":0.25,
+      "minute":0.16,
+      "hour":6.99,
+      "day":19.9,
+      "minimum":3.29
+    },
+    "bodyType":"1",
+    "gearbox":"Automatic",
+    "petFriendly":true,
+    "coordinates":[
+
+    ],
+    "packages":[
+
+    ],
+    "motorType":"PETROL"
+  },
+  {
+    "serviceId":91,
+    "name":"Toyota Corolla",
+    "imageUrl":"https://images.bolt.eu/store/2022/2022-07-08/455bd1fc-9e91-4fd0-97a3-af7706cee2bb.png",
+    "price":{
+      "km":0.25,
+      "minute":0.15,
+      "hour":6.29,
+      "day":19.9,
+      "minimum":3.29
+    },
+    "bodyType":"1",
+    "gearbox":"Automatic",
+    "petFriendly":true,
+    "coordinates":[
+
+    ],
+    "packages":[
+
+    ],
+    "motorType":"PETROL"
+  },
+  {
+    "serviceId":93,
+    "name":"Toyota Yaris",
+    "imageUrl":"https://images.bolt.eu/store/2022/2022-05-25/0d0b0d5f-627a-4bf6-b9a4-88071a680599.png",
+    "price":{
+      "km":0.25,
+      "minute":0.13,
+      "hour":5.99,
+      "day":19.9,
+      "minimum":3.29
+    },
+    "bodyType":"1",
+    "gearbox":"Automatic",
+    "petFriendly":true,
+    "coordinates":[
+
+    ],
+    "packages":[
+
+    ],
+    "motorType":"PETROL"
+  },
+  {
+    "serviceId":94,
+    "name":"Toyota Yaris Cross",
+    "imageUrl":"https://images.bolt.eu/store/2022/2022-07-28/620bdf8c-6ef3-421c-a59a-be75029e58d0.png",
+    "price":{
+      "km":0.25,
+      "minute":0.16,
+      "hour":6.99,
+      "day":19.9,
+      "minimum":3.29
+    },
+    "bodyType":"1",
+    "gearbox":"Automatic",
+    "petFriendly":true,
+    "coordinates":[
+
+    ],
+    "packages":[
+
+    ],
+    "motorType":"PETROL"
+  },
+  {
+    "serviceId":95,
+    "name":"Toyota C-HR",
+    "imageUrl":"https://images.bolt.eu/store/2022/2022-05-25/891038e8-69f8-4906-97b9-75bad3a9c37a.png",
+    "price":{
+      "km":0.25,
+      "minute":0.16,
+      "hour":6.99,
+      "day":19.9,
+      "minimum":3.29
+    },
+    "bodyType":"1",
+    "gearbox":"Automatic",
+    "petFriendly":true,
+    "coordinates":[
+
+    ],
+    "packages":[
+
+    ],
+    "motorType":"PETROL"
+  },
+  {
+    "serviceId":104,
+    "name":"Škoda Scala",
+    "imageUrl":"https://images.bolt.eu/rentals/car_models/scala_black.png",
+    "price":{
+      "km":0.25,
+      "minute":0.15,
+      "hour":6.29,
+      "day":19.9,
+      "minimum":3.29
+    },
+    "bodyType":"1",
+    "gearbox":"Automatic",
+    "petFriendly":true,
+    "coordinates":[
+
+    ],
+    "packages":[
+
+    ],
+    "motorType":"PETROL"
+  },
+  {
+    "serviceId":107,
+    "name":"Toyota Highlander",
+    "imageUrl":"https://images.bolt.eu/store/2022/2022-11-23/39c98344-673d-4013-a197-6f08d40e5c47.png",
+    "price":{
+      "km":0.28,
+      "minute":0.3,
+      "hour":15.9,
+      "day":39.89,
+      "minimum":3.29
+    },
+    "bodyType":"3",
+    "gearbox":"Automatic",
+    "petFriendly":true,
+    "coordinates":[
+
+    ],
+    "packages":[
+
+    ],
+    "motorType":"PETROL"
+  },
+  {
+    "serviceId":108,
+    "name":"Škoda Kamiq",
+    "imageUrl":"https://images.bolt.eu/rentals/car_models/kamiq_white.png",
+    "price":{
+      "km":0.25,
+      "minute":0.16,
+      "hour":6.99,
+      "day":19.9,
+      "minimum":3.29
+    },
+    "bodyType":"1",
+    "gearbox":"Automatic",
+    "petFriendly":true,
+    "coordinates":[
+
+    ],
+    "packages":[
+
+    ],
+    "motorType":"PETROL"
+  },
+  {
+    "serviceId":130,
+    "name":"Kia Picanto",
+    "imageUrl":"https://images.bolt.eu/store/2023/2023-03-01/f0eb5264-6450-47a5-89b1-3e7e1edf9216.png",
+    "price":{
+      "km":0.22,
+      "minute":0.13,
+      "hour":4.99,
+      "day":27.89,
+      "minimum":3.29
+    },
+    "bodyType":"1",
+    "gearbox":"Automatic",
+    "petFriendly":true,
+    "coordinates":[
+
+    ],
+    "packages":[
+
+    ],
+    "motorType":"PETROL"
+  },
+  {
+    "serviceId":137,
+    "name":"Renault Captur",
+    "imageUrl":"https://images.bolt.eu/store/2022/2022-10-28/ea2cb2c3-65a2-48b9-8bf1-16b56f02144e.png",
+    "price":{
+      "km":0.24,
+      "minute":0.18,
+      "hour":8.89,
+      "day":34.9,
+      "minimum":3.29
+    },
+    "bodyType":"1",
+    "gearbox":"Automatic",
+    "petFriendly":true,
+    "coordinates":[
+
+    ],
+    "packages":[
+
+    ],
+    "motorType":"PETROL"
+  },
+  {
+    "serviceId":138,
+    "name":"Tesla Model Y",
+    "price":{
+      "km":0.27,
+      "minute":0.69,
+      "hour":39.9,
+      "day":159.9,
+      "minimum":4.9
     }
   },
   {
-    "name": "Audi A1",
-    "bodyType": "HATCHBACK",
-    "motorType": "PETROL",
-    "petFriendly": true,
-    "gearbox": "AUTOMATIC",
-    "imageUrl": "providers/bolt/cars/Audi-A1.png",
-    "price": {
-      "km": 0.22,
-      "minute": 0.16,
-      "hour": 7.99,
-      "day": 30.9
+    "serviceId":139,
+    "name":"Audi A4",
+    "imageUrl":"https://images.bolt.eu/store/2023/2023-02-21/8b5efd47-f1f2-434f-bf15-739ec657a8ca.png",
+    "price":{
+      "km":0.25,
+      "minute":0.25,
+      "hour":12.9,
+      "day":39.9,
+      "minimum":3.29
+    },
+    "bodyType":"3",
+    "gearbox":"Automatic",
+    "petFriendly":true,
+    "coordinates":[
+
+    ],
+    "packages":[
+
+    ],
+    "motorType":"PETROL"
+  },
+  {
+    "serviceId":140,
+    "name":"Audi A5",
+    "imageUrl":"https://images.bolt.eu/store/2023/2023-02-21/6760affe-390a-4020-b305-e665d062bd4a.png",
+    "price":{
+      "km":0.26,
+      "minute":0.28,
+      "hour":14.99,
+      "day":49.99,
+      "minimum":3.29
+    },
+    "bodyType":"3",
+    "gearbox":"Automatic",
+    "petFriendly":true,
+    "coordinates":[
+
+    ],
+    "packages":[
+
+    ],
+    "motorType":"PETROL"
+  },
+  {
+    "serviceId":144,
+    "name":"Toyota Corolla",
+    "imageUrl":"https://images.bolt.eu/store/2023/2023-03-01/872700fa-16be-4145-854b-649d0482d90e.png",
+    "price":{
+      "km":0.25,
+      "minute":0.15,
+      "hour":6.29,
+      "day":29.89,
+      "minimum":3.29
+    },
+    "bodyType":"1",
+    "gearbox":"Automatic",
+    "petFriendly":true,
+    "coordinates":[
+
+    ],
+    "packages":[
+
+    ],
+    "motorType":"PETROL"
+  },
+  {
+    "serviceId":147,
+    "name":"Hyundai i30",
+    "imageUrl":"https://images.bolt.eu/store/2023/2023-03-01/5355f450-661a-44d5-8dbf-63893782c688.png",
+    "price":{
+      "km":0.25,
+      "minute":0.15,
+      "hour":6.29,
+      "day":19.9,
+      "minimum":3.29
+    },
+    "bodyType":"1",
+    "gearbox":"Automatic",
+    "petFriendly":true,
+    "coordinates":[
+
+    ],
+    "packages":[
+
+    ],
+    "motorType":"PETROL"
+  },
+  {
+    "serviceId":149,
+    "name":"Porsche Taycan",
+    "price":{
+      "km":0.35,
+      "minute":1.99,
+      "hour":69,
+      "day":420,
+      "minimum":9.99
     }
   },
   {
-    "name": "Audi A3",
-    "bodyType": "HATCHBACK",
-    "motorType": "PETROL",
-    "petFriendly": true,
-    "gearbox": "AUTOMATIC",
-    "imageUrl": "providers/bolt/cars/Audi-A3.png",
-    "price": {
-      "km": 0.24,
-      "minute": 0.16,
-      "hour": 7.99,
-      "day": 30.9
-    }
+    "serviceId":150,
+    "name":"Renault Megane E-Tech",
+    "imageUrl":"https://images.bolt.eu/store/2023/2023-05-03/82cf2dd1-aa9a-442d-8b56-15b093697c47.png",
+    "price":{
+      "km":0.25,
+      "minute":0.22,
+      "hour":12.9,
+      "day":34.9,
+      "minimum":3.29
+    },
+    "bodyType":"3",
+    "gearbox":"Automatic",
+    "petFriendly":true,
+    "coordinates":[
+
+    ],
+    "packages":[
+
+    ],
+    "motorType":"PETROL"
   },
   {
-    "name": "Hyundai i20",
-    "bodyType": "HATCHBACK",
-    "motorType": "PETROL",
-    "petFriendly": true,
-    "gearbox": "AUTOMATIC",
-    "imageUrl": "providers/bolt/cars/Hyundai-i20.png",
-    "price": {
-      "km": 0.19,
-      "minute": 0.07,
-      "hour": 3.99,
-      "day": 19.9
-    }
+    "serviceId":151,
+    "name":"Peugeot 208",
+    "imageUrl":"https://images.bolt.eu/store/2023/2023-02-21/2acb41eb-7c8c-44c7-81c7-4fc10a5add54.png",
+    "price":{
+      "km":0.24,
+      "minute":0.15,
+      "hour":5.99,
+      "day":19.9,
+      "minimum":3.29
+    },
+    "bodyType":"1",
+    "gearbox":"Automatic",
+    "petFriendly":true,
+    "coordinates":[
+
+    ],
+    "packages":[
+
+    ],
+    "motorType":"PETROL"
   },
   {
-    "name": "Toyota Yaris",
-    "bodyType": "HATCHBACK",
-    "motorType": "HYBRID",
-    "petFriendly": true,
-    "gearbox": "AUTOMATIC",
-    "imageUrl": "providers/bolt/cars/Toyota-Yaris.png",
-    "price": {
-      "km": 0.19,
-      "minute": 0.07,
-      "hour": 3.99,
-      "day": 19.9
-    }
+    "serviceId":156,
+    "name":"Peugeot 2008",
+    "imageUrl":"https://images.bolt.eu/store/2023/2023-02-23/76bf5043-7e73-4d12-9691-0bddb9697c7e.png",
+    "price":{
+      "km":0.25,
+      "minute":0.17,
+      "hour":7.99,
+      "day":19.9,
+      "minimum":3.29
+    },
+    "bodyType":"1",
+    "gearbox":"Automatic",
+    "petFriendly":true,
+    "coordinates":[
+
+    ],
+    "packages":[
+
+    ],
+    "motorType":"PETROL"
   },
   {
-    "name": "Škoda Scala",
-    "bodyType": "TOURING",
-    "motorType": "PETROL",
-    "petFriendly": true,
-    "gearbox": "AUTOMATIC",
-    "imageUrl": "providers/bolt/cars/Skoda-Scala.png",
-    "price": {
-      "km": 0.19,
-      "minute": 0.07,
-      "hour": 3.99,
-      "day": 19.9
-    }
-  },
-  {
-    "name": "Škoda Fabia",
-    "bodyType": "HATCHBACK",
-    "motorType": "PETROL",
-    "petFriendly": true,
-    "gearbox": "AUTOMATIC",
-    "imageUrl": "providers/bolt/cars/Skoda-Fabia.png",
-    "price": {
-      "km": 0.19,
-      "minute": 0.07,
-      "hour": 3.99,
-      "day": 19.9
-    }
-  },
-  {
-    "name": "VW ID.3",
-    "bodyType": "HATCHBACK",
-    "motorType": "ELECTRIC",
-    "petFriendly": true,
-    "gearbox": "AUTOMATIC",
-    "imageUrl": "providers/bolt/cars/VW-ID3.png",
-    "price": {
-      "km": 0.19,
-      "minute": 0.14,
-      "hour": 7.39,
-      "day": 33.9
-    }
-  },
-  {
-    "name": "Toyota Yaris Cross",
-    "bodyType": "TOURING",
-    "motorType": "HYBRID",
-    "petFriendly": true,
-    "gearbox": "AUTOMATIC",
-    "imageUrl": "providers/bolt/cars/Toyota-Yaris-Cross.png",
-    "price": {
-      "km": 0.24,
-      "minute": 0.14,
-      "hour": 5.89,
-      "day": 27.9
-    }
-  },
-  {
-    "name": "VW T-Cross",
-    "bodyType": "TOURING",
-    "motorType": "PETROL",
-    "petFriendly": true,
-    "gearbox": "AUTOMATIC",
-    "imageUrl": "providers/bolt/cars/VW-T-Cross.png",
-    "price": {
-      "km": 0.24,
-      "minute": 0.15,
-      "hour": 6.79,
-      "day": 30.9
-    }
-  },
-  {
-    "name": "Audi Q2",
-    "bodyType": "TOURING",
-    "motorType": "PETROL",
-    "petFriendly": true,
-    "gearbox": "AUTOMATIC",
-    "imageUrl": "providers/bolt/cars/Audi-Q2.png",
-    "price": {
-      "km": 0.24,
-      "minute": 0.16,
-      "hour": 7.99,
-      "day": 30.9
-    }
-  },
-  {
-    "name": "VW T-Roc",
-    "bodyType": "TOURING",
-    "motorType": "PETROL",
-    "petFriendly": true,
-    "gearbox": "AUTOMATIC",
-    "imageUrl": "providers/bolt/cars/VW-T-Roc.png",
-    "price": {
-      "km": 0.24,
-      "minute": 0.15,
-      "hour": 6.79,
-      "day": 30.9
-    }
-  },
-  {
-    "name": "Škoda Kamiq",
-    "bodyType": "TOURING",
-    "motorType": "PETROL",
-    "petFriendly": true,
-    "gearbox": "AUTOMATIC",
-    "imageUrl": "providers/bolt/cars/Skoda-Kamiq.png",
-    "price": {
-      "km": 0.24,
-      "minute": 0.14,
-      "hour": 5.89,
-      "day": 27.9
-    }
-  },
-  {
-    "name": "Toyota C-HR",
-    "bodyType": "TOURING",
-    "motorType": "HYBRID",
-    "petFriendly": true,
-    "gearbox": "AUTOMATIC",
-    "imageUrl": "providers/bolt/cars/Toyota-C-HR.png",
-    "price": {
-      "km": 0.24,
-      "minute": 0.14,
-      "hour": 5.89,
-      "day": 27.9
-    }
-  },
-  {
-    "name": "Audi e-tron",
-    "bodyType": "TOURING",
-    "motorType": "ELECTRIC",
-    "petFriendly": false,
-    "gearbox": "AUTOMATIC",
-    "imageUrl": "providers/bolt/cars/Audi-e-tron.png",
-    "price": {
-      "km": 0.25,
-      "minute": 0.69,
-      "hour": 39.9,
-      "day": 149.9
-    }
-  },
-  {
-    "name": "Toyota RAV4",
-    "bodyType": "TOURING",
-    "motorType": "PETROL",
-    "petFriendly": false,
-    "gearbox": "AUTOMATIC",
-    "imageUrl": "providers/bolt/cars/Toyota-RAV4.png",
-    "price": {
-      "km": 0.25,
-      "minute": 0.3,
-      "hour": 12.9,
-      "day": 43.9
-    }
-  },
-  {
-    "name": "BMW 4 Convertible",
-    "bodyType": "CABRIOLET",
-    "motorType": "PETROL",
-    "petFriendly": false,
-    "gearbox": "AUTOMATIC",
-    "imageUrl": "providers/bolt/cars/BMW-4-Convertible.png",
-    "price": {
-      "km": 0.35,
-      "minute": 0.49,
-      "hour": 25,
-      "day": 119.9
-    }
-  },
-  {
-    "name": "VW T-Roc Cabrio",
-    "bodyType": "CABRIOLET",
-    "motorType": "PETROL",
-    "petFriendly": false,
-    "gearbox": "AUTOMATIC",
-    "imageUrl": "providers/bolt/cars/VW-T-Roc-Cabrio.png",
-    "price": {
-      "km": 0.25,
-      "minute": 0.3,
-      "hour": 16.9,
-      "day": 54.9
-    }
-  },
-  {
-    "name": "VW Arteon",
-    "bodyType": "TOURING",
-    "motorType": "PETROL",
-    "petFriendly": false,
-    "gearbox": "AUTOMATIC",
-    "imageUrl": "providers/bolt/cars/VW-Arteon.png",
-    "price": {
-      "km": 0.25,
-      "minute": 0.3,
-      "hour": 12.9,
-      "day": 43.9
-    }
-  },
-  {
-    "name": "Toyota Land Cruiser",
-    "bodyType": "TOURING",
-    "motorType": "PETROL",
-    "petFriendly": false,
-    "gearbox": "AUTOMATIC",
-    "imageUrl": "providers/bolt/cars/Toyota-Land-Cruiser.png",
-    "price": {
-      "km": 0.34,
-      "minute": 0.49,
-      "hour": 19.9,
-      "day": 79.9
-    }
-  },
-  {
-    "name": "Mercedes Sprinter",
-    "bodyType": "VAN",
-    "motorType": "PETROL",
-    "petFriendly": false,
-    "gearbox": "MANUAL",
-    "imageUrl": "providers/bolt/cars/Mercedes-Sprinter.png",
-    "price": {
-      "km": 0.27,
-      "minute": 0.15,
-      "hour": 6.9,
-      "day": 37.9
-    }
-  },
-  {
-    "name": "VW Crafter",
-    "bodyType": "VAN",
-    "motorType": "PETROL",
-    "petFriendly": false,
-    "gearbox": "MANUAL",
-    "imageUrl": "providers/bolt/cars/VW-e-Crafter.png",
-    "price": {
-      "km": 0.27,
-      "minute": 0.13,
-      "hour": 6.9,
-      "day": 35.9
-    }
-  },
-  {
-    "name": "VW e-Crafter",
-    "bodyType": "VAN",
-    "motorType": "ELECTRIC",
-    "petFriendly": false,
-    "gearbox": "MANUAL",
-    "imageUrl": "providers/bolt/cars/VW-e-Crafter.png",
-    "price": {
-      "km": 0.27,
-      "minute": 0.13,
-      "hour": 6.9,
-      "day": 35.9
-    }
-  },
-  {
-    "name": "Audi Q8",
-    "bodyType": "TOURING",
-    "motorType": "PETROL",
-    "petFriendly": false,
-    "gearbox": "AUTOMATIC",
-    "imageUrl": "providers/bolt/cars/Audi-Q8.png",
-    "price": {
-      "min": 7.99,
-      "km": 0.35,
-      "minute": 0.84,
-      "hour": 49.9,
-      "day": 249
-    }
-  },
-  {
-    "name": "Audi Q5",
-    "bodyType": "TOURING",
-    "motorType": "PETROL",
-    "petFriendly": false,
-    "gearbox": "AUTOMATIC",
-    "imageUrl": "providers/bolt/cars/Audi-Q5.png",
-    "price": {
-      "min": 7.99,
-      "km": 0.35,
-      "minute": 0.69,
-      "hour": 39.9,
-      "day": 149.9
-    }
+    "serviceId":157,
+    "name":"Peugeot 3008",
+    "imageUrl":"https://images.bolt.eu/store/2023/2023-02-21/322c724e-e629-406b-a3e0-95cb67a59b9c.png",
+    "price":{
+      "km":0.25,
+      "minute":0.17,
+      "hour":7.99,
+      "day":19.9,
+      "minimum":3.29
+    },
+    "bodyType":"1",
+    "gearbox":"Automatic",
+    "petFriendly":true,
+    "coordinates":[
+
+    ],
+    "packages":[
+
+    ],
+    "motorType":"PETROL"
   }
 ]
