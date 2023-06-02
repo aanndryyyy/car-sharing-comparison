@@ -6,5 +6,5 @@ export interface ICarRentPrice {
   day: number
   '3days': number
   week: number
-  min: number
+  minimum: number
 }

@@ -2,10 +2,7 @@ import calculateBeastPrice from '../../helpers/Calculators/CalculateBeastPrice'
 import GenericCar from './GenericCar'
 
 import BeastLogo from '$lib/Images/beast.png'
-import type { SvelteComponent } from 'svelte'
-import BeastCarPopover from '$lib/Popovers/BeastCarPopover.svelte'
 import type { ICarBeast } from '$lib/Types/Interfaces/ICarBeast'
-import { Provider } from '../Types/Enums/Provider'
 import No_image_available from '$lib/Images/no-image-available.png'
 import Tesla_Model_3_Long_Range from '$lib/Images/Providers/Beast/Cars/Tesla-Model-3-Long-Range.png'
 import Tesla_Model_3_Standard_Range from '$lib/Images/Providers/Beast/Cars/Tesla-Model-3-Standard-Range.png'
@@ -13,13 +10,17 @@ import Tesla_Model_3_Performance from '$lib/Images/Providers/Beast/Cars/Tesla-Mo
 import Tesla_Model_X_Performance from '../Images/Providers/Beast/Cars/Tesla-Model-X-Performance.png'
 import Tesla_Model_Y_Long_Range from '$lib/Images/Providers/Beast/Cars/Tesla-Model-Y-Long-Range.png'
 import Tesla_Model_S from '$lib/Images/Providers/Beast/Cars/Tesla-Model-S.png'
+import { SearchParamsObj } from '../DTO/SearchParamsObj'
 
 export default class BeastCar extends GenericCar<ICarBeast> {
   /**
    * @inheritdoc
    */
-  calculateRentTotalPrice(): void {
-    this.rentTotalPrice = calculateBeastPrice(this.carData)
+  calculateRentTotalPrice(searchParamsObj: SearchParamsObj): void {
+    this.rentTotalPrice = calculateBeastPrice(
+      this.carData as ICarBeast,
+      searchParamsObj
+    )
   }
 
   /**

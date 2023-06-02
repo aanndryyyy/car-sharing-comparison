@@ -1,6 +1,6 @@
 import cars from "../../../static/data/beast.json";
 import calculateBeastPrice from "../../../src/helpers/Calculators/CalculateBeastPrice";
-import {SearchParamsObj} from "$lib/DTO/SearchParamsObj.js";
+import {SearchParamsObj} from "../../../src/lib/DTO/SearchParamsObj";
 
 describe("Beast price calculator", function () {
 

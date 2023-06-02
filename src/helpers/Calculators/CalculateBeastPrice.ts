@@ -1,47 +1,40 @@
-import { get } from 'svelte/store'
-import { totalKilometres } from '$lib/Store/TotalKilometresStore'
-import {
-  days as storeDays,
-  hours as storeHours,
-  minutes as storeMinutes,
-} from '$lib/Store/DurationStore'
-import type { Car } from '../../lib/DTO/Car'
 import type { ICarRentPrice } from '../../lib/Types/Interfaces/ICarRentPrice'
+import type { SearchParamsObj } from '../../lib/DTO/SearchParamsObj'
+import type { ICarBeast } from '../../lib/Types/Interfaces/ICarBeast'
 
-const calculateBeastPrice = (car: Car): number => {
+const calculateBeastPrice = (
+  car: ICarBeast,
+  searchParamsObj: SearchParamsObj
+): number => {
   const price = car.price
-  let distance = get(totalKilometres)
-  let days = get(storeDays)
-  let hours = get(storeHours)
-  let minutes = get(storeMinutes)
 
-  let totalMinutes = minutes + hours * 60
+  let totalMinutes = searchParamsObj.minutes + searchParamsObj.hours * 60
   // ---- Distance
   // Distance
   let freeDistance = 0
   // Weeks
   let weeksCost = 0
-  if (days >= 7) {
-    const weeks = Math.floor(days / 7)
-    days -= weeks * 7
+  if (searchParamsObj.days >= 7) {
+    const weeks = Math.floor(searchParamsObj.days / 7)
+    searchParamsObj.days -= weeks * 7
     weeksCost += weeks * price.week
     freeDistance += weeks * 7 * 300
   }
   // 3Days
   let threeDaysCost = 0
-  if (days >= 3) {
-    const threeDays = Math.floor(days / 3)
-    days -= threeDays * 3
-    const extraMinutes = calculateMinute(totalMinutes, price)
+  if (searchParamsObj.days >= 3) {
+    const threeDays = Math.floor(searchParamsObj.days / 3)
+    searchParamsObj.days -= threeDays * 3
+    const extraMinutes = calculateMinute(totalMinutes, price as ICarRentPrice)
     if (
       threeDays * price['3days'] +
-        days * price.day +
+        searchParamsObj.days * price.day +
         extraMinutes.daysCost +
         extraMinutes.minutesCost >
       price.week
     ) {
       weeksCost += price.week
-      days = 0
+      searchParamsObj.days = 0
       totalMinutes = 0
       freeDistance += 7 * 300
     } else {
@@ -51,26 +44,29 @@ const calculateBeastPrice = (car: Car): number => {
   }
   // Days
   let daysCost = 0
-  if (days >= 1) {
-    const extraMinutes = calculateMinute(totalMinutes, price)
+  if (searchParamsObj.days >= 1) {
+    const extraMinutes = calculateMinute(totalMinutes, price as ICarRentPrice)
     if (
-      days * price.day + extraMinutes.daysCost + extraMinutes.minutesCost >
+      searchParamsObj.days * price.day +
+        extraMinutes.daysCost +
+        extraMinutes.minutesCost >
       price['3days']
     ) {
       threeDaysCost += price['3days']
       freeDistance += 3 * 300
       totalMinutes = 0
     } else {
-      daysCost += days * price.day
-      freeDistance += days * 300
+      daysCost += searchParamsObj.days * price.day
+      freeDistance += searchParamsObj.days * 300
     }
   }
-  const calcMinutes = calculateMinute(totalMinutes, price)
+  const calcMinutes = calculateMinute(totalMinutes, price as ICarRentPrice)
   freeDistance += calcMinutes.freeDistance
   daysCost += calcMinutes.daysCost
   const minutesCost = calcMinutes.minutesCost
 
-  const distanceCost = Math.max(distance - freeDistance, 0) * price.km
+  const distanceCost =
+    Math.max(searchParamsObj.distance - freeDistance, 0) * price.km
   return (
     weeksCost +
     threeDaysCost +
@@ -79,17 +75,6 @@ const calculateBeastPrice = (car: Car): number => {
     distanceCost +
     price.start
   )
-
-  // {
-  //   price:
-  //     weeksCost +
-  //     threeDaysCost +
-  //     daysCost +
-  //     minutesCost +
-  //     distanceCost +
-  //     price.start,
-  //   preOrder: weeksCost + threeDaysCost + daysCost > 0 ? 0 : -1,
-  // };
 }
 
 const calculateMinute = (totalMinutes: number, price: ICarRentPrice) => {
