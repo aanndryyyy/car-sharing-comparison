@@ -1,282 +1,302 @@
 [
   {
+    "serviceId":0,
     "name":"Volkswagen e-Up!'19",
-    "bodyType":"HATCHBACK",
-    "motorType":"ELECTRIC",
+    "bodyType":"eco",
+    "motorType":"electric",
     "petFriendly":true,
     "gearbox":"AUTOMATIC",
-    "imageUrl":"providers/elmo/cars/VW-e-Up20.png",
+    "imageUrl":"https://elmorent.ee/wp-content/uploads/2020/08/VW-e-Up20.png",
     "price":{
-      "km":0.2,
-      "minute":0.11,
-      "hour":6.6,
-      "day":33
+      "km":0.25,
+      "minute":0.14,
+      "hour":6.3,
+      "day":31.5
     },
     "packages":[
       {
-        "name": "WEEK",
         "days":7,
         "distance":700,
-        "price":225
+        "price":220
       },
       {
-        "name": "MONTH",
-        "days":30,
-        "distance":3000,
-        "price":700
-      }
-    ]
-  },
-  {
-    "name":"Škoda Citigo",
-    "bodyType":"HATCHBACK",
-    "motorType":"ELECTRIC",
-    "petFriendly":true,
-    "gearbox":"AUTOMATIC",
-    "imageUrl":"providers/elmo/cars/Skoda-Citigo.png",
-    "price":{
-      "km":0.2,
-      "minute":0.11,
-      "hour":6.6,
-      "day":33
-    },
-    "packages":[
-      {
-        "name": "WEEK",
-        "days":7,
-        "distance":700,
-        "price":225
-      },
-      {
-        "name": "MONTH",
         "days":30,
         "distance":3000,
         "price":799
       }
+    ],
+    "coordinates":[
+
     ]
   },
   {
+    "serviceId":1,
+    "name":"Skoda Citigo",
+    "bodyType":"eco",
+    "motorType":"electric",
+    "petFriendly":true,
+    "gearbox":"AUTOMATIC",
+    "imageUrl":"https://elmorent.ee/wp-content/uploads/2020/08/Skoda-Citigo20.png",
+    "price":{
+      "km":0.25,
+      "minute":0.14,
+      "hour":6.3,
+      "day":31.5
+    },
+    "packages":[
+      {
+        "days":7,
+        "distance":700,
+        "price":220
+      },
+      {
+        "days":30,
+        "distance":3000,
+        "price":799
+      }
+    ],
+    "coordinates":[
+
+    ]
+  },
+  {
+    "serviceId":2,
     "name":"Toyota Yaris Hybrid",
-    "bodyType":"HATCHBACK",
-    "motorType":"HYBRID",
+    "bodyType":"eco",
+    "motorType":"electric",
     "petFriendly":true,
     "gearbox":"AUTOMATIC",
-    "imageUrl":"providers/elmo/cars/Toyota-Yaris-Hybrid.png",
+    "imageUrl":"https://raw.githubusercontent.com/KaarelVesilind/carrentalcomparison/main/src/assets/providers/elmo/cars/Toyota-Yaris-Hybrid.png",
     "price":{
-      "km":0.2,
-      "minute":0.11,
-      "hour":6.6,
-      "day":33
+      "km":0.25,
+      "minute":0.14,
+      "hour":6.3,
+      "day":31.5
     },
     "packages":[
       {
-        "name": "WEEK",
         "days":7,
         "distance":700,
-        "price":249
+        "price":220
       },
       {
-        "name": "MONTH",
         "days":30,
         "distance":3000,
         "price":799
       }
+    ],
+    "coordinates":[
+
     ]
   },
   {
+    "serviceId":3,
+    "name":"Renault Clio Hybrid 2021",
+    "bodyType":"eco",
+    "motorType":"electric",
+    "petFriendly":true,
+    "gearbox":"AUTOMATIC",
+    "imageUrl":"https://elmorent.ee/wp-content/uploads/2021/07/Clio-600x338.png",
+    "price":{
+      "km":0.25,
+      "minute":0.14,
+      "hour":6.3,
+      "day":31.5
+    },
+    "packages":[
+      {
+        "days":7,
+        "distance":700,
+        "price":220
+      },
+      {
+        "days":30,
+        "distance":3000,
+        "price":799
+      }
+    ],
+    "coordinates":[
+
+    ]
+  },
+  {
+    "serviceId":4,
     "name":"Nissan Leaf",
-    "bodyType":"HATCHBACK",
-    "motorType":"ELECTRIC",
+    "bodyType":"comfy",
+    "motorType":"electric",
     "petFriendly":true,
     "gearbox":"AUTOMATIC",
-    "imageUrl":"providers/elmo/cars/Nissan-Leaf.png",
+    "imageUrl":"https://elmorent.ee/wp-content/uploads/2017/07/Elmo-rent-nissan-leaf-1.png",
     "price":{
-      "km":0.2,
-      "minute":0.11,
-      "hour":6.6,
-      "day":33
+      "km":0.25,
+      "minute":0.16,
+      "hour":7.2,
+      "day":36
     },
     "packages":[
       {
-        "name": "WEEK",
         "days":7,
         "distance":700,
-        "price":249
+        "price":245
       },
       {
-        "name": "MONTH",
-        "days":30,
-        "distance":3000,
-        "price":799
-      }
-    ]
-  },
-  {
-    "name":"Volkswagen e-Up'20",
-    "bodyType":"HATCHBACK",
-    "motorType":"ELECTRIC",
-    "petFriendly":true,
-    "gearbox":"AUTOMATIC",
-    "imageUrl":"providers/elmo/cars/VW-e-Up20.png",
-    "price":{
-      "km":0.2,
-      "minute":0.11,
-      "hour":6.6,
-      "day":33
-    },
-    "packages":[
-      {
-        "name": "WEEK",
-        "days":7,
-        "distance":700,
-        "price":260
-      },
-      {
-        "name": "MONTH",
-        "days":30,
-        "distance":3000,
-        "price":799
-      }
-    ]
-  },
-  {
-    "name":"Renault Clio Hybrid",
-    "bodyType":"HATCHBACK",
-    "motorType":"HYBRID",
-    "petFriendly":true,
-    "gearbox":"AUTOMATIC",
-    "imageUrl":"providers/elmo/cars/Renault-Clio-Hybrid.png",
-    "price":{
-      "km":0.2,
-      "minute":0.11,
-      "hour":6.6,
-      "day":33
-    },
-    "packages":[
-      {
-        "name": "WEEK",
-        "days":7,
-        "distance":700,
-        "price":260
-      },
-      {
-        "name": "MONTH",
         "days":30,
         "distance":3000,
         "price":825
       }
+    ],
+    "coordinates":[
+
     ]
   },
   {
-    "name":"Renault Zoe",
-    "bodyType":"HATCHBACK",
-    "motorType":"ELECTRIC",
+    "serviceId":5,
+    "name":"Peugeot e208 GT",
+    "bodyType":"comfy",
+    "motorType":"electric",
     "petFriendly":true,
     "gearbox":"AUTOMATIC",
-    "imageUrl":"providers/elmo/cars/Renault-Zoe.png",
+    "imageUrl":"https://elmorent.ee/wp-content/uploads/2020/12/Peugeot-e-208-GT.png",
     "price":{
-      "km":0.2,
-      "minute":0.13,
-      "hour":7.8,
-      "day":39
+      "km":0.25,
+      "minute":0.16,
+      "hour":7.2,
+      "day":36
     },
     "packages":[
       {
-        "name": "WEEK",
         "days":7,
         "distance":700,
-        "price":275
+        "price":245
       },
       {
-        "name": "MONTH",
         "days":30,
         "distance":3000,
         "price":825
       }
+    ],
+    "coordinates":[
+
     ]
   },
   {
-    "name":"Peugeot e-208 GT",
-    "bodyType":"HATCHBACK",
-    "motorType":"ELECTRIC",
-    "petFriendly":true,
-    "gearbox":"AUTOMATIC",
-    "imageUrl":"providers/elmo/cars/Peugeot-e-208-GT.png",
-    "price":{
-      "km":0.2,
-      "minute":0.13,
-      "hour":7.8,
-      "day":39
-    },
-    "packages":[
-      {
-        "name": "WEEK",
-        "days":7,
-        "distance":700,
-        "price":275
-      },
-      {
-        "name": "MONTH",
-        "days":30,
-        "distance":3000,
-        "price":890
-      }
-    ]
-  },
-  {
+    "serviceId":6,
     "name":"Renault Arkana Hybrid",
-    "bodyType":"HATCHBACK",
-    "motorType":"HYBRID",
+    "bodyType":"comfy",
+    "motorType":"electric",
     "petFriendly":true,
     "gearbox":"AUTOMATIC",
-    "imageUrl":"providers/elmo/cars/Renault-Arkana-Hybrid.png",
+    "imageUrl":"https://elmorent.ee/wp-content/uploads/2021/10/Arkana_kodulehele.png",
     "price":{
-      "km":0.22,
-      "minute":0.15,
-      "hour":9.0,
-      "day":45
+      "km":0.25,
+      "minute":0.18,
+      "hour":8.1,
+      "day":40.5
     },
     "packages":[
       {
-        "name": "WEEK",
         "days":7,
         "distance":700,
-        "price":350
+        "price":275
       },
       {
-        "name": "MONTH",
         "days":30,
         "distance":3000,
-        "price":890
+        "price":825
       }
+    ],
+    "coordinates":[
+
     ]
   },
   {
-    "name":"Tesla Model 3 SR+",
-    "bodyType":"SEDAN",
-    "motorType":"ELECTRIC",
+    "serviceId":7,
+    "name":"Renault Zoe",
+    "bodyType":"comfy",
+    "motorType":"electric",
     "petFriendly":true,
     "gearbox":"AUTOMATIC",
-    "imageUrl":"providers/elmo/cars/Tesla-Model-3-SR+.png",
+    "imageUrl":"https://elmorent.ee/wp-content/uploads/2020/05/Renault-Zoe-20.png",
     "price":{
-      "km":0.2,
-      "minute":0.25,
-      "hour":15,
-      "day":75
+      "km":0.25,
+      "minute":0.16,
+      "hour":7.2,
+      "day":36
     },
     "packages":[
       {
-        "name": "WEEK",
+        "days":7,
+        "distance":700,
+        "price":220
+      },
+      {
+        "days":30,
+        "distance":3000,
+        "price":799
+      }
+    ],
+    "coordinates":[
+
+    ]
+  },
+  {
+    "serviceId":8,
+    "name":"Tesla Model 3",
+    "bodyType":"classy",
+    "motorType":"electric",
+    "petFriendly":true,
+    "gearbox":"AUTOMATIC",
+    "imageUrl":"https://elmorent.ee/wp-content/uploads/2021/08/ELMO-Tesla.png",
+    "price":{
+      "km":0.26,
+      "minute":0.35,
+      "hour":17.5,
+      "day":87.5
+    },
+    "packages":[
+      {
         "days":7,
         "distance":700,
         "price":525
       },
       {
-        "name": "MONTH",
         "days":30,
         "distance":3000,
         "price":1599
       }
+    ],
+    "coordinates":[
+
+    ]
+  },
+  {
+    "serviceId":9,
+    "name":"Tesla Model Y",
+    "bodyType":"classy",
+    "motorType":"electric",
+    "petFriendly":true,
+    "gearbox":"AUTOMATIC",
+    "imageUrl":"https://elmorent.ee/wp-content/uploads/2023/04/ef135341b534317b4003950bc1b6b2e46c780cf225e7035af6ab60c1e328c8f1.jpg",
+    "price":{
+      "km":0.26,
+      "minute":0.45,
+      "hour":24.75,
+      "day":123.75
+    },
+    "packages":[
+      {
+        "days":7,
+        "distance":700,
+        "price":799
+      },
+      {
+        "days":30,
+        "distance":3000,
+        "price":2600
+      }
+    ],
+    "coordinates":[
+
     ]
   }
 ]

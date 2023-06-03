@@ -1,4 +1,5 @@
 import type { ICar } from './ICar'
+import type { ICarRentPricePackage } from './ICarRentPricePackage'
 
 export interface ICarElmo extends ICar {
   serviceId: number
@@ -10,13 +11,7 @@ export interface ICarElmo extends ICar {
     day: number
     minimum: number
   }
-  packages: [
-    {
-      days: number
-      distance: number
-      price: number
-    }
-  ]
+  packages: ICarRentPricePackage[]
   priceWithCustomerCard: {
     km: number
     hour: number

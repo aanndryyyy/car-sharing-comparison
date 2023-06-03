@@ -17,7 +17,7 @@ describe("Elmo price calculator", function () {
     let result = calculateElmoPrice(car, searchParamsObj);
 
     // ASSERT
-    expect(Number(result.toFixed(2))).toBe(974.81);
+    expect(Number(result.toFixed(2))).toBe(1067.04);
   });
 
   test("Volkswagen e-Up!'19 - 28day ", async () => {
@@ -33,7 +33,7 @@ describe("Elmo price calculator", function () {
     let result = calculateElmoPrice(car, searchParamsObj);
 
     // ASSERT
-    expect(Number(result.toFixed(2))).toBe(700);
+    expect(Number(result.toFixed(2))).toBe(799);
   });
   test("Volkswagen e-Up!'19 -  6day 23h 59min", async () => {
     // ARRANGE
@@ -48,7 +48,7 @@ describe("Elmo price calculator", function () {
     let result = calculateElmoPrice(car, searchParamsObj);
 
     // ASSERT
-    expect(Number(result.toFixed(2))).toBe(225);
+    expect(Number(result.toFixed(2))).toBe(220);
   });
 
   test("Volkswagen e-Up!'19 -  23h 59min", async () => {
@@ -64,7 +64,7 @@ describe("Elmo price calculator", function () {
     let result = calculateElmoPrice(car, searchParamsObj);
 
     // ASSERT
-    expect(Number(result.toFixed(2))).toBe(33);
+    expect(Number(result.toFixed(2))).toBe(31.5);
   });
 
   test("Volkswagen e-Up!'19 -  23h 59min 101km", async () => {
@@ -80,6 +80,6 @@ describe("Elmo price calculator", function () {
     let result = calculateElmoPrice(car, searchParamsObj);
 
     // ASSERT
-    expect(Number(result.toFixed(2))).toBe(53.1);
+    expect(Number(result.toFixed(2))).toBe(56.6);
   });
 });
