@@ -31,6 +31,14 @@ export default abstract class GenericMappableCar<
     return this.closestMarker
   }
 
+  public getClosestMarkerDistanceFormatted() {
+    if (!this.closestMarkerDistance) return ""
+    if (this.closestMarkerDistance <= 1) {
+      return (this.closestMarkerDistance * 1000).toFixed(0) + " m"
+    }
+    return this.closestMarkerDistance.toFixed(2) + " km"
+  }
+
   /**
    * Initialise the markers.
    */
