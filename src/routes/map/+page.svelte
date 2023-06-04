@@ -1,10 +1,15 @@
 <script lang="ts">
   import { PUBLIC_GOOGLE_API_KEY } from '$env/static/public'
   import CarsMap from '$lib/Components/CarsMap/CarsMap.svelte'
+  import ManualPlanner from '$lib/Components/Planners/ManualPlanner.svelte'
+  import AutoPlanner from '$lib/Components/Planners/TripPlanner.svelte'
+  import { ArrowsUpDown, Icon } from 'svelte-hero-icons'
   import { cars } from '../../lib/Store/Cars'
 
   export let data
   $cars = data.cars
+
+  let plannerType: boolean = false
 </script>
 
 <svelte:head>
@@ -15,7 +20,25 @@
   class="grid min-h-full grid-rows-[1fr_5rem] md:grid-cols-[24rem_1fr] md:grid-rows-none"
 >
   <aside class="hidden md:block md:w-96">
-    <h1>Planner</h1>
+    <div class="m-4 flex items-center justify-between">
+      <h2 class="text-2xl font-semibold md:text-3xl md:font-medium">Planner</h2>
+
+      <button
+        class="flex items-center justify-center rounded bg-green-600 p-2.5 text-white"
+        on:click={() => (plannerType = !plannerType)}
+      >
+        <Icon src={ArrowsUpDown} size="24" />
+      </button>
+    </div>
+
+    <div class="px-4">
+      <div class:hidden={plannerType}>
+        <ManualPlanner />
+      </div>
+      <div class:hidden={!plannerType}>
+        <AutoPlanner />
+      </div>
+    </div>
   </aside>
 
   <div class="grow bg-gray-300">
