@@ -133,8 +133,6 @@
     $map.setZoom(15)
   }
 
-  export let visible: boolean = false
-
   function addWaypoint() {
     if (inputWaypoints.length >= 5) return
 
@@ -175,7 +173,7 @@
   $: calculateRoute(isRoundTrip)
 </script>
 
-<div class="mt-8" class:max-md:!block={visible} class:max-md:!hidden={!visible}>
+<div class="mt-8">
   {#if GoogleAutocomplete}
     <div class="flex justify-between text-sm text-slate-600 transition-colors">
       <button

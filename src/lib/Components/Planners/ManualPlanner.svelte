@@ -3,15 +3,9 @@
   import { totalKilometres } from '$lib/Store/TotalKilometresStore'
   import { _ } from 'svelte-i18n'
   import RangeSlider from 'svelte-range-slider-pips'
-
-  export let visible: boolean = false
 </script>
 
-<div
-  class="mt-4 space-y-8 md:mt-6"
-  class:max-md:!block={visible}
-  class:max-md:!hidden={!visible}
->
+<div class="mt-4 space-y-8 md:mt-6">
   <div>
     <div class="flex flex-row gap-2 md:flex-col lg:flex-row">
       <div

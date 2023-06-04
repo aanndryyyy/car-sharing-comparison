@@ -26,7 +26,12 @@
     </div>
 
     <div>
-      <ManualPlanner visible={manualPlanner} />
+      <div
+        class:max-md:!block={manualPlanner}
+        class:max-md:!hidden={!manualPlanner}
+      >
+        <ManualPlanner />
+      </div>
 
       <div class="relative my-8 mt-10 flex items-center max-md:hidden">
         <div class="flex-grow border-t border-slate-300" />
@@ -36,7 +41,12 @@
         <div class="flex-grow border-t border-slate-300" />
       </div>
 
-      <AutoPlanner visible={!manualPlanner} />
+      <div
+        class:max-md:!block={manualPlanner}
+        class:max-md:!hidden={!manualPlanner}
+      >
+        <AutoPlanner />
+      </div>
     </div>
   </div>
 </aside>
