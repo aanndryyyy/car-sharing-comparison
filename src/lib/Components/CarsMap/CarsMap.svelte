@@ -102,8 +102,13 @@
       ) as GenericMappableCar[]
 
       carsToShow.forEach((car) => {
-        const markers = car.markers.filter((marker) => marker.map === null)
-        markers.forEach((marker) => (marker.map = $map))
+        let markers = car.markers.filter((marker) => marker.content !== null)
+
+        markers = car.markers.filter(
+          (marker) => marker.content!.classList.contains('hidden')!
+        )
+
+        markers.forEach((marker) => marker.content!.classList.remove('hidden'))
       })
 
       const carsToHide = $visibleCars.hidden.filter(
@@ -111,8 +116,13 @@
       ) as GenericMappableCar[]
 
       carsToHide.forEach((car) => {
-        const markers = car.markers.filter((marker) => marker.map !== null)
-        markers.forEach((marker) => (marker.map = null))
+        let markers = car.markers.filter((marker) => marker.content !== null)
+
+        markers = car.markers.filter(
+          (marker) => !marker.content!.classList.contains('hidden')
+        )
+
+        markers.forEach((marker) => marker.content!.classList.add('hidden'))
       })
     }
   })
