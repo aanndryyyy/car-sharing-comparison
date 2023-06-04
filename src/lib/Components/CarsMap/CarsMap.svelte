@@ -70,7 +70,7 @@
 
     duration.subscribe(updateMarkers)
     totalKilometres.subscribe(updateMarkers)
-    visibleCars.subscribe(toggleMarkers)
+    visibleCars.subscribe(adjustMarkersVisibility)
     googleMap.addListener('dragend', updateMarkers)
 
     function updateMarkers() {
@@ -96,7 +96,7 @@
       })
     }
 
-    function toggleMarkers() {
+    function adjustMarkersVisibility() {
       const carsToShow = $visibleCars.visible.filter(
         (car) => car instanceof GenericMappableCar
       ) as GenericMappableCar[]
@@ -124,6 +124,8 @@
 
         markers.forEach((marker) => marker.content!.classList.add('!hidden'))
       })
+
+      updateMarkers()
     }
   })
 
