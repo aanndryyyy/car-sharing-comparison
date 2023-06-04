@@ -105,10 +105,10 @@
         let markers = car.markers.filter((marker) => marker.content !== null)
 
         markers = car.markers.filter(
-          (marker) => marker.content!.classList.contains('hidden')!
+          (marker) => marker.content!.classList.contains('!hidden')!
         )
 
-        markers.forEach((marker) => marker.content!.classList.remove('hidden'))
+        markers.forEach((marker) => marker.content!.classList.remove('!hidden'))
       })
 
       const carsToHide = $visibleCars.hidden.filter(
@@ -119,10 +119,10 @@
         let markers = car.markers.filter((marker) => marker.content !== null)
 
         markers = car.markers.filter(
-          (marker) => !marker.content!.classList.contains('hidden')
+          (marker) => !marker.content!.classList.contains('!hidden')
         )
 
-        markers.forEach((marker) => marker.content!.classList.add('hidden'))
+        markers.forEach((marker) => marker.content!.classList.add('!hidden'))
       })
     }
   })
