@@ -6,4 +6,5 @@ export interface ICarRentPricePackage {
   hours: number
   distance: number
   price: number
+  priceWithPayAsYouGo: number
 }

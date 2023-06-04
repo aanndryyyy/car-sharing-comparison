@@ -8,6 +8,7 @@ import type { ICarCityBee } from '$lib/Types/Interfaces/ICarCityBee'
 import type { ICarElmo } from '$lib/Types/Interfaces/ICarElmo'
 import type { Provider } from '$lib/Types/Enums/Provider'
 import type { ISearchParamsObj } from '../Types/Interfaces/ISearchParamsObj'
+import type { ICarRentPricePackage } from '../Types/Interfaces/ICarRentPricePackage'
 
 export type CarData = ICarBolt | ICarCityBee | ICarElmo | ICarBeast
 export type Car = BoltCar | CityBeeCar | ElmoCar | BeastCar
@@ -20,6 +21,7 @@ export default abstract class GenericCar<
   CarDataType extends CarData = CarData
 > {
   rentTotalPrice: number = 0
+  rentUsablePackages: ICarRentPricePackage[] = []
 
   /**
    * Initialise Car with data.

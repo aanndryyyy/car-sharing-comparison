@@ -1,67 +1,103 @@
 import { calculateTime } from './CalculatorHelper'
-import { CarRentPricePackage } from '../../lib/DTO/CarRentPricePackage'
+import type { CarRentPricePackage } from '../../lib/DTO/CarRentPricePackage'
 import type { ICarCityBee } from '../../lib/Types/Interfaces/ICarCityBee'
-import { CarRentPrice } from '../../lib/DTO/CarRentPrice'
-import type { ICarCityBeePricePackage } from '../../lib/Types/Interfaces/ICityBeePricePackage'
+import type { CarRentPrice } from '../../lib/DTO/CarRentPrice'
 import type { SearchParamsObj } from '../../lib/DTO/SearchParamsObj'
+import type { ICarRentPricePackage } from '../../lib/Types/Interfaces/ICarRentPricePackage'
 
 const calculateCityBeePrice = (
   car: ICarCityBee,
   searchParamsObj: SearchParamsObj
-): number => {
-  const price = (car as ICarCityBee).price
-  const distanceCost = searchParamsObj.distance * price.km
-  const totalTime = searchParamsObj.getDuration()
+): Object => {
+  const price = (car as ICarCityBee).price as CarRentPrice
 
-  // Time
-  const { daysCost, hoursCost, minutesCost } = calculateTime(
-    totalTime,
-    price as CarRentPrice
-  )
-  const totalCost = 0.5 + distanceCost + daysCost + hoursCost + minutesCost
+  let totalCost = _getPayAsYouGoCost(searchParamsObj, price)
   if (totalCost < price.minimum) {
-    return price.minimum
+    return { price: price.minimum, pricePackages: [] }
   }
-  // Calculate packages
-  const usePackage: CarRentPricePackage = _calculatePackages(
-    car,
-    searchParamsObj,
-    totalCost,
-    totalTime
-  )
-  return usePackage.price < totalCost ? usePackage.price : totalCost
+
+  const usablePackages = []
+  let usablePackage: CarRentPricePackage | null
+  let remainingCost = totalCost
+  do {
+    usablePackage = _findPackage(car, searchParamsObj, remainingCost)
+    if (usablePackage) {
+      usablePackages.push(usablePackage)
+      searchParamsObj.distance -= usablePackage.distance
+      if (searchParamsObj.days < usablePackage.days) {
+        searchParamsObj.days = 0
+        searchParamsObj.hours = 0
+        searchParamsObj.minutes = 0
+      } else if (searchParamsObj.hours < usablePackage.hours) {
+        searchParamsObj.days -= usablePackage.days
+        searchParamsObj.hours = 0
+        searchParamsObj.minutes = 0
+      } else {
+        searchParamsObj.days -= usablePackage.days
+        searchParamsObj.hours -= usablePackage.hours
+      }
+      remainingCost = _getPayAsYouGoCost(searchParamsObj, price)
+    }
+  } while (usablePackage)
+
+  const packagesSum = usablePackages.reduce((n, { price }) => n + price, 0)
+  let totalCostWithPackages =
+    _getPayAsYouGoCost(searchParamsObj, price) + packagesSum
+  totalCostWithPackages = Number(totalCostWithPackages.toFixed(2))
+
+  return {
+    price:
+      totalCostWithPackages < totalCost ? totalCostWithPackages : totalCost,
+    pricePackages: totalCostWithPackages < totalCost ? usablePackages : [],
+  }
 }
 
-const _calculatePackages = (
+const _getPayAsYouGoCost = (
+  searchParamsObj: SearchParamsObj,
+  price: CarRentPrice
+): number => {
+  const distanceCost = searchParamsObj.distance * price.km
+  const { daysCost, hoursCost, minutesCost } = calculateTime(
+    searchParamsObj.duration,
+    price
+  )
+  const cost = 0.5 + distanceCost + daysCost + hoursCost + minutesCost
+  return Number(cost.toFixed(2))
+}
+
+const _findPackage = (
   car: ICarCityBee,
   searchParamsObj: SearchParamsObj,
-  totalCost: number,
-  totalTime: number
-): CarRentPricePackage => {
-  const packages: ICarCityBeePricePackage[] = car.packages
+  totalCost: number
+): CarRentPricePackage | null => {
+  const packages: ICarRentPricePackage[] = car.packages.reverse()
   const price = car.price
-  let usePackage = new CarRentPricePackage()
-  for (const option of packages) {
-    if (option.price < totalCost) {
-      const packageTotalTime = option.day * 24 * 60 + option.hour * 60
+
+  let usePackage: CarRentPricePackage | null = null
+  for (const pricePackage of packages) {
+    if (pricePackage.price < totalCost) {
+      const packageTotalTime =
+        pricePackage.days * 24 * 60 + pricePackage.hours * 60
       // if fits exactly in the package
       if (
-        searchParamsObj.distance <= option.km &&
-        totalTime <= packageTotalTime &&
-        option.price < usePackage.price
+        searchParamsObj.distance <= pricePackage.distance &&
+        searchParamsObj.duration <= packageTotalTime &&
+        (!usePackage || pricePackage.price < usePackage.price)
       ) {
-        usePackage = { ...option }
+        usePackage = { ...pricePackage }
+        usePackage.priceWithPayAsYouGo = usePackage.price
       }
       // if fits in the package with some extra time or distance
       else {
-        let packageCostExtra = option.price
+        let packageCostExtra = pricePackage.price
         // Add extra distance
-        if (searchParamsObj.distance > option.km) {
-          packageCostExtra += (searchParamsObj.distance - option.km) * price.km
+        if (searchParamsObj.distance > pricePackage.distance) {
+          packageCostExtra +=
+            (searchParamsObj.distance - pricePackage.distance) * price.km
         }
         // Add extra time
-        if (totalTime > packageTotalTime) {
-          const extraTime = totalTime - packageTotalTime
+        if (searchParamsObj.duration > packageTotalTime) {
+          const extraTime = searchParamsObj.duration - packageTotalTime
           let extraCostTime = calculateTime(extraTime, price as CarRentPrice)
           packageCostExtra +=
             extraCostTime.daysCost +
@@ -70,10 +106,10 @@ const _calculatePackages = (
         }
         if (
           packageCostExtra < totalCost &&
-          packageCostExtra < usePackage.price
+          (!usePackage || packageCostExtra < usePackage.priceWithPayAsYouGo)
         ) {
-          usePackage = { ...option }
-          usePackage.price = packageCostExtra
+          usePackage = { ...pricePackage }
+          usePackage.priceWithPayAsYouGo = packageCostExtra
         }
       }
     }

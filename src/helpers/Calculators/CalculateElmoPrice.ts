@@ -18,7 +18,7 @@ const calculateElmoPrice = (
   } else {
     distanceCost = searchParamsObj.distance * price.km
   }
-  const totalTime = searchParamsObj.getDuration()
+  const totalTime = searchParamsObj.duration
 
   // Time
   let { daysCost, hoursCost, minutesCost } = calculateTime(

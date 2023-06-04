@@ -9,4 +9,5 @@ export class CarRentPrice implements ICarRentPrice {
   minute = 0
   start = 0
   week = 0
+  month = 0
 }

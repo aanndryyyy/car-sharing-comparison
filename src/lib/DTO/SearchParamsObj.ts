@@ -9,7 +9,7 @@ export class SearchParamsObj implements ISearchParamsObj {
   start = City.TALLINN
   end = City.TALLINN
 
-  getDuration(): number {
+  get duration() {
     return this.minutes + this.hours * 60 + this.days * 24 * 60
   }
 }

@@ -7,4 +7,5 @@ export class CarRentPricePackage implements ICarRentPricePackage {
   distance = 0
   hours = 0
   price = Number.MAX_SAFE_INTEGER
+  priceWithPayAsYouGo = Number.MAX_SAFE_INTEGER
 }

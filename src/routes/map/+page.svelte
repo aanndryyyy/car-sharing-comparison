@@ -1,7 +1,7 @@
 <script lang="ts">
   import { PUBLIC_GOOGLE_API_KEY } from '$env/static/public'
   import CarsMap from '$lib/Components/CarsMap/CarsMap.svelte'
-  import {cars} from "../../lib/Store/Cars";
+  import { cars } from '../../lib/Store/Cars'
 
   export let data
   $cars = data.cars
