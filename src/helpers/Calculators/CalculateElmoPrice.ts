@@ -1,4 +1,4 @@
-import { calculateTime } from './CalculatorHelper'
+import {calculateTime, getDuration} from './CalculatorHelper'
 import type { SearchParamsObj } from '../../lib/DTO/SearchParamsObj'
 import { ElmoCheapestPackage } from '../../lib/DTO/ElmoCheapestPackage'
 import { ElmoPackageCalculatingData } from '../../lib/DTO/ElmoPackageCalculatingData'
@@ -18,7 +18,7 @@ const calculateElmoPrice = (
   } else {
     distanceCost = searchParamsObj.distance * price.km
   }
-  const totalTime = searchParamsObj.duration
+  const totalTime = getDuration(searchParamsObj)
 
   // Time
   let { daysCost, hoursCost, minutesCost } = calculateTime(
