@@ -1,6 +1,7 @@
 import type { CarRentPrice } from '../../lib/DTO/CarRentPrice'
+import type { SearchParamsObj } from '../../lib/DTO/SearchParamsObj'
 
-export const calculateTime = (totalTime: number, price: CarRentPrice) => {
+const calculateTime = (totalTime: number, price: CarRentPrice) => {
   let days = Math.floor(totalTime / 1440)
   totalTime -= days * 1440
   let hours = Math.floor(totalTime / 60)
@@ -33,3 +34,13 @@ export const calculateTime = (totalTime: number, price: CarRentPrice) => {
   }
   return { daysCost, hoursCost, minutesCost }
 }
+
+const getDuration = (searchParamsObj: SearchParamsObj) => {
+  return (
+    searchParamsObj.minutes +
+    searchParamsObj.hours * 60 +
+    searchParamsObj.days * 24 * 60
+  )
+}
+
+export { calculateTime, getDuration }

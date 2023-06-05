@@ -4,6 +4,23 @@ import {SearchParamsObj} from "../../../src/lib/DTO/SearchParamsObj";
 
 describe("CityBee price calculator", function () {
 
+  test("Ford Fiesta - 0min 0km", async () => {
+    // ARRANGE
+    const car = JSON.parse(JSON.stringify(cars.find(car => car.name === "Ford Fiesta")))
+    const searchParamsObj = new SearchParamsObj();
+    searchParamsObj.distance = 0;
+    searchParamsObj.days = 0;
+    searchParamsObj.hours = 0;
+    searchParamsObj.minutes = 0;
+
+    // ACT
+    const {price, pricePackages} = calculateCityBeePrice(car, searchParamsObj);
+
+    // ASSERT
+    expect(price).toBe(0.5);
+    expect(pricePackages.length).toBe(0);
+  });
+
   test("Ford Fiesta - 30min 30km", async () => {
     // ARRANGE
     const car = JSON.parse(JSON.stringify(cars.find(car => car.name === "Ford Fiesta")))
@@ -18,6 +35,23 @@ describe("CityBee price calculator", function () {
 
     // ASSERT
     expect(price).toBe(11.9);
+    expect(pricePackages.length).toBe(0);
+  });
+
+  test("Ford Fiesta - 1h 26min 86km", async () => {
+    // ARRANGE
+    const car = JSON.parse(JSON.stringify(cars.find(car => car.name === "Ford Fiesta")))
+    const searchParamsObj = new SearchParamsObj();
+    searchParamsObj.distance = 86;
+    searchParamsObj.days = 0;
+    searchParamsObj.hours = 1;
+    searchParamsObj.minutes = 26;
+
+    // ACT
+    const {price, pricePackages} = calculateCityBeePrice(car, searchParamsObj);
+
+    // ASSERT
+    expect(price).toBe(30.27);
     expect(pricePackages.length).toBe(0);
   });
 

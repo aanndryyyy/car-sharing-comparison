@@ -7,6 +7,7 @@ import Skoda_Fabia from '$lib/Images/Providers/Citybee/Cars/LowQuality/Skoda-Fab
 import Nissan_Juke from '$lib/Images/Providers/Citybee/Cars/LowQuality/Nissan-Juke.png'
 import VW_T_Cross from '$lib/Images/Providers/Citybee/Cars/LowQuality/VW-T-Cross.png'
 import Toyota_RAV4 from '$lib/Images/Providers/Citybee/Cars/LowQuality/Toyota-RAV4.png'
+import Toyota_Corolla from '$lib/Images/Providers/Citybee/Cars/LowQuality/Toyota-Corolla.png'
 import Toyota_Yaris_Cross from '$lib/Images/Providers/Citybee/Cars/LowQuality/Toyota-Yaris-Cross.png'
 import Citroen_C3 from '$lib/Images/Providers/Citybee/Cars/LowQuality/Citroen-C3.png'
 import VW_T_Roc_R_Line from '$lib/Images/Providers/Citybee/Cars/LowQuality/VW-T-Roc-R-Line.png'
@@ -33,18 +34,15 @@ import Peugeot_308 from '$lib/Images/Providers/Citybee/Cars/LowQuality/Peugeot-3
 import GenericMappableCar from './GenericMappableCar'
 import calculateCityBeePrice from '../../helpers/Calculators/CalculateCityBeePrice'
 import { SearchParamsObj } from '../DTO/SearchParamsObj'
-import type { ICarRentPricePackage } from '../Types/Interfaces/ICarRentPricePackage'
 
 export default class CityBeeCar extends GenericMappableCar<ICarCityBee> {
   calculateRentTotalPrice(searchParamsObj: SearchParamsObj): void {
-    const { cost, usablePackages } = calculateCityBeePrice(
+    const { price, pricePackages } = calculateCityBeePrice(
       this.carData as ICarCityBee,
       searchParamsObj
     )
-    console.log('cost', cost)
-    console.log('usablePackages', usablePackages)
-    this.rentTotalPrice = cost
-    this.rentUsablePackages = usablePackages
+    this.rentTotalPrice = price
+    this.rentUsablePackages = pricePackages
   }
 
   /**
@@ -57,7 +55,7 @@ export default class CityBeeCar extends GenericMappableCar<ICarCityBee> {
   getCarImg(): string {
     switch (this.carData.name) {
       case 'Toyota Corolla':
-        return VW_T_Cross
+        return Toyota_Corolla
       case 'VW Crafter':
         return VW_Crafter
       case 'Toyota Yaris':

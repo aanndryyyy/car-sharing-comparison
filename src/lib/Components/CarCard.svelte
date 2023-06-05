@@ -92,12 +92,33 @@
   >
     <Divider />
     <div class="grid gap-2 p-4" id={`offer-details-wrapper-${index}`}>
-      <div>
-        <p class="text-left">
-          For the cheapest ride select <b>package 1</b> and drive it over
-          <b>23km</b>.
-        </p>
-      </div>
+      <!--            <div>-->
+      <!--                <p class="text-left">-->
+      <!--                    For the cheapest ride select <b>package 1</b> and drive it over-->
+      <!--                    <b>23km</b>.-->
+      <!--                </p>-->
+      <!--            </div>-->
+      {#if car.rentUsablePackages.length > 0}
+        <p>Take these packages:</p>
+        <div>
+          {#each car.rentUsablePackages as pricePackage}
+            <div class="flex gap-2">
+              <p>
+                {pricePackage.hours}h
+              </p>
+              <p>
+                {pricePackage.days}d
+              </p>
+              <p>
+                {pricePackage.distance}km
+              </p>
+              <p>
+                {pricePackage.price}€
+              </p>
+            </div>
+          {/each}
+        </div>
+      {/if}
       <div class="mt-2">
         <a href="https://bolt.eu/et-ee/" target="”_blank”">
           <button

@@ -1,4 +1,4 @@
-import { calculateTime } from './CalculatorHelper'
+import { calculateTime, getDuration } from './CalculatorHelper'
 import type { CarRentPricePackage } from '../../lib/DTO/CarRentPricePackage'
 import type { ICarCityBee } from '../../lib/Types/Interfaces/ICarCityBee'
 import type { CarRentPrice } from '../../lib/DTO/CarRentPrice'
@@ -58,7 +58,7 @@ const _getPayAsYouGoCost = (
 ): number => {
   const distanceCost = searchParamsObj.distance * price.km
   const { daysCost, hoursCost, minutesCost } = calculateTime(
-    searchParamsObj.duration,
+    getDuration(searchParamsObj),
     price
   )
   const cost = 0.5 + distanceCost + daysCost + hoursCost + minutesCost
@@ -72,6 +72,7 @@ const _findPackage = (
 ): CarRentPricePackage | null => {
   const packages: ICarRentPricePackage[] = car.packages.reverse()
   const price = car.price
+  const duration = getDuration(searchParamsObj)
 
   let usePackage: CarRentPricePackage | null = null
   for (const pricePackage of packages) {
@@ -81,7 +82,7 @@ const _findPackage = (
       // if fits exactly in the package
       if (
         searchParamsObj.distance <= pricePackage.distance &&
-        searchParamsObj.duration <= packageTotalTime &&
+        duration <= packageTotalTime &&
         (!usePackage || pricePackage.price < usePackage.price)
       ) {
         usePackage = { ...pricePackage }
@@ -96,8 +97,8 @@ const _findPackage = (
             (searchParamsObj.distance - pricePackage.distance) * price.km
         }
         // Add extra time
-        if (searchParamsObj.duration > packageTotalTime) {
-          const extraTime = searchParamsObj.duration - packageTotalTime
+        if (duration > packageTotalTime) {
+          const extraTime = duration - packageTotalTime
           let extraCostTime = calculateTime(extraTime, price as CarRentPrice)
           packageCostExtra +=
             extraCostTime.daysCost +
