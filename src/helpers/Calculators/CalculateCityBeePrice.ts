@@ -70,7 +70,7 @@ const _findPackage = (
   searchParamsObj: SearchParamsObj,
   totalCost: number
 ): CarRentPricePackage | null => {
-  const packages: ICarRentPricePackage[] = car.packages.reverse()
+  const packages: ICarRentPricePackage[] = car.packages
   const price = car.price
   const duration = getDuration(searchParamsObj)
 

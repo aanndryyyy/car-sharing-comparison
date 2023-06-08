@@ -4,6 +4,23 @@ import {SearchParamsObj} from "../../../src/lib/DTO/SearchParamsObj";
 
 describe("CityBee price calculator", function () {
 
+  test("VW Crafter - 1h 26min 86km", async () => {
+    // ARRANGE
+    const car = JSON.parse(JSON.stringify(cars.find(car => car.name === "VW Crafter")))
+    const searchParamsObj = new SearchParamsObj();
+    searchParamsObj.distance = 86;
+    searchParamsObj.days = 0;
+    searchParamsObj.hours = 1;
+    searchParamsObj.minutes = 26;
+
+    // ACT
+    const {price, pricePackages} = calculateCityBeePrice(car, searchParamsObj);
+
+    // ASSERT
+    expect(price).toBe(36.41);
+    expect(pricePackages.length).toBe(1);
+  });
+
   test("Ford Fiesta - 0min 0km", async () => {
     // ARRANGE
     const car = JSON.parse(JSON.stringify(cars.find(car => car.name === "Ford Fiesta")))
