@@ -2,9 +2,7 @@
   import { onMount } from 'svelte'
   import { createEventDispatcher } from 'svelte'
   const dispatch = createEventDispatcher()
-
-  import Ellipsis2Vertical from '$lib/Icons/Ellipsis2Vertical.svelte'
-  import XMarkIcon from '$lib/Icons/Solid/XMarkIcon.svelte'
+  import { Icon, XMark, EllipsisVertical } from 'svelte-hero-icons'
 
   onMount(async () => {
     dispatch('mounted', { index, input })
@@ -41,13 +39,17 @@
       {placeholder}
     />
     <span class="hidden">
-      <Ellipsis2Vertical class="fill-slate-400 hover:cursor-grab" />
+      <Icon
+        src={EllipsisVertical}
+        size="24"
+        class="text-slate-400 hover:cursor-grab"
+      />
     </span>
   </div>
 
   {#if !isFirst && !isLast}
     <button on:click={() => dispatch('delete', { index })}>
-      <XMarkIcon class="fill-red-600" />
+      <Icon src={XMark} size="24" class="text-red-600" />
     </button>
   {/if}
 </li>

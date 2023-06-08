@@ -1,10 +1,9 @@
 <script lang="ts">
-  import { map, userPosition } from '$lib/Store/GoogleMapStore'
+  import { map } from '$lib/Store/GoogleMapStore'
 
-  import MinusIcon from '$lib/Icons/Mini/MinusIcon.svelte'
-  import PlusIcon from '$lib/Icons/Mini/PlusIcon.svelte'
-  import LocationTargetIcon from '$lib/Icons/Outline/LocationTargetIcon.svelte'
-  import { getPosition } from '$lib/helpers/position'
+  import LocationTargetIcon from '../../../assets/icons/location-target.svg'
+  import { Icon, MinusSmall, PlusSmall } from 'svelte-hero-icons'
+  import { getPosition } from '../../../helpers/position'
 
   function setCurrentLocation() {
     getPosition()
@@ -29,7 +28,7 @@
     class="flex h-8 w-8 items-center justify-center rounded-md bg-white px-0.5 py-0 text-slate-600 shadow-lg shadow-black/20 transition-[fill] hover:text-green-600"
     title="Show your current location"
   >
-    <LocationTargetIcon class="h-5 w-5" />
+    <LocationTargetIcon/>
   </button>
 
   <div class="rounded-md bg-white px-0.5 py-0 shadow-lg shadow-black/20">
@@ -38,14 +37,14 @@
       class="flex h-8 w-7 items-center justify-center border-b border-slate-200 fill-slate-600 transition-[fill] hover:fill-green-600"
       title="Zoom in"
     >
-      <PlusIcon />
+      <Icon src={PlusSmall} size="24" class="text-slate-600" />
     </button>
     <button
       on:click={() => $map.setZoom($map.getZoom() - 1)}
       class="flex h-8 w-7 items-center justify-center fill-slate-600 transition-[fill] hover:fill-green-600"
       title="Zoom out"
     >
-      <MinusIcon />
+      <Icon src={MinusSmall} size="24" class="text-slate-600" />
     </button>
   </div>
 </div>

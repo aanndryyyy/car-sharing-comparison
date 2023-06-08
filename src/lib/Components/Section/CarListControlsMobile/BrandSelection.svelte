@@ -1,8 +1,8 @@
 <script lang="ts">
-  import BeastLogo from '$lib/Images/beast.png'
-  import BoltLogo from '$lib/Images/bolt.png'
-  import CityBeeLogo from '$lib/Images/citybee.png'
-  import ElmoLogo from '$lib/Images/elmo.png'
+  import BeastLogo from '../../../../assets/images/providers/beast/beast-logo.png'
+  import BoltLogo from '../../../../assets/images/providers/bolt/bolt-logo.png'
+  import CityBeeLogo from '../../../../assets/images/providers/citybee/citybee-logo.png'
+  import ElmoLogo from '../../../../assets/images/providers/elmo/elmo-logo.png'
   import { carsFilter } from '$lib/Store/FilterStore'
   import { Provider } from '$lib/Types/Enums/Provider'
 

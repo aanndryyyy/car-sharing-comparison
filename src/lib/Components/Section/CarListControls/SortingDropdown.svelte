@@ -1,13 +1,12 @@
 <script lang="ts">
-  import { getPosition } from '$lib/helpers/position'
-  import Loader from '$lib/Icons/Loader.svelte'
-  import ChevronDownIcon from '$lib/Icons/Mini/ChevronDownIcon.svelte'
-  import CurrencyEuro from '$lib/Icons/Outline/CurrencyEuro.svelte'
-  import PersonWalkingIcon from '$lib/Icons/Solid/PersonWalkingIcon.svelte'
+  import { getPosition } from '../../../../helpers/position'
+  import Loader from '../../../../assets/icons/loader.svg'
+  import PersonWalkingIcon from '../../../../assets/icons/person-walking.svg'
   import { carsSort, type SortingSelection } from '$lib/Store/FilterStore'
   import { userPosition } from '$lib/Store/GoogleMapStore'
   import { CarSortField } from '$lib/Types/Enums/CarSortField'
   import { SortDirection } from '$lib/Types/Enums/SortDirection'
+  import { Icon, CurrencyEuro, ChevronDown } from 'svelte-hero-icons'
   import {
     Menu,
     MenuButton,
@@ -81,7 +80,10 @@
     class="group flex items-center gap-1 font-medium text-slate-600 transition-colors duration-75 hover:text-slate-900"
   >
     {sortingLabel}
-    <ChevronDownIcon
+    <Icon
+      src={ChevronDown}
+      mini
+      size="20"
       class="text-slate-400 transition-colors group-hover:text-slate-900 group-hover:transition-colors group-hover:duration-75"
     />
     {#if isLoading}
@@ -103,7 +105,11 @@
           <PersonWalkingIcon class="h-5 w-5 group-hover:text-green-600" />
         {/if}
         {#if option.value === CarSortField.PRICE}
-          <CurrencyEuro class="h-5 w-5 group-hover:text-green-600" />
+          <Icon
+            src={CurrencyEuro}
+            size="20"
+            class="group-hover:text-green-600"
+          />
         {/if}
         {getSortingLabel(option.value, option.direction)}
       </MenuItem>

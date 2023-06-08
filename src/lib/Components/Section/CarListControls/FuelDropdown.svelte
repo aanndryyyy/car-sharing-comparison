@@ -1,6 +1,6 @@
 <script>
   import { MotorType } from '$lib/Types/Enums/MotorType'
-  import ChevronDownIcon from '$lib/Icons/Mini/ChevronDownIcon.svelte'
+  import { Icon, ChevronDown } from 'svelte-hero-icons'
   import {
     Popover,
     PopoverButton,
@@ -24,7 +24,10 @@
     <span class="inline-block h-5 w-5 rounded-md bg-slate-200"
       >{selectedItems.length}</span
     >
-    <ChevronDownIcon
+    <Icon
+      src={ChevronDown}
+      mini
+      size="20"
       class="text-slate-400 transition-colors group-hover:text-slate-900 group-hover:transition-colors group-hover:duration-75"
     />
   </PopoverButton>

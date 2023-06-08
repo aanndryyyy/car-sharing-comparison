@@ -3,17 +3,14 @@
   import { days, duration, hours, minutes } from '$lib/Store/DurationStore'
   import { totalKilometres } from '$lib/Store/TotalKilometresStore'
   import { map } from '$lib/Store/GoogleMapStore'
-  import { Loader } from '@googlemaps/js-api-loader'
-  import { PUBLIC_GOOGLE_API_KEY } from '$env/static/public'
   import WaypointInput from './WaypointInput.svelte'
-  import LoaderIcon from '$lib/Icons/Loader.svelte'
-
+  import Loader from '../../../assets/icons/loader.svg'
+  import { Icon, PlusCircle } from 'svelte-hero-icons'
   import {
     Switch,
     SwitchLabel,
     SwitchGroup,
   } from '@rgossiaux/svelte-headlessui'
-  import PlusCircleIcon from '$lib/Icons/Outline/PlusCircleIcon.svelte'
 
   let isRoundTrip: boolean = false
 
@@ -181,7 +178,8 @@
         class="flex items-center gap-2 hover:text-slate-900 disabled:text-slate-400"
         disabled={inputWaypoints.length >= 5}
       >
-        <PlusCircleIcon /> Add stop
+        <Icon src={PlusCircle} size="24" />
+        Add stop
       </button>
 
       <SwitchGroup
@@ -223,7 +221,7 @@
     <div
       class="flex w-full justify-center rounded-md bg-slate-100 fill-slate-800 p-8"
     >
-      <LoaderIcon class="h-5 w-5 animate-spin text-slate-500" />
+      <Loader class="h-5 w-5 animate-spin text-slate-500" />
     </div>
   {/if}
 </div>

@@ -2,7 +2,7 @@
   import { PUBLIC_GOOGLE_API_KEY } from '$env/static/public'
   import CarsSection from '$lib/Components/Section/Cars.svelte'
   import PlannerSection from '$lib/Components/Section/Planner.svelte'
-  import ogImage from '$lib/Images/og-image.png'
+  import ogImage from '../assets/images/og-image.png'
   import { cars } from '$lib/Store/Cars'
   import { ArrowSmallRight, Icon, XMark } from 'svelte-hero-icons'
   import { _ } from 'svelte-i18n'

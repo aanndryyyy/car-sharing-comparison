@@ -1,10 +1,11 @@
 <script lang="ts">
   import { _ } from 'svelte-i18n'
   import Divider from '$lib/Components/Divider.svelte'
-  import CurrencyEuro from '$lib/Icons/Outline/CurrencyEuro.svelte'
   import type GenericCar from '$lib/Car/GenericCar'
   import GenericMappableCar from '$lib/Car/GenericMappableCar'
-  import PersonWalkingIcon from '$lib/Icons/Mini/PersonWalkingIcon.svelte'
+  import PersonWalking from '../../assets/icons/person-walking.svg'
+  import PersonWalkingSmall from '../../assets/icons/person-walking-small.svg'
+  import { Icon, CurrencyEuro } from 'svelte-hero-icons'
 
   export let car: GenericCar
   export let index: number
@@ -46,11 +47,11 @@
           class="flex items-start gap-2 text-xs text-slate-500 sm:gap-4 md:flex-row md:text-sm"
         >
           <div class="flex items-center gap-0.5 md:gap-1">
-            <CurrencyEuro class="h-3 w-3 stroke-slate-500 md:h-4 md:w-4" />
+            <Icon src={CurrencyEuro} size={screenSize >= 768 ? '16' : '14'} />
             {car.getFormattedMinutePrice()}
           </div>
           <div class="flex items-center gap-0.5 md:gap-1">
-            <CurrencyEuro class="h-3 w-3 stroke-slate-500 md:h-4 md:w-4" />
+            <Icon src={CurrencyEuro} size={screenSize >= 768 ? '16' : '14'} />
             {car.getFormattedKilometrePrice()}
           </div>
           {#if car instanceof GenericMappableCar}
@@ -58,7 +59,11 @@
               class="flex items-center gap-0.5 md:gap-1"
               class:hidden={!car.closestMarkerDistance}
             >
-              <PersonWalkingIcon class="h-3 w-3 text-slate-500 md:h-4 md:w-4" />
+              {#if screenSize >= 768}
+                <PersonWalking class="text-slate-500" />
+              {:else }
+                <PersonWalkingSmall class="text-slate-500" />
+              {/if}
               {car.getClosestMarkerDistanceFormatted()}
             </div>
           {/if}

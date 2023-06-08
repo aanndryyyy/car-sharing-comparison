@@ -1,12 +1,12 @@
 <script lang="ts">
-  import { getPosition } from '$lib/helpers/position'
-  import Loader from '$lib/Icons/Loader.svelte'
-  import CurrencyEuro from '$lib/Icons/Outline/CurrencyEuro.svelte'
-  import PersonWalkingIcon from '$lib/Icons/Solid/PersonWalkingIcon.svelte'
+  import { getPosition } from '../../../../helpers/position'
+  import Loader from '../../../../assets/icons/loader.svg'
+  import PersonWalkingIcon from '../../../../assets/icons/person-walking.svg'
   import { carsSort, type SortingSelection } from '$lib/Store/FilterStore'
   import { userPosition } from '$lib/Store/GoogleMapStore'
   import { CarSortField } from '$lib/Types/Enums/CarSortField'
   import { SortDirection } from '$lib/Types/Enums/SortDirection'
+  import { Icon, CurrencyEuro } from 'svelte-hero-icons'
 
   async function setSortingOption(option: SortingSelection) {
     if (option.value === CarSortField.DISTANCE) {
@@ -61,7 +61,7 @@
           direction: SortDirection.ASCENDING,
         })}
     >
-      <CurrencyEuro class="h-5 w-5 group-hover:text-green-600" />
+      <Icon src={CurrencyEuro} size="20" class="group-hover:text-green-600" />
       Closest first
     </button>
   </div>

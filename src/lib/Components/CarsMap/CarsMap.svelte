@@ -1,17 +1,16 @@
 <script lang="ts">
-  import LoaderIcon from '$lib/Icons/Loader.svelte'
-  import placeholder from '$lib/Images/placeholder.png'
+  import Loader from '../../../assets/icons/loader.svg'
+  import placeholder from '../../../assets/images/placeholder.png'
   import { map } from '$lib/Store/GoogleMapStore'
   import { onMount } from 'svelte'
-
   import { PUBLIC_GOOGLE_MAP_ID } from '$env/static/public'
   import GenericMappableCar from '$lib/Car/GenericMappableCar'
-  import ExclamationTriangleIcon from '$lib/Icons/Outline/ExclamationTriangleIcon.svelte'
   import { cars, visibleCars } from '$lib/Store/Cars'
   import { duration } from '$lib/Store/DurationStore'
   import { totalKilometres } from '$lib/Store/TotalKilometresStore'
   import MapBottomRightControls from './MapBottomRightControls.svelte'
   import MapFullScreenControl from './MapFullScreenControl.svelte'
+  import { Icon, ExclamationTriangle } from 'svelte-hero-icons'
 
   export let center: google.maps.LatLngLiteral = {
     lat: 59.437066,
@@ -145,8 +144,10 @@
       class:pointer-events-none={mapLoaded}
       class:backdrop-blur-none={mapLoaded}
     >
-      <LoaderIcon
-        class={`h-10 w-10 animate-spin text-white ${mapLoaded ? 'hidden' : ''}`}
+      <Loader
+        width="32"
+        height="32"
+        class={`animate-spin text-white ${mapLoaded ? 'hidden' : ''}`}
       />
     </div>
 
@@ -157,7 +158,7 @@
     <div
       class="absolute inset-0 z-20 flex items-center justify-center bg-amber-400"
     >
-      <ExclamationTriangleIcon class="h-10 w-10 text-white" />
+      <Icon src={ExclamationTriangle} size="32" class="text-white" />
     </div>
   {/if}
 </div>

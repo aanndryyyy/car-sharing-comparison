@@ -1,17 +1,9 @@
 <script lang="ts">
   import { page } from '$app/stores'
+  import { Icon, ArrowsPointingOut, ArrowsPointingIn } from 'svelte-hero-icons'
 
-  import ArrowsPointingIn from '$lib/Icons/Solid/ArrowsPointingIn.svelte'
-  import ArrowsPointingOut from '$lib/Icons/Solid/ArrowsPointingOut.svelte'
-
-  let href: string = '/map'
-  let isFullscreen: boolean = $page.url.pathname == href
-  let icon = ArrowsPointingOut
-
-  if (isFullscreen) {
-    href = '/'
-    icon = ArrowsPointingIn
-  }
+  let isFullscreen: boolean = $page.url.pathname == '/map'
+  let href: string = isFullscreen ? '/' : '/map'
 </script>
 
 <div class="absolute right-4 top-4">
@@ -23,6 +15,10 @@
     class:bg-red-600={isFullscreen}
     class:hover:bg-red-700={isFullscreen}
   >
-    <svelte:component this={icon} class="h-6 w-6" />
+    <Icon
+      src={isFullscreen ? ArrowsPointingIn : ArrowsPointingOut}
+      size="24"
+      class="text-white"
+    />
   </a>
 </div>
