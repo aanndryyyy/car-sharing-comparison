@@ -1,5 +1,5 @@
 import cars from "../../../static/data/elmo.json";
-import calculateElmoPrice from "../../../src/helpers/Calculators/CalculateElmoPrice";
+import calculateElmoPrice from "../../../src/helpers/calculators/calculateElmoPrice.js";
 import {SearchParamsObj} from "../../../src/lib/DTO/SearchParamsObj";
 
 describe("Elmo price calculator", function () {

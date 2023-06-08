@@ -1,5 +1,5 @@
 import cars from "../../../static/data/citybee.json";
-import calculateCityBeePrice from "../../../src/helpers/Calculators/CalculateCityBeePrice";
+import calculateCityBeePrice from "../../../src/helpers/calculators/calculateCityBeePrice.js";
 import {SearchParamsObj} from "../../../src/lib/DTO/SearchParamsObj";
 
 describe("CityBee price calculator", function () {

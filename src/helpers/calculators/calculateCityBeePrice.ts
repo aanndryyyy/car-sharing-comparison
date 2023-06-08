@@ -1,4 +1,4 @@
-import { calculateTime, getDuration } from './CalculatorHelper'
+import { calculateTime, getDuration } from './calculatorHelper'
 import type { CarRentPricePackage } from '../../lib/DTO/CarRentPricePackage'
 import type { ICarCityBee } from '../../lib/Types/Interfaces/ICarCityBee'
 import type { CarRentPrice } from '../../lib/DTO/CarRentPrice'

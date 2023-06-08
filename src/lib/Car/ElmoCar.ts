@@ -13,7 +13,7 @@ import Toyota_Yaris_Hybrid from '../../assets/images/providers/elmo/cars/lowQual
 import VW_e_Up20 from '../../assets/images/providers/elmo/cars/lowQuality/VW-e-Up20.png'
 import GenericCar from './GenericCar'
 import { SearchParamsObj } from '../DTO/SearchParamsObj'
-import calculateElmoPrice from '../../helpers/calculators/CalculateElmoPrice'
+import calculateElmoPrice from '../../helpers/calculators/calculateElmoPrice'
 
 export default class ElmoCar extends GenericCar<ICarElmo> {
   calculateRentTotalPrice(searchParamsObj: SearchParamsObj): void {

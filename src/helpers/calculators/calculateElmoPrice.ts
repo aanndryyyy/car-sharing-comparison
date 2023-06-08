@@ -1,4 +1,4 @@
-import {calculateTime, getDuration} from './CalculatorHelper'
+import { calculateTime, getDuration } from './calculatorHelper'
 import type { SearchParamsObj } from '../../lib/DTO/SearchParamsObj'
 import { ElmoCheapestPackage } from '../../lib/DTO/ElmoCheapestPackage'
 import { ElmoPackageCalculatingData } from '../../lib/DTO/ElmoPackageCalculatingData'

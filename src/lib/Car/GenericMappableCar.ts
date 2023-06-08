@@ -1,4 +1,4 @@
-import { haversineRaw } from '$lib/helpers/haversine'
+import { haversineRaw } from '../../helpers/haversine'
 import type { CarData } from './GenericCar'
 import GenericCar from './GenericCar'
 

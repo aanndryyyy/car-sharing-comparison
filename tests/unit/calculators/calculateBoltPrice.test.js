@@ -1,5 +1,5 @@
 import cars from "../../../static/data/bolt.json";
-import calculateBoltPrice from "../../../src/helpers/Calculators/CalculateBoltPrice";
+import calculateBoltPrice from "../../../src/helpers/calculators/calculateBoltPrice.js";
 import {SearchParamsObj} from "../../../src/lib/DTO/SearchParamsObj";
 
 describe("Bolt price calculator", function () {

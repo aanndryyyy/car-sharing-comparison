@@ -3,7 +3,7 @@ import { CarSortField } from '../lib/Types/Enums/CarSortField'
 import type { Car } from '../lib/Car/GenericCar'
 import type { SortingSelection } from '$lib/Store/FilterStore'
 import GenericMappableCar from '$lib/Car/GenericMappableCar'
-import { haversineRaw } from '$lib/helpers/haversine'
+import { haversineRaw } from './haversine'
 
 const sortCars = (
   cars: Car[],

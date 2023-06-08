@@ -1,4 +1,4 @@
-import calculateBeastPrice from '../../helpers/calculators/CalculateBeastPrice'
+import calculateBeastPrice from '../../helpers/calculators/calculateBeastPrice'
 import GenericCar from './GenericCar'
 
 import BeastLogo from '../../assets/images/providers/beast/beast-logo.png'

@@ -1,5 +1,5 @@
 import BoltLogo from '../../assets/images/providers/bolt/bolt-logo.png'
-import calculateBoltPrice from '../../helpers/calculators/CalculateBoltPrice'
+import calculateBoltPrice from '../../helpers/calculators/calculateBoltPrice'
 import type { ICarBolt } from '$lib/Types/Interfaces/ICarBolt'
 
 import No_image_available from '../../assets/images/no-image-available.png'
