@@ -76,6 +76,7 @@ const _findPackage = (
 
   let usePackage: CarRentPricePackage | null = null
   for (const pricePackage of packages) {
+    if (!pricePackage.price) continue
     if (pricePackage.price < totalCost) {
       const packageTotalTime =
         pricePackage.days * 24 * 60 + pricePackage.hours * 60
