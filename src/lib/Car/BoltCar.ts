@@ -12,7 +12,10 @@ import Audi_Q2 from '../../assets/images/providers/bolt/cars/lowQuality/Audi-Q2.
 import Audi_Q5 from '../../assets/images/providers/bolt/cars/lowQuality/Audi-Q5.png'
 import Audi_Q8 from '../../assets/images/providers/bolt/cars/lowQuality/Audi-Q8.png'
 import BMW_4_Convertible from '../../assets/images/providers/bolt/cars/lowQuality/BMW-4-Convertible.png'
+import BMW_4_Coupe from '../../assets/images/providers/bolt/cars/lowQuality/BMW-4-Coupe.png'
+import BMW_520d from '../../assets/images/providers/bolt/cars/lowQuality/Hyundai-i30.png'
 import Hyundai_i20 from '../../assets/images/providers/bolt/cars/lowQuality/Hyundai-i20.png'
+import Hyundai_i30 from '../../assets/images/providers/bolt/cars/lowQuality/Hyundai-i30.png'
 import Kia_Picanto from '../../assets/images/providers/bolt/cars/lowQuality/Kia-Picanto.png'
 import Mercedes_Sprinter from '../../assets/images/providers/bolt/cars/lowQuality/Mercedes-Sprinter.png'
 import Peugeot_208 from '../../assets/images/providers/bolt/cars/lowQuality/Peugeot-208.png'
@@ -85,10 +88,18 @@ export default class BoltCar extends GenericMappableCar<ICarBolt> {
         return Audi_Q2
       case 'Audi e-tron':
         return Audi_e_tron
+      case 'BMW 4 Convertible':
+        return BMW_4_Convertible
+      case 'BMW 4 Coupe':
+        return BMW_4_Coupe
+      case 'BMW 520d':
+        return BMW_520d
       case 'Škoda Fabia':
         return Skoda_Fabia
       case 'Hyundai i20':
         return Hyundai_i20
+      case 'Hyundai i30':
+        return Hyundai_i30
       case 'Mercedes Sprinter':
         return Mercedes_Sprinter
       case 'Toyota Corolla':
@@ -124,7 +135,6 @@ export default class BoltCar extends GenericMappableCar<ICarBolt> {
       default:
         return No_image_available
     }
-    // return this.carData.imageUrl
   }
 
   initialiseMarkers(
