@@ -5,6 +5,7 @@
   import AutoPlanner from '$lib/Components/Planners/TripPlanner.svelte'
   import { ArrowsUpDown, Icon } from 'svelte-hero-icons'
   import { cars } from '../../lib/Store/Cars'
+  import Filters from '$lib/Components/Filters.svelte'
 
   export let data
   $cars = data.cars
@@ -46,7 +47,7 @@
   </div>
 
   <aside class="block h-20 md:hidden">
-    <p>Filters</p>
+    <Filters />
   </aside>
 </main>
 

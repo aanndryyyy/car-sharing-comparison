@@ -3,48 +3,50 @@
   import BoltLogo from '../../../../assets/images/providers/bolt/bolt-logo.png'
   import CityBeeLogo from '../../../../assets/images/providers/citybee/citybee-logo.png'
   import ElmoLogo from '../../../../assets/images/providers/elmo/elmo-logo.png'
+  import AvisLogo from '../../../../assets/images/providers/avis/avis-logo.png'
   import { carsFilter } from '$lib/Store/FilterStore'
   import { Provider } from '$lib/Types/Enums/Provider'
 
-  let providers = $carsFilter.providers
-
-  const providersInfo: Record<Provider, any> = {
-    [Provider.BOLT]: { title: 'Bolt', value: Provider.BOLT, imgUrl: BoltLogo },
-    [Provider.CITYBEE]: {
+  const providersInfo: any = [
+    { title: 'Bolt', value: Provider.BOLT, imgUrl: BoltLogo },
+    {
       title: 'Citybee',
       value: Provider.CITYBEE,
       imgUrl: CityBeeLogo,
     },
-    [Provider.ELMO]: { title: 'Elmo', value: Provider.ELMO, imgUrl: ElmoLogo },
-    [Provider.AVIS]: { title: 'Avis', value: Provider.AVIS, imgUrl: ElmoLogo },
-    [Provider.BEAST]: {
+    { title: 'Elmo', value: Provider.ELMO, imgUrl: ElmoLogo },
+    {
       title: 'Beast',
       value: Provider.BEAST,
       imgUrl: BeastLogo,
     },
-  }
+    { title: 'Avis', value: Provider.AVIS, imgUrl: AvisLogo },
+  ]
 </script>
 
 <div class="space-y-1">
   <h4 class="text-base font-normal">Brands</h4>
   <div class="space-x-4 overflow-x-scroll whitespace-nowrap scrollbar-hide">
-    {#each providers as provider, index}
+    {#each providersInfo as provider, index}
       <div class="inline-block">
         <input
           type="checkbox"
           class="peer hidden"
           id={'provider-' + index}
-          value={provider}
+          value={provider.value}
           bind:group={$carsFilter.providers}
         />
         <label
-          class="block rounded border-2 border-slate-300 px-4 py-3 peer-checked:border-green-600"
+          class="block rounded px-4 py-3"
+          style={$carsFilter.providers.some((p) => p === provider.value)
+            ? 'border: 2px solid #16a34a'
+            : 'border: 2px solid #cbd5e1'}
           for={'provider-' + index}
         >
           <img
             class="block h-5 w-12 object-contain"
-            src={providersInfo[provider].imgUrl}
-            alt={providersInfo[provider].title}
+            src={provider.imgUrl}
+            alt={provider.title}
           />
         </label>
       </div>

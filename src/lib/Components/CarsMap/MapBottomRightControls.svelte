@@ -28,7 +28,7 @@
     class="flex h-8 w-8 items-center justify-center rounded-md bg-white px-0.5 py-0 text-slate-600 shadow-lg shadow-black/20 transition-[fill] hover:text-green-600"
     title="Show your current location"
   >
-    <LocationTargetIcon/>
+    <LocationTargetIcon />
   </button>
 
   <div class="rounded-md bg-white px-0.5 py-0 shadow-lg shadow-black/20">

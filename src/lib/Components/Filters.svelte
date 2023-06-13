@@ -13,9 +13,11 @@
       {$_('filters')}
     </h3>
 
-    <button on:click={() => (open = false)}>
-      <Icon src={XMark} size="24" />
-    </button>
+    {#if open}
+      <button on:click={() => (open = false)}>
+        <Icon src={XMark} size="24" />
+      </button>
+    {/if}
   </div>
 
   <SortSelection />

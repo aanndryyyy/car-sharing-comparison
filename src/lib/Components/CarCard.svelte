@@ -61,7 +61,7 @@
             >
               {#if screenSize >= 768}
                 <PersonWalking class="text-slate-500" />
-              {:else }
+              {:else}
                 <PersonWalkingSmall class="text-slate-500" />
               {/if}
               {car.getClosestMarkerDistanceFormatted()}

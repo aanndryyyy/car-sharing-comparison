@@ -36,25 +36,28 @@
       <Loader class="h-4 w-4 animate-spin text-slate-500" />
     {/if}
   </h4>
-
   <div class="flex gap-4 overflow-x-scroll whitespace-nowrap scrollbar-hide">
     <button
-      class="flex items-center gap-2 rounded border-2 border-slate-300 px-4 py-3"
-      class:border-green-600={$carsSort.value === CarSortField.PRICE &&
-        $carsSort.direction === SortDirection.ASCENDING}
+      class="flex items-center gap-2 rounded px-4 py-3"
+      style={$carsSort.value === CarSortField.PRICE &&
+      $carsSort.direction === SortDirection.ASCENDING
+        ? 'border: 2px solid #16a34a'
+        : 'border: 2px solid #cbd5e1'}
       on:click={() =>
         setSortingOption({
           value: CarSortField.PRICE,
           direction: SortDirection.ASCENDING,
         })}
     >
-      <PersonWalkingIcon class="h-5 w-5 group-hover:text-green-600" />
+      <PersonWalkingIcon class="group-hover:text-green-600" />
       Cheapest first
     </button>
     <button
-      class="flex items-center gap-2 rounded border-2 border-slate-300 px-4 py-3"
-      class:border-green-600={$carsSort.value === CarSortField.DISTANCE &&
-        $carsSort.direction === SortDirection.ASCENDING}
+      class="flex items-center gap-2 rounded px-4 py-3"
+      style={$carsSort.value === CarSortField.DISTANCE &&
+      $carsSort.direction === SortDirection.ASCENDING
+        ? 'border: 2px solid #16a34a'
+        : 'border: 2px solid #cbd5e1'}
       on:click={() =>
         setSortingOption({
           value: CarSortField.DISTANCE,
