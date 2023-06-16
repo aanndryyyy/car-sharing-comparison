@@ -1,9 +1,11 @@
 <script lang="ts">
+  import { _ } from 'svelte-i18n'
   import { PUBLIC_GOOGLE_API_KEY } from '$env/static/public'
   import CarsMap from '$lib/Components/CarsMap/CarsMap.svelte'
   import ManualPlanner from '$lib/Components/Planners/ManualPlanner.svelte'
   import AutoPlanner from '$lib/Components/Planners/TripPlanner.svelte'
-  import { ArrowsUpDown, Icon } from 'svelte-hero-icons'
+  import CarList from '$lib/Components/Section/CarList/CarList.svelte'
+  import { ArrowsUpDown, Funnel, Icon } from 'svelte-hero-icons'
   import { cars } from '../../lib/Store/Cars'
   import Filters from '$lib/Components/Filters.svelte'
 
@@ -20,7 +22,9 @@
 <main
   class="grid min-h-full grid-rows-[1fr_5rem] md:grid-cols-[24rem_1fr] md:grid-rows-none"
 >
-  <aside class="hidden md:block md:w-96">
+  <aside
+    class="hidden h-screen overflow-scroll scrollbar-hide md:block md:w-96"
+  >
     <div class="m-4 flex items-center justify-between">
       <h2 class="text-2xl font-semibold md:text-3xl md:font-medium">Planner</h2>
 
@@ -39,6 +43,23 @@
       <div class:hidden={!plannerType}>
         <AutoPlanner />
       </div>
+    </div>
+    <div class="m-4 mt-8">
+      <div class="flex items-center justify-between">
+        <div>
+          <h2 class="text-2xl font-semibold md:text-3xl md:font-medium">
+            {$_('cars.title')}
+          </h2>
+        </div>
+
+        <button
+          on:click={() => {}}
+          class="flex items-center justify-center gap-1.5 rounded bg-green-600 p-2.5 text-base font-medium text-white"
+        >
+          <Icon src={Funnel} size="24" />
+        </button>
+      </div>
+      <CarList />
     </div>
   </aside>
 

@@ -50,15 +50,3 @@
     </div>
   </div>
 </aside>
-
-<style lang="postcss">
-  :global(.rangeSlider) {
-    margin: 16px 0 !important;
-  }
-  :global(.rangeSlider > .rangeBar) {
-    background: #4ade80 !important;
-  }
-  :global(.rangeNub) {
-    background: #16a34a !important;
-  }
-</style>

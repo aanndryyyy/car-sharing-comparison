@@ -1,5 +1,6 @@
 <script lang="ts">
   import { _ } from 'svelte-i18n'
+  import { onMount } from 'svelte'
   import Divider from '$lib/Components/Divider.svelte'
   import type GenericCar from '$lib/Car/GenericCar'
   import GenericMappableCar from '$lib/Car/GenericMappableCar'
@@ -24,45 +25,61 @@
     }
   }
 
+  onMount(async () => {
+    initView()
+    window.addEventListener('resize', initView)
+  })
+
+  const initView = () => {
+    mobileView = screenSize < 768 || window.location.pathname === '/map'
+  }
+
   let screenSize: number
+  let mobileView: boolean
 </script>
 
 <svelte:window bind:innerWidth={screenSize} />
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <div
-  class="w-full rounded-lg border border-slate-200 p-4 text-left shadow-lg focus:ring-2 focus:ring-green-500 focus:ring-offset-2 sm:p-0"
+  class="w-full rounded-lg border border-slate-200 p-4 text-left shadow-lg focus:ring-2 focus:ring-green-500 focus:ring-offset-2 {mobileView
+    ? ''
+    : 'p-0'}"
   on:click={openDetails}
 >
-  <div class="flex sm:flex-row-reverse">
+  <div class="flex {mobileView ? '' : 'flex-row-reverse'}">
     <div
-      class="flex grow flex-col gap-1 sm:my-4 sm:flex-row sm:items-center sm:justify-between sm:border-l sm:border-slate-200 sm:px-6"
+      class="flex grow gap-1 {mobileView
+        ? 'flex-col'
+        : 'my-4 flex-row items-center justify-between border-l border-slate-200 px-6'}"
     >
       <div class="space-y-1">
-        <h2 class="text-base font-normal md:font-medium">
+        <h2 class="text-base {mobileView ? 'font-normal' : 'font-medium'}">
           {car.getName()}
         </h2>
 
         <div
-          class="flex items-start gap-2 text-xs text-slate-500 sm:gap-4 md:flex-row md:text-sm"
+          class="flex items-start gap-2 text-slate-500 {mobileView
+            ? 'text-xs'
+            : 'flex-row gap-4 text-sm'}"
         >
-          <div class="flex items-center gap-0.5 md:gap-1">
-            <Icon src={CurrencyEuro} size={screenSize >= 768 ? '16' : '14'} />
+          <div class="flex items-center gap-0.5 {mobileView ? '' : 'gap-1'}">
+            <Icon src={CurrencyEuro} size={mobileView ? '14' : '16'} />
             {car.getFormattedMinutePrice()}
           </div>
-          <div class="flex items-center gap-0.5 md:gap-1">
-            <Icon src={CurrencyEuro} size={screenSize >= 768 ? '16' : '14'} />
+          <div class="flex items-center gap-0.5 {mobileView ? '' : 'gap-1'}">
+            <Icon src={CurrencyEuro} size={mobileView ? '14' : '16'} />
             {car.getFormattedKilometrePrice()}
           </div>
           {#if car instanceof GenericMappableCar}
             <div
-              class="flex items-center gap-0.5 md:gap-1"
+              class="flex items-center gap-0.5 {mobileView ? '' : 'gap-1'}"
               class:hidden={!car.closestMarkerDistance}
             >
-              {#if screenSize >= 768}
-                <PersonWalking class="text-slate-500" />
-              {:else}
+              {#if mobileView}
                 <PersonWalkingSmall class="text-slate-500" />
+              {:else}
+                <PersonWalking class="text-slate-500" />
               {/if}
               {car.getClosestMarkerDistanceFormatted()}
             </div>
@@ -73,8 +90,12 @@
       <p class="font-semibold">{car.getFormattedTotalPrice()}</p>
     </div>
 
-    <div class="relative flex w-24 items-center sm:w-32">
-      <div class="absolute inset-x-0 top-0 flex justify-center sm:top-4">
+    <div class="relative flex w-24 items-center {mobileView ? '' : 'w-32'}">
+      <div
+        class="absolute inset-x-0 top-0 flex justify-center {mobileView
+          ? ''
+          : 'top-4'}"
+      >
         <img
           class="h-4"
           src={car.getLogo()}
@@ -83,7 +104,7 @@
         />
       </div>
       <img
-        class="mx-auto h-14 w-auto md:mb-2 md:mt-6"
+        class="mx-auto h-14 w-auto {mobileView ? '' : 'mb-2 mt-6'}"
         src={car.getCarImg()}
         alt="Car"
         loading="lazy"
@@ -95,6 +116,7 @@
     class="h-0 overflow-hidden transition-[height] delay-100 duration-500 ease-in-out"
     id={`offer-details-grow-${index}`}
   >
+    <div class="mt-2" />
     <Divider />
     <div class="grid gap-2 p-4" id={`offer-details-wrapper-${index}`}>
       <!--            <div>-->
