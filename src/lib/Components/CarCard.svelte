@@ -6,7 +6,8 @@
   import GenericMappableCar from '$lib/Car/GenericMappableCar'
   import PersonWalking from '../../assets/icons/person-walking.svg'
   import PersonWalkingSmall from '../../assets/icons/person-walking-small.svg'
-  import { Icon, CurrencyEuro } from 'svelte-hero-icons'
+  import { CurrencyEuro, Icon } from 'svelte-hero-icons'
+  import { Provider } from '../Types/Enums/Provider'
 
   export let car: GenericCar
   export let index: number
@@ -25,9 +26,50 @@
     }
   }
 
+  const getAppLink = () => {
+    if (car.provider === Provider.BOLT) {
+      return 'https://bolt.onelink.me/sbJ2/7c3bdcee'
+    }
+
+    // Let's make sure what platform is used
+    const isAndroid = navigator.userAgent.toLowerCase().indexOf('android') > -1
+    const isIOS =
+      /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream
+    if (isAndroid) {
+      switch (car.provider) {
+        case Provider.BEAST:
+          return 'https://play.google.com/store/apps/details?id=co.electricbeast.beast'
+        case Provider.CITYBEE:
+          return 'https://play.google.com/store/apps/details?id=com.primeleasing.citybee'
+        case Provider.ELMO:
+          return 'https://play.google.com/store/apps/details?id=ee.elmorent.rent&hl=en&gl=US'
+      }
+    } else if (isIOS) {
+      switch (car.provider) {
+        case Provider.BEAST:
+          return 'https://apps.apple.com/us/app/beast-rent/id1521729069'
+        case Provider.CITYBEE:
+          return 'https://apps.apple.com/ee/app/citybee-shared-mobility/id966537355'
+        case Provider.ELMO:
+          return 'https://apps.apple.com/ee/app/elmo-rent/id1567760991'
+      }
+    } else {
+      switch (car.provider) {
+        case Provider.BEAST:
+          return 'https://beast.rent/'
+        case Provider.CITYBEE:
+          return 'https://citybee.ee/'
+        case Provider.ELMO:
+          return 'https://elmorent.ee/'
+      }
+    }
+    throw 'Missing provider: ' + car.provider
+  }
+
   onMount(async () => {
     initView()
     window.addEventListener('resize', initView)
+    appLink = getAppLink()
   })
 
   const initView = () => {
@@ -36,6 +78,7 @@
 
   let screenSize: number
   let mobileView: boolean
+  let appLink: string
 </script>
 
 <svelte:window bind:innerWidth={screenSize} />
@@ -147,7 +190,7 @@
         </div>
       {/if}
       <div class="mt-2">
-        <a href="https://bolt.eu/et-ee/" target="”_blank”">
+        <a href={appLink} target="”_blank”">
           <button
             class="w-60 rounded bg-green-600 py-2 font-bold text-white hover:bg-green-700"
           >
