@@ -49,12 +49,15 @@
           <Icon class="text-green-600" src={XMark} size="24" />
         </button>
       </div>
-      <button class="flex items-center gap-1 pt-2 text-xs font-medium">
+      <a
+        href="/about-us"
+        class="flex items-center gap-1 pt-2 text-xs font-medium"
+      >
         <p>
           {$_('readMore')}
         </p>
         <Icon src={ArrowSmallRight} size="12" />
-      </button>
+      </a>
     </div>
   {/if}
 </header>
