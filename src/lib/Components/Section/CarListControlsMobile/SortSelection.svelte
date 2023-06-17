@@ -27,6 +27,12 @@
   }
 
   let isLoading = false
+  $: sortByPrice =
+    $carsSort.value === CarSortField.PRICE &&
+    $carsSort.direction === SortDirection.ASCENDING
+  $: sortByDistance =
+    $carsSort.value === CarSortField.DISTANCE &&
+    $carsSort.direction === SortDirection.ASCENDING
 </script>
 
 <div class="space-y-1">
@@ -38,11 +44,9 @@
   </h4>
   <div class="flex gap-4 overflow-x-scroll whitespace-nowrap scrollbar-hide">
     <button
-      class="flex items-center gap-2 rounded px-4 py-3"
-      style={$carsSort.value === CarSortField.PRICE &&
-      $carsSort.direction === SortDirection.ASCENDING
-        ? 'border: 2px solid #16a34a'
-        : 'border: 2px solid #cbd5e1'}
+      class="flex items-center gap-2 rounded border-2 p-1.5 {sortByPrice
+        ? 'border-green-600 bg-green-200'
+        : 'border-gray-200 bg-gray-200'}"
       on:click={() =>
         setSortingOption({
           value: CarSortField.PRICE,
@@ -53,11 +57,9 @@
       Cheapest first
     </button>
     <button
-      class="flex items-center gap-2 rounded px-4 py-3"
-      style={$carsSort.value === CarSortField.DISTANCE &&
-      $carsSort.direction === SortDirection.ASCENDING
-        ? 'border: 2px solid #16a34a'
-        : 'border: 2px solid #cbd5e1'}
+      class="flex items-center gap-2 rounded border-2 p-1.5 {sortByDistance
+        ? 'border-green-600 bg-green-200'
+        : 'border-gray-200 bg-gray-200'}"
       on:click={() =>
         setSortingOption({
           value: CarSortField.DISTANCE,

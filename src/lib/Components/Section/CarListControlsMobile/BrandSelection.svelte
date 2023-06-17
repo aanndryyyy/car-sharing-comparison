@@ -37,14 +37,15 @@
           bind:group={$carsFilter.providers}
         />
         <label
-          class="block rounded px-4 py-3"
-          style={$carsFilter.providers.some((p) => p === provider.value)
-            ? 'border: 2px solid #16a34a'
-            : 'border: 2px solid #cbd5e1'}
+          class="block rounded border-2 p-1.5 {$carsFilter.providers.some(
+            (p) => p === provider.value
+          )
+            ? 'border-green-600 bg-green-200'
+            : 'border-gray-200 bg-gray-200'}"
           for={'provider-' + index}
         >
           <img
-            class="block h-5 w-12 object-contain"
+            class="block h-5 w-14 object-contain"
             src={provider.imgUrl}
             alt={provider.title}
           />
