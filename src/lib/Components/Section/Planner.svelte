@@ -38,7 +38,7 @@
         <div class="flex-grow border-t border-slate-300" />
       </div>
 
-      <div class={manualPlanner ? 'hidden' : 'block'}>
+      <div class={manualPlanner && screenSize < 768 ? 'hidden' : 'block'}>
         <AutoPlanner />
       </div>
     </div>
