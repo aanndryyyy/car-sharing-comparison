@@ -5,6 +5,7 @@
   import ManualPlanner from '$lib/Components/Planners/ManualPlanner.svelte'
   import AutoPlanner from '$lib/Components/Planners/TripPlanner.svelte'
   import CarList from '$lib/Components/Section/CarList/CarList.svelte'
+  import BottomSheet from 'svelte-swipeable-sheets/BottomSheet.svelte'
   import { ArrowsUpDown, Funnel, Icon } from 'svelte-hero-icons'
   import { cars } from '../../lib/Store/Cars'
   import Filters from '$lib/Components/Filters.svelte'
@@ -13,6 +14,7 @@
   $cars = data.cars
 
   let plannerType: boolean = false
+  let open: boolean = false
 </script>
 
 <svelte:head>
@@ -20,10 +22,10 @@
 </svelte:head>
 
 <main
-  class="grid min-h-full grid-rows-[1fr_5rem] md:grid-cols-[24rem_1fr] md:grid-rows-none"
+  class="grid min-h-[calc(100vh-52px)] grid-rows-[1fr_5rem] md:min-h-fit md:grid-cols-[24rem_1fr] md:grid-rows-none"
 >
   <aside
-    class="hidden h-screen overflow-scroll scrollbar-hide md:block md:w-96"
+    class="-mt-16 hidden h-screen overflow-scroll pt-16 scrollbar-hide md:block md:w-96"
   >
     <div class="m-4 flex items-center justify-between">
       <h2 class="text-2xl font-semibold md:text-3xl md:font-medium">Planner</h2>
@@ -67,10 +69,22 @@
     <CarsMap zoom={13} class="h-full w-full" />
   </div>
 
-  <aside class="block h-20 md:hidden">
-    <Filters />
-  </aside>
+  <button
+    on:click={() => {
+      open = true
+    }}
+    class="block h-20 p-4 md:hidden"
+  >
+    <div class="flex gap-4">
+      <Icon src={Funnel} size="24" class="text-green-600" />
+      <p>Filters</p>
+    </div>
+  </button>
 </main>
+
+<BottomSheet bind:open>
+  <Filters bind:open />
+</BottomSheet>
 
 <style lang="postcss">
   :global(html),

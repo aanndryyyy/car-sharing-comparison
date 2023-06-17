@@ -7,7 +7,7 @@
   export let open = false
 </script>
 
-<div class="space-y-4 p-4">
+<div class="grid gap-2 p-4">
   <div class="flex justify-between">
     <h3>
       {$_('filters')}

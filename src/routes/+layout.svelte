@@ -5,6 +5,7 @@
   import { browser } from '$app/environment'
   import { locale, waitLocale, isLoading } from 'svelte-i18n'
   import type { LayoutLoad } from './$types'
+  import TopBarNavigation from '$lib/Components/TopBarNavigation.svelte'
 
   export const load: LayoutLoad = async () => {
     if (browser && ['en-US', 'et'].includes(window.navigator.language)) {
@@ -15,6 +16,7 @@
   }
 </script>
 
+<TopBarNavigation />
 {#if !$isLoading}
   <slot />
 {/if}

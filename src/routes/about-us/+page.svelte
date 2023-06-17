@@ -1,4 +1,4 @@
-<div class="m-8 flex justify-center">
+<div class="flex justify-center p-8">
   <div class="grid max-w-lg gap-6">
     <p>
       Welcome to our website! Here, you'll find a powerful calculator that helps

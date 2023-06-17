@@ -26,10 +26,7 @@
     </div>
 
     <div>
-      <div
-        class:max-md:!block={manualPlanner}
-        class:max-md:!hidden={!manualPlanner}
-      >
+      <div class={manualPlanner ? 'block' : 'hidden'}>
         <ManualPlanner />
       </div>
 
@@ -41,10 +38,7 @@
         <div class="flex-grow border-t border-slate-300" />
       </div>
 
-      <div
-        class:max-md:!block={manualPlanner}
-        class:max-md:!hidden={!manualPlanner}
-      >
+      <div class={manualPlanner ? 'hidden' : 'block'}>
         <AutoPlanner />
       </div>
     </div>
