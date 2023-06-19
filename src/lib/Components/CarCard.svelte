@@ -85,8 +85,8 @@
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <div
-  class="w-full rounded-lg border border-slate-200 p-4 text-left shadow-lg focus:ring-2 focus:ring-green-500 focus:ring-offset-2 {mobileView
-    ? ''
+  class="w-full rounded-lg border border-slate-200 text-left shadow-lg focus:ring-2 focus:ring-green-500 focus:ring-offset-2 {mobileView
+    ? 'p-4'
     : 'p-0'}"
   on:click={openDetails}
 >
