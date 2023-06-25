@@ -22,6 +22,9 @@ export default abstract class GenericCar<
 > {
   rentTotalPrice: number = 0
   rentUsablePackages: ICarRentPricePackage[] = []
+  markers: google.maps.marker.AdvancedMarkerElement[] = []
+  closestMarker?: google.maps.marker.AdvancedMarkerElement
+  closestMarkerDistance?: number
 
   /**
    * Initialise Car with data.

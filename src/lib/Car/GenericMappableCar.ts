@@ -5,10 +5,6 @@ import GenericCar from './GenericCar'
 export default abstract class GenericMappableCar<
   CarDataType extends CarData = CarData
 > extends GenericCar<CarDataType> {
-  markers: google.maps.marker.AdvancedMarkerElement[] = []
-  closestMarker?: google.maps.marker.AdvancedMarkerElement
-  closestMarkerDistance?: number
-
   public findClosestMarkerTo(
     lat: number,
     lng: number
@@ -17,8 +13,8 @@ export default abstract class GenericMappableCar<
 
     this.markers.sort((marker1, marker2) => {
       return (
-        haversineRaw(marker2.position, { lat, lng }) -
-        haversineRaw(marker1.position, { lat, lng })
+        haversineRaw(marker1.position, { lat, lng }) -
+        haversineRaw(marker2.position, { lat, lng })
       )
     })
 
@@ -40,13 +36,14 @@ export default abstract class GenericMappableCar<
   }
 
   setMarkerIcons(type?: 'price') {
-    this.markers.forEach((marker) => {
-      this.setMarkerIcon(marker, type)
+    this.markers.forEach((marker, index) => {
+      this.setMarkerIcon(marker, index, type)
     })
   }
 
   setMarkerIcon(
     marker: google.maps.marker.AdvancedMarkerElement,
+    index: number,
     type?: 'price'
   ) {
     switch (type) {
@@ -58,6 +55,15 @@ export default abstract class GenericMappableCar<
         marker.content = this.getMarkerDotIcon()
         break
     }
+    marker.content.id =
+      index +
+      1 +
+      '-' +
+      this.getName().replace(' ', '-') +
+      '-' +
+      this.provider.toLowerCase() +
+      '-' +
+      'marker'
   }
 
   /**

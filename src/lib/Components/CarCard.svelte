@@ -8,6 +8,9 @@
   import PersonWalkingSmall from '../../assets/icons/person-walking-small.svg'
   import { CurrencyEuro, Icon } from 'svelte-hero-icons'
   import { Provider } from '../Types/Enums/Provider'
+  import { map } from '$lib/Store/GoogleMapStore'
+  import { carsSort } from '$lib/Store/FilterStore'
+  import { CarSortField } from '$lib/Types/Enums/CarSortField'
 
   export let car: GenericCar
   export let index: number
@@ -18,12 +21,32 @@
       growDiv.style.height = '0'
       growDiv.style.overflow = 'hidden'
     } else {
+      zoomToCar()
       const wrapper = document.getElementById(`offer-details-wrapper-${index}`)
       growDiv.style.height = wrapper.clientHeight + 41 + 'px'
       setTimeout(() => {
         growDiv.style.overflow = 'inherit'
       }, 500)
     }
+    markClosestCar()
+  }
+
+  const markClosestCar = () => {
+    if ($carsSort.value === CarSortField.PRICE || !car.closestMarker) return
+    const dotElem = document.getElementById(car.closestMarker.content.id)
+    if (!dotElem) return
+    if (dotElem.style.border) {
+      dotElem.style.border = null
+    } else {
+      car.closestMarker.zIndex = 20
+      dotElem.style.border = '2px solid red'
+    }
+  }
+
+  const zoomToCar = () => {
+    if ($carsSort.value !== CarSortField.DISTANCE || !car.closestMarker) return
+    $map.setZoom(15)
+    $map.panTo(car.closestMarker!.position!)
   }
 
   const getAppLink = () => {
