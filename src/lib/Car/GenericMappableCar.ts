@@ -39,21 +39,96 @@ export default abstract class GenericMappableCar<
     return this.closestMarkerDistance.toFixed(2) + ' km'
   }
 
+  setMarkerIcons(type?: 'price') {
+    this.markers.forEach((marker) => {
+      this.setMarkerIcon(marker, type)
+    })
+  }
+
+  setMarkerIcon(
+    marker: google.maps.marker.AdvancedMarkerElement,
+    type?: 'price'
+  ) {
+    switch (type) {
+      case 'price':
+        marker.content = this.getMarkerPriceIcon()
+        break
+
+      default:
+        marker.content = this.getMarkerDotIcon()
+        break
+    }
+  }
+
   /**
    * Initialise the markers.
    */
-  abstract initialiseMarkers(
+  public initialiseMarkers(
     AdvancedMarkerElement: typeof google.maps.marker.AdvancedMarkerElement,
     map?: google.maps.Map
-  ): void
+  ): void {
+    this.carData.coordinates.forEach(({ lat, lng }) => {
+      const marker = new AdvancedMarkerElement({
+        map,
+        content: this.getMarkerDotIcon(),
+        position: { lat, lng },
+      })
 
-  /**
-   * The Element for dot icon.
-   */
-  abstract getMarkerDotIcon(): Element
+      marker.addListener('click', () => {
+        if (!marker.content.className.includes('detail-icon')) {
+          marker.content = this.getMarkerDetailIcon()
+          marker.zIndex = 20
+        } else {
+          if (map.getZoom() < 14) {
+            marker.content = this.getMarkerDotIcon()
+          } else {
+            marker.content = this.getMarkerPriceIcon()
+          }
+          marker.zIndex = 10
+        }
+      })
 
-  /**
-   * The Element for icon with price.
-   */
-  abstract getMarkerPriceIcon(): Element
+      this.markers.push(marker)
+    })
+  }
+
+  getMarkerDotIcon(): HTMLDivElement {
+    const content = document.createElement('div')
+    content.className = `dot-icon bg-brand-${this.provider.toLowerCase()}`
+
+    return content
+  }
+
+  getMarkerPriceIcon(): HTMLDivElement {
+    const content = document.createElement('div')
+    content.className = `dot-icon bg-brand-${this.provider.toLowerCase()}`
+
+    const priceIcon = document.createElement('div')
+    priceIcon.className = 'price-icon'
+
+    priceIcon.innerText = this.getFormattedTotalPrice()
+    priceIcon.appendChild(content)
+
+    return priceIcon
+  }
+
+  getMarkerDetailIcon(): HTMLDivElement {
+    const content = `<div style="display: flex; padding: 0.25rem; font-size: 0.75rem; line-height: 1rem; align-items: center; background: white; border-color: #E2E8F0; border-width: 1px; border-radius: 6px; z-index: 200">
+                <div>
+                    <img src=${this.getCarImg()} alt="car image" width="80">
+                </div> 
+                <div>
+                    <p>${this.getName()}</p>
+                    <p>${this.getFormattedMinutePrice()}</p>
+                    <p>${this.getFormattedKilometrePrice()}</p>
+                    <p><b>${this.getFormattedTotalPrice()}</b></p>
+                </div>
+            </div>`
+    const priceIcon = document.createElement('div')
+    priceIcon.className = 'detail-icon'
+
+    priceIcon.innerHTML = content
+
+    return priceIcon
+  }
 }
