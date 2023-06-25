@@ -162,3 +162,12 @@
     </div>
   {/if}
 </div>
+
+<style lang="postcss">
+  .bg-brand-bolt {
+    @apply bg-green-500;
+  }
+  .bg-brand-citybee {
+    @apply bg-orange-500;
+  }
+</style>
