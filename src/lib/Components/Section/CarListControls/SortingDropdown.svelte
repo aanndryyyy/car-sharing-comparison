@@ -102,14 +102,10 @@
         on:click={() => setSortingOption(option)}
       >
         {#if option.value === CarSortField.DISTANCE}
-          <PersonWalkingIcon class="h-5 w-5 group-hover:text-green-600" />
+          <PersonWalkingIcon class="mr-1 h-5" />
         {/if}
         {#if option.value === CarSortField.PRICE}
-          <Icon
-            src={CurrencyEuro}
-            size="20"
-            class="group-hover:text-green-600"
-          />
+          <Icon src={CurrencyEuro} size="20" />
         {/if}
         {getSortingLabel(option.value, option.direction)}
       </MenuItem>
