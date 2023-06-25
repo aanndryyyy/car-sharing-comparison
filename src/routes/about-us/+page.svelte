@@ -2,8 +2,8 @@
   <div class="grid max-w-lg gap-6">
     <p>
       Welcome to our website! Here, you'll find a powerful calculator that helps
-      you choose the optimal service provider for your shared car trip which is
-      completely free to use. Currently, our services are available exclusively
+      you choose the optimal service provider for your shared car trip.
+      Currently, our services are available only
       in the Estonian market. We provide detailed pricing information for four
       different service providers, two of which Bolt and CityBee also offer
       real-time car location availability.
@@ -15,12 +15,12 @@
       Using our application is straightforward and depends on the specific
       information you're looking for. If you're interested in car price
       information, begin by filling out the planner input fields. You have two
-      planning options to choose from. The first is a manual planner, where you
-      input the duration of your drive and the distance you'll cover during that
-      time. Alternatively, you can opt for our automatic planner, which requires
+      planning options to choose from. The first is an automatic planner, which requires
       you to enter the start and end locations of your trip. You can also add
       stopovers to your journey and indicate if it's a round trip, which doubles
-      the marked distance.
+      the marked distance. Alternatively, you can choose manual planner, where you
+      input the duration of your drive and the distance you'll cover during that
+      time.
     </p>
 
     <p>
@@ -45,8 +45,8 @@
     <p>
       Our application is designed to be user-friendly on both desktop and mobile
       devices. Additionally, we've implemented a bookmarking feature, allowing
-      you to add the application to your bookmarks for one-click access. Follow
-      the steps below to add the application to your bookmarks:
+      you to add the application to your device main screen for one-click access. Follow
+      the steps below to install the application to your device:
     </p>
 
     <p>On an iOS phone: [Include instructions here.]</p>
