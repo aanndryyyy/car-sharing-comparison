@@ -4,13 +4,14 @@
   import { map } from '$lib/Store/GoogleMapStore'
   import { onMount } from 'svelte'
   import { PUBLIC_GOOGLE_MAP_ID } from '$env/static/public'
-  import GenericMappableCar from '$lib/Car/GenericMappableCar'
   import { cars, visibleCars } from '$lib/Store/Cars'
   import { duration } from '$lib/Store/DurationStore'
   import { totalKilometres } from '$lib/Store/TotalKilometresStore'
   import MapBottomRightControls from './MapBottomRightControls.svelte'
   import MapFullScreenControl from './MapFullScreenControl.svelte'
   import { Icon, ExclamationTriangle } from 'svelte-hero-icons'
+  import { carsSort } from '../../Store/FilterStore'
+  import { CarSortField } from '../../Types/Enums/CarSortField'
 
   export let center: google.maps.LatLngLiteral = {
     lat: 59.437066,
@@ -53,80 +54,53 @@
 
     googleMap.addListener('zoom_changed', () => {
       let mapZoom = googleMap.getZoom()!
-
-      $visibleCars.visible.forEach((car) => {
-        if (!(car instanceof GenericMappableCar)) {
-          return
-        }
-
-        if (mapZoom < iconsZoom) {
-          car.setMarkerIcons()
-        } else {
-          car.setMarkerIcons('price')
-        }
-      })
+      if (mapZoom < iconsZoom) {
+        $visibleCars.forEach((car) => car.setMarkerIcons())
+      } else {
+        $visibleCars.forEach((car) => car.setMarkerIcons('price'))
+      }
     })
 
     duration.subscribe(updateMarkers)
     totalKilometres.subscribe(updateMarkers)
     visibleCars.subscribe(adjustMarkersVisibility)
     googleMap.addListener('dragend', updateMarkers)
-
-    function updateMarkers() {
-      const carsToUpdate = $visibleCars.visible.filter(
-        (car) => car instanceof GenericMappableCar
-      ) as GenericMappableCar[]
-
-      const mapZoom = $map.getZoom()
-      const mapBounds = $map.getBounds()
-
-      carsToUpdate.forEach((car) => {
-        car.markers.forEach((marker) => {
-          if (!mapBounds || !mapBounds.contains(marker.position!)) {
-            return
-          }
-
-          if (!mapZoom || mapZoom < iconsZoom) {
-            return
-          }
-
-          car.setMarkerIcon(marker, 'price')
-        })
-      })
-    }
-
-    function adjustMarkersVisibility() {
-      const carsToShow = $visibleCars.visible.filter(
-        (car) => car instanceof GenericMappableCar
-      ) as GenericMappableCar[]
-
-      carsToShow.forEach((car) => {
-        let markers = car.markers.filter((marker) => marker.content !== null)
-
-        markers = car.markers.filter(
-          (marker) => marker.content!.classList.contains('!hidden')!
-        )
-
-        markers.forEach((marker) => marker.content!.classList.remove('!hidden'))
-      })
-
-      const carsToHide = $visibleCars.hidden.filter(
-        (car) => car instanceof GenericMappableCar
-      ) as GenericMappableCar[]
-
-      carsToHide.forEach((car) => {
-        let markers = car.markers.filter((marker) => marker.content !== null)
-
-        markers = car.markers.filter(
-          (marker) => !marker.content!.classList.contains('!hidden')
-        )
-
-        markers.forEach((marker) => marker.content!.classList.add('!hidden'))
-      })
-
-      updateMarkers()
-    }
   })
+
+  function updateMarkers() {
+    const mapZoom = $map.getZoom()
+    const mapBounds = $map.getBounds()
+    if (!mapBounds || !mapZoom || mapZoom < iconsZoom) return
+
+    $visibleCars.forEach((car) => {
+      car.markers.forEach((marker, index) => {
+        if (!mapBounds.contains(marker.position!)) return
+        car.setMarkerIcon(marker, index, 'price')
+      })
+    })
+  }
+
+  function adjustMarkersVisibility() {
+    $cars.forEach((car) =>
+      car.markers.forEach((marker) => marker.content!.classList.add('!hidden'))
+    )
+    $visibleCars.forEach((car) =>
+      car.markers.forEach((marker) =>
+        marker.content!.classList.remove('!hidden')
+      )
+    )
+    if ($carsSort.value === CarSortField.DISTANCE) {
+      $cars.forEach((car) =>
+        car.markers.forEach((marker) => {
+          if (Number(marker.title) > 1) {
+            marker.content!.classList.add('!hidden')
+          }
+        })
+      )
+    }
+
+    updateMarkers()
+  }
 
   let mapCanvas: HTMLDivElement
 </script>
@@ -167,6 +141,7 @@
   .bg-brand-bolt {
     @apply bg-green-500;
   }
+
   .bg-brand-citybee {
     @apply bg-orange-500;
   }

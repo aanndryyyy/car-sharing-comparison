@@ -1,39 +1,20 @@
 import type { Car } from '$lib/Car/GenericCar'
 import type { carsFilters } from '$lib/Store/FilterStore'
-import type { Provider } from '$lib/Types/Enums/Provider'
+import { Provider } from '$lib/Types/Enums/Provider'
 
-const filterCars = (
-  cars: Car[],
-  filters: carsFilters
-): { visible: Car[]; hidden: Car[] } => {
-  let { visible, hidden } = _searchProvider(cars, filters.providers)
+const filterCars = (cars: Car[], filters: carsFilters): Car[] => {
+  cars = _searchProvider(cars, filters.providers)
+  // ..car fuel type
+  // ..car body type
+  // ...
 
-  return { visible, hidden }
+  return cars
 }
 
-const _searchProvider = (
-  cars: Car[],
-  providers: Provider[]
-): { visible: Car[]; hidden: Car[] } => {
-  if (!providers.length)
-    return {
-      visible: cars,
-      hidden: [],
-    }
-
-  let visible: Car[] = []
-  let hidden: Car[] = []
-
-  for (const car of cars) {
-    if (providers.includes(car.provider)) {
-      visible.push(car)
-      continue
-    }
-
-    hidden.push(car)
-  }
-
-  return { visible, hidden }
+const _searchProvider = (cars: Car[], value: Provider[]) => {
+  const haveSomeProvider = Object.keys(value).some((provider) => provider)
+  if (!haveSomeProvider) return cars
+  return cars.filter((car) => value.some((v) => v === car.provider))
 }
 
 export default filterCars

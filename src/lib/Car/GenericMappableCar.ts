@@ -5,28 +5,6 @@ import GenericCar from './GenericCar'
 export default abstract class GenericMappableCar<
   CarDataType extends CarData = CarData
 > extends GenericCar<CarDataType> {
-  public findClosestMarkerTo(
-    lat: number,
-    lng: number
-  ): google.maps.marker.AdvancedMarkerElement | null {
-    if (this.markers.length === 0) return null
-
-    this.markers.sort((marker1, marker2) => {
-      return (
-        haversineRaw(marker1.position, { lat, lng }) -
-        haversineRaw(marker2.position, { lat, lng })
-      )
-    })
-
-    this.closestMarker = this.markers[0]
-    this.closestMarkerDistance = haversineRaw(this.markers[0].position, {
-      lat,
-      lng,
-    })
-
-    return this.closestMarker
-  }
-
   public getClosestMarkerDistanceFormatted() {
     if (!this.closestMarkerDistance) return ''
     if (this.closestMarkerDistance <= 1) {
@@ -35,17 +13,13 @@ export default abstract class GenericMappableCar<
     return this.closestMarkerDistance.toFixed(2) + ' km'
   }
 
-  setMarkerIcons(type?: 'price') {
-    this.markers.forEach((marker, index) => {
-      this.setMarkerIcon(marker, index, type)
-    })
-  }
-
-  setMarkerIcon(
+  public setMarkerIcon(
     marker: google.maps.marker.AdvancedMarkerElement,
     index: number,
     type?: 'price'
   ) {
+    const previousMarkerContentIsHidden: boolean =
+      marker.content.className.includes('!hidden')
     switch (type) {
       case 'price':
         marker.content = this.getMarkerPriceIcon()
@@ -55,15 +29,17 @@ export default abstract class GenericMappableCar<
         marker.content = this.getMarkerDotIcon()
         break
     }
-    marker.content.id =
-      index +
-      1 +
-      '-' +
+    if (previousMarkerContentIsHidden)
+      marker.content.className = marker.content.className + ' !hidden'
+    const carsGroupingClassName =
       this.getName().replace(' ', '-') +
       '-' +
       this.provider.toLowerCase() +
       '-' +
       'marker'
+    marker.content.className =
+      marker.content.className + ' ' + carsGroupingClassName
+    marker.content.id = index + 1 + '-' + carsGroupingClassName
   }
 
   /**

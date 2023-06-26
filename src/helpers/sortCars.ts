@@ -2,7 +2,6 @@ import { SortDirection } from '../lib/Types/Enums/SortDirection'
 import { CarSortField } from '../lib/Types/Enums/CarSortField'
 import type { Car } from '../lib/Car/GenericCar'
 import type { SortingSelection } from '$lib/Store/FilterStore'
-import GenericMappableCar from '$lib/Car/GenericMappableCar'
 import { haversineRaw } from './haversine'
 
 const sortCars = (
@@ -28,10 +27,10 @@ const sortCars = (
   return cars
 }
 
-const sortByDistance = async (
+const sortByDistance = (
   cars: Car[],
   userPosition: GeolocationPosition
-) => {
+): void => {
   if (!navigator.geolocation || !userPosition) {
     alert('Not possible to get user location.')
     return
@@ -39,36 +38,18 @@ const sortByDistance = async (
 
   const { latitude, longitude } = userPosition.coords
 
+  cars.forEach((car) => car.findClosestMarkerTo(latitude, longitude))
   cars.sort((car1, car2) => {
-    if (
-      !(car1 instanceof GenericMappableCar) ||
-      !(car2 instanceof GenericMappableCar)
-    ) {
-      return 1
-    }
-
-    if (!car1.closestMarker) {
-      car1.findClosestMarkerTo(latitude, longitude)
-    }
-
-    if (!car2.closestMarker) {
-      car2.findClosestMarkerTo(latitude, longitude)
-    }
-
+    if (!car1.closestMarker) return 1
+    if (!car2.closestMarker) return -1
     return (
       haversineRaw(
         { lat: latitude, lng: longitude },
-        {
-          lat: car1.closestMarker?.position?.lat,
-          lng: car1.closestMarker?.position?.lng,
-        }
+        car1.closestMarker!.position!
       ) -
       haversineRaw(
         { lat: latitude, lng: longitude },
-        {
-          lat: car2.closestMarker?.position?.lat,
-          lng: car2.closestMarker?.position?.lng,
-        }
+        car2.closestMarker!.position!
       )
     )
   })

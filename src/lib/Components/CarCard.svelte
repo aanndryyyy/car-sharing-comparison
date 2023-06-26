@@ -11,42 +11,57 @@
   import { map } from '$lib/Store/GoogleMapStore'
   import { carsSort } from '$lib/Store/FilterStore'
   import { CarSortField } from '$lib/Types/Enums/CarSortField'
+  import { getPosition } from '../../helpers/position'
 
   export let car: GenericCar
   export let index: number
 
-  const openDetails = () => {
+  async function openDetails(): Promise<void> {
     const growDiv = document.getElementById(`offer-details-grow-${index}`)
     if (growDiv.clientHeight) {
       growDiv.style.height = '0'
       growDiv.style.overflow = 'hidden'
     } else {
-      zoomToCar()
+      zoomToCurrentLocation()
       const wrapper = document.getElementById(`offer-details-wrapper-${index}`)
       growDiv.style.height = wrapper.clientHeight + 41 + 'px'
       setTimeout(() => {
         growDiv.style.overflow = 'inherit'
       }, 500)
     }
-    markClosestCar()
+    setTimeout(markClosestCar, 20)
   }
 
   const markClosestCar = () => {
     if ($carsSort.value === CarSortField.PRICE || !car.closestMarker) return
-    const dotElem = document.getElementById(car.closestMarker.content.id)
-    if (!dotElem) return
-    if (dotElem.style.border) {
-      dotElem.style.border = null
-    } else {
-      car.closestMarker.zIndex = 20
-      dotElem.style.border = '2px solid red'
+    const markerElems: HTMLElement[] = [
+      ...document.getElementsByClassName(car.closestMarker.content.className),
+    ]
+    if (markerElems.length === 0) return
+    for (const markerElem of markerElems) {
+      if (markerElem.style.border) {
+        markerElem.style.border = null
+        car.closestMarker.zIndex = 10
+      } else {
+        car.closestMarker.zIndex = 30
+        markerElem.style.border = '2px solid red'
+      }
     }
   }
 
-  const zoomToCar = () => {
-    if ($carsSort.value !== CarSortField.DISTANCE || !car.closestMarker) return
-    $map.setZoom(15)
-    $map.panTo(car.closestMarker!.position!)
+  function zoomToCurrentLocation() {
+    if ($carsSort.value !== CarSortField.DISTANCE) return
+    getPosition()
+      .then((position) => {
+        $map.setZoom(14)
+        $map.panTo({
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
+        })
+      })
+      .catch((err) => {
+        alert('Failed to load location: ' + err)
+      })
   }
 
   const getAppLink = () => {

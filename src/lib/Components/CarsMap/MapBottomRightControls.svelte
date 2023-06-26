@@ -5,7 +5,7 @@
   import { Icon, MinusSmall, PlusSmall } from 'svelte-hero-icons'
   import { getPosition } from '../../../helpers/position'
 
-  function setCurrentLocation() {
+  const zoomToCurrentLocation = () => {
     getPosition()
       .then((position) => {
         $map.setZoom(13)
@@ -24,7 +24,7 @@
   class="absolute bottom-7 right-4 flex flex-col items-center justify-center gap-2"
 >
   <button
-    on:click={setCurrentLocation}
+    on:click={zoomToCurrentLocation}
     class="flex h-8 w-8 items-center justify-center rounded-md bg-white px-0.5 py-0 text-slate-600 shadow-lg shadow-black/20 transition-[fill] hover:text-green-600"
     title="Show your current location"
   >

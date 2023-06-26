@@ -3,7 +3,7 @@
   import Loader from '../../../../assets/icons/loader.svg'
   import PersonWalkingIcon from '../../../../assets/icons/person-walking.svg'
   import { carsSort, type SortingSelection } from '$lib/Store/FilterStore'
-  import { userPosition } from '$lib/Store/GoogleMapStore'
+  import { map, userPosition } from '$lib/Store/GoogleMapStore'
   import { CarSortField } from '$lib/Types/Enums/CarSortField'
   import { SortDirection } from '$lib/Types/Enums/SortDirection'
   import { Icon, CurrencyEuro, ChevronDown } from 'svelte-hero-icons'
@@ -59,6 +59,11 @@
       await getPosition()
         .then((position) => {
           $userPosition = position
+          $map.setZoom(14)
+          $map.panTo({
+            lat: position.coords.latitude,
+            lng: position.coords.longitude,
+          })
         })
         .catch((err) => {
           alert('Failed to load location: ' + err)
