@@ -13,6 +13,7 @@ import Citroen_C3 from '../../assets/images/providers/citybee/cars/lowQuality/Ci
 import VW_T_Roc_R_Line from '../../assets/images/providers/citybee/cars/lowQuality/VW-T-Roc-R-Line.png'
 import Renault_Master from '../../assets/images/providers/citybee/cars/lowQuality/Renault-Master.png'
 import Ford_Focus from '../../assets/images/providers/citybee/cars/lowQuality/Ford-Focus.png'
+import Ford_Focus_Wagon from '../../assets/images/providers/citybee/cars/lowQuality/Ford-Focus-Wagon.png'
 import Ford_Kuga from '../../assets/images/providers/citybee/cars/lowQuality/Ford-Kuga.png'
 import Jeep_Compass from '../../assets/images/providers/citybee/cars/lowQuality/Jeep-Compass.png'
 import Ford_Fiesta from '../../assets/images/providers/citybee/cars/lowQuality/Ford-Fiesta.png'
@@ -78,6 +79,8 @@ export default class CityBeeCar extends GenericMappableCar<ICarCityBee> {
         return Renault_Master
       case 'Ford Focus':
         return Ford_Focus
+      case 'Ford Focus Wagon':
+        return Ford_Focus_Wagon
       case 'Ford Kuga':
         return Ford_Kuga
       case 'Jeep Compass':
