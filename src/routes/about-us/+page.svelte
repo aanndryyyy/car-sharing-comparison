@@ -7,6 +7,9 @@
   import IOS_PWA_4 from '../../assets/images/instructions/IOS/ios-pwa-4.png'
   import PC_PWA_1 from '../../assets/images/instructions/PC/pc-pwa-1.png'
   import PC_PWA_2 from '../../assets/images/instructions/PC/pc-pwa-2.png'
+  import android_PWA_1 from '../../assets/images/instructions/android/android-pwa-1.png'
+  import android_PWA_2 from '../../assets/images/instructions/android/android-pwa-2.png'
+  import android_PWA_3 from '../../assets/images/instructions/android/android-pwa-3.png'
 </script>
 
 <div class="flex justify-center p-8">
@@ -68,12 +71,17 @@
       <img width="200" src={IOS_PWA_4} alt="IOS PWA 4" />
     </div>
 
-    <p>On an Android phone: [Include instructions here.]</p>
+    <p>On an Android phone: </p>
+    <div class="mb-8 flex flex-wrap gap-2">
+      <img width="200" src={android_PWA_1} alt="Android PWA 1" />
+      <img width="200" src={android_PWA_2} alt="Android PWA 2" />
+      <img width="200" src={android_PWA_3} alt="Android PWA 3" />
+    </div>
 
     <p>On a computer:</p>
     <div class="mb-8 grid gap-2">
-      <img src={PC_PWA_1} alt="IOS PWA 1" />
-      <img src={PC_PWA_2} alt="IOS PWA 2" />
+      <img src={PC_PWA_1} alt="PC PWA 1" />
+      <img src={PC_PWA_2} alt="PC PWA 2" />
     </div>
 
     <p>
