@@ -61,6 +61,7 @@
           <Icon src={Funnel} size="24" />
         </button>
       </div>
+      <Filters />
       <CarList />
     </div>
   </aside>

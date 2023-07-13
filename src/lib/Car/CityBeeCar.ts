@@ -18,6 +18,7 @@ import Ford_Kuga from '../../assets/images/providers/citybee/cars/lowQuality/For
 import Jeep_Compass from '../../assets/images/providers/citybee/cars/lowQuality/Jeep-Compass.png'
 import Ford_Fiesta from '../../assets/images/providers/citybee/cars/lowQuality/Ford-Fiesta.png'
 import Skoda_Kamiq from '../../assets/images/providers/citybee/cars/lowQuality/Skoda-Kamiq.png'
+import Skoda_Karoq from '../../assets/images/providers/citybee/cars/lowQuality/Skoda-Karoq.png'
 import VW_Taigo from '../../assets/images/providers/citybee/cars/lowQuality/VW-Taigo.png'
 import Toyota_C_HR from '../../assets/images/providers/citybee/cars/lowQuality/Toyota-C-HR.png'
 import Nissan_Qashqai from '../../assets/images/providers/citybee/cars/lowQuality/Nissan-Qashqai.png'
@@ -89,6 +90,8 @@ export default class CityBeeCar extends GenericMappableCar<ICarCityBee> {
         return Ford_Fiesta
       case 'Skoda Kamiq':
         return Skoda_Kamiq
+      case 'Skoda Karoq':
+        return Skoda_Karoq
       case 'VW Taigo':
         return VW_Taigo
       case 'VW':
