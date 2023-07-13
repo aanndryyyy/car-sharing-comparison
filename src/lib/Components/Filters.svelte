@@ -9,9 +9,9 @@
 
 <div class="grid gap-2 p-4">
   <div class="flex justify-between">
-    <h3>
+    <h2 class="font-semibold">
       {$_('filters')}
-    </h3>
+    </h2>
 
     {#if open}
       <button on:click={() => (open = false)}>

@@ -22,11 +22,17 @@
     },
     { title: 'Avis', value: Provider.AVIS, imgUrl: AvisLogo },
   ]
+
+  export let grid = false
 </script>
 
 <div class="space-y-1">
   <h4 class="text-base font-normal">Brands</h4>
-  <div class="space-x-4 overflow-x-scroll whitespace-nowrap scrollbar-hide">
+  <div
+    class="space-x-4 overflow-x-scroll whitespace-nowrap scrollbar-hide {grid
+      ? 'contents'
+      : ''}"
+  >
     {#each providersInfo as provider, index}
       <div class="inline-block">
         <input

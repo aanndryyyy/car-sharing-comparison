@@ -7,7 +7,7 @@
   import { ArrowSmallRight, Icon, XMark } from 'svelte-hero-icons'
   import { _ } from 'svelte-i18n'
   import { Modal } from 'svelte-simple-modal'
-  import Footer from "$lib/Components/Footer.svelte";
+  import Footer from '$lib/Components/Footer.svelte'
 
   let showAppShortDescription: boolean = true
 
@@ -36,7 +36,6 @@
 </svelte:head>
 
 <header class="mx-auto my-4 max-w-screen-lg px-4 md:my-8 lg:my-12">
-
   {#if showAppShortDescription}
     <div class="block rounded-md bg-green-100 p-4 text-green-900 md:hidden">
       <div class="flex justify-between">

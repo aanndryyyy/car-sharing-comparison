@@ -9,12 +9,28 @@
   import { ArrowsUpDown, Funnel, Icon } from 'svelte-hero-icons'
   import { cars } from '../../lib/Store/Cars'
   import Filters from '$lib/Components/Filters.svelte'
+  import SortSelection from '$lib/Components/Section/CarListControlsMobile/SortSelection.svelte'
+  import BrandSelection from '$lib/Components/Section/CarListControlsMobile/BrandSelection.svelte'
 
   export let data
   $cars = data.cars
 
   let plannerType: boolean = false
   let open: boolean = false
+
+  async function openFilters(): Promise<void> {
+    const growDiv = document.getElementById(`filters-grow`)
+    if (growDiv.clientHeight) {
+      growDiv.style.height = '0'
+      growDiv.style.overflow = 'hidden'
+    } else {
+      const wrapper = document.getElementById(`filters-wrapper`)
+      growDiv.style.height = wrapper.clientHeight + 'px'
+      setTimeout(() => {
+        growDiv.style.overflow = 'inherit'
+      }, 500)
+    }
+  }
 </script>
 
 <svelte:head>
@@ -28,7 +44,7 @@
     class="-mt-16 hidden h-screen overflow-scroll pt-16 scrollbar-hide md:block md:w-96"
   >
     <div class="m-4 flex items-center justify-between">
-      <h2 class="text-2xl font-semibold md:text-3xl md:font-medium">Planner</h2>
+      <h2 class="font-semibold">Planner</h2>
 
       <button
         class="flex items-center justify-center rounded bg-green-600 p-2.5 text-white"
@@ -49,19 +65,31 @@
     <div class="m-4 mt-8">
       <div class="flex items-center justify-between">
         <div>
-          <h2 class="text-2xl font-semibold md:text-3xl md:font-medium">
+          <h2 class="font-semibold">
             {$_('cars.title')}
           </h2>
         </div>
 
         <button
-          on:click={() => {}}
+          on:click={openFilters}
           class="flex items-center justify-center gap-1.5 rounded bg-green-600 p-2.5 text-base font-medium text-white"
         >
           <Icon src={Funnel} size="24" />
         </button>
       </div>
-      <Filters />
+      <div
+        class="h-0 max-w-md overflow-hidden transition-[height] delay-100 duration-500 ease-in-out"
+        id="filters-grow"
+      >
+        <div
+          class="mt-4 grid gap-2 rounded-lg border border-slate-200 p-4"
+          id="filters-wrapper"
+        >
+          <SortSelection />
+          <BrandSelection grid={true} />
+        </div>
+      </div>
+
       <CarList />
     </div>
   </aside>

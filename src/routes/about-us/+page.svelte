@@ -1,5 +1,5 @@
 <script>
-  import Footer from "$lib/Components/Footer.svelte";
+  import Footer from '$lib/Components/Footer.svelte'
 </script>
 
 <div class="flex justify-center p-8">
