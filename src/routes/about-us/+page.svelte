@@ -1,5 +1,12 @@
 <script>
   import Footer from '$lib/Components/Footer.svelte'
+
+  import IOS_PWA_1 from '../../assets/images/instructions/IOS/ios-pwa-1.png'
+  import IOS_PWA_2 from '../../assets/images/instructions/IOS/ios-pwa-2.png'
+  import IOS_PWA_3 from '../../assets/images/instructions/IOS/ios-pwa-3.png'
+  import IOS_PWA_4 from '../../assets/images/instructions/IOS/ios-pwa-4.png'
+  import PC_PWA_1 from '../../assets/images/instructions/PC/pc-pwa-1.png'
+  import PC_PWA_2 from '../../assets/images/instructions/PC/pc-pwa-2.png'
 </script>
 
 <div class="flex justify-center p-8">
@@ -13,7 +20,7 @@
       availability.
     </p>
 
-    <p>Introduction:</p>
+    <p>Introductions:</p>
 
     <p>
       Using our application is straightforward and depends on the specific
@@ -53,11 +60,21 @@
       access. Follow the steps below to install the application to your device:
     </p>
 
-    <p>On an iOS phone: [Include instructions here.]</p>
+    <p>On an iOS phone:</p>
+    <div class="mb-8 flex flex-wrap gap-2">
+      <img width="200" src={IOS_PWA_1} alt="IOS PWA 1" />
+      <img width="200" src={IOS_PWA_2} alt="IOS PWA 2" />
+      <img width="200" src={IOS_PWA_3} alt="IOS PWA 3" />
+      <img width="200" src={IOS_PWA_4} alt="IOS PWA 4" />
+    </div>
 
     <p>On an Android phone: [Include instructions here.]</p>
 
-    <p>On a computer: [Include instructions here.]</p>
+    <p>On a computer:</p>
+    <div class="mb-8 grid gap-2">
+      <img src={PC_PWA_1} alt="IOS PWA 1" />
+      <img src={PC_PWA_2} alt="IOS PWA 2" />
+    </div>
 
     <p>
       We acknowledge that our current application has room for improvement, and
