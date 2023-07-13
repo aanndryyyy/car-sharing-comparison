@@ -12,6 +12,7 @@
   import { carsSort } from '$lib/Store/FilterStore'
   import { CarSortField } from '$lib/Types/Enums/CarSortField'
   import { getPosition } from '../../helpers/position'
+  import PackageInfoContainer from '$lib/Components/Section/CarList/PackageInfoContainer.svelte'
 
   export let car: GenericCar
   export let index: number
@@ -165,10 +166,18 @@
               {car.getClosestMarkerDistanceFormatted()}
             </div>
           {/if}
+          {#if car.rentUsablePackages.length > 0 && !mobileView}
+            <div>📦</div>
+          {/if}
         </div>
       </div>
 
-      <p class="font-semibold">{car.getFormattedTotalPrice()}</p>
+      <div class="flex gap-2">
+        <p class="font-semibold">{car.getFormattedTotalPrice()}</p>
+        {#if car.rentUsablePackages.length > 0 && mobileView}
+          <div>with 📦</div>
+        {/if}
+      </div>
     </div>
 
     <div class="relative flex w-24 items-center {mobileView ? '' : 'w-32'}">
@@ -208,22 +217,9 @@
       <!--            </div>-->
       {#if car.rentUsablePackages.length > 0}
         <p>Take these packages:</p>
-        <div>
+        <div class="grid gap-2">
           {#each car.rentUsablePackages as pricePackage}
-            <div class="flex gap-2">
-              <p>
-                {pricePackage.hours}h
-              </p>
-              <p>
-                {pricePackage.days}d
-              </p>
-              <p>
-                {pricePackage.distance}km
-              </p>
-              <p>
-                {pricePackage.price}€
-              </p>
-            </div>
+            <PackageInfoContainer {pricePackage} />
           {/each}
         </div>
       {/if}
