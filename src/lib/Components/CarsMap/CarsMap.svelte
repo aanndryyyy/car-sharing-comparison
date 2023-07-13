@@ -12,6 +12,7 @@
   import { Icon, ExclamationTriangle } from 'svelte-hero-icons'
   import { carsSort } from '../../Store/FilterStore'
   import { CarSortField } from '../../Types/Enums/CarSortField'
+  import { getPosition } from '../../../helpers/position'
 
   export let center: google.maps.LatLngLiteral = {
     lat: 59.437066,
@@ -24,6 +25,7 @@
   let isError: boolean = false
 
   onMount(async () => {
+    const userPosProm = getPosition()
     const { Map } = (await google.maps.importLibrary(
       'maps'
     )) as google.maps.MapsLibrary
@@ -59,6 +61,14 @@
       } else {
         $visibleCars.forEach((car) => car.setMarkerIcons('price'))
       }
+    })
+    const userContent = document.createElement('h5')
+    userContent.textContent = '😀'
+    const userPos = await userPosProm
+    new AdvancedMarkerElement({
+      map: $map,
+      content: userContent,
+      position: { lat: userPos.coords.latitude, lng: userPos.coords.longitude },
     })
 
     duration.subscribe(updateMarkers)
@@ -136,13 +146,3 @@
     </div>
   {/if}
 </div>
-
-<style lang="postcss">
-  .bg-brand-bolt {
-    @apply bg-green-500;
-  }
-
-  .bg-brand-citybee {
-    @apply bg-orange-500;
-  }
-</style>

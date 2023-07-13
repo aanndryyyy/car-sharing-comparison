@@ -71,7 +71,7 @@
       <img width="200" src={IOS_PWA_4} alt="IOS PWA 4" />
     </div>
 
-    <p>On an Android phone: </p>
+    <p>On an Android phone:</p>
     <div class="mb-8 flex flex-wrap gap-2">
       <img width="200" src={android_PWA_1} alt="Android PWA 1" />
       <img width="200" src={android_PWA_2} alt="Android PWA 2" />
