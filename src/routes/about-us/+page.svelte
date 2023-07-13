@@ -1,3 +1,7 @@
+<script>
+  import Footer from "$lib/Components/Footer.svelte";
+</script>
+
 <div class="flex justify-center p-8">
   <div class="grid max-w-lg gap-6">
     <p>
@@ -68,3 +72,5 @@
     </p>
   </div>
 </div>
+
+<Footer />

@@ -7,6 +7,7 @@
   import { ArrowSmallRight, Icon, XMark } from 'svelte-hero-icons'
   import { _ } from 'svelte-i18n'
   import { Modal } from 'svelte-simple-modal'
+  import Footer from "$lib/Components/Footer.svelte";
 
   let showAppShortDescription: boolean = true
 
@@ -72,6 +73,4 @@
   </main>
 </Modal>
 
-<footer class="mb-8 grid items-center justify-center p-4">
-  <p class="text-base text-gray-500">Copyright © 2023</p>
-</footer>
+<Footer />
