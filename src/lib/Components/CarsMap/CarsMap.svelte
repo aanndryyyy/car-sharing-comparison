@@ -146,3 +146,13 @@
     </div>
   {/if}
 </div>
+
+<style lang="postcss">
+  .bg-brand-bolt {
+    background: #34D186;
+  }
+
+  .bg-brand-citybee {
+    background: #FF3802;
+  }
+</style>
