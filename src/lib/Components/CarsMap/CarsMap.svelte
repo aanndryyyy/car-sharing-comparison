@@ -13,6 +13,7 @@
   import { carsSort } from '../../Store/FilterStore'
   import { CarSortField } from '../../Types/Enums/CarSortField'
   import { getPosition } from '../../../helpers/position'
+  import userDot from '../../../helpers/htmlElements'
 
   export let center: google.maps.LatLngLiteral = {
     lat: 59.437066,
@@ -62,12 +63,11 @@
         $visibleCars.forEach((car) => car.setMarkerIcons('price'))
       }
     })
-    const userContent = document.createElement('h5')
-    userContent.textContent = '😀'
+
     const userPos = await userPosProm
     new AdvancedMarkerElement({
       map: $map,
-      content: userContent,
+      content: userDot(),
       position: { lat: userPos.coords.latitude, lng: userPos.coords.longitude },
     })
 
@@ -149,10 +149,10 @@
 
 <style lang="postcss">
   .bg-brand-bolt {
-    background: #34D186;
+    background: #34d186;
   }
 
   .bg-brand-citybee {
-    background: #FF3802;
+    background: #ff3802;
   }
 </style>
