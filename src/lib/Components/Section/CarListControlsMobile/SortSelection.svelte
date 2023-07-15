@@ -15,8 +15,8 @@
         .then((position) => {
           $userPosition = position
         })
-        .catch((err) => {
-          alert('Failed to load location: ' + err)
+        .catch((err: Error) => {
+          alert(err.message +  '\n\nFailed to load location! Make sure that the browser has the right to share your location!')
         })
         .finally(() => {
           isLoading = false
