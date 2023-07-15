@@ -6,6 +6,7 @@
   import WaypointInput from './WaypointInput.svelte'
   import Loader from '../../../assets/icons/loader.svg'
   import { Icon, PlusCircle } from 'svelte-hero-icons'
+  import { getPosition } from '../../../helpers/position'
   import {
     Switch,
     SwitchLabel,
@@ -147,7 +148,7 @@
     calculateRoute(isRoundTrip)
   }
 
-  function initAutocomplete(e) {
+  async function initAutocomplete(e) {
     inputWaypoints[e.detail.index].input = e.detail.input
     inputWaypoints[e.detail.index].autocomplete = new GoogleAutocomplete(
       e.detail.input,
@@ -155,6 +156,59 @@
     )
 
     if (e.detail.index === 0) {
+      let geocoder = new google.maps.Geocoder()
+
+      let userPosition = await getPosition()
+      await geocoder.geocode(
+        {
+          location: {
+            lat: userPosition.coords.latitude,
+            lng: userPosition.coords.longitude,
+          },
+        },
+        (results, status) => {
+          if (status == google.maps.GeocoderStatus.OK) {
+            let address = results[0].formatted_address
+            console.log('address', address)
+
+            let autocompleteService =
+              new google.maps.places.AutocompleteService()
+            let request = { input: address }
+            autocompleteService.getPlacePredictions(
+              request,
+              (predictionsArr, placesServiceStatus) => {
+                console.log(
+                  'getting place predictions :: predictionsArr = ',
+                  predictionsArr,
+                  '\n',
+                  'placesServiceStatus = ',
+                  placesServiceStatus
+                )
+
+                let placeRequest = { placeId: predictionsArr[0].place_id }
+                let placeService = new google.maps.places.PlacesService($map)
+                placeService.getDetails(
+                  placeRequest,
+                  (placeResult, placeServiceStatus) => {
+                    console.log(
+                      'placeService :: placeResult = ',
+                      placeResult,
+                      '\n',
+                      'placeServiceStatus = ',
+                      placeServiceStatus
+                    )
+                  }
+                )
+              }
+            )
+          } else {
+            alert(
+              'Geocode was not successful for the following reason: ' + status
+            )
+          }
+        }
+      )
+
       inputWaypoints[0].autocomplete.addListener(
         'place_changed',
         showStartingLocation
