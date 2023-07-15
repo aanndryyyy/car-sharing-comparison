@@ -102,7 +102,7 @@
     if ($carsSort.value === CarSortField.DISTANCE) {
       $cars.forEach((car) =>
         car.markers.forEach((marker) => {
-          if (Number(marker.title) > 1) {
+          if (Number(marker.title) > 2) {
             marker.content!.classList.add('!hidden')
           }
         })

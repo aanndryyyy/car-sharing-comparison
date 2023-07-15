@@ -60,15 +60,12 @@ export const visibleCars = derived<
     const filteredCars = filterCars($cars, $carsFilter)
     const sortedCars = sortCars(filteredCars, $sortOptions, $userPosition)
     if ($sortOptions.value === CarSortField.DISTANCE) {
-      set(
         sortedCars.filter((car) => {
-          if (!car.closestMarker || !car.closestMarker.title) return false
-          return Number(car.closestMarker.title) < 1
+            if (!car.closestMarker || !car.closestMarker.title) return false
+            return Number(car.closestMarker.title) < 1
         })
-      )
-    } else {
-      set(sortedCars)
     }
+    set(sortedCars)
   },
   []
 )
