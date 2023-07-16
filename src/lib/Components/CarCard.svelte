@@ -22,6 +22,7 @@
     if (growDiv.clientHeight) {
       growDiv.style.height = '0'
       growDiv.style.overflow = 'hidden'
+      setTimeout(() => markAllCars(false), 50)
     } else {
       zoomToCurrentLocation()
       const wrapper = document.getElementById(`offer-details-wrapper-${index}`)
@@ -29,23 +30,27 @@
       setTimeout(() => {
         growDiv.style.overflow = 'inherit'
       }, 500)
+      setTimeout(() => markAllCars(true), 50)
     }
-    setTimeout(markClosestCar, 20)
   }
 
-  const markClosestCar = () => {
-    if ($carsSort.value === CarSortField.PRICE || !car.closestMarker) return
+  const markAllCars = (showBorder) => {
     const markerElems: HTMLElement[] = [
-      ...document.getElementsByClassName(car.closestMarker.content.className),
+      ...document.getElementsByClassName(
+        car.getName().replace(' ', '-') +
+          '-' +
+          car.provider.toLowerCase() +
+          '-marker'
+      ),
     ]
     if (markerElems.length === 0) return
     for (const markerElem of markerElems) {
-      if (markerElem.style.border) {
-        markerElem.style.border = null
-        car.closestMarker.zIndex = 10
+      if (showBorder) {
+        markerElem.style.border = '2px solid purple'
+        markerElem.style.zIndex = '30'
       } else {
-        car.closestMarker.zIndex = 30
-        markerElem.style.border = '2px solid red'
+        markerElem.style.border = null
+        markerElem.style.zIndex = '10'
       }
     }
   }
