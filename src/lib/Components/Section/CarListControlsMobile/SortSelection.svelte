@@ -16,7 +16,10 @@
           $userPosition = position
         })
         .catch((err: Error) => {
-          alert(err.message +  '\n\nFailed to load location! Make sure that the browser has the right to share your location!')
+          alert(
+            err.message +
+              '\n\nFailed to load location! Make sure that the browser has the right to share your location!'
+          )
         })
         .finally(() => {
           isLoading = false

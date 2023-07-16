@@ -26,10 +26,11 @@
   let isError: boolean = false
 
   onMount(async () => {
-    const userPosProm = getPosition()
-    const { Map } = (await google.maps.importLibrary(
-      'maps'
-    )) as google.maps.MapsLibrary
+    const [{ Map }, { AdvancedMarkerElement }, userPos] = await Promise.all([
+      google.maps.importLibrary('maps'),
+      google.maps.importLibrary('marker'),
+      getPosition(),
+    ])
 
     const googleMap = new Map(mapCanvas, {
       zoom,
@@ -47,10 +48,6 @@
       mapLoaded = true
     })
 
-    const { AdvancedMarkerElement } = (await google.maps.importLibrary(
-      'marker'
-    )) as google.maps.MarkerLibrary
-
     $cars.forEach((car) => {
       car.initialiseMarkers(AdvancedMarkerElement, $map)
     })
@@ -64,7 +61,6 @@
       }
     })
 
-    const userPos = await userPosProm
     new AdvancedMarkerElement({
       map: $map,
       content: userDot(),
@@ -80,12 +76,13 @@
   function updateMarkers() {
     const mapZoom = $map.getZoom()
     const mapBounds = $map.getBounds()
-    if (!mapBounds || !mapZoom || mapZoom < iconsZoom) return
+    if (!mapBounds || !mapZoom) return
 
+    const icon = mapZoom > iconsZoom ? 'price' : null
     $visibleCars.forEach((car) => {
       car.markers.forEach((marker, index) => {
         if (!mapBounds.contains(marker.position!)) return
-        car.setMarkerIcon(marker, index, 'price')
+        car.setMarkerIcon(marker, index, icon)
       })
     })
   }

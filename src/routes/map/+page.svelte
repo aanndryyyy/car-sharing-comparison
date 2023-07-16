@@ -1,6 +1,9 @@
 <script lang="ts">
   import { _ } from 'svelte-i18n'
-  import { PUBLIC_GOOGLE_API_KEY } from '$env/static/public'
+  import {
+    PUBLIC_BACKEND_BASE_URL,
+    PUBLIC_GOOGLE_API_KEY,
+  } from '$env/static/public'
   import CarsMap from '$lib/Components/CarsMap/CarsMap.svelte'
   import ManualPlanner from '$lib/Components/Planners/ManualPlanner.svelte'
   import AutoPlanner from '$lib/Components/Planners/TripPlanner.svelte'
@@ -11,12 +14,28 @@
   import Filters from '$lib/Components/Filters.svelte'
   import SortSelection from '$lib/Components/Section/CarListControlsMobile/SortSelection.svelte'
   import BrandSelection from '$lib/Components/Section/CarListControlsMobile/BrandSelection.svelte'
+  import { onMount } from 'svelte'
+  import { invalidate } from '$app/navigation'
+  import { map } from '../../lib/Store/GoogleMapStore'
 
   export let data
   $cars = data.cars
 
   let plannerType: boolean = false
   let open: boolean = false
+
+  onMount(async () => {
+    const { AdvancedMarkerElement } = (await google.maps.importLibrary(
+      'marker'
+    )) as google.maps.MarkerLibrary
+    const interval = setInterval(() => {
+      invalidate(PUBLIC_BACKEND_BASE_URL + 'location')
+      $cars.forEach((c) => c.markers.forEach((m) => (m.map = null)))
+      data.cars.forEach((c) => c.initialiseMarkers(AdvancedMarkerElement, $map))
+      $cars = data.cars
+    }, 60000)
+    return () => clearInterval(interval)
+  })
 
   async function openFilters(): Promise<void> {
     const growDiv = document.getElementById(`filters-grow`)

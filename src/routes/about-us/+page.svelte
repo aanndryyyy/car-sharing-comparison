@@ -51,10 +51,8 @@
     <p>
       Another essential feature is the live map view, which displays the
       real-time locations of available service providers' cars. The application
-      retrieves the most up-to-date location data upon page load, ensuring
-      accuracy within a maximum one-minute time frame. If you've been on the
-      page for an extended period and want the latest information, simply
-      refresh the page.
+      retrieves the most up-to-date location data upon page load and itself
+      automatically downloads the latest data every minute.
     </p>
     <p>
       Our application is designed to be user-friendly on both desktop and mobile

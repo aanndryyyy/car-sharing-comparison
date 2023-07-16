@@ -1,4 +1,3 @@
-import { haversineRaw } from '../../helpers/haversine'
 import type { CarData } from './GenericCar'
 import GenericCar from './GenericCar'
 
@@ -16,7 +15,7 @@ export default abstract class GenericMappableCar<
   public setMarkerIcon(
     marker: google.maps.marker.AdvancedMarkerElement,
     index: number,
-    type?: 'price'
+    type?: string
   ) {
     const previousMarkerContentIsHidden: boolean =
       marker.content.className.includes('!hidden')
@@ -49,6 +48,7 @@ export default abstract class GenericMappableCar<
     AdvancedMarkerElement: typeof google.maps.marker.AdvancedMarkerElement,
     map?: google.maps.Map
   ): void {
+    this.markers = []
     this.carData.coordinates.forEach(({ lat, lng }) => {
       const marker = new AdvancedMarkerElement({
         map,

@@ -1,5 +1,6 @@
 <script lang="ts">
   import { PUBLIC_GOOGLE_API_KEY } from '$env/static/public'
+  import { PUBLIC_BACKEND_BASE_URL } from '$env/static/public'
   import CarsSection from '$lib/Components/Section/Cars.svelte'
   import PlannerSection from '$lib/Components/Section/Planner.svelte'
   import ogImage from '../assets/images/og-image.png'
@@ -8,11 +9,27 @@
   import { _ } from 'svelte-i18n'
   import { Modal } from 'svelte-simple-modal'
   import Footer from '$lib/Components/Footer.svelte'
+  import { onMount } from 'svelte'
+  import { invalidate } from '$app/navigation'
+  import { map } from '../lib/Store/GoogleMapStore'
 
   let showAppShortDescription: boolean = true
 
   export let data
   $cars = data.cars
+
+  onMount(async () => {
+    const { AdvancedMarkerElement } = (await google.maps.importLibrary(
+      'marker'
+    )) as google.maps.MarkerLibrary
+    const interval = setInterval(() => {
+      invalidate(PUBLIC_BACKEND_BASE_URL + 'location')
+      $cars.forEach((c) => c.markers.forEach((m) => (m.map = null)))
+      data.cars.forEach((c) => c.initialiseMarkers(AdvancedMarkerElement, $map))
+      $cars = data.cars
+    }, 60000)
+    return () => clearInterval(interval)
+  })
 </script>
 
 <svelte:head>
