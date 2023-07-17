@@ -171,7 +171,7 @@
               {:else}
                 <PersonWalking class="text-slate-500" />
               {/if}
-              {car.getClosestMarkerDistanceFormatted()}
+              {car.getMarkerDistanceFormatted(car.closestMarkerDistance)}
             </div>
           {/if}
           {#if car.rentUsablePackages.length > 0 && !mobileView}

@@ -4,12 +4,12 @@ import GenericCar from './GenericCar'
 export default abstract class GenericMappableCar<
   CarDataType extends CarData = CarData
 > extends GenericCar<CarDataType> {
-  public getClosestMarkerDistanceFormatted() {
-    if (!this.closestMarkerDistance) return ''
-    if (this.closestMarkerDistance <= 1) {
-      return (this.closestMarkerDistance * 1000).toFixed(0) + ' m'
+  public getMarkerDistanceFormatted(distance) {
+    if (!distance) return ''
+    if (distance <= 1) {
+      return (distance * 1000).toFixed(0) + ' m'
     }
-    return this.closestMarkerDistance.toFixed(2) + ' km'
+    return distance.toFixed(2) + ' km'
   }
 
   public setMarkerIcon(
@@ -58,7 +58,7 @@ export default abstract class GenericMappableCar<
 
       marker.addListener('click', () => {
         if (!marker.content.className.includes('detail-icon')) {
-          marker.content = this.getMarkerDetailIcon()
+          marker.content = this.getMarkerDetailIcon(Number(marker.title))
           marker.zIndex = 20
         } else {
           if (map.getZoom() < 14) {
@@ -94,7 +94,9 @@ export default abstract class GenericMappableCar<
     return priceIcon
   }
 
-  getMarkerDetailIcon(): HTMLDivElement {
+  getMarkerDetailIcon(markerDistance: number): HTMLDivElement {
+    const formattedMarkerDistance =
+      this.getMarkerDistanceFormatted(markerDistance)
     const content = `<div style="display: flex; padding: 0.25rem; font-size: 0.75rem; line-height: 1rem; align-items: center; background: white; border-color: #E2E8F0; border-width: 1px; border-radius: 6px; z-index: 200">
                 <div>
                     <img src=${this.getCarImg()} alt="car image" width="80">
@@ -103,6 +105,7 @@ export default abstract class GenericMappableCar<
                     <p>${this.getName()}</p>
                     <p>${this.getFormattedMinutePrice()}</p>
                     <p>${this.getFormattedKilometrePrice()}</p>
+                    <p>${formattedMarkerDistance}</p>
                     <p><b>${this.getFormattedTotalPrice()}</b></p>
                 </div>
             </div>`
