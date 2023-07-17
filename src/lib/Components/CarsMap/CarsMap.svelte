@@ -78,7 +78,7 @@
     const mapBounds = $map.getBounds()
     if (!mapBounds || !mapZoom) return
 
-    const icon = mapZoom > iconsZoom ? 'price' : null
+    const icon = mapZoom >= iconsZoom ? 'price' : null
     $visibleCars.forEach((car) => {
       car.markers.forEach((marker, index) => {
         if (!mapBounds.contains(marker.position!)) return
