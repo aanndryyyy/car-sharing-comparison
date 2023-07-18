@@ -24,8 +24,8 @@
     )) as google.maps.MarkerLibrary
     const interval = setInterval(() => {
       invalidate(PUBLIC_BACKEND_BASE_URL + 'location')
-      $cars.forEach((c) => c.markers.forEach((m) => (m.map = null)))
-      data.cars.forEach((c) => c.initialiseMarkers(AdvancedMarkerElement, $map))
+      $cars.forEach((car) => car.markers.forEach((marker) => {marker.map = null}))
+      data.cars.forEach((car) => car.initialiseMarkers(AdvancedMarkerElement, $map))
       $cars = data.cars
     }, 60000)
     return () => clearInterval(interval)
