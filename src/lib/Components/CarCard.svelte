@@ -35,24 +35,16 @@
   }
 
   const markAllCars = (showBorder) => {
-    const markerElems: HTMLElement[] = [
-      ...document.getElementsByClassName(
-        car.getName().replace(' ', '-') +
-          '-' +
-          car.provider.toLowerCase() +
-          '-marker'
-      ),
-    ]
-    if (markerElems.length === 0) return
-    for (const markerElem of markerElems) {
+    car.markers.forEach(marker => {
       if (showBorder) {
-        markerElem.style.border = '2px solid purple'
-        markerElem.style.zIndex = '30'
+        marker.element.style.border = '3px solid purple'
+        marker.element.style.borderRadius = "13px"
+        marker.zIndex = 200
       } else {
-        markerElem.style.border = null
-        markerElem.style.zIndex = '10'
+        marker.element.style.border = null
+        marker.zIndex = 10
       }
-    }
+    })
   }
 
   function zoomToCurrentLocation() {
