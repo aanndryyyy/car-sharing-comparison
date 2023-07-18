@@ -86,7 +86,7 @@
       We acknowledge that our current application has room for improvement, and
       we are committed to further development. If you encounter any bugs or
       would like to reach out to us for any other reason, please don't hesitate
-      to contact us at something@something.com.
+      to contact us at info.rentalize@gmail.com.
     </p>
 
     <p>
