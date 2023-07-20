@@ -72,7 +72,7 @@ function createDays() {
   }
 }
 
-export const duration = writable<number>(60)
+export const duration = writable<number>(86)
 export const minutes = createMinutes()
 export const hours = createHours()
 export const days = createDays()
