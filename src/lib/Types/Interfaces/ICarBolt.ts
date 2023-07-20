@@ -15,4 +15,5 @@ export interface ICarBolt extends ICar {
     lat: number
     lng: number
   }[]
+  city: string
 }

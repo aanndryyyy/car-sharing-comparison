@@ -18,4 +18,5 @@ export interface ICarCityBee extends ICar {
   category: string
   gearbox: string
   coordinates: { serviceId: number; carId: number; lat: number; lng: number }[]
+  city?: string
 }
