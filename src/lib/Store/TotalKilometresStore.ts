@@ -1,3 +1,3 @@
 import { writable } from 'svelte/store'
 
-export const totalKilometres = writable(86)
+export const totalKilometres = writable(15)
