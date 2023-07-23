@@ -5,7 +5,7 @@
   import { Icon, ArrowsUpDown } from 'svelte-hero-icons'
   import App_logo from '../../../assets/images/app-logo.png'
 
-  let manualPlanner = true
+  let autoPlanner = true
   let screenSize: number
 </script>
 
@@ -27,15 +27,15 @@
 
       <button
         class="flex items-center justify-center rounded bg-green-600 p-2.5 text-white md:hidden"
-        on:click={() => (manualPlanner = !manualPlanner)}
+        on:click={() => (autoPlanner = !autoPlanner)}
       >
         <Icon src={ArrowsUpDown} size="24" />
       </button>
     </div>
 
     <div>
-      <div class={manualPlanner ? 'block' : 'hidden'}>
-        <ManualPlanner />
+      <div class={autoPlanner ? 'block' : 'hidden'}>
+        <AutoPlanner />
       </div>
 
       <div class="relative my-8 mt-10 flex items-center max-md:hidden">
@@ -46,8 +46,8 @@
         <div class="flex-grow border-t border-slate-300" />
       </div>
 
-      <div class={manualPlanner && screenSize < 768 ? 'hidden' : 'block'}>
-        <AutoPlanner />
+      <div class={autoPlanner && screenSize < 768 ? 'hidden' : 'block'}>
+        <ManualPlanner />
       </div>
     </div>
   </div>

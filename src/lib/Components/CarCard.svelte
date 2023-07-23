@@ -35,10 +35,10 @@
   }
 
   const markAllCars = (showBorder) => {
-    car.markers.forEach(marker => {
+    car.markers.forEach((marker) => {
       if (showBorder) {
         marker.element.style.border = '3px solid purple'
-        marker.element.style.borderRadius = "13px"
+        marker.element.style.borderRadius = '13px'
         marker.zIndex = 200
       } else {
         marker.element.style.border = null
