@@ -1,5 +1,5 @@
 export enum City {
-  TALLINN = 'TALLINN',
-  TARTU = 'TARTU',
-  PÄRNU = 'PÄRNU',
+  TALLINN = 'Tallinn',
+  TARTU = 'Tartu',
+  PÄRNU = 'Pärnu',
 }

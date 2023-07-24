@@ -1,19 +1,13 @@
 <script>
-  import { MotorType } from '$lib/Types/Enums/MotorType'
   import { Icon, ChevronDown } from 'svelte-hero-icons'
   import {
     Popover,
     PopoverButton,
     PopoverPanel,
   } from '@rgossiaux/svelte-headlessui'
+  import { carsFilter } from '$lib/Store/FilterStore'
 
-  const items = [
-    { value: MotorType.ELECTRIC, title: 'Electric' },
-    { value: MotorType.PETROL, title: 'Petrol' },
-    { value: MotorType.DIESEL, title: 'Diesel' },
-  ]
-
-  let selectedItems = items
+  let items = $carsFilter.motorTypes
 </script>
 
 <Popover class="relative px-4 pr-0 text-sm">
@@ -22,7 +16,7 @@
   >
     Fuel
     <span class="inline-block h-5 w-5 rounded-md bg-slate-200"
-      >{selectedItems.length}</span
+      >{$carsFilter.motorTypes.length}</span
     >
     <Icon
       src={ChevronDown}
@@ -41,7 +35,8 @@
       >
         <input
           type="checkbox"
-          bind:group={selectedItems}
+          bind:group={$carsFilter.motorTypes}
+          id={'fuel-' + item.title}
           value={item}
           class="form-checkbox h-4 w-4 rounded border-slate-400 text-green-600 focus:ring-green-500"
         />

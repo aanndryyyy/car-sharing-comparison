@@ -29,18 +29,18 @@
   <PopoverPanel
     class="absolute right-4 z-10 mt-2 w-36 whitespace-nowrap rounded-md bg-white py-1 font-medium text-slate-600 shadow-xl ring-1 ring-black ring-opacity-5 focus:outline-none"
   >
-    {#each brandFilter as item, index}
+    {#each brandFilter as item}
       <label
         class="flex items-center gap-3 px-4 py-2 capitalize hover:bg-slate-100 hover:text-slate-900"
       >
         <input
           type="checkbox"
           class="form-checkbox h-4 w-4 rounded border-slate-400 text-green-600 focus:ring-green-500"
-          id={'provider-' + index}
+          id={'provider-' + item.title}
           value={item}
           bind:group={$carsFilter.providers}
         />
-        {item}
+        {item.title}
       </label>
     {/each}
   </PopoverPanel>

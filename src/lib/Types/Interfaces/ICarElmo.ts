@@ -17,5 +17,4 @@ export interface ICarElmo extends ICar {
     hour: number
     minimum: number
   }
-  city?: string
 }

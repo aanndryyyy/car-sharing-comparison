@@ -16,5 +16,4 @@ export interface ICarBeast extends ICar {
       special: number
     }
   }
-  city?: string
 }
