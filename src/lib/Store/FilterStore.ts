@@ -3,6 +3,7 @@ import { Provider } from '$lib/Types/Enums/Provider'
 import { CarSortField } from '$lib/Types/Enums/CarSortField'
 import { SortDirection } from '$lib/Types/Enums/SortDirection'
 import { MotorType } from '../Types/Enums/MotorType'
+import { City } from '../Types/Enums/City'
 
 export type SortingSelection = {
   value: CarSortField
@@ -14,24 +15,20 @@ export const carsSort = writable<SortingSelection>({
   direction: SortDirection.ASCENDING,
 })
 
-export type Item<T> = { value: T; title: string }
-
 export type carsFilters = {
-  providers: Item<Provider>[]
-  motorTypes: Item<MotorType>[]
+  providers: Provider[]
+  motorTypes: MotorType[]
+  cities: City[]
 }
 
 export const carsFilter = writable<carsFilters>({
   providers: [
-    { value: Provider.BOLT, title: 'Bolt' },
-    { value: Provider.CITYBEE, title: 'CityBee' },
-    { value: Provider.ELMO, title: 'Elmo' },
-    { value: Provider.BEAST, title: 'Beast' },
-    { value: Provider.AVIS, title: 'Avis' },
+    Provider.BOLT,
+    Provider.CITYBEE,
+    Provider.ELMO,
+    Provider.BEAST,
+    Provider.AVIS,
   ],
-  motorTypes: [
-    { value: MotorType.ELECTRIC, title: 'Electric' },
-    { value: MotorType.PETROL, title: 'Petrol' },
-    { value: MotorType.DIESEL, title: 'Diesel' },
-  ],
+  motorTypes: [MotorType.ELECTRIC, MotorType.PETROL, MotorType.DIESEL],
+  cities: [City.TALLINN, City.TARTU],
 })

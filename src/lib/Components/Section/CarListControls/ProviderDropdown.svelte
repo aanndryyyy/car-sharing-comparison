@@ -6,17 +6,24 @@
     PopoverPanel,
   } from '@rgossiaux/svelte-headlessui'
   import { carsFilter } from '$lib/Store/FilterStore'
+  import { Provider } from '$lib/Types/Enums/Provider'
 
-  let items = $carsFilter.motorTypes
+  let items = [
+    { title: 'Bolt', value: Provider.BOLT },
+    { title: 'CityBee', value: Provider.CITYBEE },
+    { title: 'Elmo', value: Provider.ELMO },
+    { title: 'Beast', value: Provider.BEAST },
+    { title: 'Avis', value: Provider.AVIS },
+  ]
 </script>
 
-<Popover class="relative px-4 pr-0 text-sm">
+<Popover class="title relative px-4 text-sm">
   <PopoverButton
     class="group flex items-center gap-1 font-medium text-slate-600 transition-colors duration-75 hover:text-slate-900"
   >
-    Fuel
+    Brand
     <span class="inline-block h-5 w-5 rounded-md bg-slate-200"
-      >{$carsFilter.motorTypes.length}</span
+      >{$carsFilter.providers.length}</span
     >
     <Icon
       src={ChevronDown}
@@ -27,18 +34,18 @@
   </PopoverButton>
 
   <PopoverPanel
-    class="absolute right-0 z-10 mt-2 w-36 whitespace-nowrap rounded-md bg-white py-1 font-medium text-slate-600 shadow-xl ring-1 ring-black ring-opacity-5 focus:outline-none"
+    class="absolute right-4 z-10 mt-2 w-36 whitespace-nowrap rounded-md bg-white py-1 font-medium text-slate-600 shadow-xl ring-1 ring-black ring-opacity-5 focus:outline-none"
   >
     {#each items as item}
       <label
-        class="flex items-center gap-3 px-4 py-2 hover:bg-slate-100 hover:text-slate-900"
+        class="flex items-center gap-3 px-4 py-2 capitalize hover:bg-slate-100 hover:text-slate-900"
       >
         <input
           type="checkbox"
-          bind:group={$carsFilter.motorTypes}
-          id={'fuel-' + item.title}
-          value={item}
           class="form-checkbox h-4 w-4 rounded border-slate-400 text-green-600 focus:ring-green-500"
+          id={'provider-' + item.title}
+          value={item.value}
+          bind:group={$carsFilter.providers}
         />
         {item.title}
       </label>

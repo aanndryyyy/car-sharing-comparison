@@ -8,19 +8,11 @@
   import { Provider } from '$lib/Types/Enums/Provider'
 
   const providersInfo: any = [
-    { title: 'Bolt', value: Provider.BOLT, imgUrl: BoltLogo },
-    {
-      title: 'Citybee',
-      value: Provider.CITYBEE,
-      imgUrl: CityBeeLogo,
-    },
-    { title: 'Elmo', value: Provider.ELMO, imgUrl: ElmoLogo },
-    {
-      title: 'Beast',
-      value: Provider.BEAST,
-      imgUrl: BeastLogo,
-    },
-    { title: 'Avis', value: Provider.AVIS, imgUrl: AvisLogo },
+    { imgUrl: BoltLogo, title: 'Bolt', value: Provider.BOLT },
+    { imgUrl: CityBeeLogo, title: 'Citybee', value: Provider.CITYBEE },
+    { imgUrl: ElmoLogo, title: 'Elmo', value: Provider.ELMO },
+    { imgUrl: BeastLogo, title: 'Beast', value: Provider.BEAST },
+    { imgUrl: AvisLogo, title: 'Avis', value: Provider.AVIS },
   ]
 
   export let grid = false
@@ -33,12 +25,12 @@
       ? 'contents'
       : ''}"
   >
-    {#each providersInfo as provider, index}
+    {#each providersInfo as provider}
       <div class="inline-block">
         <input
           type="checkbox"
           class="peer hidden"
-          id={'provider-' + index}
+          id={'provider-' + provider.title}
           value={provider.value}
           bind:group={$carsFilter.providers}
         />
@@ -48,7 +40,7 @@
           )
             ? 'border-green-600 bg-green-200'
             : 'border-gray-200 bg-gray-200'}"
-          for={'provider-' + index}
+          for={'provider-' + provider.title}
         >
           <img
             class="block h-5 w-14 object-contain"

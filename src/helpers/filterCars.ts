@@ -2,16 +2,13 @@ import type { Car } from '$lib/Car/GenericCar'
 import type { carsFilters } from '$lib/Store/FilterStore'
 import { Provider } from '$lib/Types/Enums/Provider'
 import { MotorType } from '../lib/Types/Enums/MotorType'
+import { City } from '../lib/Types/Enums/City'
 
 const filterCars = (cars: Car[], filters: carsFilters): Car[] => {
-  cars = _searchProvider(
-    cars,
-    filters.providers.map((p) => p.value)
-  )
-  cars = _searchMotorType(
-    cars,
-    filters.motorTypes.map((p) => p.value)
-  )
+  cars = _searchProvider(cars, filters.providers)
+  cars = _searchMotorType(cars, filters.motorTypes)
+  cars = _searchCity(cars, filters.cities)
+
   // ..car body type
   // ...
 
@@ -27,7 +24,21 @@ const _searchProvider = (cars: Car[], value: Provider[]) => {
 const _searchMotorType = (cars: Car[], value: MotorType[]) => {
   const haveSomeProvider = Object.keys(value).some((motorType) => motorType)
   if (!haveSomeProvider) return cars
-  return cars.filter((car) => value.some((v) => v === car.carData.motorType))
+  return cars.filter(
+    (car) =>
+      !car.carData.motorType ||
+      value.some((v) => v.toLowerCase() === car.carData.motorType.toLowerCase())
+  )
+}
+
+const _searchCity = (cars: Car[], value: City[]) => {
+  const haveSomeProvider = Object.keys(value).some((city) => city)
+  if (!haveSomeProvider) return cars
+  return cars.filter(
+    (car) =>
+      car.provider !== Provider.BOLT ||
+      value.some((v) => v === car.carData.city)
+  )
 }
 
 export default filterCars
