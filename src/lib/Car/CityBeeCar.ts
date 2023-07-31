@@ -33,6 +33,7 @@ import Fiat_Multipla from '../../assets/images/providers/citybee/cars/lowQuality
 import BMW_118i from '../../assets/images/providers/citybee/cars/lowQuality/BMW-118i.png'
 import Fiat_500e from '../../assets/images/providers/citybee/cars/lowQuality/Fiat-500e.png'
 import Peugeot_308 from '../../assets/images/providers/citybee/cars/lowQuality/Peugeot-308.png'
+import Porsche_Taycan from '../../assets/images/providers/citybee/cars/lowQuality/Porsche-Taycan.png'
 import GenericMappableCar from './GenericMappableCar'
 import calculateCityBeePrice from '../../helpers/calculators/calculateCityBeePrice'
 import { SearchParamsObj } from '../DTO/SearchParamsObj'
@@ -94,8 +95,6 @@ export default class CityBeeCar extends GenericMappableCar<ICarCityBee> {
         return Skoda_Karoq
       case 'VW Taigo':
         return VW_Taigo
-      case 'VW':
-        return VW_Taigo
       case 'Toyota C-HR':
         return Toyota_C_HR
       case 'Nissan Qashqai':
@@ -122,6 +121,8 @@ export default class CityBeeCar extends GenericMappableCar<ICarCityBee> {
         return Fiat_500e
       case 'Peugeot 308':
         return Peugeot_308
+      case 'Porsche Taycan':
+        return Porsche_Taycan
       default:
         return No_image_available
     }
