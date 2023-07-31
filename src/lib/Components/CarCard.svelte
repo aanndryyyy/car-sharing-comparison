@@ -210,6 +210,14 @@
     <div class="mt-2" />
     <Divider />
     <div class="grid gap-2 p-4" id={`offer-details-wrapper-${index}`}>
+      {#if car.provider === Provider.BOLT && car.getTotalPrice() <= 3.99}
+        <p>
+          The final price depends on your starting fee, which can vary between
+          1.99€ to 3.99€. Starting fee depends on how much you have driven short
+          distances. In the calculation, the starting fee is {car.carData.price
+            .minimum}€.
+        </p>
+      {/if}
       <AvailableCarsContainer carsCount={car.carData.coordinates.length} />
       {#if car.rentUsablePackages.length > 0}
         <p>Take these packages:</p>
