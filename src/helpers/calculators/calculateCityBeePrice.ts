@@ -24,6 +24,7 @@ const calculateCityBeePrice = (
     if (usablePackage) {
       usablePackages.push(usablePackage)
       searchParamsObj.distance -= usablePackage.distance
+      if (searchParamsObj.distance < 0) searchParamsObj.distance = 0
       if (searchParamsObj.days < usablePackage.days) {
         searchParamsObj.days = 0
         searchParamsObj.hours = 0

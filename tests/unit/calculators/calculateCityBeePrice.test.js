@@ -1,8 +1,25 @@
 import cars from "../../../static/data/citybee.json";
-import calculateCityBeePrice from "../../../src/helpers/calculators/calculateCityBeePrice.js";
+import calculateCityBeePrice from "../../../src/helpers/calculators/calculateCityBeePrice";
 import {SearchParamsObj} from "../../../src/lib/DTO/SearchParamsObj";
 
 describe("CityBee price calculator", function () {
+
+  test("Toyota Yaris - 23h 15km", async () => {
+    // ARRANGE
+    const car = JSON.parse(JSON.stringify(cars.find(car => car.name === "Toyota Yaris")))
+    const searchParamsObj = new SearchParamsObj();
+    searchParamsObj.distance = 15;
+    searchParamsObj.days = 0;
+    searchParamsObj.hours = 23;
+    searchParamsObj.minutes = 0;
+
+    // ACT
+    const {price, pricePackages} = calculateCityBeePrice(car, searchParamsObj);
+
+    // ASSERT
+    expect(price).toBe(33.09);
+    expect(pricePackages.length).toBe(0);
+  });
 
   test("VW Crafter - 1h 26min 86km", async () => {
     // ARRANGE

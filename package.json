@@ -15,6 +15,7 @@
 	"devDependencies": {
 		"@babel/core": "^7.21.5",
 		"@babel/preset-env": "^7.21.5",
+		"@babel/preset-typescript": "^7.22.5",
 		"@rgossiaux/svelte-headlessui": "^1.0.2",
 		"@sveltejs/kit": "^1.5.0",
 		"@tailwindcss/forms": "^0.5.3",
