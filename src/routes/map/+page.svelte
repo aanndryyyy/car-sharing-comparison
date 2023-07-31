@@ -21,7 +21,7 @@
   export let data
   $cars = data.cars
 
-  let plannerType: boolean = false
+  let autoPlanner: boolean = true
   let open: boolean = false
 
   onMount(async () => {
@@ -73,17 +73,17 @@
 
       <button
         class="flex items-center justify-center rounded bg-green-600 p-2.5 text-white"
-        on:click={() => (plannerType = !plannerType)}
+        on:click={() => (autoPlanner = !autoPlanner)}
       >
         <Icon src={ArrowsUpDown} size="24" />
       </button>
     </div>
 
     <div class="px-4">
-      <div class:hidden={plannerType}>
+      <div class:hidden={autoPlanner}>
         <ManualPlanner />
       </div>
-      <div class:hidden={!plannerType}>
+      <div class:hidden={!autoPlanner}>
         <AutoPlanner />
       </div>
     </div>
