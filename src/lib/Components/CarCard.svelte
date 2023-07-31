@@ -13,6 +13,7 @@
   import { CarSortField } from '$lib/Types/Enums/CarSortField'
   import { getPosition } from '../../helpers/position'
   import PackageInfoContainer from '$lib/Components/Section/CarList/PackageInfoContainer.svelte'
+  import AvailableCarsContainer from '$lib/Components/Section/CarList/AvailableCarsContainer.svelte'
 
   export let car: GenericCar
   export let index: number
@@ -209,12 +210,7 @@
     <div class="mt-2" />
     <Divider />
     <div class="grid gap-2 p-4" id={`offer-details-wrapper-${index}`}>
-      <!--            <div>-->
-      <!--                <p class="text-left">-->
-      <!--                    For the cheapest ride select <b>package 1</b> and drive it over-->
-      <!--                    <b>23km</b>.-->
-      <!--                </p>-->
-      <!--            </div>-->
+      <AvailableCarsContainer carsCount={car.carData.coordinates.length} />
       {#if car.rentUsablePackages.length > 0}
         <p>Take these packages:</p>
         <div class="grid gap-2">
