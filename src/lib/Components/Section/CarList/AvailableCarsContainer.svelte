@@ -1,5 +1,5 @@
 <script>
-  import {Provider} from "$lib/Types/Enums/Provider";
+  import { Provider } from '$lib/Types/Enums/Provider'
 
   export let carsCount
   export let provider
@@ -12,9 +12,8 @@
     <p>Available cars count:</p>
     {#if provider === Provider.BOLT || provider === Provider.CITYBEE}
       <p>{carsCount}</p>
-    {:else }
+    {:else}
       <p>Unknown</p>
     {/if}
-
   </div>
 </div>

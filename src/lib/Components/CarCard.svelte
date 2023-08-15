@@ -218,7 +218,10 @@
             .minimum}€.
         </p>
       {/if}
-      <AvailableCarsContainer carsCount={car.carData.coordinates.length} provider="{car.provider}" />
+      <AvailableCarsContainer
+        carsCount={car.carData.coordinates.length}
+        provider={car.provider}
+      />
       {#if car.rentUsablePackages.length > 0}
         <p>Take these packages:</p>
         <div class="grid gap-2">

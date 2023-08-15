@@ -17,6 +17,7 @@
   import { onMount } from 'svelte'
   import { invalidate } from '$app/navigation'
   import { map } from '../../lib/Store/GoogleMapStore'
+  import CitySelection from '$lib/Components/Section/CarListControlsMobile/CitySelection.svelte'
 
   export let data
   $cars = data.cars
@@ -111,6 +112,7 @@
           id="filters-wrapper"
         >
           <SortSelection />
+          <CitySelection />
           <BrandSelection grid={true} />
         </div>
       </div>

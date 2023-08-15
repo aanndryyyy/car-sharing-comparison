@@ -3,6 +3,7 @@
   import { _ } from 'svelte-i18n'
   import BrandSelection from './Section/CarListControlsMobile/BrandSelection.svelte'
   import SortSelection from './Section/CarListControlsMobile/SortSelection.svelte'
+  import CitySelection from '$lib/Components/Section/CarListControlsMobile/CitySelection.svelte'
 
   export let open = false
 </script>
@@ -21,5 +22,6 @@
   </div>
 
   <SortSelection />
+  <CitySelection />
   <BrandSelection />
 </div>
