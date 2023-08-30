@@ -10,9 +10,4 @@ export interface ICarBolt extends ICar {
     day: number
     minimum: number
   }
-  coordinates: {
-    serviceId: number
-    lat: number
-    lng: number
-  }[]
 }

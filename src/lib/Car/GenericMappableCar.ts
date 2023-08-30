@@ -49,12 +49,13 @@ export default abstract class GenericMappableCar<
     map?: google.maps.Map
   ): void {
     this.markers = []
-    this.carData.coordinates.forEach(({ lat, lng }) => {
+    this.carData.coordinates.forEach((cord) => {
       const marker = new AdvancedMarkerElement({
         map,
         content: this.getMarkerDotIcon(),
-        position: { lat, lng },
+        position: { lat: cord.lat, lng: cord.lng },
       })
+      marker.role = cord.city.toUpperCase()
 
       marker.addListener('click', () => {
         if (!marker.content.className.includes('detail-icon')) {

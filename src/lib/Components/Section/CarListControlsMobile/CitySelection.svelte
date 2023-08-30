@@ -5,6 +5,7 @@
   const citiesInfo: any = [
     { title: City.TALLINN, value: City.TALLINN },
     { title: City.TARTU, value: City.TARTU },
+    { title: City.PÄRNU, value: City.PÄRNU },
   ]
 
   export let grid = false

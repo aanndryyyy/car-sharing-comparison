@@ -32,13 +32,13 @@ const _searchMotorType = (cars: Car[], value: MotorType[]) => {
 }
 
 const _searchCity = (cars: Car[], value: City[]) => {
-  const haveSomeProvider = Object.keys(value).some((city) => city)
-  if (!haveSomeProvider) return cars
-  return cars.filter(
-    (car) =>
-      car.provider !== Provider.BOLT ||
-      value.some((v) => v === car.carData.city)
+  cars.forEach((car) =>
+    car.markers.forEach(
+      (marker) =>
+        (marker.hidden = !value.some((v) => v.toUpperCase() === marker.role))
+    )
   )
+  return cars
 }
 
 export default filterCars

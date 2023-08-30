@@ -11,6 +11,7 @@
   let items = [
     { title: 'Tallinn', value: City.TALLINN },
     { title: 'Tartu', value: City.TARTU },
+    { title: 'Pärnu', value: City.PÄRNU },
   ]
 </script>
 

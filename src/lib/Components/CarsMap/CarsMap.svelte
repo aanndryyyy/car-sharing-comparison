@@ -96,15 +96,17 @@
         marker.content!.classList.remove('!hidden')
       )
     )
-    if ($carsSort.value === CarSortField.DISTANCE) {
-      $cars.forEach((car) =>
-        car.markers.forEach((marker) => {
-          if (Number(marker.title) > 2) {
-            marker.content!.classList.add('!hidden')
-          }
-        })
-      )
-    }
+    $cars.forEach((car) =>
+      car.markers.forEach((marker) => {
+        if (
+          marker.hidden ||
+          ($carsSort.value === CarSortField.DISTANCE &&
+            Number(marker.title) > 2)
+        ) {
+          marker.content!.classList.add('!hidden')
+        }
+      })
+    )
 
     updateMarkers()
   }

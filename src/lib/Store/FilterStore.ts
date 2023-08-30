@@ -30,5 +30,5 @@ export const carsFilter = writable<carsFilters>({
     Provider.AVIS,
   ],
   motorTypes: [MotorType.ELECTRIC, MotorType.PETROL, MotorType.DIESEL],
-  cities: [City.TALLINN, City.TARTU],
+  cities: [City.TALLINN, City.TARTU, City.PÄRNU],
 })
