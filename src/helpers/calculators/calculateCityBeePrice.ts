@@ -62,7 +62,7 @@ const _getPayAsYouGoCost = (
     getDuration(searchParamsObj),
     price
   )
-  const cost = 0.5 + distanceCost + daysCost + hoursCost + minutesCost
+  const cost = distanceCost + daysCost + hoursCost + minutesCost
   return Number(cost.toFixed(2))
 }
 
