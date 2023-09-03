@@ -23,7 +23,7 @@ const calculateBeastPrice = (
     searchParamsObj.days -= threeDays * 3
     const extraMinutes = calculateMinute(totalMinutes, price as ICarRentPrice)
     if (
-      threeDays * price['3days'] +
+      threeDays * price.threeDays +
         searchParamsObj.days * price.day +
         extraMinutes.daysCost +
         extraMinutes.minutesCost >
@@ -33,7 +33,7 @@ const calculateBeastPrice = (
       searchParamsObj.days = 0
       totalMinutes = 0
     } else {
-      threeDaysCost += threeDays * price['3days']
+      threeDaysCost += threeDays * price.threeDays
     }
   }
   // Days
@@ -44,9 +44,9 @@ const calculateBeastPrice = (
       searchParamsObj.days * price.day +
         extraMinutes.daysCost +
         extraMinutes.minutesCost >
-      price['3days']
+      price.threeDays
     ) {
-      threeDaysCost += price['3days']
+      threeDaysCost += price.threeDays
       totalMinutes = 0
     } else {
       daysCost += searchParamsObj.days * price.day
@@ -58,7 +58,7 @@ const calculateBeastPrice = (
 
   const packagesSum = weeksCost + threeDaysCost + daysCost
   if (packagesSum > 0) {
-    return packagesSum + minutesCost
+    return packagesSum + minutesCost + price.start
   }
   return minutesCost + price.start
 }
