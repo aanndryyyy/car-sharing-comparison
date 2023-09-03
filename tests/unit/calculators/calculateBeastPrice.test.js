@@ -1,5 +1,5 @@
 import cars from "../../../static/data/beast.json";
-import calculateBeastPrice from "../../../src/helpers/calculators/calculateBeastPrice.js";
+import calculateBeastPrice from "../../../src/helpers/calculators/calculateBeastPrice";
 import {SearchParamsObj} from "../../../src/lib/DTO/SearchParamsObj";
 
 describe("Beast price calculator", function () {
@@ -17,7 +17,7 @@ describe("Beast price calculator", function () {
     const result = calculateBeastPrice(car, searchParamsObj);
 
     // ASSERT
-    expect(result).toBe(12.49);
+    expect(result).toBe(13.99);
   });
 
   test("Tesla Model 3 Standard Range - 2 days 10h", async () => {
@@ -33,10 +33,10 @@ describe("Beast price calculator", function () {
     const result = calculateBeastPrice(car, searchParamsObj);
 
     // ASSERT
-    expect(result).toBe(294.98);
+    expect(result).toBe(274.98);
   });
 
-  test("Tesla Model 3 Standard Range - 1 week 5 days 5h", async () => {
+  test("Tesla Model 3 Standard Range - 1 week 5 days 10h", async () => {
     // ARRANGE
     const car = JSON.parse(JSON.stringify(cars.find(car => car.name === "Tesla Model 3 Standard Range")))
     const searchParamsObj = new SearchParamsObj();
@@ -49,7 +49,7 @@ describe("Beast price calculator", function () {
     const result = calculateBeastPrice(car, searchParamsObj);
 
     // ASSERT
-    expect(result).toBe(1104.97);
+    expect(result).toBe(1124.97);
   });
 
   test("Tesla Model 3 Standard Range - 4 days 12h 2000km", async () => {
@@ -65,7 +65,7 @@ describe("Beast price calculator", function () {
     const result = calculateBeastPrice(car, searchParamsObj);
 
     // ASSERT
-    expect(result).toBe(634.96);
+    expect(result.toFixed(2)).toBe(474.96 + "");
   });
 
   test("Tesla Model 3 Standard Range - 20min, 30km", async () => {
@@ -81,7 +81,7 @@ describe("Beast price calculator", function () {
     const result = calculateBeastPrice(car, searchParamsObj);
 
     // ASSERT
-    expect(result).toBe(9.99);
+    expect(result).toBe(10.99);
   });
 
   test("Tesla Model 3 Standard Range - 1 day 1min 600km", async () => {
@@ -97,6 +97,6 @@ describe("Beast price calculator", function () {
     const result = calculateBeastPrice(car, searchParamsObj);
 
     // ASSERT
-    expect(result.toFixed(2)).toBe(125.23 + "");
+    expect(result.toFixed(2)).toBe(105.28 + "");
   });
 });

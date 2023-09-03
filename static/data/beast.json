@@ -7,12 +7,16 @@
     "gearbox": "AUTOMATIC",
     "imageUrl": "providers/beast/cars/Tesla-Model-3-Standard-Range.png",
     "price": {
-      "km": 0.2,
+      "km": 0.28,
+      "minute": 0.3,
+      "day": 99.99,
+      "threeDays": 269.99,
+      "week": 559.99,
       "start": 4.99,
-      "minute": 0.25,
-      "day": 119.99,
-      "3days": 289.99,
-      "week": 549.99
+      "deposit": {
+        "base": 100,
+        "special": 300
+      }
     }
   },
   {
@@ -23,12 +27,16 @@
     "gearbox": "AUTOMATIC",
     "imageUrl": "providers/beast/cars/Tesla-Model-3-Long-Range.png",
     "price": {
-      "km": 0.2,
+      "km": 0.28,
+      "minute": 0.3,
+      "day": 99.99,
+      "threeDays": 269.99,
+      "week": 559.99,
       "start": 4.99,
-      "minute": 0.29,
-      "day": 139.99,
-      "3days": 339.99,
-      "week": 649.99
+      "deposit": {
+        "base": 100,
+        "special": 300
+      }
     }
   },
   {
@@ -39,12 +47,16 @@
     "gearbox": "AUTOMATIC",
     "imageUrl": "providers/beast/cars/Tesla-Model-3-Performance.png",
     "price": {
-      "km": 0.2,
-      "start": 9.99,
-      "minute": 0.33,
-      "day": 159.99,
-      "3days": 379.99,
-      "week": 749.99
+      "km": 0.35,
+      "minute": 0.46,
+      "day": 199.99,
+      "threeDays": 539.99,
+      "week": 1119.99,
+      "start": 4.99,
+      "deposit": {
+        "base": 200,
+        "special": 600
+      }
     }
   },
   {
@@ -55,12 +67,16 @@
     "gearbox": "AUTOMATIC",
     "imageUrl": "providers/beast/cars/Tesla-Model-Y-Long-Range.png",
     "price": {
-      "km": 0.25,
-      "start": 9.99,
-      "minute": 0.4,
-      "day": 189.99,
-      "3days": 459.99,
-      "week": 899.99
+      "km": 0.35,
+      "minute": 0.46,
+      "day": 199.99,
+      "threeDays": 539.99,
+      "week": 1119.99,
+      "start": 4.99,
+      "deposit": {
+        "base": 200,
+        "special": 600
+      }
     }
   },
   {
@@ -71,12 +87,16 @@
     "gearbox": "AUTOMATIC",
     "imageUrl": "providers/beast/cars/Tesla-Model-X-Ludicrous-Perf.png",
     "price": {
-      "km": 0.3,
-      "start": 9.99,
-      "minute": 0.56,
-      "day": 269.99,
-      "3days": 649.99,
-      "week": 1299.99
+      "km": 0.42,
+      "minute": 0.78,
+      "day": 319.99,
+      "threeDays": 859.99,
+      "week": 1789.99,
+      "start": 4.99,
+      "deposit": {
+        "base": 500,
+        "special": 1500
+      }
     }
   }
 ]
