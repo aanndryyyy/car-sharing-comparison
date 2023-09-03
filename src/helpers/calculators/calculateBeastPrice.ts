@@ -58,7 +58,7 @@ const calculateBeastPrice = (
 
   const packagesSum = weeksCost + threeDaysCost + daysCost
   if (packagesSum > 0) {
-    return packagesSum + minutesCost + price.start
+    return packagesSum + minutesCost
   }
   return minutesCost + price.start
 }
