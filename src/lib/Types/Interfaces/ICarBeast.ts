@@ -7,7 +7,7 @@ export interface ICarBeast extends ICar {
     minute: number
     hour: number
     day: number
-    '3days': number
+    threeDays: number
     week: number
     start: number
     minimum: number
