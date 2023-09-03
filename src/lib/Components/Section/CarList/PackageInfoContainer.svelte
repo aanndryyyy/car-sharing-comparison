@@ -8,10 +8,10 @@
   >
     <p>📦</p>
     <p>
-      {pricePackage.hours}h +
+      {pricePackage.days}d +
     </p>
     <p>
-      {pricePackage.days}d +
+      {pricePackage.hours}h +
     </p>
     <p>
       {pricePackage.distance}km
