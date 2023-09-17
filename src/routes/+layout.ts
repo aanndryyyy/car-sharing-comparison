@@ -1,7 +1,6 @@
-import { PUBLIC_BACKEND_BASE_URL } from '$env/static/public'
-
 import { Provider as EProvider } from '$lib/Types/Enums/Provider'
-import type { Provider } from '$lib/types'
+import { browser } from '$app/environment'
+import { locale, waitLocale } from 'svelte-i18n'
 
 import BoltCar from '$lib/Car/BoltCar'
 import CityBeeCar from '$lib/Car/CityBeeCar'
@@ -13,13 +12,16 @@ import type { ICarCityBee } from '$lib/Types/Interfaces/ICarCityBee'
 import type { ICarElmo } from '$lib/Types/Interfaces/ICarElmo'
 import type { ICarBeast } from '$lib/Types/Interfaces/ICarBeast'
 
-/** @type {import('./$types').PageLoad} */
-export async function load({ fetch }) {
-  const response = await fetch(PUBLIC_BACKEND_BASE_URL + 'location')
-  const providerDetails = (await response.json()) as Provider[]
+export async function load({ data }) {
+  if (browser && ['en-US', 'et'].includes(window.navigator.language)) {
+    locale.set(window.navigator.language)
+  }
+
+  const { allProviders } = data
 
   let cars: Car[] = []
-  providerDetails.forEach((providers) => {
+
+  allProviders.forEach((providers) => {
     const { provider, services } = providers
     const theProvider = provider.toUpperCase() as EProvider
 
@@ -51,9 +53,6 @@ export async function load({ fetch }) {
     })
   })
 
-  return {
-    cars,
-  } as {
-    cars: Car[]
-  }
+  await waitLocale()
+  return { cars }
 }

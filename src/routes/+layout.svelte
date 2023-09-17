@@ -2,18 +2,39 @@
   import './page.css'
 
   import '$lib/i18n'
-  import { browser } from '$app/environment'
-  import { locale, waitLocale, isLoading } from 'svelte-i18n'
-  import type { LayoutLoad } from './$types'
+  import { isLoading } from 'svelte-i18n'
   import TopBarNavigation from '$lib/Components/TopBarNavigation.svelte'
+  import { onMount } from 'svelte'
+  import { invalidate } from '$app/navigation'
+  import { map } from '../lib/Store/GoogleMapStore'
+  import { cars } from '$lib/Store/Cars'
 
-  export const load: LayoutLoad = async () => {
-    if (browser && ['en-US', 'et'].includes(window.navigator.language)) {
-      locale.set(window.navigator.language)
-    }
+  export let data
 
-    await waitLocale()
-  }
+  $cars = data.cars
+
+  onMount(async () => {
+    const { AdvancedMarkerElement } = (await google.maps.importLibrary(
+      'marker'
+    )) as google.maps.MarkerLibrary
+
+    const interval = setInterval(() => {
+      invalidate('/api/location')
+
+      $cars.forEach((car) =>
+        car.markers.forEach((marker) => {
+          marker.map = null
+        })
+      )
+
+      data.cars.forEach((car) =>
+        car.initialiseMarkers(AdvancedMarkerElement, $map)
+      )
+
+      $cars = data.cars
+    }, 60000)
+    return () => clearInterval(interval)
+  })
 </script>
 
 <TopBarNavigation />

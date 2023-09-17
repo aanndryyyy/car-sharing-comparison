@@ -2,7 +2,7 @@
   import Filters from '$lib/Components/Filters.svelte'
   import { Funnel, Icon, Map } from 'svelte-hero-icons'
   import { _ } from 'svelte-i18n'
-  import BottomSheet from 'svelte-swipeable-sheets/BottomSheet.svelte'
+  import BottomSheet from '$lib/Components/BottomSheet.svelte'
   import CarsMap from '../CarsMap/CarsMap.svelte'
   import CarList from './CarList/CarList.svelte'
   import CarListControls from './CarListControls/CarListControls.svelte'
