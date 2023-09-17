@@ -2,7 +2,6 @@
   import Loader from '../../../assets/icons/loader.svg'
   import placeholder from '../../../assets/images/placeholder.png'
   import { map } from '$lib/Store/GoogleMapStore'
-  import { onMount } from 'svelte'
   import { PUBLIC_GOOGLE_MAP_ID } from '$env/static/public'
   import { cars, visibleCars } from '$lib/Store/Cars'
   import { duration } from '$lib/Store/DurationStore'
@@ -24,54 +23,6 @@
 
   let mapLoaded: boolean = false
   let isError: boolean = false
-
-  onMount(async () => {
-    const [{ Map }, { AdvancedMarkerElement }, userPos] = await Promise.all([
-      google.maps.importLibrary('maps'),
-      google.maps.importLibrary('marker'),
-      getPosition(),
-    ])
-
-    const googleMap = new Map(mapCanvas, {
-      zoom,
-      center,
-      mapId: PUBLIC_GOOGLE_MAP_ID,
-      mapTypeControl: false,
-      fullscreenControl: false,
-      zoomControl: false,
-      streetViewControl: false,
-    })
-
-    $map = googleMap
-
-    googleMap.addListener('tilesloaded', () => {
-      mapLoaded = true
-    })
-
-    $cars.forEach((car) => {
-      car.initialiseMarkers(AdvancedMarkerElement, $map)
-    })
-
-    googleMap.addListener('zoom_changed', () => {
-      let mapZoom = googleMap.getZoom()!
-      if (mapZoom < iconsZoom) {
-        $visibleCars.forEach((car) => car.setMarkerIcons())
-      } else {
-        $visibleCars.forEach((car) => car.setMarkerIcons('price'))
-      }
-    })
-
-    new AdvancedMarkerElement({
-      map: $map,
-      content: userDot(),
-      position: { lat: userPos.coords.latitude, lng: userPos.coords.longitude },
-    })
-
-    duration.subscribe(updateMarkers)
-    totalKilometres.subscribe(updateMarkers)
-    visibleCars.subscribe(adjustMarkersVisibility)
-    googleMap.addListener('dragend', updateMarkers)
-  })
 
   function updateMarkers() {
     const mapZoom = $map.getZoom()
@@ -111,7 +62,54 @@
     updateMarkers()
   }
 
-  let mapCanvas: HTMLDivElement
+  const bindMap = async (element: HTMLDivElement) => {
+    const { Map } = (await google.maps.importLibrary('maps')) as google.maps
+
+    const googleMap = new Map(element, {
+      zoom,
+      center,
+      mapId: PUBLIC_GOOGLE_MAP_ID,
+      mapTypeControl: false,
+      fullscreenControl: false,
+      zoomControl: false,
+      streetViewControl: false,
+    })
+
+    $map = googleMap
+
+    googleMap.addListener('tilesloaded', () => {
+      mapLoaded = true
+    })
+
+    const { AdvancedMarkerElement } = (await google.maps.importLibrary(
+      'marker'
+    )) as google.maps.MarkerLibrary
+
+    $cars.forEach((car) => {
+      car.initialiseMarkers(AdvancedMarkerElement, $map)
+    })
+
+    googleMap.addListener('zoom_changed', () => {
+      let mapZoom = googleMap.getZoom()!
+      if (mapZoom < iconsZoom) {
+        $visibleCars.forEach((car) => car.setMarkerIcons())
+      } else {
+        $visibleCars.forEach((car) => car.setMarkerIcons('price'))
+      }
+    })
+
+    const userPos = await getPosition()
+    new AdvancedMarkerElement({
+      map: $map,
+      content: userDot(),
+      position: { lat: userPos.coords.latitude, lng: userPos.coords.longitude },
+    })
+
+    duration.subscribe(updateMarkers)
+    totalKilometres.subscribe(updateMarkers)
+    visibleCars.subscribe(adjustMarkersVisibility)
+    googleMap.addListener('dragend', updateMarkers)
+  }
 </script>
 
 <div class={`relative overflow-hidden ${$$props.class}`}>
@@ -134,7 +132,8 @@
       />
     </div>
 
-    <div class="h-full" bind:this={mapCanvas} />
+    <div class="h-full" use:bindMap />
+
     <MapFullScreenControl />
     <MapBottomRightControls />
   {:else}
