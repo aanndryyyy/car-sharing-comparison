@@ -11,26 +11,11 @@
   import SortSelection from '$lib/Components/Section/CarListControlsMobile/SortSelection.svelte'
   import BrandSelection from '$lib/Components/Section/CarListControlsMobile/BrandSelection.svelte'
   import CitySelection from '$lib/Components/Section/CarListControlsMobile/CitySelection.svelte'
-
-  export let data
-  $cars = data.cars
+  import { slide } from 'svelte/transition'
 
   let autoPlanner: boolean = true
   let open: boolean = false
-
-  async function openFilters(): Promise<void> {
-    const growDiv = document.getElementById(`filters-grow`)
-    if (growDiv.clientHeight) {
-      growDiv.style.height = '0'
-      growDiv.style.overflow = 'hidden'
-    } else {
-      const wrapper = document.getElementById(`filters-wrapper`)
-      growDiv.style.height = wrapper.clientHeight + 'px'
-      setTimeout(() => {
-        growDiv.style.overflow = 'inherit'
-      }, 500)
-    }
-  }
+  let isfilterOpen: boolean = false
 </script>
 
 <main
@@ -67,25 +52,22 @@
         </div>
 
         <button
-          on:click={openFilters}
+          on:click={() => (isfilterOpen = !isfilterOpen)}
           class="flex items-center justify-center gap-1.5 rounded bg-green-600 p-2.5 text-base font-medium text-white"
         >
           <Icon src={Funnel} size="24" />
         </button>
       </div>
-      <div
-        class="h-0 max-w-md overflow-hidden transition-[height] delay-100 duration-500 ease-in-out"
-        id="filters-grow"
-      >
-        <div
-          class="mt-4 grid gap-2 rounded-lg border border-slate-200 p-4"
-          id="filters-wrapper"
-        >
-          <SortSelection />
-          <CitySelection />
-          <BrandSelection grid={true} />
+
+      {#if isfilterOpen}
+        <div transition:slide>
+          <div class="mt-4 grid gap-2 rounded-lg border border-slate-200 p-4">
+            <SortSelection />
+            <CitySelection />
+            <BrandSelection grid={true} />
+          </div>
         </div>
-      </div>
+      {/if}
 
       <CarList />
     </div>
