@@ -1,6 +1,7 @@
 import { sveltekit } from '@sveltejs/kit/vite'
 import { defineConfig } from 'vite'
 import { svelteSVG } from 'rollup-plugin-svelte-svg'
+import { imagetools } from 'vite-imagetools'
 
 export default defineConfig({
   plugins: [
@@ -14,8 +15,6 @@ export default defineConfig({
       enforce: 'pre',
     }),
     sveltekit(),
-  ],
-  ssr: {
-    noExternal: ['@googlemaps/js-api-loader'],
-  },
+    imagetools()
+  ]
 })

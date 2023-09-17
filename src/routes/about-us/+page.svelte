@@ -1,15 +1,15 @@
 <script>
   import Footer from '$lib/Components/Footer.svelte'
 
-  import IOS_PWA_1 from '../../assets/images/instructions/IOS/ios-pwa-1.png'
-  import IOS_PWA_2 from '../../assets/images/instructions/IOS/ios-pwa-2.png'
-  import IOS_PWA_3 from '../../assets/images/instructions/IOS/ios-pwa-3.png'
-  import IOS_PWA_4 from '../../assets/images/instructions/IOS/ios-pwa-4.png'
-  import PC_PWA_1 from '../../assets/images/instructions/PC/pc-pwa-1.png'
-  import PC_PWA_2 from '../../assets/images/instructions/PC/pc-pwa-2.png'
-  import android_PWA_1 from '../../assets/images/instructions/android/android-pwa-1.png'
-  import android_PWA_2 from '../../assets/images/instructions/android/android-pwa-2.png'
-  import android_PWA_3 from '../../assets/images/instructions/android/android-pwa-3.png'
+  import IOS_PWA_1 from '../../assets/images/instructions/IOS/ios-pwa-1.png?url&format=webp'
+  import IOS_PWA_2 from '../../assets/images/instructions/IOS/ios-pwa-2.png?url&format=webp'
+  import IOS_PWA_3 from '../../assets/images/instructions/IOS/ios-pwa-3.png?url&format=webp'
+  import IOS_PWA_4 from '../../assets/images/instructions/IOS/ios-pwa-4.png?url&format=webp'
+  import PC_PWA_1 from '../../assets/images/instructions/PC/pc-pwa-1.png?url&format=webp'
+  import PC_PWA_2 from '../../assets/images/instructions/PC/pc-pwa-2.png?url&format=webp'
+  import android_PWA_1 from '../../assets/images/instructions/android/android-pwa-1.png?url&format=webp'
+  import android_PWA_2 from '../../assets/images/instructions/android/android-pwa-2.png?url&format=webp'
+  import android_PWA_3 from '../../assets/images/instructions/android/android-pwa-3.png?url&format=webp'
 </script>
 
 <div class="flex justify-center p-8">

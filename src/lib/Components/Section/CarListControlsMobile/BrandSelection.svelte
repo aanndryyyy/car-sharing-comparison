@@ -1,9 +1,9 @@
 <script lang="ts">
-  import BeastLogo from '../../../../assets/images/providers/beast/beast-logo.png'
-  import BoltLogo from '../../../../assets/images/providers/bolt/bolt-logo.png'
-  import CityBeeLogo from '../../../../assets/images/providers/citybee/citybee-logo.png'
-  import ElmoLogo from '../../../../assets/images/providers/elmo/elmo-logo.png'
-  import AvisLogo from '../../../../assets/images/providers/avis/avis-logo.png'
+  import BeastLogo from '../../../../assets/images/providers/beast/beast-logo.png?url&format=webp'
+  import BoltLogo from '../../../../assets/images/providers/bolt/bolt-logo.png?url&format=webp'
+  import CityBeeLogo from '../../../../assets/images/providers/citybee/citybee-logo.png?url&format=webp'
+  import ElmoLogo from '../../../../assets/images/providers/elmo/elmo-logo.png?url&format=webp'
+  import AvisLogo from '../../../../assets/images/providers/avis/avis-logo.png?url&format=webp'
   import { carsFilter } from '$lib/Store/FilterStore'
   import { Provider } from '$lib/Types/Enums/Provider'
 

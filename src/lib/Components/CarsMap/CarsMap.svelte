@@ -1,6 +1,6 @@
 <script lang="ts">
   import Loader from '../../../assets/icons/loader.svg'
-  import placeholder from '../../../assets/images/placeholder.png'
+  import placeholder from '../../../assets/images/placeholder.png?url&format=webp'
   import { map } from '$lib/Store/GoogleMapStore'
   import { PUBLIC_GOOGLE_MAP_ID } from '$env/static/public'
   import { cars, visibleCars } from '$lib/Store/Cars'
@@ -76,10 +76,7 @@
     })
 
     $map = googleMap
-
-    googleMap.addListener('tilesloaded', () => {
-      mapLoaded = true
-    })
+    mapLoaded = true
 
     const { AdvancedMarkerElement } = (await google.maps.importLibrary(
       'marker'
@@ -98,17 +95,17 @@
       }
     })
 
+    duration.subscribe(updateMarkers)
+    totalKilometres.subscribe(updateMarkers)
+    visibleCars.subscribe(adjustMarkersVisibility)
+    googleMap.addListener('dragend', updateMarkers)
+
     const userPos = await getPosition()
     new AdvancedMarkerElement({
       map: $map,
       content: userDot(),
       position: { lat: userPos.coords.latitude, lng: userPos.coords.longitude },
     })
-
-    duration.subscribe(updateMarkers)
-    totalKilometres.subscribe(updateMarkers)
-    visibleCars.subscribe(adjustMarkersVisibility)
-    googleMap.addListener('dragend', updateMarkers)
   }
 </script>
 

@@ -3,7 +3,7 @@
   import AutoPlanner from '$lib/Components/Planners/TripPlanner.svelte'
   import ManualPlanner from '$lib/Components/Planners/ManualPlanner.svelte'
   import { Icon, ArrowsUpDown } from 'svelte-hero-icons'
-  import App_logo from '../../../assets/images/app-logo.png'
+  import App_logo from '../../../assets/images/app-logo.png?url&format=webp'
 
   let autoPlanner = true
   let screenSize: number

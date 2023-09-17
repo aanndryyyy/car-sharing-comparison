@@ -1,15 +1,15 @@
 import calculateBeastPrice from '../../helpers/calculators/calculateBeastPrice'
 import GenericCar from './GenericCar'
-
-import BeastLogo from '../../assets/images/providers/beast/beast-logo.png'
 import type { ICarBeast } from '$lib/Types/Interfaces/ICarBeast'
-import No_image_available from '../../assets/images/no-image-available.png'
-import Tesla_Model_3_Long_Range from '../../assets/images/providers/beast/cars/lowQuality/Tesla-Model-3-Long-Range.png'
-import Tesla_Model_3_Standard_Range from '../../assets/images/providers/beast/cars/lowQuality/Tesla-Model-3-Standard-Range.png'
-import Tesla_Model_3_Performance from '../../assets/images/providers/beast/cars/lowQuality/Tesla-Model-3-Performance.png'
-import Tesla_Model_X_Performance from '../../assets/images/providers/beast/cars/lowQuality/Tesla-Model-X-Performance.png'
-import Tesla_Model_Y_Long_Range from '../../assets/images/providers/beast/cars/lowQuality/Tesla-Model-Y-Long-Range.png'
-import Tesla_Model_S from '../../assets/images/providers/beast/cars/lowQuality/Tesla-Model-S.png'
+
+import BeastLogo from '../../assets/images/providers/beast/beast-logo.png?url&format=webp'
+import No_image_available from '../../assets/images/no-image-available.png?url&format=webp'
+import Tesla_Model_3_Long_Range from '../../assets/images/providers/beast/cars/lowQuality/Tesla-Model-3-Long-Range.png?url&h=112&format=webp'
+import Tesla_Model_3_Standard_Range from '../../assets/images/providers/beast/cars/lowQuality/Tesla-Model-3-Standard-Range.png?url&h=112&format=webp'
+import Tesla_Model_3_Performance from '../../assets/images/providers/beast/cars/lowQuality/Tesla-Model-3-Performance.png?url&h=112&format=webp'
+import Tesla_Model_X_Performance from '../../assets/images/providers/beast/cars/lowQuality/Tesla-Model-X-Performance.png?url&h=112&format=webp'
+import Tesla_Model_Y_Long_Range from '../../assets/images/providers/beast/cars/lowQuality/Tesla-Model-Y-Long-Range.png?url&h=112&format=webp'
+import Tesla_Model_S from '../../assets/images/providers/beast/cars/lowQuality/Tesla-Model-S.png?url&h=112&format=webp'
 import { SearchParamsObj } from '../DTO/SearchParamsObj'
 
 export default class BeastCar extends GenericCar<ICarBeast> {
