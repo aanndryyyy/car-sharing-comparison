@@ -1,13 +1,11 @@
-import adapter from '@sveltejs/adapter-vercel';
-import { vitePreprocess } from '@sveltejs/kit/vite';
+import { adapter } from 'sveltekit-adapter-aws';
+import preprocess from 'svelte-preprocess';
 
-/** @type {import('@sveltejs/kit').Config} */
-const config = {
-	preprocess: vitePreprocess(),
-
+export default {
+	preprocess: preprocess(),
 	kit: {
-		adapter: adapter(),
-	}
+		adapter: adapter({
+			autoDeploy: true,
+		}),
+	},
 };
-
-export default config;
