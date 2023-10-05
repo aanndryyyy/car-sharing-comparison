@@ -3,7 +3,7 @@ import { MotorType } from '../Enums/MotorType'
 export interface ICar {
   name: string
   price: object
-  city?: string
+  cities: string[]
   motorType: MotorType
   coordinates: {
     serviceId: number
