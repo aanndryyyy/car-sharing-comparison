@@ -1,12 +1,11 @@
-import type { Car } from '../../lib/DTO/Car'
-import type { ICarBolt } from '../../lib/Types/Interfaces/ICarBolt'
+import type { ICarBolt }  from '../../lib/Types/Interfaces/ICarBolt'
 import type { SearchParamsObj } from '../../lib/DTO/SearchParamsObj'
 
 const calculateBoltPrice = (
-  car: Car,
+  car: ICarBolt,
   searchParamsObj: SearchParamsObj
 ): number => {
-  const price = (car as ICarBolt).price
+  const price = car.price
   const distanceCost = searchParamsObj.distance * price.km
 
   // Days
