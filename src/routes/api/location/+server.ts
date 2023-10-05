@@ -7,4 +7,5 @@ export const config = {
 
 export const GET = async ({ fetch }) => {
   return await fetch(SECRET_BACKEND_BASE_URL + 'location')
+  // return await fetch(import.meta.env.BACKEND_API_URL + 'location')
 }
