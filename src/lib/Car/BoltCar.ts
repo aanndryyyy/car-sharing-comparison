@@ -7,6 +7,7 @@ import BoltLogo from '../../assets/images/providers/bolt/bolt-logo.png?url&forma
 import No_image_available from '../../assets/images/no-image-available.png?url&h=112&format=webp'
 import Audi_A1 from '../../assets/images/providers/bolt/cars/lowQuality/Audi-A1.png?url&h=112&format=webp'
 import Audi_A3 from '../../assets/images/providers/bolt/cars/lowQuality/Audi-A3.png?url&h=112&format=webp'
+import Audi_A3_Sedan from '../../assets/images/providers/bolt/cars/lowQuality/Audi-A3-Sedan.png?url&h=112&format=webp'
 import Audi_A4 from '../../assets/images/providers/bolt/cars/lowQuality/Audi-A4.png?url&h=112&format=webp'
 import Audi_A5 from '../../assets/images/providers/bolt/cars/lowQuality/Audi-A5.png?url&h=112&format=webp'
 import Audi_e_tron from '../../assets/images/providers/bolt/cars/lowQuality/Audi-e-tron.png?url&h=112&format=webp'
@@ -83,6 +84,8 @@ export default class BoltCar extends GenericMappableCar<ICarBolt> {
         return Audi_A1
       case 'Audi A3':
         return Audi_A3
+      case 'Audi A3 Sedan':
+        return Audi_A3_Sedan
       case 'Audi Q2':
         return Audi_Q2
       case 'Audi e-tron':
