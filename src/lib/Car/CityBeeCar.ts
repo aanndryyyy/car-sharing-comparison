@@ -39,6 +39,7 @@ import Fiat_500e from '../../assets/images/providers/citybee/cars/lowQuality/Fia
 import Peugeot_308 from '../../assets/images/providers/citybee/cars/lowQuality/Peugeot-308.png?url&h=112&format=webp'
 import Porsche_Taycan from '../../assets/images/providers/citybee/cars/lowQuality/Porsche-Taycan.png?url&h=112&format=webp'
 import VW_Tiguan from '../../assets/images/providers/citybee/cars/lowQuality/VW-Tiguan.png?url&h=112&format=webp'
+import Toyota_Corolla_Touring from '../../assets/images/providers/citybee/cars/lowQuality/Toyota-Corolla-Touring.png?url&h=112&format=webp'
 
 export default class CityBeeCar extends GenericMappableCar<ICarCityBee> {
   calculateRentTotalPrice(searchParamsObj: SearchParamsObj): void {
@@ -127,6 +128,8 @@ export default class CityBeeCar extends GenericMappableCar<ICarCityBee> {
         return Porsche_Taycan
       case 'VW Tiguan':
         return VW_Tiguan
+      case 'Toyota Corolla Touring':
+        return Toyota_Corolla_Touring
       default:
         return No_image_available
     }
