@@ -46,7 +46,7 @@ export default abstract class GenericCar<
    * Get the car model name.
    */
   public getName(): string {
-    return this.carData.cities.includes('Tartu')
+    return this.carData.cities && this.carData.cities.includes('Tartu')
       ? this.carData.name + ' (Tartu)'
       : this.carData.name
   }
