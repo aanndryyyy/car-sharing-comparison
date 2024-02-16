@@ -1,6 +1,6 @@
 {
 	"name": "Car Sharing Comparison",
-	"image": "mcr.microsoft.com/devcontainers/javascript-node:0-18-bullseye",
+	"image": "mcr.microsoft.com/devcontainers/javascript-node:20",
 	"customizations": {
 		"vscode": {
 			"settings": {},

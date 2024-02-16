@@ -7,6 +7,6 @@ export async function load({ fetch }) {
   }
 
   return {
-    allProviders: getAllProviders(),
+    allProviders: await getAllProviders(),
   }
 }
