@@ -89,7 +89,7 @@ export default abstract class GenericMappableCar<
     const priceIcon = document.createElement('div')
     priceIcon.className = 'price-icon'
 
-    priceIcon.innerText = this.getFormattedTotalPrice()
+    priceIcon.innerHTML = this.getFormattedTotalPrice()
     priceIcon.appendChild(content)
 
     return priceIcon

@@ -124,6 +124,7 @@
 <svelte:window bind:innerWidth={screenSize} />
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
+<!-- svelte-ignore a11y-no-static-element-interactions -->
 <div
   class="w-full rounded-lg border border-slate-200 text-left shadow-lg focus:ring-2 focus:ring-green-500 focus:ring-offset-2 {mobileView
     ? 'p-4'
@@ -148,11 +149,11 @@
         >
           <div class="flex items-center gap-0.5 {mobileView ? '' : 'gap-1'}">
             <Icon src={CurrencyEuro} size={mobileView ? '14' : '16'} />
-            {car.getFormattedMinutePrice()}
+            {@html car.getFormattedMinutePrice()}
           </div>
           <div class="flex items-center gap-0.5 {mobileView ? '' : 'gap-1'}">
             <Icon src={CurrencyEuro} size={mobileView ? '14' : '16'} />
-            {car.getFormattedKilometrePrice()}
+            {@html car.getFormattedKilometrePrice()}
           </div>
           {#if car instanceof GenericMappableCar}
             <div
@@ -174,7 +175,7 @@
       </div>
 
       <div class="flex gap-2">
-        <p class="font-semibold">{car.getFormattedTotalPrice()}</p>
+        <p class="font-semibold">{@html car.getFormattedTotalPrice()}</p>
         {#if car.rentUsablePackages.length > 0 && mobileView}
           <div>with 📦</div>
         {/if}

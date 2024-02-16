@@ -55,20 +55,24 @@ export default abstract class GenericCar<
    * The total rent price.
    */
   public getTotalPrice(): number {
-    return this.rentTotalPrice
+    return this.rentTotalPrice || 0
   }
 
   /**
    * Formatted total rent price to two decimal points with currency symbol.
    */
   public getFormattedTotalPrice(): string {
-    return this.getTotalPrice().toFixed(2) + ' €'
+    if (this.getTotalPrice() === 0) return '&mdash; &euro;';
+
+    return this.getTotalPrice().toFixed(2) + ' &euro;'
   }
 
   /**
    * The minute price as formatted text.
    */
   public getFormattedMinutePrice(): string {
+    if (!this.carData.price.minute) return '&mdash;';
+
     return this.carData.price.minute + ' min'
   }
 
@@ -76,6 +80,8 @@ export default abstract class GenericCar<
    * The kilometre price as formatted text.
    */
   public getFormattedKilometrePrice(): string {
+    if (!this.carData.price.km) return '&mdash;';
+
     return this.carData.price.km + ' km'
   }
 
